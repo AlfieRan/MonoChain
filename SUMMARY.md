@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Some Generic Project](README.md)
+* [Epic Blockchain Technology](README.md)
 
 ## 1 Analysis <a href="#analysis" id="analysis"></a>
 
