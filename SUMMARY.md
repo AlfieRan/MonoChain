@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Epic Blockchain Technology](README.md)
+* [Building Blockchain Technology](README.md)
 
 ## 1 Analysis <a href="#analysis" id="analysis"></a>
 
