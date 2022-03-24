@@ -1,0 +1,23 @@
+# This is a basic workflow to help you get started with Actions
+name: Push To Personal
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the docs branch
+  push:
+    branches: [ docs ]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: ad-m/github-push-action@v0.6.0
+      with:
+        # Token for the repo. Can be passed in using $\{{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.API_GITHUB_TOKEN }}
+        # Repository name to push. Default or empty value represents current github repository (${GITHUB_REPOSITORY})
+        repository: git@github.com:AlfieRan/A-Level-Project.git
+        # Destination branch to push changes
+        branch: docs
