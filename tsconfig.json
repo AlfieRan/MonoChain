@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "baseUrl": "./packages",
+    "paths": {
+      "@namespace/node/*": ["node/src/*"],
+      "@namespace/webportal/*": ["webportal/src/*"],
+      "@namespace/utils/*": ["utils/src/*"]
+    }
+  }
+}
