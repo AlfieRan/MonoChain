@@ -4,18 +4,19 @@ import { ChakraProvider } from "@chakra-ui/provider";
 import { extendTheme } from "@chakra-ui/react";
 import { SWRConfig } from "swr";
 import { fetcher } from "../utils/fetcher";
+import NavBar from "../component/NavBar";
 
 const theme = extendTheme({
   styles: {
     global: {
       "html, body": {
         color: "textColour",
-        background: "#7F7FD5" /* fallback for old browsers */,
+        background: "background" /* fallback for old browsers */,
       },
     },
   },
   colors: {
-    background: "#A9BCD0",
+    background: "#FFF",
     subHover: "#ccced7",
     subColour: "white",
     textColour: "black",
@@ -36,6 +37,7 @@ export default function App({ Component, pageProps }: AppProps) {
       }}
     >
       <ChakraProvider theme={theme}>
+        <NavBar />
         <Component {...pageProps} />
       </ChakraProvider>
     </SWRConfig>
