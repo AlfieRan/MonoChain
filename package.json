@@ -13,12 +13,15 @@
     "prepare": "node ./configure-references.js"
   },
   "workspaces": {
-    "packages": ["packages/*"]
+    "packages": [
+      "packages/*"
+    ]
   },
   "devDependencies": {
     "eslint": "^8.11.0",
     "jest": "^27.5.1",
     "lerna": "^4.0.0",
+    "prettier": "^2.6.0",
     "typescript": "^4.6.2"
   }
 }

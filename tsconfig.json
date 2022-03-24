@@ -1,11 +1,29 @@
 {
-  "compilerOptions": {
-    "jsx": "react",
-    "baseUrl": "./packages",
-    "paths": {
-      "@namespace/node/*": ["node/src/*"],
-      "@namespace/webportal/*": ["webportal/src/*"],
-      "@namespace/utils/*": ["utils/src/*"]
-    }
-  }
+    "compilerOptions": {
+        "jsx": "react",
+        "baseUrl": "./packages",
+        "paths": {
+            "@namespace/node/*": [
+                "node/src/*"
+            ],
+            "@namespace/webportal/*": [
+                "webportal/src/*"
+            ],
+            "@namespace/utils/*": [
+                "utils/src/*"
+            ]
+        }
+    },
+    "files": [],
+    "references": [
+        {
+            "path": "packages/node"
+        },
+        {
+            "path": "packages/utils"
+        },
+        {
+            "path": "packages/webportal"
+        }
+    ]
 }
