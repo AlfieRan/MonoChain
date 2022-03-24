@@ -4,7 +4,7 @@ import React from "react";
 const index = () => {
   return (
     <Box w={"full"} h={"full"}>
-      <Text>Hello</Text>
+      <Text>Hello Internet</Text>
     </Box>
   )
 }
