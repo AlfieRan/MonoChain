@@ -32,3 +32,7 @@
 ***
 
 * [Reference list](reference-list.md)
+
+## Notes
+
+* [Phase 1](notes/phase-1.md)
