@@ -43,4 +43,14 @@ In JSON format that would look something like the following: (Although bear in m
 
 One issue with most blockchain technologies is that they must abide by a time limit. Meaning that the amount of transactions is limited, which is not good.
 
-One example of this is the blockchain for bitcoin, which requires a new block to be registered once per ten minutes, no more or less, and the amount of transactions is hard capped at 1MB, which caps the amount of transactions to approximately 3000 per block. Because of this the average amount of transactions sent over the bitcoin blockchain is approximately 4.6 per second, [(Anonymous, 2022)](../reference-list.md) which is significantly lower than Visa's 1700 transactions per second (reference visa)
+One example of this is the blockchain for bitcoin, which requires a new block to be registered approximately once per ten minutes (it accomplishes this by varying the difficulty of mining a block) and the amount of transactions is hard capped at 1MB, which caps the amount of transactions to approximately 3000 per block. Because of this the average amount of transactions sent over the bitcoin blockchain is approximately 4.6 per second, [(Anonymous, 2022)](../reference-list.md) which is significantly lower than Visa's 1700 transactions per second (reference visa).&#x20;
+
+So how does visa sustain 350 times as many transactions per second as bitcoin? The simple reason is that visa does not use a block based model, instead it just sends transactions separately and as needed, this removes any bottlenecking created by miner nodes waiting for the next block request and only being able to fit a certain amount of transactions in each block.&#x20;
+
+That seems like the obvious solution right? Just send all the transactions separately, with one per block? No, that would not work at all, because all blocks have to be "chained" to the block before, you would not only have lots of blocks all chained to the same block but it would be very very difficult to determine if a block was legitimate or not because of the pure mass of data flowing through at any given time making it much easier for a fraudulent block to slip through.
+
+So we want the maximum amount of transactions per block to be high enough that there should always be some space in the amount of left over transactions but not too high so that the amount of left over, empty transactions, are kept at a minimum. Alongside this we need to ensure that blocks occur frequently enough that transactions do not take too long to occur and are not stacked up into unreasonably massive blocks, yet keep the blocks infrequent enough so that they do not become too easy to mine and therefore increase the probability of a fraudulent block successfully defrauding the system.
+
+### **Ensuring that Blocks occur at the correct rate**
+
+To calculate how often we want blocks to be created on the blockchain
