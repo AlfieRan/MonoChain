@@ -11,8 +11,10 @@ Because of the fact that this relies on three separate packages and it may need 
 * [x] Setup a monorepo for hosting the packages in a single repository.
 * [x] Build a very basic initial version of the web-portal for testing deployment.
 * [x] Deploy the initial version of the web-portal.
+* [x] Build a very basic version of the node program that says "hello world" in the console
 * [ ] Figure out the best way to let users download and run the node program.
 * [ ] Attach a way to download the node program to the web-portal.
+* [ ] Successfully download and run the node program from the webportal.
 
 ### Usability Features
 
@@ -59,14 +61,17 @@ Description of challenges
 
 ## Testing
 
-Evidence for testing
+Test 1:
+
+
 
 ### Tests
 
-| Test | Instructions                                                                           | What I expect                                              | What actually happens | Pass/Fail |
-| ---- | -------------------------------------------------------------------------------------- | ---------------------------------------------------------- | --------------------- | --------- |
-| 1    | Deploy the web-portal by git pushing to Github and Vercel should automatically deploy. | Website launches successfully on frontend server.          | As expected           | Pass      |
-| 2    | Run node program.                                                                      | An output of "hello world"                                 |                       |           |
-| 3    | Download the node program by clicking on the download button on the web-portal         | The Node program should be downloaded to the test computer |                       |           |
+| Test | Instructions                                                                           | What I expect                                                                                                  | What actually happens | Pass/Fail |
+| ---- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | --------------------- | --------- |
+| 1    | Run the webportal on localhost.                                                        | Webportal launches and text is displayed on the screen                                                         | As expected           | Pass      |
+| 2    | Deploy the web-portal by git pushing to Github and Vercel should automatically deploy. | Website launches successfully on frontend server and when navigated to displays the same text as on localhost. | As expected           | Pass      |
+| 3    | Run node program.                                                                      | An output of "hello world"                                                                                     |                       |           |
+| 4    | Download the node program by clicking on the download button on the web-portal         | The Node program should be downloaded to the test computer                                                     |                       |           |
 
 ### Evidence
