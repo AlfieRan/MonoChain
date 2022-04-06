@@ -61,9 +61,15 @@ Description of challenges
 
 ## Testing
 
-Test 1:
+**Test 1 - Webportal running on localhost:**
 
+![Web portal running as expected on localhost:3000 when "yarn next" is ran in /packages/webportal](<../.gitbook/assets/image (3).png>)
 
+![Console output for the webportal.](<../.gitbook/assets/image (4).png>)
+
+**Test 2 - Deploy and Run the webportal on an external server:**
+
+![Vercel successfully running the webportal on https://monochain.network](<../.gitbook/assets/image (2).png>)
 
 ### Tests
 

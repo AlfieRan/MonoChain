@@ -19,7 +19,7 @@ The above graph shows the relative difficulty of mining a block on the bitcoin b
 
 It is also important to remember that alongside the popularity of bitcoin growing between it's creation in 2009 and now, in 2022, that computing power has also grown substantially.
 
-![Source - https://ourworldindata.org/technological-change](<../.gitbook/assets/image (2).png>)
+![Source - https://ourworldindata.org/technological-change](<../.gitbook/assets/image (2) (1).png>)
 
 The above graph showcasing that the computational capacity of the worlds largest supercomputers has grown by a factor of 246, a very substantial increase in power in only 13 years.
 
