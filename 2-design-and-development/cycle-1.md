@@ -18,10 +18,11 @@ Because of the fact that this relies on three separate packages and it may need 
 
 ### Key Variables
 
-| Variable Name               | Use                                                                                                                                                   |
-| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| references (/tsconfig.json) | Tells typescript where references across packages should occour - allows web portal and node to share types and interfaces through the utils package. |
-| workspaces (/package.json)  | Tells lerna and yarn workspaces where the packages directory is and therefore where to build programs from.                                           |
+| Variable Name                          | Use                                                                                                                                                   |
+| -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| workspaces (/package.json)             | Tells lerna and yarn workspaces where the packages directory is and therefore where to build programs from.                                           |
+| references (/tsconfig.json)            | Tells typescript where references across packages should occour - allows web portal and node to share types and interfaces through the utils package. |
+| href (within web-portal download page) | Tells the browser where the node package download is hosted, and therefore what file to download                                                      |
 
 ### Pseudocode
 
