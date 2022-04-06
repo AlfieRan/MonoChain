@@ -26,6 +26,14 @@ Because of the fact that this relies on three separate packages and it may need 
 
 ### Pseudocode
 
+Demo Node program:&#x20;
+
+```
+OUTPUT "hello world!" //does what is says on the tin
+```
+
+Download Feature on webportal:
+
 ```
 <React component> // This refers to the page of which the download button exists
     <Link href="https://path/to/node/download" download> 
@@ -55,9 +63,10 @@ Evidence for testing
 
 ### Tests
 
-| Test | Instructions  | What I expect     | What actually happens | Pass/Fail |
-| ---- | ------------- | ----------------- | --------------------- | --------- |
-| 1    | Run code      | Thing happens     | As expected           | Pass      |
-| 2    | Press buttons | Something happens | As expected           | Pass      |
+| Test | Instructions                                                                           | What I expect                                              | What actually happens | Pass/Fail |
+| ---- | -------------------------------------------------------------------------------------- | ---------------------------------------------------------- | --------------------- | --------- |
+| 1    | Deploy the web-portal by git pushing to Github and Vercel should automatically deploy. | Website launches successfully on frontend server.          | As expected           | Pass      |
+| 2    | Run node program.                                                                      | An output of "hello world"                                 |                       |           |
+| 3    | Download the node program by clicking on the download button on the web-portal         | The Node program should be downloaded to the test computer |                       |           |
 
 ### Evidence
