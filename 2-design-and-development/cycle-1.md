@@ -18,16 +18,26 @@ Because of the fact that this relies on three separate packages and it may need 
 
 ### Key Variables
 
-| Variable Name | Use                   |
-| ------------- | --------------------- |
-| foo           | does something useful |
+| Variable Name               | Use                                                                                                                                                   |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| references (/tsconfig.json) | Tells typescript where references across packages should occour - allows web portal and node to share types and interfaces through the utils package. |
+| workspaces (/package.json)  | Tells lerna and yarn workspaces where the packages directory is and therefore where to build programs from.                                           |
 
 ### Pseudocode
 
 ```
-procedure do_something
-    
-end procedure
+<React component> // This refers to the page of which the download button exists
+    <Link href="https://path/to/node/download" download> 
+    // The Link paired with the download flag above ^ tells the browser 
+    // to download the file referenced in the 'href' field to the users computer. 
+        
+        <Text>
+            Download Node
+        <End Text>
+        // The text component just shows some text within the link box to the user
+        
+    <End Link>
+<End React component>
 ```
 
 ## Development
