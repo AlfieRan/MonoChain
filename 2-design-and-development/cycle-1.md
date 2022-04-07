@@ -65,7 +65,7 @@ Description of challenges
 
 ![Web portal running as expected on localhost:3000 when "yarn next" is ran in /packages/webportal](<../.gitbook/assets/image (3).png>)
 
-![Console output for the webportal.](<../.gitbook/assets/image (4).png>)
+![Console output for the webportal.](<../.gitbook/assets/image (4) (1).png>)
 
 **Test 2 - Deploy and Run the webportal on an external server:**
 
