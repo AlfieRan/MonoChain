@@ -4,11 +4,13 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "clean": "rimraf dist && rimraf tsconfig.tsbuildinfo",
+    "start": "node dist/code/index.js",
+    "clean": "rimraf dist/code && rimraf tsconfig.tsbuildinfo && mkdir dist/code && echo \"cleaned dist/code\"",
+    "clean-zip": "rimraf node.zip && echo \"cleaned node.zip\"",
     "prepack": "yarn build",
-    "build": "yarn clean && yarn compile",
-    "compile": "tsc --build && cp \"./package.json\" ./dist/",
-    "test": "echo 'no test'",
+    "build": "yarn clean && yarn clean-zip && yarn compile && yarn zip && echo \"zipped node\"",
+    "compile": "tsc && cp \"./package.json\" ./dist/code/ && echo \"compiled\"",
+    "zip": "zip ../webportal/public/node.zip -9r ./dist/ && echo \"zipped\"",
     "lint": "eslint \"./src/**/*.{ts,tsx}\" --max-warnings=0"
   }
 }

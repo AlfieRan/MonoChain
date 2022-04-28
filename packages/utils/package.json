@@ -5,6 +5,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "clean": "rimraf dist && rimraf tsconfig.tsbuildinfo",
+    "start": "node ./dist/index.js",
     "prepack": "yarn build",
     "build": "yarn clean && yarn compile",
     "compile": "tsc --build && cp \"./package.json\" ./dist/",

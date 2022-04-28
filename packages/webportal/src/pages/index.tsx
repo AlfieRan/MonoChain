@@ -23,6 +23,19 @@ const index = () => {
           This means that not only can MonoChain support small transactional
           data, but can also be used for large data storage.
         </Text>
+        <Text mt={5}>
+          Meaning that not only does the MonoChain support cryptocurrencies and
+          traditional nfts (links to images stored on other external databases
+          and servers), but also ownership certificates from other sites if they
+          choose to support MonoChain.
+        </Text>
+        <Text mt={5}>
+          This would allow for other, external sites, that have nothing to do
+          with the MonoChain, to build their entire storage directories on the
+          MonoChain, provided they are willing to run their own nodes on the
+          network to process their transactions, or pay fees to willing nodes to
+          run these stores of data instead.
+        </Text>
       </Flex>
     </Center>
   );

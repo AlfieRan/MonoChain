@@ -2,11 +2,16 @@ import { Flex, Link } from "@chakra-ui/react";
 
 const NavBar = () => {
   const LinkMarginAmount = 2;
-  const Links: { name: string; href: string }[] = [
+  const Links: { name: string; href: string; external?: boolean }[] = [
     { name: "Home", href: "/" },
-    { name: "Info", href: "/info" },
-    { name: "Code", href: "https://github.com/AlfieRan/A-Level-Project" },
+    { name: "Project", href: "/info" },
+    {
+      name: "Code",
+      href: "https://github.com/AlfieRan/A-Level-Project",
+      external: true,
+    },
     { name: "Wallet", href: "/wallet" },
+    { name: "Download", href: "/download" },
   ];
 
   return (
@@ -22,6 +27,7 @@ const NavBar = () => {
           href={data.href}
           mx={LinkMarginAmount}
           fontSize={"xl"}
+          isExternal={data.external ? true : false}
         >
           {data.name}
         </Link>
