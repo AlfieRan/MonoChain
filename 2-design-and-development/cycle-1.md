@@ -90,9 +90,10 @@ This is done using yarn commands which effectively just let you string together 
 
 By following this code we can see that once "yarn build" is run it runs:&#x20;
 
-1. "yarn clean" - which runs the "clean" command in the package.json to remove the last code distribution and typescript build info from the file system, then recreate the distribution code file structure before echoing that it has finished cleaning the distribution files.
-2. "yarn clean-zip" - which runs the "clean-zip" command created in the same package.json in order to remove the previous zip file and then echo that the command has successfully run
-3. "yarn compile"
+1. "yarn clean" - which removes the last code distribution and typescript build info from the file system, then recreate the distribution code file structure before echoing that it has finished cleaning the distribution files.
+2. "yarn clean-zip" - which removes the previous zip file and then echoes that the command has successfully run
+3. "yarn compile" - which compiles the typescript to javascript, copies the current package.json to the distribution folder and echoes to let us know it's successfully completed.
+4. "yarn zip" - which zips the newly compiled distribution folder to the webportal's public folder and echoes to
 
 ## Testing
 
