@@ -59,11 +59,15 @@ Most of the development for this cycle was just setup, to get everything I need 
 
 ### Challenges
 
-Description of challenges
+The main challenge I faced in this cycle of development was deciding how to make the node software available for download, originally I attempted to setup a file server and upload files to that in order to download the software easily, however I soon realised that this would be a lot of setup to just host one file.
+
+Luckily I soon realised that you can download files very easily from websites using the "download" flag in chakra-ui (the component package I'm using - it's very similar for html) and because I had setup the repositories in a monorepo it was possible to build and zip the node software from the node's package, then copy it into the public folder in the website's package and have the download link from the website just point to the zipped software within it's own public folder.
+
+This then means that upon building the node software, the typescript in which it is written is compiled to javascript within the "dist" folder (dist meaning distribution), this dist folder is then zipped and finally the zipped folder is copied to the web portal's public folder.
 
 ## Testing
 
-**Test 1 - Webportal running on localhost:**
+**Test 1 - Web portal running on localhost:**
 
 ![Web portal running as expected on localhost:3000 when "yarn next" is ran in /packages/webportal](<../.gitbook/assets/image (3).png>)
 
