@@ -65,6 +65,35 @@ Luckily I soon realised that you can download files very easily from websites us
 
 This then means that upon building the node software, the typescript in which it is written is compiled to javascript within the "dist" folder (dist meaning distribution), this dist folder is then zipped and finally the zipped folder is copied to the web portal's public folder.
 
+
+
+This is done using yarn commands which effectively just let you string together a series of bash commands that are local to your project, the commands themselves can be found within the "package.json" file within the node package. (The current package.json is shown below)
+
+```
+{
+  "name": "@namespace/node",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "start": "node dist/code/index.js",
+    "clean": "rimraf dist/code && rimraf tsconfig.tsbuildinfo && mkdir dist/code && echo \"cleaned dist/code\"",
+    "clean-zip": "rimraf node.zip && echo \"cleaned node.zip\"",
+    "prepack": "yarn build",
+    "build": "yarn clean && yarn clean-zip && yarn compile && yarn zip && echo \"zipped node\"",
+    "compile": "tsc && cp \"./package.json\" ./dist/code/ && echo \"compiled\"",
+    "zip": "zip ../webportal/public/node.zip -9r ./dist/ && echo \"zipped\"",
+    "lint": "eslint \"./src/**/*.{ts,tsx}\" --max-warnings=0"
+  }
+}
+```
+
+By following this code we can see that once "yarn build" is run it runs:&#x20;
+
+1. "yarn clean" - which runs the "clean" command in the package.json to remove the last code distribution and typescript build info from the file system, then recreate the distribution code file structure before echoing that it has finished cleaning the distribution files.
+2. "yarn clean-zip" - which runs the "clean-zip" command created in the same package.json in order to remove the previous zip file and then echo that the command has successfully run
+3. "yarn compile"
+
 ## Testing
 
 **Test 1 - Web portal running on localhost:**
