@@ -12,7 +12,7 @@ Because of the fact that this relies on three separate packages and it may need 
 * [x] Build a very basic initial version of the web-portal for testing deployment.
 * [x] Deploy the initial version of the web-portal.
 * [x] Build a very basic version of the node program that says "hello world" in the console
-* [ ] Figure out the best way to let users download and run the node program.
+* [x] Figure out the best way to let users download and run the node program.
 * [ ] Attach a way to download the node program to the web-portal.
 * [ ] Successfully download and run the node program from the webportal.
 
@@ -52,6 +52,8 @@ Download Feature on webportal:
 ```
 
 ## Development
+
+Most of the development for this cycle was just setup, to get everything I need for this project up and running and building out the structure of the codebase in order to make the actual programming as smooth as possible.
 
 ### Outcome
 
