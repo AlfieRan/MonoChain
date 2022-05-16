@@ -105,7 +105,7 @@ By following this code we can see that once "yarn build" is run it runs:&#x20;
 
 **Test 2 - Deploy and Run the webportal on an external server:**
 
-![Vercel successfully running the webportal on https://monochain.network](<../.gitbook/assets/image (2).png>)
+![Vercel successfully running the webportal on https://monochain.network](<../.gitbook/assets/image (2) (1).png>)
 
 ### Tests
 
