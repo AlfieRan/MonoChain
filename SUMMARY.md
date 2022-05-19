@@ -37,7 +37,4 @@
 
 * [How Bitcoin makes mining harder.](notes/how-bitcoin-makes-mining-harder..md)
 * [Phase 1](notes/phase-1.md)
-
-***
-
-* [Proof of Worth](proof-of-worth.md)
+* [Proof of Worth](notes/proof-of-worth.md)
