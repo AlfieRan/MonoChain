@@ -14,5 +14,5 @@ In order to create the proof of worth census that this blockchain will run on we
 * The leader then broadcasts this block to the blockchain and it is added.
 * This then completes all of the transactions which were pending and therefore also results in the leader node receiving all of the transaction fees that it required.&#x20;
 * Now that the leader node has "the block's mining revenue" it needs to distribute it to it's worker nodes, which it does so by first taking it's own cut (this is up to the leader node's own choice but will be 25% on the initial example node software).
-* Then it takes the remaining pile of crypto and distributes it equally to every node that&#x20;
+* Then it takes the remaining pile of crypto and distributes it equally to every node that helped construct the block
 
