@@ -16,3 +16,4 @@ In order to create the proof of worth census that this blockchain will run on we
 * Now that the leader node has "the block's mining revenue" it needs to distribute it to it's worker nodes, which it does so by first taking it's own cut (this is up to the leader node's own choice but will be 25% on the initial example node software).
 * Then it takes the remaining pile of crypto and distributes it equally to every node that helped construct the block
 
+Benefits of this system:
