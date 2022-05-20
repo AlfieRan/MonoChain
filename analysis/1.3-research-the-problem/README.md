@@ -12,9 +12,9 @@ Bitcoin was created in 2008 and was the first cryptocurrency to be created digit
 
 
 
-## Consensus Protocol
+### Consensus Protocol
 
-Bitcoin uses "proof of power"
+Bitcoin uses proof of power as it's Consensus Protocol
 
 ### Features
 
@@ -23,6 +23,8 @@ Bitcoin uses "proof of power"
 | Feature                             | Justification |
 | ----------------------------------- | ------------- |
 | Cryptographically safe transactions |               |
+
+
 {% endtab %}
 
 {% tab title="Features I won't be including" %}
@@ -32,3 +34,15 @@ Bitcoin uses "proof of power"
 | The limit of only using the blockchain for a singular currency (bitcoins) and nothing else. |                                                              |
 {% endtab %}
 {% endtabs %}
+
+## Ethereum
+
+
+
+### Overview
+
+Ethereum is the second largest cryptocurrency as of time of writing (Friday 20th May 2022), costing approximately £1,650 GBP per coin. It was launched on the 30th of July 2015 and has grown to a current market cap of £195,873,606,031.48 (\~£200 Bn) in the just under 7 years it has been in use.
+
+### Consensus Protocol
+
+Ethereum began as a proof of power blockchain but due to the environmental issues it has begun switching to a proof of stake blockchain and intends to merge the current developer network that runs the proof of stake version of ethereum with the main network that uses proof of power sometime in August this year (2022) although that date has already been postponed over a year so it may be completed at a later date. Because Ethereum is currently undergoing a transition to proof of stake and by the time you are reading this is should have been completed I will be referring to Ethereum's consensus protocol as proof of stake for the remainder of this project.
