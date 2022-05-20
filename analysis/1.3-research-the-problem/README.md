@@ -14,7 +14,7 @@ Bitcoin was created in 2008 and was the first cryptocurrency to be created digit
 
 ### [Consensus Protocol](consensus-protocols/#what-is-a-consensus-protocol)
 
-Bitcoin uses proof of power as it's [Consensus Protocol](consensus-protocols/#what-is-a-consensus-protocol)
+Bitcoin uses [proof of power](consensus-protocols/#proof-of-power) as it's [Consensus Protocol](consensus-protocols/#what-is-a-consensus-protocol)
 
 ### Features
 
@@ -30,7 +30,7 @@ Bitcoin uses proof of power as it's [Consensus Protocol](consensus-protocols/#wh
 {% tab title="Features I won't be including" %}
 | Feature                                                                                     | Justification                                                |
 | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| [Proof of work](./#consensus-protocol) based trust                                          | Bad for the environment and wastes a lot of computing power. |
+| Proof of work based trust                                                                   | Bad for the environment and wastes a lot of computing power. |
 | The limit of only using the blockchain for a singular currency (bitcoins) and nothing else. |                                                              |
 {% endtab %}
 {% endtabs %}
