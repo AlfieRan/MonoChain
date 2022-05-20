@@ -2,9 +2,9 @@
 
 ## Bitcoin
 
-![](../.gitbook/assets/image.png)
+![](../../.gitbook/assets/image.png)
 
-![](<../.gitbook/assets/image (1).png>)
+![](<../../.gitbook/assets/image (1).png>)
 
 ### Overview
 
@@ -14,7 +14,7 @@ Bitcoin was created in 2008 and was the first cryptocurrency to be created digit
 
 ## Consensus Protocol
 
-Bitcoin uses mining for proof of truth&#x20;
+Bitcoin uses "proof of power"
 
 ### Features
 
@@ -22,13 +22,13 @@ Bitcoin uses mining for proof of truth&#x20;
 {% tab title="Features I will Include" %}
 | Feature                             | Justification |
 | ----------------------------------- | ------------- |
-| Proof of work based trust           |               |
 | Cryptographically safe transactions |               |
 {% endtab %}
 
 {% tab title="Features I won't be including" %}
-| Feature                                                                                     | Justification |
-| ------------------------------------------------------------------------------------------- | ------------- |
-| The limit of only using the blockchain for a singular currency (bitcoins) and nothing else. |               |
+| Feature                                                                                     | Justification                                                |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| Proof of work based trust                                                                   | Bad for the environment and wastes a lot of computing power. |
+| The limit of only using the blockchain for a singular currency (bitcoins) and nothing else. |                                                              |
 {% endtab %}
 {% endtabs %}

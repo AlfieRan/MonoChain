@@ -6,7 +6,8 @@
 
 * [1.1 Problem Identification](1-analysis/1.1-problem-identification.md)
 * [1.2 Stakeholders](1-analysis/1.2-stakeholders.md)
-* [1.3 Research](1-analysis/1.3-research-the-problem.md)
+* [1.3 Research](analysis/1.3-research-the-problem/README.md)
+  * [Proof of Worth](analysis/1.3-research-the-problem/proof-of-worth.md)
 * [1.4a Features of Proposed Solution](1-analysis/1.4a-features-of-the-proposed-solution.md)
 * [1.4b Computational Methods](1-analysis/1.4b-computational-methods.md)
 * [1.5 Success Criteria](1-analysis/1.5-success-criteria.md)
@@ -37,4 +38,3 @@
 
 * [How Bitcoin makes mining harder.](notes/how-bitcoin-makes-mining-harder..md)
 * [Phase 1](notes/phase-1.md)
-* [Proof of Worth](notes/proof-of-worth.md)
