@@ -1,6 +1,6 @@
 # Reference list
 
-Hall, M. (2021). _What’s the Difference Between a Monopoly and an Oligopoly?_ \[online] Investopedia. Available at: [https://www.investopedia.com/ask/answers/121514/what-are-major-differences-between-monopoly-and-oligopoly.asp#:\~:text=Oligopoly%3A%20An%20Overview](https://www.investopedia.com/ask/answers/121514/what-are-major-differences-between-monopoly-and-oligopoly.asp#:\~:text=Oligopoly%3A%20An%20Overview)
+Hall, M. (2021). _What’s the Difference Between a Monopoly and an Oligopoly?_ \[online] Investopedia. Available at: [https://www.investopedia.com/ask/answers/121514/what-are-major-differences-between-monopoly-and-oligopoly.asp#:\~:text=Oligopoly%3A%20An%20Overview](https://www.investopedia.com/ask/answers/121514/what-are-major-differences-between-monopoly-and-oligopoly.asp)
 
 Anon, G.A. (2022). _Decentralized Storage_. \[online] ethereum.org. Available at: [https://ethereum.org/en/developers/docs/storage/](https://ethereum.org/en/developers/docs/storage/) \[Accessed 22 Mar. 2022].
 
@@ -13,3 +13,5 @@ Abdullah-Othman, A., Alhabshi, S., Kassim, S. and Haron, R. (2020). _The Impact 
 Chen, J. (2021). _Fiat Money_. \[online] Investopedia. Available at: [https://www.investopedia.com/terms/f/fiatmoney.asp](https://www.investopedia.com/terms/f/fiatmoney.asp). \[Accessed 7 Apr. 2022]
 
 O’Neill, A. (2020). _Value of the US dollar 1635-2020_. \[online] Statista. Available at: [https://www.statista.com/statistics/1032048/value-us-dollar-since-1640/](https://www.statista.com/statistics/1032048/value-us-dollar-since-1640/) \[Accessed 7 Apr. 2022].
+
+Wackerow, P. (2022). _Proof-of-stake (PoS)_. \[online] ethereum.org. Available at: [https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/](https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/) \[Accessed 20 May. 2022].

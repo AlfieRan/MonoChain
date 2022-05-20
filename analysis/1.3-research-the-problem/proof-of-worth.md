@@ -16,4 +16,7 @@ In order to create the proof of worth census that this blockchain will run on we
 * Now that the leader node has "the block's mining revenue" it needs to distribute it to it's worker nodes, which it does so by first taking it's own cut (this is up to the leader node's own choice but will be 25% on the initial example node software).
 * Then it takes the remaining pile of crypto and distributes it equally to every node that helped construct the block
 
-Benefits of this system:
+### Benefits of this system compared to Bitcoin and Ethereum's consensus systems:
+
+* Does not waste as much computing power to "mine" a block as a proof of work system such as bitcoin, as it requires an ideal pool of 100-1000 worker nodes per block unlike bitcoin which relies on a pool of millions of nodes for every block.
+* Does not rely on worker nodes being owned by users who already have a large investment in the system unlike a proof of stake model, which in Ethereum's case is a massive hurdle for nodes. `"To participate as a validator, a user must deposit 32 ETH into the deposit contract and run three separate pieces of software: an execution client, a consensus client, and a validator."` [(Wackerow, 2022)](../../reference-list.md).
