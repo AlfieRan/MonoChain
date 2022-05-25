@@ -28,10 +28,10 @@ Bitcoin uses [proof of power](consensus-protocols/#proof-of-power) as it's [Cons
 {% endtab %}
 
 {% tab title="Features I won't be including" %}
-| Feature                                                                                     | Justification                                                |
-| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| Proof of work based trust                                                                   | Bad for the environment and wastes a lot of computing power. |
-| The limit of only using the blockchain for a singular currency (bitcoins) and nothing else. |                                                              |
+| Feature                                                                                     | Justification                                                                                                                                       |
+| ------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Proof of work based trust                                                                   | Wastes a lot of computing power and therefore both time and resources (such as electrical energy) which could be used for other, more useful tasks. |
+| The limit of only using the blockchain for a singular currency (bitcoins) and nothing else. | Does not allow the blockchain to store other types of data, such as json object data, which this blockchain is based around.                        |
 {% endtab %}
 {% endtabs %}
 
