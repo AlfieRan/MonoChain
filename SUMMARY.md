@@ -35,6 +35,7 @@
 ***
 
 * [Reference list](reference-list.md)
+* [Terminology](terminology.md)
 
 ## Notes
 
