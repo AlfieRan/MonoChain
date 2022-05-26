@@ -20,9 +20,10 @@ Bitcoin uses [proof of power](consensus-protocols/#proof-of-power) as it's [Cons
 
 {% tabs %}
 {% tab title="Features I will Include" %}
-| Feature                             | Justification |
-| ----------------------------------- | ------------- |
-| Cryptographically safe transactions |               |
+| Feature                             | Justification                                                                                                                                                   |
+| ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| A base cryptocurrency               | This is what the majority of systems involved will use as their currency and acts a central protocol, it will also likely be what transaction fees are paid in. |
+| Cryptographically safe transactions | This is what allows nodes to verify that a sender actually sent a transaction and it isn't some kind of fraudulent transaction.                                 |
 
 
 {% endtab %}
