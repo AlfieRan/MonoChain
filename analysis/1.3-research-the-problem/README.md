@@ -18,16 +18,17 @@ Bitcoin uses [proof of power](consensus-protocols/#proof-of-power) as it's [Cons
 
 ![Bitcoin's USD transaction cost over time](<../../.gitbook/assets/image (3).png>)
 
-The above chart shows this transaction fee over time, and although right now it is pretty reasonable at approx $2 per transaction (£1.59) it is not always stable can get quite high, such as during July 2020 to July 2021 where transaction fees rose to averaging around $10 and peaking at $62 per transaction, an amount that makes any small transaction pointless.
+The above chart shows this transaction fee over time, and although right now it is pretty reasonable at approx $2 per transaction (£1.59) it is not always stable can get quite high, such as during July 2020 to July 2021 where transaction fees rose to averaging around $10 and peaking at $62 per transaction, an amount that makes any small transaction completely unreasonable.
 
 ### Features
 
 {% tabs %}
 {% tab title="Features I will Include" %}
-| Feature                             | Justification                                                                                                                                                   |
-| ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| A base cryptocurrency               | This is what the majority of systems involved will use as their currency and acts a central protocol, it will also likely be what transaction fees are paid in. |
-| Cryptographically safe transactions | This is what allows nodes to verify that a sender actually sent a transaction and it isn't some kind of fraudulent transaction.                                 |
+| Feature                             | Justification                                                                                                                                                                                                                                                                                    |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| A base cryptocurrency               | This is what the majority of systems involved will use as their currency and acts a central protocol, it will also likely be what transaction fees are paid in.                                                                                                                                  |
+| Some kind of transaction fee        | The consensus protocol I intend to use does allow nodes to require some kind of transaction fee, however because it is up to the node and any node could theoretically complete a transaction this means that nodes need to compete with each other and keep their transaction fees competitive. |
+| Cryptographically safe transactions | This is what allows nodes to verify that a sender actually sent a transaction and it isn't some kind of fraudulent transaction.                                                                                                                                                                  |
 
 
 {% endtab %}
