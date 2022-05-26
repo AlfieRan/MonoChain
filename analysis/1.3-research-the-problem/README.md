@@ -14,7 +14,11 @@ Bitcoin was created in 2008 and was the first cryptocurrency to be created digit
 
 ### [Consensus Protocol](consensus-protocols/#what-is-a-consensus-protocol)
 
-Bitcoin uses [proof of power](consensus-protocols/#proof-of-power) as it's [Consensus Protocol](consensus-protocols/#what-is-a-consensus-protocol)
+Bitcoin uses [proof of power](consensus-protocols/#proof-of-power) as it's [Consensus Protocol](consensus-protocols/#what-is-a-consensus-protocol), the benefit of this is that in order to deceive the blockchain protocol and successfully defraud the system, an individual would need 51% of the computing power connected to the network, which is feasible initially but as the network grows becomes extremely difficult to do so, especially at it's current state. The downside to using proof of power is that it it is extremely inefficient and wastes a lot of energy [(for an explanation why click here)](consensus-protocols/#proof-of-power). This is not only bad for the environment but also raises transaction fees as nodes have to do a lot more work to complete each transaction and have to be compensated fairly.
+
+![Bitcoin's USD transaction cost over time](<../../.gitbook/assets/image (3).png>)
+
+The above chart shows this transaction fee over time, and although right now it is pretty reasonable at approx $2 per transaction (£1.59) it is not always stable can get quite high, such as during July 2020 to July 2021 where transaction fees rose to averaging around $10 and peaking at $62 per transaction, an amount that makes any small transaction pointless.
 
 ### Features
 
