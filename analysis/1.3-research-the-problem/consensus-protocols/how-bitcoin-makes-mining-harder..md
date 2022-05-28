@@ -21,12 +21,12 @@ Therefore by increasing the amount of zeros a block requires to be below this th
 
 ![Source - https://www.blockchain.com/charts/difficulty](<../../../.gitbook/assets/image (2) (1).png>)
 
-The above graph shows the relative difficulty of mining a block on the bitcoin blockchain compares to mining the first block. As of Monday 4th April 2022 it is approximately 28,600,000,000 times harder to mine a block.
+The above graph shows the relative difficulty of mining a block on the bitcoin blockchain compared to mining the first block. As of Monday 4th April 2022 it is approximately 28,600,000,000 times harder to mine a block.
 
-It is also important to remember that alongside the popularity of bitcoin growing between it's creation in 2009 and now, in 2022, that computing power has also grown substantially.
+It is also important to remember that alongside the popularity of bitcoin growing between its creation in 2009 and now, in 2022, that computing power has also grown substantially.
 
 ![Source - https://ourworldindata.org/technological-change](<../../../.gitbook/assets/image (2) (1) (1) (1).png>)
 
 The above graph showcasing that the computational capacity of the worlds largest supercomputers has grown by a factor of 246, a very substantial increase in power in only 13 years.
 
-Therefore as bitcoin has shown it can scale with popularity and computing power very well, and should only stop scaling this well once it gets to the point upon which the hash of new blocks are entirely zero, which would be impossible to below, however the amount of computing power required to do this is so large it is infeasible to imagine.
+Therefore as bitcoin has shown it can scale with popularity and computing power very well, and should only stop scaling this well once it gets to the point upon which the hash of new blocks are entirely zero, which would make it impossible for the network to increase it's mining difficulty, however the amount of computing power required to do this is so large it is infeasible to imagine and it is more likely that the cryptocurrency ceases use before then. (This is because the more zeros required at the start of the hash the exponentially harder it is to generate)
