@@ -12,6 +12,8 @@ A consensus protocol is the protocol that a blockchain system uses to validate b
 
 ### Proof of Power
 
+Proof of power is the most common consensus protocol and was&#x20;
+
 explanation for proof of power goes here [(How Bitcoin makes it harder to mine dynamically)](how-bitcoin-makes-mining-harder..md)
 
 ### Proof of Stake
