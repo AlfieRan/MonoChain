@@ -12,9 +12,7 @@ A consensus protocol is the protocol that a blockchain system uses to validate b
 
 ### Proof of Power
 
-Proof of power is the most common consensus protocol and was originally introduced by the bitcoin blockchain, it is quite simple and secure which is what made it a good choice for the first cryptocurrency, however it does also have some serious issues.
-
-It works by requiring the hash of a block that is added to the blockchain to start with a number of zeros atleast equal to a dynamic variable&#x20;
+Proof of power is the most common consensus protocol and was&#x20;
 
 explanation for proof of power goes here [(How Bitcoin makes it harder to mine dynamically)](how-bitcoin-makes-mining-harder..md)
 
