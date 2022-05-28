@@ -25,6 +25,8 @@ explanation for proof of power goes here [(How Bitcoin makes it harder to mine d
 | Scales with increases in computing power extremely well               | If a large entity with lots of computing power wanted to they could theoretically create a node network at least 51% of the size of the whole network, centralising it and having complete control of all the data flowing through the network.                                                                                    |
 |                                                                       | Nodes with extremely large computing power do not have to group up and can therefore reap all the rewards of their work alone, growing faster and resulting in a big divide between the ultra wealthy and powerful single nodes and the less wealthy, not very powerful grouped nodes that can't accomplish anything on their own. |
 
+Lots of the drawbacks were sourced from [(Wackerow, 2022)](../../../reference-list.md).
+
 ### Proof of Stake
 
 Proof of stake is a consensus protocol that&#x20;

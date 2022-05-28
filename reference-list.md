@@ -15,3 +15,5 @@ Chen, J. (2021). _Fiat Money_. \[online] Investopedia. Available at: [https://ww
 O’Neill, A. (2020). _Value of the US dollar 1635-2020_. \[online] Statista. Available at: [https://www.statista.com/statistics/1032048/value-us-dollar-since-1640/](https://www.statista.com/statistics/1032048/value-us-dollar-since-1640/) \[Accessed 7 Apr. 2022].
 
 Wackerow, P. (2022). _Proof-of-stake (PoS)_. \[online] ethereum.org. Available at: [https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/](https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/) \[Accessed 20 May. 2022].
+
+Napoletano, E. (2022). _Proof of Stake Explained_. \[online] Forbes Advisor. Available at: [https://www.forbes.com/advisor/investing/cryptocurrency/proof-of-stake/#:\~:text=With%20proof%20of%20stake%2C%20participants](https://www.forbes.com/advisor/investing/cryptocurrency/proof-of-stake/) \[Accessed 28 May 2022].
