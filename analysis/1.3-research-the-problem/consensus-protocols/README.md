@@ -8,7 +8,7 @@ description: >-
 
 ### What is a Consensus Protocol?
 
-
+A consensus protocol is the protocol that a blockchain system uses to validate blocks created by nodes during the block creation stage. This is needed because in a decentralised system, the nodes (aka computers) that run the system cannot necessarily be trusted, as one node may wish to do something that benefits themselves such as paying themselves currency that doesn't actually exist. This type of node is typically referred to as a bad actor
 
 ### Proof of Power
 
