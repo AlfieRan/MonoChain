@@ -4,22 +4,22 @@ description: >-
   any other proof of power blockchain (possibly with some tweaks)
 ---
 
-# How Proof of Work Mining Works
+# How Bitcoin makes mining harder.
 
-Bitcoin mining is a term given to the process of randomly generating numbers, a "nonce" (number used once) to feed alongside the block into the SHA-256 hashing algorithm so as to make the hashed value below a dynamically set threshold.
+Bitcoin mining is a term given to the process of randomly generating numbers, a "nonce" (number used once) to feed alongside the block into the SHA-256 hashing algorithm so as to make the hashed value below a set threshold, some set amount of zeros at the start of the output.
 
 {% hint style="info" %}
 Example SHA256 hash: 000000e943a990e64b08bd3bafc7c1b3fde497e92670f78cd8e9eb27529706f2
 {% endhint %}
 
-Because SHA-256 strings do not change in length, always being 64 hex-digits long (4 bits per hex-digit means the total is 256 bits, hence SHA-256) no matter how much data is fed into them, the value of the hash can be used to represent how much work (computing power) has been put into finding a nonce for this block.
+Because SHA-256 strings do not change in length, always being 64 hex-digits long (256 bits, hence SHA-256) no matter how much data is fed into them, the value of the hash can be used to represent how much work (computing power) has been put into finding a nonce for this block.
 
-In Bitcoin's case it requires the hash of the block to be lower than the hash target, which is a dynamic value defined by the below equation.
+In Bitcoin's case it requires the hash of the block to be lower than the hash target, which is a&#x20;
 
 ![Source - http://blog.geveo.com/Blockchain-Mining-Difficulty#:\~:text=The%20current%20Bitcoin%20blockchain%20requirement,not%20about%20the%20leading%20zeros.&#x20;
 2016 Blocks are used because if a block should be generated once per 10 minutes, that's 6 per hour and there's 336 hours per fortnight, therefore multiplying 6 by 336 we get 2016.](<../../../.gitbook/assets/image (1) (1).png>)
 
-Therefore by lowering the target that a block's hash needs to be below, the amount of computing power to generate a nonce that meets this requirement grows proportionally. For example, that means that if the hash has to have an additional hex 0 at the start the hash target has become 1/16th of it's previous value and therefore has become 16 times harder to complete.
+Therefore by increasing the amount of zeros a block requires to be below this threshold, the amount of computing power to generate a nonce that meets this requirement grows exponentially.
 
 ![Source - https://www.blockchain.com/charts/difficulty](<../../../.gitbook/assets/image (2) (1).png>)
 
