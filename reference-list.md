@@ -17,3 +17,5 @@ O’Neill, A. (2020). _Value of the US dollar 1635-2020_. \[online] Statista. Av
 Wackerow, P. (2022). _Proof-of-stake (PoS)_. \[online] ethereum.org. Available at: [https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/](https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/) \[Accessed 20 May. 2022].
 
 Napoletano, E. (2022). _Proof of Stake Explained_. \[online] Forbes Advisor. Available at: [https://www.forbes.com/advisor/investing/cryptocurrency/proof-of-stake/#:\~:text=With%20proof%20of%20stake%2C%20participants](https://www.forbes.com/advisor/investing/cryptocurrency/proof-of-stake/) \[Accessed 28 May 2022].
+
+Cloud 66 (n.d.). Recommended minimum server sizes • Node. \[online] help.cloud66.com. Available at: [https://help.cloud66.com/node/references/non-recommended-server-sizes.html#:\~:text=We%20recommend%20the%20following%20minimum](https://help.cloud66.com/node/references/non-recommended-server-sizes.html).
