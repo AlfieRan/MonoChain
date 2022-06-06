@@ -1,4 +1,16 @@
+---
+description: >-
+  This is the original concept for proof of worth, my custom designed consensus
+  protocol for this project.
+---
+
 # Proof of Worth - the bullet point summary.
+
+{% hint style="info" %}
+## This is just a summary.
+
+This is the original concept for proof of worth, my custom designed consensus protocol for this project. The point of this is not to be fully fleshed out and just shows the original planning for this protocol which will be elaborated on in later development cycles.
+{% endhint %}
 
 In order to create the proof of worth census that this blockchain will run on we need to first initialise the first Leader node, don't worry I'll explain what a leader node is and how it can be created later but it's important to know that there will need to be an initial leader node and that will need to be hosted by the creator of the blockchain.
 
@@ -13,7 +25,7 @@ In order to create the proof of worth census that this blockchain will run on we
 * Now that the leader node has a large quantity of what should theoretically be the same block, it compares all of the worker node's submitted blocks and if over a large majority (90%?) are identical then that will be the final block to be submitted to the blockchain.
 * The leader then broadcasts this block to the blockchain and it is added.
 * This then completes all of the transactions which were pending and therefore also results in the leader node receiving all of the transaction fees that it required.&#x20;
-* Now that the leader node has "the block's mining revenue" it needs to distribute it to it's worker nodes, which it does so by first taking it's own cut (this is up to the leader node's own choice but will be 25% on the initial example node software).
+* Now that the leader node has "the block's mining revenue" it needs to distribute it to its worker nodes, which it does so by first taking its own cut (this is up to the leader node's own choice but will be 25% on the initial example node software).
 * Then it takes the remaining pile of crypto and distributes it equally to every node that helped construct the block
 
 ### Benefits of this system compared to Bitcoin and Ethereum's consensus systems:
