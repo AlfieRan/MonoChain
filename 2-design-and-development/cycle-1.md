@@ -18,6 +18,9 @@ Because of the fact that this relies on three separate packages and it may need 
 
 ### Usability Features
 
+* Easy to read text - the web portal will be built using a white background and black text, this contrasts the two greatly and makes the text a lot easier to read.
+* Navigation - when using either the node software or the web portal the controls should be easy to understand and navigate, in the web portal's case it's important everything a user could want should be accessible within as few clicks as possible.
+
 ### Key Variables
 
 | Variable Name                          | Use                                                                                                                                                   |
@@ -31,7 +34,7 @@ Because of the fact that this relies on three separate packages and it may need 
 Demo Node program:&#x20;
 
 ```
-OUTPUT "hello world!" //does what is says on the tin
+OUTPUT "hello world!" //outputs a string to the console to confirm it's running
 ```
 
 Download Feature on webportal:
