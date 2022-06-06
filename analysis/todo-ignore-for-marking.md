@@ -16,7 +16,7 @@ description: >-
 * [ ] 1.4b - examples of Computational Methods in project
 * [x] 1.4b - Thinking Abstractly and Visualisation
 * [x] 1.4b - Thinking Ahead
-* [x] 1.4b - Thinking Procedurally and Decomposition
+* [ ] 1.4b - Thinking Procedurally and Decomposition
 * [ ] 1.4b - Thinking Logically
 * [ ] 1.4b - Thinking Concurrently
 * [ ] 1.5 - all of it
