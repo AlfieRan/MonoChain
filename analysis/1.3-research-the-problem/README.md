@@ -52,3 +52,23 @@ Ethereum is the second largest cryptocurrency as of time of writing (Friday 20th
 ### [Consensus Protocol](consensus-protocols/#what-is-a-consensus-protocol)
 
 Ethereum began as a [proof of power](consensus-protocols/#proof-of-power) blockchain but due to the environmental issues it has begun switching to a [proof of stake](consensus-protocols/#proof-of-stake) blockchain and intends to merge the current developer network that runs the proof of stake version of ethereum with the main network that uses proof of power sometime in August this year (2022) although that date has already been postponed over a year so it may be completed at a later date. Because Ethereum is currently undergoing a transition to proof of stake and by the time you are reading this is should have been completed I will be referring to Ethereum's consensus protocol as proof of stake for the remainder of this project.
+
+### Features
+
+{% tabs %}
+{% tab title="Features I will be including" %}
+| Feature                                           | Justification                                                                                                                                                                                                                                           |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| A consensus protocol that rewards long term users | This is very useful to keep users on the blockchain and is what helps to encourage long term usage and financial gain for those who do use the blockchain long term. This is obviously not guaranteed but it should still be a benefit for the network. |
+|                                                   |                                                                                                                                                                                                                                                         |
+|                                                   |                                                                                                                                                                                                                                                         |
+{% endtab %}
+
+{% tab title="Features I won't be including" %}
+| Feature | Justification |
+| ------- | ------------- |
+|         |               |
+|         |               |
+|         |               |
+{% endtab %}
+{% endtabs %}
