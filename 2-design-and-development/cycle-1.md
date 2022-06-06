@@ -60,6 +60,17 @@ Most of the development for this cycle was just setup, to get everything I need 
 
 ### Outcome
 
+#### Web Portal
+
+In the pages directory I have created four primary web pages:
+
+* [download.tsx](https://github.com/Marling-CS-Projects/AlfieRanstead-alevel-project/blob/686db5c2250bcc9c4430567baf9e29df5bb36b4b/packages/webportal/src/pages/download.tsx)
+* [index.tsx](https://github.com/Marling-CS-Projects/AlfieRanstead-alevel-project/blob/686db5c2250bcc9c4430567baf9e29df5bb36b4b/packages/webportal/src/pages/index.tsx)
+* [info.tsx](https://github.com/Marling-CS-Projects/AlfieRanstead-alevel-project/blob/686db5c2250bcc9c4430567baf9e29df5bb36b4b/packages/webportal/src/pages/info.tsx)
+* [wallet.tsx](https://github.com/Marling-CS-Projects/AlfieRanstead-alevel-project/blob/686db5c2250bcc9c4430567baf9e29df5bb36b4b/packages/webportal/src/pages/wallet.tsx)
+
+#### Node Software
+
 ### Challenges
 
 The main challenge I faced in this cycle of development was deciding how to make the node software available for download, originally I attempted to setup a file server and upload files to that in order to download the software easily, however I soon realised that this would be a lot of setup to just host one file.
