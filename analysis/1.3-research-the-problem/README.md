@@ -4,7 +4,7 @@
 
 ![](../../.gitbook/assets/image.png)
 
-![](<../../.gitbook/assets/image (1) (1).png>)
+![The https://bitcoin.org/en/ homepage](<../../.gitbook/assets/image (1) (1).png>)
 
 ### Overview
 
@@ -43,7 +43,7 @@ The above chart shows this transaction fee over time, and although right now it 
 
 ## Ethereum
 
-
+![The https://ethereum.org/en/ homepage](<../../.gitbook/assets/image (5).png>)
 
 ### Overview
 
