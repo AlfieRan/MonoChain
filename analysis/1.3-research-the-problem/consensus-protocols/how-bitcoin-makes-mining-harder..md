@@ -17,7 +17,7 @@ Because SHA-256 strings do not change in length, always being 64 hex-digits long
 In Bitcoin's case it requires the hash of the block to be lower than the hash target, which is a dynamic value defined by the below equation.
 
 ![Source - http://blog.geveo.com/Blockchain-Mining-Difficulty#:\~:text=The%20current%20Bitcoin%20blockchain%20requirement,not%20about%20the%20leading%20zeros.&#x20;
-2016 Blocks are used because if a block should be generated once per 10 minutes, that's 6 per hour and there's 336 hours per fortnight, therefore multiplying 6 by 336 we get 2016.](<../../../.gitbook/assets/image (1) (1).png>)
+2016 Blocks are used because if a block should be generated once per 10 minutes, that's 6 per hour and there's 336 hours per fortnight, therefore multiplying 6 by 336 we get 2016.](<../../../.gitbook/assets/image (1) (1) (1).png>)
 
 Therefore by lowering the target that a block's hash needs to be below, the amount of computing power to generate a nonce that meets this requirement grows proportionally. For example, that means that if the hash has to have an additional hex 0 at the start the hash target has become 1/16th of it's previous value and therefore has become 16 times harder to complete.
 
