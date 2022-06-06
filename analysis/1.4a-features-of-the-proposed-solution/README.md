@@ -1,5 +1,9 @@
 # 1.4a Features of Proposed Solution
 
+## The Blockchain
+
+## The Blocks
+
 ## Transactions
 
 ### The Structure of Transactions and Digital Signatures
