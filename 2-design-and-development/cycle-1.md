@@ -113,7 +113,7 @@ By following this code we can see that once "yarn build" is run it runs:&#x20;
 
 **Test 1 - Web portal running on localhost:**
 
-![Web portal running as expected on localhost:3000 when "yarn next" is ran in /packages/webportal](<../.gitbook/assets/image (3) (1).png>)
+![Web portal running as expected on localhost:3000 when "yarn next" is ran in /packages/webportal](<../.gitbook/assets/image (3) (1) (1).png>)
 
 ![Console output for the webportal.](<../.gitbook/assets/image (4) (1) (1).png>)
 
