@@ -14,8 +14,8 @@ description: >-
 * [ ] 1.4a - limitations
 * [ ] 1.4a - Polishing
 * [ ] 1.4b - examples of Computational Methods in project
-* [ ] 1.4b - Thinking Abstractly and Visualisation
-* [ ] 1.4b - Thinking Ahead
+* [x] 1.4b - Thinking Abstractly and Visualisation
+* [x] 1.4b - Thinking Ahead
 * [ ] 1.4b - Thinking Procedurally and Decomposition
 * [ ] 1.4b - Thinking Logically
 * [ ] 1.4b - Thinking Concurrently
