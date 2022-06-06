@@ -65,10 +65,10 @@ Ethereum began as a [proof of power](consensus-protocols/#proof-of-power) blockc
 {% endtab %}
 
 {% tab title="Features I won't be including" %}
-| Feature | Justification |
-| ------- | ------------- |
-|         |               |
-|         |               |
-|         |               |
+| Feature                                                                                                             | Justification                                                                                                                                                                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| A consensus protocol that requires users to have a large amount of money to invest in the network in order to mine. | This greatly limits who is allowed to mine on the network and defeats the purpose of diversifying the power of finance. Alongside going against the purpose of this project's blockchain it is also very difficult to implement without a large pool of pre-existing users |
+|                                                                                                                     |                                                                                                                                                                                                                                                                            |
+|                                                                                                                     |                                                                                                                                                                                                                                                                            |
 {% endtab %}
 {% endtabs %}
