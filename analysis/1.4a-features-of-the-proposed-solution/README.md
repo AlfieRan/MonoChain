@@ -16,6 +16,7 @@ These rules are the following:
 * The transactions themselves are signed using a wallet's private key and then their signature and transaction combo can be verified using that wallet's public key. The point of this is to only allow the sender to create transactions where they send an item, but anyone can check and verify these transactions.
 * Transactions should include a timestamp of when they were created by the sender, as the block also contains a timestamp, if the transaction is included on a block that is timestamped to outside of a set time frame then the transaction should be counted as null and void.
 * Transactions should then also obviously include where the coins/proof of ownership should be sent to, and what is being sent.
+* The&#x20;
 
 Following these rules gives us an idea of what each transaction should look like:
 
@@ -28,8 +29,7 @@ In JSON format that would look something like the following:
 ```
 {
     Sender: "b94d27b9",
-    Transaction:
-        [{type: coin, quantity: 50}],
+    Transaction: [{type: coin, quantity: 50}],
     Recipient: "j45n63m3",
     Timestamp: "Thu Mar 17 2022 19:06:50 GMT",
     Sender-Signature: "821a643d5ebf18ee9"
@@ -43,8 +43,7 @@ Therefore, in this scenario the sender would be hashing and signing the followin
 ```
 {
     Sender-Key: "b94d27b9",
-    Transaction:
-        [{type: coin, quantity: 50}],
+    Transaction: [{type: coin, quantity: 50}],
     Recipient-Key: "j45n63m3",
     Timestamp: "Thu Mar 17 2022 19:06:50 GMT",
 }
@@ -63,7 +62,7 @@ The other alternative to this is to construct the transaction object in two part
     body: {
         recipient: "j45n63m3",
         Transaction:
-            [{type: coin, id: "mono",quantity: 50}],
+            [{type: coin, quantity: 50}],
         Timestamp: "Thu Mar 17 2022 19:06:50 GMT",
     }
 }
@@ -89,7 +88,7 @@ This is what is commonly referred to as a cryptocurrency, and is the data that r
      type: coin,
      data: {
           id: "mono",
-          created-by: "some-key", 
+          created-by: "system", 
           quantity: 50
      }
 }
