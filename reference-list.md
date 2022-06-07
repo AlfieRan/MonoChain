@@ -4,7 +4,9 @@ Abdullah-Othman, A., Alhabshi, S., Kassim, S. and Haron, R. (2020). _The Impact 
 
 Anon, G.A. (2022). _Decentralized Storage_. \[online] ethereum.org. Available at: [https://ethereum.org/en/developers/docs/storage/](https://ethereum.org/en/developers/docs/storage/) \[Accessed 22 Mar. 2022].
 
-Anonymous, Blockchain. com (2022). _n-transactions-per-block_. \[online] Blockchain.com. Available at: [https://www.blockchain.com/charts/n-transactions-per-block](https://www.blockchain.com/charts/n-transactions-per-block) \[Accessed 1 Apr. 2022].
+Anonymous, Blockchain.com (2022). _n-transactions-per-block_. \[online] Blockchain.com. Available at: [https://www.blockchain.com/charts/n-transactions-per-block](https://www.blockchain.com/charts/n-transactions-per-block) \[Accessed 1 Apr. 2022].
+
+Apple (2009). _Safari 4 for Mac - Technical Specifications_. \[online] support.apple.com. Available at: [https://support.apple.com/kb/sp552?locale=en\_GB](https://support.apple.com/kb/sp552?locale=en\_GB) \[Accessed 7 Jun. 2022].
 
 Cloud 66 (n.d.). Recommended minimum server sizes • Node. \[online] help.cloud66.com. Available at: [https://help.cloud66.com/node/references/non-recommended-server-sizes.html#:\~:text=We%20recommend%20the%20following%20minimum](https://help.cloud66.com/node/references/non-recommended-server-sizes.html).
 
