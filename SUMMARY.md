@@ -40,5 +40,6 @@
 
 ## Notes
 
+* [My brain hurts](notes/my-brain-hurts.md)
 * [Stuff to do](notes/stuff-to-do.md)
 * [Phase 1](notes/phase-1.md)

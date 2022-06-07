@@ -1,9 +1,5 @@
 # 1.4a Features of Proposed Solution
 
-## The Blockchain
-
-## The Blocks
-
 ## Transactions
 
 ### The Structure of Transactions and Digital Signatures
@@ -13,62 +9,44 @@ Transactions on this blockchain will abide by a few rules, rules which form the 
 These rules are the following:
 
 * Wallets (and therefore users) are identified by their public keys
-* The transactions themselves are signed using a wallet's private key and then their signature and transaction combo can be verified using that wallet's public key. The point of this is to only allow the sender to create transactions where they send an item, but anyone can check and verify these transactions.
-* Transactions should include a timestamp of when they were created by the sender, as the block also contains a timestamp, if the transaction is included on a block that is timestamped to outside of a set time frame then the transaction should be counted as null and void.
+* The transactions themselves are encrypted using a wallet's private key and can be decrypted using that wallet's public key. This is effectively the opposite of standard encryption, as anyone can read this data, because only the owner can write a transaction involving themselves, however with typical encryption, anyone can write a message but only the owner can read them.
+* Transactions should include a timestamp of when they were approved, if the transaction is included on a block that is timestamped to outside of a set time frame of the transaction's time stamp then the transaction should be counted as null and void.
 * Transactions should then also obviously include where the coins/proof of ownership should be sent to, and what is being sent.
-* The&#x20;
 
 Following these rules gives us an idea of what each transaction should look like:
 
-| Sender's public key | Transaction                | Recipient's public key | Timestamp                    | Sender Signature  |
-| ------------------- | -------------------------- | ---------------------- | ---------------------------- | ----------------- |
-| b94d27b9            | {type: coin, quantity: 50} | j45n63m3               | Thu Mar 17 2022 19:06:50 GMT | 821a643d5ebf18ee9 |
+| Sender's public key | Transaction                | Recipient's public key | Timestamp                    | Sender Encrypted Copy |
+| ------------------- | -------------------------- | ---------------------- | ---------------------------- | --------------------- |
+| b94d27b9            | {type: coin, quantity: 50} | j45n63m3               | Thu Mar 17 2022 19:06:50 GMT | 821a643d5ebf18ee9     |
 
 In JSON format that would look something like the following:
 
 ```
 {
-    Sender: "b94d27b9",
-    Transaction: [{type: coin, quantity: 50}],
-    Recipient: "j45n63m3",
+    Sender-Key: "b94d27b9",
+    Transaction:
+        [{type: coin, quantity: 50}],
+    Recipient-Key: "j45n63m3",
     Timestamp: "Thu Mar 17 2022 19:06:50 GMT",
-    Sender-Signature: "821a643d5ebf18ee9"
+    Sender-Encrypted: "821a643d5ebf18ee9"
 }    
 ```
 
-It's important to mention that the Sender-Signed hash of the data does not include itself, otherwise that would create a recursion error and would be impossible to destruct. Instead the Sender-Signed hash is a hash of everything except itself in a separate JSON object than the one in the blockchain.
+It's important to mention that the Sender-Encrypted hash of the data does not include itself, otherwise that would create a recursion error and would be impossible to destruct. Instead the Sender-Encrypted hash is a hash of everything except itself in a separate JSON object than the one in the blockchain.
 
-Therefore, in this scenario the sender would be hashing and signing the following:
+Therefore, in this scenario the sender would be hashing and encrypting the following:
 
 ```
 {
     Sender-Key: "b94d27b9",
-    Transaction: [{type: coin, quantity: 50}],
+    Transaction:
+        [{type: coin, quantity: 50}],
     Recipient-Key: "j45n63m3",
     Timestamp: "Thu Mar 17 2022 19:06:50 GMT",
 }
 ```
 
-This is very important to bear in mind when writing the node mining software as if the whole json transaction is validated it will never validate successfully, and instead the section of the transaction referenced above is the part that should be validated according to the Sender-signed hash.
-
-The other alternative to this is to construct the transaction object in two parts: the signature and the data. This would be structured similarly to how a typical communication request is structured, with a header and a body.
-
-```
-{
-    header: {
-        sender: "b94d27b9",
-        signature: "821a643d5ebf18ee9",    
-    },
-    body: {
-        recipient: "j45n63m3",
-        Transaction:
-            [{type: coin, quantity: 50}],
-        Timestamp: "Thu Mar 17 2022 19:06:50 GMT",
-    }
-}
-```
-
-The final construction has not yet been decided, but it should abide by the above rules.
+This is very important to bear in mind when writing the node mining software as if the whole json transaction is validated it will never validate successfully, and instead the section of the transaction referenced above is the part that should be validated according to the Sender-encrypted hash.
 
 ## Types of Transactions and Valid Data
 
@@ -82,17 +60,6 @@ The final construction has not yet been decided, but it should abide by the abov
 ### Coins
 
 This is what is commonly referred to as a cryptocurrency, and is the data that represents money and allows the whole blockchain to run. There will be one key coin that will be the coin the default node software will be paid in, however if a user was to create their own node software that abides by the blockchain's protocols they could accept any kind of coin they wished as payment.
-
-```
-{
-     type: coin,
-     data: {
-          id: "mono",
-          created-by: "system", 
-          quantity: 50
-     }
-}
-```
 
 ### Certificates
 
