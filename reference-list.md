@@ -12,6 +12,8 @@ Cloud 66 (n.d.). Recommended minimum server sizes • Node. \[online] help.cloud
 
 Chen, J. (2021). _Fiat Money_. \[online] Investopedia. Available at: [https://www.investopedia.com/terms/f/fiatmoney.asp](https://www.investopedia.com/terms/f/fiatmoney.asp). \[Accessed 7 Apr. 2022]
 
+Firefox (2022). _Firefox 101.0 System Requirements_. \[online] Mozilla. Available at: [https://www.mozilla.org/en-US/firefox/101.0/system-requirements/](https://www.mozilla.org/en-US/firefox/101.0/system-requirements/) \[Accessed 7 Jun. 2022].
+
 Google. (2012). _Chrome Browser system requirements - Google Chrome Enterprise Help_. \[online] Available at: [https://support.google.com/chrome/a/answer/7100626?hl=en](https://support.google.com/chrome/a/answer/7100626?hl=en) \[Accessed 7 June 2022].
 
 Hall, M. (2021). _What’s the Difference Between a Monopoly and an Oligopoly?_ \[online] Investopedia. Available at: [https://www.investopedia.com/ask/answers/121514/what-are-major-differences-between-monopoly-and-oligopoly.asp#:\~:text=Oligopoly%3A%20An%20Overview](https://www.investopedia.com/ask/answers/121514/what-are-major-differences-between-monopoly-and-oligopoly.asp)
