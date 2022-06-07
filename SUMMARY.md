@@ -39,8 +39,8 @@
 
 ## Notes
 
-* [\[Archive\] 1.4a Features of Proposed Solution](analysis/1.4a-features-of-the-proposed-solution/README.md)
-  * [Proof of Worth - the bullet point summary.](analysis/1.4a-features-of-the-proposed-solution/proof-of-worth.md)
-* [important stuff](notes/important-stuff.md)
+* [Proof of Worth - the bullet point summary.](notes/proof-of-worth-the-bullet-point-summary..md)
+* [\[Archive\] 1.4a Features of Proposed Solution](notes/1.4a-features-of-the-proposed-solution.md)
+* [important stuff](notes/my-brain-hurts.md)
 * [Stuff to do](notes/stuff-to-do.md)
 * [Phase 1](notes/phase-1.md)
