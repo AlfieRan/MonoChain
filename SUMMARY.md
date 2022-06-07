@@ -41,6 +41,6 @@
 
 * [\[Archive\] 1.4a Features of Proposed Solution](analysis/1.4a-features-of-the-proposed-solution/README.md)
   * [Proof of Worth - the bullet point summary.](analysis/1.4a-features-of-the-proposed-solution/proof-of-worth.md)
-* [My brain hurts](notes/my-brain-hurts.md)
+* [important stuff](notes/important-stuff.md)
 * [Stuff to do](notes/stuff-to-do.md)
 * [Phase 1](notes/phase-1.md)

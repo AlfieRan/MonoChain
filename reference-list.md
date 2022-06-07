@@ -8,9 +8,11 @@ Anonymous, Blockchain.com (2022). _n-transactions-per-block_. \[online] Blockcha
 
 Apple (2009). _Safari 4 for Mac - Technical Specifications_. \[online] support.apple.com. Available at: [https://support.apple.com/kb/sp552?locale=en\_GB](https://support.apple.com/kb/sp552?locale=en\_GB) \[Accessed 7 Jun. 2022].
 
+Chen, J. (2021). _Fiat Money_. \[online] Investopedia. Available at: [https://www.investopedia.com/terms/f/fiatmoney.asp](https://www.investopedia.com/terms/f/fiatmoney.asp). \[Accessed 7 Apr. 2022]
+
 Cloud 66 (n.d.). Recommended minimum server sizes • Node. \[online] help.cloud66.com. Available at: [https://help.cloud66.com/node/references/non-recommended-server-sizes.html#:\~:text=We%20recommend%20the%20following%20minimum](https://help.cloud66.com/node/references/non-recommended-server-sizes.html).
 
-Chen, J. (2021). _Fiat Money_. \[online] Investopedia. Available at: [https://www.investopedia.com/terms/f/fiatmoney.asp](https://www.investopedia.com/terms/f/fiatmoney.asp). \[Accessed 7 Apr. 2022]
+crypto.com (2022). _When the Peg Breaks - Depegging Events in Fiat and Crypto_. \[online] crypto.com. Available at: [https://content-hub-static.crypto.com/wp-content/uploads/2022/05/20220531\_CDC\_1\_When\_the\_Peg\_Breaks.pdf](https://content-hub-static.crypto.com/wp-content/uploads/2022/05/20220531\_CDC\_1\_When\_the\_Peg\_Breaks.pdf) \[Accessed 7 Jun. 2022].
 
 Firefox (2022). _Firefox 101.0 System Requirements_. \[online] Mozilla. Available at: [https://www.mozilla.org/en-US/firefox/101.0/system-requirements/](https://www.mozilla.org/en-US/firefox/101.0/system-requirements/) \[Accessed 7 Jun. 2022].
 
