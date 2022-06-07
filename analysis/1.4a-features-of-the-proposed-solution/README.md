@@ -1,8 +1,6 @@
-# \[Archive] 1.4a Features of Proposed Solution
+# \[Archive] 1.4a - OLD VERSION
 
-## The Blockchain
-
-## The Blocks
+## I'm going to delete this file when I've finished transferring all it's info into [the new 1.4a File](../1.4a-features-of-proposed-solution.md), as it's badly structured and I don't like it.
 
 ## Transactions
 

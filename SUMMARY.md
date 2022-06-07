@@ -11,6 +11,8 @@
   * [Consensus Protocols](analysis/1.3-research-the-problem/consensus-protocols/README.md)
     * [How Proof of Work Mining Works](analysis/1.3-research-the-problem/consensus-protocols/how-bitcoin-makes-mining-harder..md)
 * [1.4a Features of Proposed Solution](analysis/1.4a-features-of-proposed-solution.md)
+* [\[Archive\] 1.4a - OLD VERSION](analysis/1.4a-features-of-the-proposed-solution/README.md)
+  * [Proof of Worth - the bullet point summary.](analysis/1.4a-features-of-the-proposed-solution/proof-of-worth-the-bullet-point-summary..md)
 * [1.4b Computational Methods](1-analysis/1.4b-computational-methods.md)
 * [1.5 Success Criteria](1-analysis/1.5-success-criteria.md)
 * [1.6 Hardware and Software Requirements](1-analysis/1.6-hardware-and-software-requirements.md)
@@ -39,8 +41,6 @@
 
 ## Notes
 
-* [Proof of Worth - the bullet point summary.](notes/proof-of-worth-the-bullet-point-summary..md)
-* [\[Archive\] 1.4a Features of Proposed Solution](notes/1.4a-features-of-the-proposed-solution.md)
 * [important stuff](notes/my-brain-hurts.md)
 * [Stuff to do](notes/stuff-to-do.md)
 * [Phase 1](notes/phase-1.md)
