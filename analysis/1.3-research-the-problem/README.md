@@ -34,10 +34,11 @@ The above chart shows this transaction fee over time, and although right now it 
 {% endtab %}
 
 {% tab title="Features I won't be including" %}
-| Feature                                                                                     | Justification                                                                                                                                       |
-| ------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Proof of work based trust                                                                   | Wastes a lot of computing power and therefore both time and resources (such as electrical energy) which could be used for other, more useful tasks. |
-| The limit of only using the blockchain for a singular currency (bitcoins) and nothing else. | Does not allow the blockchain to store other types of data, such as json object data, which this blockchain is based around.                        |
+| Feature                                                                                     | Justification                                                                                                                                                              |
+| ------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Proof of work based trust                                                                   | Wastes a lot of computing power and therefore both time and resources (such as electrical energy) which could be used for other, more useful tasks.                        |
+| The limit of only using the blockchain for a singular currency (bitcoins) and nothing else. | Does not allow the blockchain to store other types of data, such as json object data, which this blockchain is based around.                                               |
+| ≈10 minute block times                                                                      | This is a good time period for ensuring all nodes on the network reach a consensus, but it massively limits the amount of transactions per second to only approximately 7. |
 {% endtab %}
 {% endtabs %}
 
@@ -61,6 +62,7 @@ Ethereum began as a [proof of power](consensus-protocols/#proof-of-power) blockc
 | ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | A consensus protocol that rewards long term users                  | This is very useful to keep users on the blockchain and is what helps to encourage long term usage and financial gain for those who do use the blockchain long term. This is obviously not guaranteed but it should still be a benefit for the network. |
 | Digital ownership certificates [(Nfts)](../../terminology.md#nfts) | This is what allows most of the more useful technology in the Ethereum blockchain and will unlock a lot of the potential in this blockchain. This is how ownership is proven on the blockchain and is what differentiates web2 from web3.               |
+| ≈15 second block times                                             | This is long enough so that nodes should have enough time to reach an agreement on which blocks are valid, but keeps transaction times low and allows lots of data to flow through the network.                                                         |
 {% endtab %}
 
 {% tab title="Features I won't be including" %}
