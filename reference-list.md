@@ -14,6 +14,8 @@ Cloud 66 (n.d.). Recommended minimum server sizes • Node. \[online] help.cloud
 
 crypto.com (2022). _When the Peg Breaks - Depegging Events in Fiat and Crypto_. \[online] crypto.com. Available at: [https://content-hub-static.crypto.com/wp-content/uploads/2022/05/20220531\_CDC\_1\_When\_the\_Peg\_Breaks.pdf](https://content-hub-static.crypto.com/wp-content/uploads/2022/05/20220531\_CDC\_1\_When\_the\_Peg\_Breaks.pdf) \[Accessed 7 Jun. 2022].
 
+Ethereum (2015). _State Tree Pruning_. \[online] blog.ethereum.org. Available at: [https://blog.ethereum.org/2015/06/26/state-tree-pruning/](https://blog.ethereum.org/2015/06/26/state-tree-pruning/) \[Accessed 8 Jun. 2022].
+
 Firefox (2022). _Firefox 101.0 System Requirements_. \[online] Mozilla. Available at: [https://www.mozilla.org/en-US/firefox/101.0/system-requirements/](https://www.mozilla.org/en-US/firefox/101.0/system-requirements/) \[Accessed 7 Jun. 2022].
 
 Google. (2012). _Chrome Browser system requirements - Google Chrome Enterprise Help_. \[online] Available at: [https://support.google.com/chrome/a/answer/7100626?hl=en](https://support.google.com/chrome/a/answer/7100626?hl=en) \[Accessed 7 June 2022].
