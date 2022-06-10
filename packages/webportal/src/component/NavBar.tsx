@@ -1,18 +1,17 @@
-import { Flex, Link } from "@chakra-ui/react";
+import { Button, Flex, Link, Text } from "@chakra-ui/react";
+import { Links } from "../utils/types";
+import DevNavigation from "./Dev-navigation";
+import { useState } from "react";
 
 const NavBar = () => {
-  const LinkMarginAmount = 2;
-  const Links: { name: string; href: string; external?: boolean }[] = [
+  const LinkMarginAmount = 6;
+  const Links: Links[] = [
     { name: "Home", href: "/" },
-    { name: "Project", href: "/info" },
-    {
-      name: "Code",
-      href: "https://github.com/AlfieRan/A-Level-Project",
-      external: true,
-    },
+    { name: "Learn More", href: "/info" },
+    { name: "Developers", comp: DevNavigation, type: "component" },
     { name: "Wallet", href: "/wallet" },
-    { name: "Download", href: "/download" },
   ];
+  const [devShowing, setDevShowing] = useState<boolean>(false);
 
   return (
     <Flex
@@ -20,18 +19,35 @@ const NavBar = () => {
       bg={"rgba(17,17,17,0.1)"}
       justifyContent={"center"}
       px={5}
+      py={2}
     >
-      {Links.map((data) => (
-        <Link
-          key={data.name}
-          href={data.href}
-          mx={LinkMarginAmount}
-          fontSize={"xl"}
-          isExternal={data.external ? true : false}
-        >
-          {data.name}
-        </Link>
-      ))}
+      {Links.map((data) => {
+        if (data.type === "component") {
+          return (
+            <Button
+              key={data.name}
+              onClick={() => {
+                setDevShowing(!devShowing);
+              }}
+            >
+              <Text>{data.name}</Text>
+              <data.comp hidden={!devShowing} />
+            </Button>
+          );
+        } else {
+          return (
+            <Link
+              key={data.name}
+              href={data.href}
+              mx={LinkMarginAmount}
+              fontSize={"xl"}
+              isExternal={!!data.external}
+            >
+              {data.name}
+            </Link>
+          );
+        }
+      })}
     </Flex>
   );
 };
