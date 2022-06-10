@@ -1,7 +1,12 @@
-import { Button, Flex, Link, Text } from "@chakra-ui/react";
+import { Button, Flex, Interpolation, Link, Text } from "@chakra-ui/react";
 import { Links } from "../utils/types";
 import DevNavigation from "./Dev-navigation";
 import { useState } from "react";
+
+const LinkHover: Interpolation<{}> = {
+  background: "",
+  color: "#4343dc",
+};
 
 const NavBar = () => {
   const LinkMarginAmount = 6;
@@ -18,21 +23,38 @@ const NavBar = () => {
       w={"100vw"}
       bg={"rgba(17,17,17,0.1)"}
       justifyContent={"center"}
+      fontSize={"xl"}
       px={5}
-      py={2}
+      pb={2}
+      pt={4}
     >
       {Links.map((data) => {
         if (data.type === "component") {
           return (
-            <Button
-              key={data.name}
-              onClick={() => {
-                setDevShowing(!devShowing);
-              }}
-            >
-              <Text>{data.name}</Text>
+            <Flex flexDir={"column"}>
+              <Button
+                key={data.name}
+                bg={""}
+                my={0}
+                mx={LinkMarginAmount}
+                p={0}
+                _hover={LinkHover}
+                onClick={() => {
+                  setDevShowing(!devShowing);
+                }}
+              >
+                <Text
+                  fontSize={"xl"}
+                  fontWeight={"normal"}
+                  h={"full"}
+                  w={"full"}
+                  lineHeight={"base"}
+                >
+                  {data.name}
+                </Text>
+              </Button>
               <data.comp hidden={!devShowing} />
-            </Button>
+            </Flex>
           );
         } else {
           return (
@@ -40,10 +62,12 @@ const NavBar = () => {
               key={data.name}
               href={data.href}
               mx={LinkMarginAmount}
-              fontSize={"xl"}
               isExternal={!!data.external}
+              _hover={LinkHover}
             >
-              {data.name}
+              <Text fontSize={"xl"} h={"full"} w={"full"}>
+                {data.name}
+              </Text>
             </Link>
           );
         }

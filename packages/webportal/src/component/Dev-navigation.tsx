@@ -1,5 +1,5 @@
 import { Links } from "../utils/types";
-import { Flex, Link } from "@chakra-ui/react";
+import { Center, Flex, Link } from "@chakra-ui/react";
 
 const DevNavigation = (props: { hidden?: boolean }) => {
   const LinkMarginAmount = 3;
@@ -13,7 +13,7 @@ const DevNavigation = (props: { hidden?: boolean }) => {
   if (props.hidden) return null;
 
   return (
-    <Flex pos={"absolute"} p={3} flexDir={"column"}>
+    <Center pos={"absolute"} p={3} flexDir={"column"}>
       {values.map((value) => {
         if (value.type === "component") {
           return;
@@ -31,7 +31,7 @@ const DevNavigation = (props: { hidden?: boolean }) => {
           );
         }
       })}
-    </Flex>
+    </Center>
   );
 };
 
