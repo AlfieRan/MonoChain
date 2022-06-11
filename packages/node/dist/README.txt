@@ -4,14 +4,11 @@ Mining is a process based upon giving up some of your computer's power to a bloc
 In exchange, you receive a small percentage of any transactions that are processed on your computer in MonoCoins,
 the standard currency for the MonoChain network.
 
-To run this program you will need node, a program that allows you to run javascript directly on your computer.
- - node the js interpreter is not related or associated with the MonoChain network in any way.
- - It just happens to share a name with this type of mining software.
+To start working for the MonoChain Network you will first need to allow other nodes to connect to your computer,
+this will be through a http connection that requires some kind of open port, this can be done through port forwarding (less recommended),
+through a cloudflare tunnel (highly recommended) or any other method.
 
-It is also recommended that you understand what you are doing as you will need to use the console to start your node.
+Once you've setup a way for other nodes to communicate with yours all you have to do is run the executable file titled "main" in this folder.
+Then it will guide you through the setup steps.
 
-
-To install Node go here: https://nodejs.org/en/
-
-To start working for the MonoChain Network open your console, navigate to wherever you have installed this software,
-then type "node /code/index.js"
+For more information on how to complete any of the above please visit the docs at https://monochain.network/docs 

@@ -39,6 +39,7 @@ const NavBar = () => {
                 mx={LinkMarginAmount}
                 p={0}
                 _hover={LinkHover}
+                _active={LinkHover}
                 onClick={() => {
                   setDevShowing(!devShowing);
                 }}
