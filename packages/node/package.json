@@ -7,7 +7,7 @@
   "scripts": {
     "start": "ts-node dist/code/index.js",
     "clean": "rm -rf dist/code && mkdir dist/code && echo \"cleaned dist/code\"",
-    "clean-zip": "rm -f node.zip && echo \"cleaned node.zip\"",
+    "clean-zip": "rm -f node.zip && rm -f ../webportal/public/node.zip && echo \"cleaned node.zip\"",
     "prepack": "yarn build",
     "build": "yarn clean && yarn clean-zip && yarn compile && yarn zip && echo \"zipped node\"",
     "compile": "v ./src/ && mv ./src/src ./dist/code && echo \"compiled\"",

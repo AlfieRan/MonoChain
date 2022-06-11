@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { AppProps } from "next/app";
 import { ChakraProvider } from "@chakra-ui/provider";
 import { extendTheme } from "@chakra-ui/react";
 import { SWRConfig } from "swr";
 import { fetcher } from "../utils/fetcher";
 import NavBar from "../component/NavBar";
+import DevNavigation from "../component/Dev-navigation";
 
 const theme = extendTheme({
   styles: {

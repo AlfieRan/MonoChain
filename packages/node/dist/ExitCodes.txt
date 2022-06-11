@@ -1,0 +1,14 @@
+// Safe Exit
+0 - Exited safely, typically due to user request.
+
+// Generic Errors
+1 - Generic Error, unknown cause, can usually be solved by restarting software
+
+// Generic Errors - input based
+2 - Unknown input type
+3 - input out of expected range
+
+
+// Configuration Exits
+50 - Attempting to ask user if they would like to create a new configuration file failed too many times
+100 - Failed to create a new configuration file, function to do so returned an invalid config file for unknown reason.
