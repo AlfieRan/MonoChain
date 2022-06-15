@@ -1,37 +1,35 @@
 module configuration
 import json
 import os
-import readline { read_line }
 
 pub fn load_config() UserConfig {
-	if os.exists("./node.config") {
-		// config file already exists, make sure we can open and decode it
+	if os.exists("./node.config") { // check config file exists
+		// if it does, make sure we can open and decode it
 
 		config_raw := os.read_file("node.config") or {
-			// something went wrong opening the file, return null
+			// something went wrong opening the file, return without loading the config
 			eprintln('Failed to open config file, error $err')
 			return UserConfig{ loaded: false }
 		}
 
 		user_config := json.decode(UserConfig, config_raw) or {
-			// something went wrong decoding the file, return null
+			// something went wrong decoding the file, return without loading the config
 			eprintln('Failed to decode json, error: $err')
 			return UserConfig{ loaded: false }
 		}
 
-		return user_config
+		return user_config // config loaded and no issues with it
 	}
 
-	return UserConfig{ loaded: false }
+	return UserConfig{ loaded: false } // config doesn't exit, so return
 } 
 
 pub fn save_config(config UserConfig, recursion_depth int) bool {
-	mut failed := false
+	mut failed := false // initialise a failsafe
+	data := json.encode(config) // encode the current configuration to json
 
-	data := json.encode(config)
-	if failed {return false}
-
-	os.write_file("./node.config", data) or {
+	os.write_file("./node.config", data) or { // try and write data to file
+		// if it failed, run the recursion depth checker to ensure there hasn't been too many failed attempts
 		eprintln('Failed to save file, trying again.')
 		if recursion_depth >= 5{
 			eprintln("Failed to save file too many times, continuing with program but your config won't be saved")

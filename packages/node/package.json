@@ -22,6 +22,7 @@
 
     "zip": "zip ../webportal/public/node.zip -9r ./dist/ && echo \"zipped\"",
 
-    "dev": "v watch ./src/"
+    "dev": "v watch ./src/",
+    "start": "v run ./src/"
   }
 }
