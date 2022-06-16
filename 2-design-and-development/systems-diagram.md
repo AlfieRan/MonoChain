@@ -4,9 +4,15 @@
 
 ![My design frame](<../.gitbook/assets/Design Frame (1).jpg>)
 
-The diagram above shows the major sectors of this project
+The diagram above shows the major sectors of this project that I will be creating through out development. The diagram is split into three major sections that then have their own sub-sections to help simplify each part.&#x20;
 
-This diagram shows the different parts of the game that I will focus on creating. I have split each section into smaller sub-sections. Throughout the development stage, I will pick one or two of these sections to focus on at a time to gradually build up and piece together the game. I have broken the project down this way as it roughly corresponds to the success criteria.
+The main sections are the following:
+
+1. The Protocol - This is a summary for how the computers on the network will interact, construct data and validate it in order to create what will be known as the MonoChain.
+2. The Web-portal - This is the website that will allow users to interact with the MonoChain through a few basic functions
+3. The Node Software -&#x20;
+
+Throughout the development stage, I will pick one or two of these sections to focus on at a time to gradually build up and piece together the game. I have broken the project down this way as it roughly corresponds to the success criteria.
 
 ## Usability Features
 
