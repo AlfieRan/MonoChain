@@ -9,10 +9,10 @@ The diagram above shows the major sectors of this project that I will be creatin
 The main sections are the following:
 
 1. The Protocol - This is a summary for how the computers on the network will interact, construct data and validate it in order to create what will be known as the MonoChain.
-2. The Web-portal - This is the website that will allow users to interact with the MonoChain through a few basic functions
-3. The Node Software -&#x20;
+2. The Web-portal - This is the website that will allow users to interact with the MonoChain through a few basic functions which are shown in the diagram.
+3. The Node Software - This is what people who want to contribute to the MonoChain through the validating of transactions and data in order to "mine" coins on the network will use on their computers/servers.
 
-Throughout the development stage, I will pick one or two of these sections to focus on at a time to gradually build up and piece together the game. I have broken the project down this way as it roughly corresponds to the success criteria.
+Throughout the development stage I will initially focus mainly on the Node Software and the Protocol, and then once they are up to the point at which the network somewhat works I will also start developing the webportal as when the network doesn't work the portal doesn't have much of a use. I have also decided to break down the diagram into those specific subsections in order to roughly align with the[ Success Criteria](../1-analysis/1.5-success-criteria.md).
 
 ## Usability Features
 
