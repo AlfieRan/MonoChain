@@ -8,7 +8,7 @@ pub interface Node_Type {
 		grudge int	// personal rating: positive = good, negative = bad
 }
 
-pub interface Blockchain_State {
+pub struct Blockchain_State {
 	headers State_Tree_Headers 	// standard headers for block verification - verify to child trees
 	domains Domain_Tree 		// domains refer to wallets on the blockchain without having to use a boring wallet key
 	wallets Wallet_Tree			// This stores all the contents of all the wallets currently on the blockchain

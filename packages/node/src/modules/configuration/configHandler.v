@@ -6,8 +6,9 @@ import utils
 
 struct UserConfig {
 	last_connect int	// the last time this node connected to the network
-
+	priv_key string
 	pub: 
+		pub_key string
 		loaded bool	// has the config loaded up
 		port int	// open port for server
 		self Node	// ref to self
@@ -38,7 +39,7 @@ pub fn get_config() UserConfig {
 	}
 
 	// return config after it's loaded
-	println("\nConfig Loaded, launching API server...")
+	println("\nConfig Loaded...")
 	return user_config
 }
 
