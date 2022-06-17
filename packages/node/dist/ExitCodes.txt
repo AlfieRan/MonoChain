@@ -7,6 +7,7 @@
 // Generic Errors - input based
 2 - Unknown input type
 3 - input out of expected range
+4 - function should've returned a value but it continued past the return point
 
 
 // Configuration Exits
