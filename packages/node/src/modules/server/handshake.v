@@ -21,9 +21,11 @@ pub fn ping(ref string, self configuration.UserConfig) bool {
 	msg := "gfhajbsfhka" // should be random or datetime or something
 	req := PingRequest{ping_key: self.pub_key, message: msg}
 
+	println("Sending ping request to $ref")
 	// fetch domain, domain should respond with their wallet pub key/address, "pong" and a signed hash of the message
-	raw := http.get("$ref/pong/$req") or {
-		eprintln("Failed to ping $ref, Node is probably offline.")
+	req_encoded := json.encode(req)
+	raw := http.get("$ref/pong/$req_encoded") or {
+		eprintln("Failed to ping $ref, Node is probably offline. Error: $err")
 		return false
 	}
 
@@ -31,6 +33,8 @@ pub fn ping(ref string, self configuration.UserConfig) bool {
 		eprintln("Failed to decode response, responder is probably using an old node version.\nTheir Response: $raw")
 		return false
 	}
+
+	println("$ref responded to ping request with pong $data")
 
 	// signed hash can then be verified using the wallet pub key supplied
 	if data.message == msg && data.ping_key == self.pub_key {

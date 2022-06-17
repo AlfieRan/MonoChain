@@ -2,13 +2,17 @@ module server
 import vweb
 import json
 import configuration
+import time
 
 struct App {
 	vweb.Context
 }
 
-pub fn start(port int) {
-	vweb.run(&App{}, port)
+pub fn start(config configuration.UserConfig) {
+	api := go vweb.run(&App{}, config.port)
+	time.sleep(2 * time.second)
+	server.ping("http://localhost:$config.port", config)
+	api.wait()
 }
 
 pub fn (mut app App) index() vweb.Result {
@@ -24,6 +28,8 @@ pub fn (mut app App) pong(req string) vweb.Result {
 
 	self := configuration.get_config()
 
+	println("Received pong request, data supplied: $req_parsed")
+
 	res := PongResponse{
 		pong_key: self.pub_key
 		ping_key: req_parsed.ping_key
@@ -32,6 +38,5 @@ pub fn (mut app App) pong(req string) vweb.Result {
 	}
 
 	data := json.encode(res)
-
 	return app.text(data)
 }
