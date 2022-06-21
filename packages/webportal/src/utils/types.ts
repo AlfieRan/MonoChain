@@ -12,5 +12,12 @@ export type Links =
   | {
       name: string;
       comp: (props: { hidden?: boolean }) => JSX.Element | null;
+      state: state_nav;
       type: "component";
     };
+
+
+export type state_nav = {
+  change: React.Dispatch<React.SetStateAction<boolean>>;
+  value: boolean;
+}

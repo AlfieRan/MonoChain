@@ -8,39 +8,40 @@ import NavBar from "../component/NavBar";
 import DevNavigation from "../component/Dev-navigation";
 
 const theme = extendTheme({
-  styles: {
-    global: {
-      "html, body": {
-        color: "textColour",
-        background: "background" /* fallback for old browsers */,
-      },
+    styles: {
+        global: {
+            "html, body": {
+                color: "textColour",
+                background: "background" /* fallback for old browsers */,
+                "overscroll-behavior-y": "none",
+            },
+        },
     },
-  },
-  colors: {
-    background: "#FFF",
-    subHover: "#ccced7",
-    subColour: "white",
-    textColour: "black",
-    confirmColourMain: "#2545e3",
-    confirmColourHover: "#505bec",
-    confirmColourClick: "#1f289a",
-  },
+    colors: {
+        background: "#FFF",
+        subHover: "#ccced7",
+        subColour: "white",
+        textColour: "black",
+        confirmColourMain: "#2545e3",
+        confirmColourHover: "#505bec",
+        confirmColourClick: "#1f289a",
+    },
 });
 
 export default function App({ Component, pageProps }: AppProps) {
-  return (
-    <SWRConfig
-      value={{
-        fetcher(url) {
-          return fetcher("GET", url).then((res) => res.data);
-        },
-        refreshInterval: 5 * 1000,
-      }}
-    >
-      <ChakraProvider theme={theme}>
-        <NavBar />
-        <Component {...pageProps} />
-      </ChakraProvider>
-    </SWRConfig>
-  );
+    return (
+        <SWRConfig
+            value={{
+                fetcher(url) {
+                    return fetcher("GET", url).then((res) => res.data);
+                },
+                refreshInterval: 5 * 1000,
+            }}
+        >
+            <ChakraProvider theme={theme}>
+                <NavBar />
+                <Component {...pageProps} />
+            </ChakraProvider>
+        </SWRConfig>
+    );
 }

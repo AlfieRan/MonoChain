@@ -28,7 +28,7 @@ pub fn (mut app App) pong(req string) vweb.Result {
 
 	self := configuration.get_config()
 
-	println("Received pong request, data supplied: $req_parsed")
+	println("Received pong request.\n data supplied: $req_parsed \n Raw data supplied $req")
 
 	res := PongResponse{
 		pong_key: self.pub_key
