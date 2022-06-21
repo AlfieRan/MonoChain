@@ -13,7 +13,7 @@ const theme = extendTheme({
             "html, body": {
                 color: "textColour",
                 background: "background" /* fallback for old browsers */,
-                "overscroll-behavior-y": "none",
+                overscrollBehaviorY: "none",
             },
         },
     },

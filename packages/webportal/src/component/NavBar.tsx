@@ -17,6 +17,8 @@ const LinkHover: Interpolation<{}> = {
 
 const NavBar = () => {
     const [devShowing, setDevShowing] = useState<boolean>(false);
+    const [mobile, setMobile] = useState<boolean>(true);
+    const [showingMenu, setShowingMenu] = useState<boolean>(!mobile);
 
     const LinkMarginAmount = 6;
     const Links: Links[] = [
@@ -34,7 +36,7 @@ const NavBar = () => {
     return (
         <>
             <Flex
-                w={"100vw"}
+                w={"full"}
                 bg={"rgba(17,17,17,0.1)"}
                 justifyContent={"center"}
                 fontSize={"xl"}
