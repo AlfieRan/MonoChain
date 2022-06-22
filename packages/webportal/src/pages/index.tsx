@@ -60,4 +60,6 @@ const index = () => {
   );
 };
 
+// Images are stored in the /public/index folder
+
 export default index;
