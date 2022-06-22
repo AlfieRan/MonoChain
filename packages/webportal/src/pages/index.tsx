@@ -6,7 +6,7 @@ const index = () => {
   return (
     <Flex flexDir="column">
       <AspectRatio maxH="5%" ratio={5 / 1}>
-        <Image src="/index/nodes.png" layout="fill" />
+        <Image src="/index/nodes-banner.png" layout="fill" />
       </AspectRatio>
       <Flex
         w={"100vw"}
