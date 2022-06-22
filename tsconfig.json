@@ -17,9 +17,6 @@
     "files": [],
     "references": [
         {
-            "path": "packages/node"
-        },
-        {
             "path": "packages/utils"
         },
         {
