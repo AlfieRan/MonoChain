@@ -4,7 +4,7 @@ import utils
 
 // Structures and Types
 
-struct UserConfig {
+pub struct UserConfig {
 	last_connect int	// the last time this node connected to the network
 	priv_key string
 	pub: 
