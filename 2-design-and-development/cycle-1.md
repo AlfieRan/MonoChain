@@ -13,8 +13,8 @@ Because of the fact that this relies on three separate packages and it may need 
 * [x] Deploy the initial version of the web-portal.
 * [x] Build a very basic version of the node program that says "hello world" in the console
 * [x] Figure out the best way to let users download and run the node program.
-* [ ] Attach a way to download the node program to the web-portal.
-* [ ] Successfully download and run the node program from the webportal.
+* [x] Attach a way to download the node program to the web-portal.
+* [x] Successfully download and run the node program from the webportal.
 
 ### Usability Features
 
