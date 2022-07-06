@@ -1,11 +1,21 @@
 module configuration
 import readline { read_line }
+import cryptography
+import crypto.ed25519 as dsa
 import utils
 
 pub fn create_configuration() UserConfig {
+	pub_key, priv_key := get_keys(0)
+
 	config := UserConfig{
 		loaded: true
 		port: ask_for_port(0)
+		priv_key: priv_key
+		self: Node{
+			trust: 0,	// this should be collected from blockchain
+			ref: "self"
+			key: pub_key
+		}
 	}
 
 	save_config(config, 0)
@@ -26,4 +36,36 @@ fn ask_for_port(recursion_depth int) int {
 	}
 
 	return port
+}
+
+fn ask_for_keys_inp(recursion_depth int) string {
+	eprintln("Input failed, please try again")
+	utils.recursion_check(recursion_depth, 4)
+	return ask_for_keys_inp(recursion_depth + 1)
+}
+
+fn ask_for_keys(recursion_depth int) (dsa.PublicKey, dsa.PrivateKey) {
+	println("Please enter your public key:")
+	pub_key := utils.inp_parser(read_line("$:\t") or {ask_for_keys_inp(recursion_depth)}).bytes()
+	println("Please enter your private key:")
+	priv_key := utils.inp_parser(read_line("$:\t") or {ask_for_keys_inp(recursion_depth)}).bytes()
+	return pub_key, priv_key
+}
+
+fn get_keys(recursion_depth int) (dsa.PublicKey, dsa.PrivateKey) {
+	println("Would you like to generate a new keypair? (y/n)")
+	gen_keys := utils.ask_for_bool(0)
+
+	if gen_keys {
+		return cryptography.gen_keys()
+	} else {
+		println("Do you have a keypair already? (y/n)")
+		have_keys := utils.ask_for_bool(0)
+		if have_keys {
+			return ask_for_keys(0)
+		} else {
+			eprintln("Cannot continue without a keypair!")
+			exit(75)
+		}
+	}
 }

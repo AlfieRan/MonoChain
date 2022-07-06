@@ -1,7 +1,7 @@
 module server
 
 pub interface Node_Type {
-	wallet string 	// the wallet public key (id)
+	wallet []u8 	// the wallet public key (id)
 	mut:
 		trust int 	// Node's current trust level
 		route string	// ip or domain to connect

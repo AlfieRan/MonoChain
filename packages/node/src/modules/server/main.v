@@ -2,7 +2,7 @@ module server
 import vweb
 import json
 import configuration
-// import time
+import cryptography
 
 struct App {
 	vweb.Context
@@ -26,15 +26,15 @@ pub fn (mut app App) pong(req string) vweb.Result {
 		return app.server_error(403)
 	}
 
-	self := configuration.get_config()
+	this := configuration.get_config()
 
 	println("Received pong request.\n data supplied: $req_parsed \n Raw data supplied $req")
 
 	res := PongResponse{
-		pong_key: self.pub_key
+		pong_key: this.self.key
 		ping_key: req_parsed.ping_key
 		message: req_parsed.message
-		signature: "signature" // replace this with the "sign" function call once I've actually made it
+		signature: cryptography.sign(this.priv_key, req_parsed.message.bytes())
 	}
 
 	data := json.encode(res)

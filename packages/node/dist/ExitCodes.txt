@@ -12,4 +12,13 @@
 
 // Configuration Exits
 50 - Attempting to ask user if they would like to create a new configuration file failed too many times
+75 - Attempted to open config file when there wasn't one (typically during later processing)
 100 - Failed to create a new configuration file, function to do so returned an invalid config file for unknown reason.
+
+
+// Cyptography Errors
+125 - No keypair supplied and did not wish to generate a new one
+130 - Failed to validate keypair
+140 - Error signing data
+145 - Error validating data
+150 - Error generating new keypair

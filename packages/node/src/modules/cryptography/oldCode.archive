@@ -1,0 +1,157 @@
+// This is an archive file of all the non-working code I wrote in an attempt to generate custom DSA keys.
+// this was before I realised if I switched to ed35519 (a variation of DSA) I could use the built in vlang crypto library.
+
+
+// GENERATE PRIMES FILE
+
+module cryptography
+import crypto.rand
+import math
+
+const bits = 64	// ideally this would be 2048, but for a proof, we need to use a smaller number
+
+pub fn probable_prime() u64 {
+	mut n := rand_odd(bits)
+	mut a := rand_u64(n-1)
+
+	dump("\nl:\t${bits}\nn:\t${n}\na:\t${a}")
+
+	mut recursion_depth := 0
+	for ((u64(math.pow(a, n-1)) % n != 1) && recursion_depth < recursion_attempts){
+		n = rand_odd(bits)
+		a = rand_u64(n-1)
+
+		if recursion_depth % 10000 == 0 {
+			println("Values tested so far ${recursion_depth} \t current n: ${n}")
+		}
+
+		recursion_depth += 1
+	}
+
+	if u64(math.pow(a, n-1)) % n == 1 {
+		println("Found probable prime: ${n} after ${recursion_depth} recursions")
+		return n
+	} else {
+		eprint("Failed to find probable prime after ${recursion_attempts} recursions")
+		exit(1)
+	}
+}
+
+pub fn rand_bits(num_bits u64) u64 {
+
+	min := u64(1 << num_bits - 1)
+	max := u64(1 << num_bits)
+
+	mut result := dump(rand_u64(max))
+
+	if result < min {
+		result += min
+	}
+
+	println("rand(${num_bits}) = ${result}\tmin: ${min}")
+	dump(result == min)
+	return result
+}
+
+pub fn rand_odd(num_bits u64) u64 {
+	mut result := rand_bits(num_bits)
+	if result % 2 == 0 {
+		result += 1
+	}
+	return result
+}
+
+pub fn rand_u64(max u64) u64 {
+	return rand.int_u64(max) or {
+		eprintln("Failed to generate random number")
+		exit(1)
+	}	
+}
+
+
+
+
+
+
+
+
+// GENERATE KEYS FILE
+
+module cryptography
+import encoding.binary
+import math
+
+const recursion_attempts = 1
+
+fn bin(inp u64) []u8{
+	mut out := []u8{len: 8, init: 0}
+    binary.little_endian_put_u64(mut out, inp)
+    return out
+}
+
+// pub fn gen_p(recursion_depth int, l int, n int) u64{
+// 	mut p := u64(probable_prime(l))
+
+// 	for (dump((dump(math.pow(2, (2*l)-1) > p) || dump(p < math.pow(2, l)))) && recursion_depth < recursion_attempts){
+// 		p = gen_p(recursion_depth+1, l, n)
+// 	}
+
+// 	if recursion_depth < recursion_attempts {
+// 		println("Generated p as ${p}, recursion_depth ${recursion_depth}")
+// 		return p
+// 	} else {
+// 		println("Failed to generate p, recursion_depth ${recursion_depth}")
+// 		exit(1)
+// 	}
+// }
+
+
+
+
+
+
+// HASH FILE
+module cryptography
+import crypto.sha256
+
+struct Hashed {
+	hash string
+	algo string
+}
+
+pub fn hash(data string) Hashed {
+	return Hashed{hash: sha256.hexhash(data), algo: 'sha256'}
+}
+
+
+
+
+
+// MAIN FILE
+
+// pub fn gen_keys() {
+// 	// generate a pair of DSA keys, effectively generating a wallet.
+// 	q := gen_prime_num()
+// 	mut p := gen_prime_num()
+
+// 	mut loops := 0
+
+// 	for ((p-1)%q != 0)&&(loops < 100){
+// 		p = gen_prime_num()
+// 		loops++
+// 	}
+
+// 	if loops >= 100{
+// 		panic("Could not generate a prime number")
+// 	}
+
+// 	mut g := rand.int_u64(p)
+// 	h := 256
+
+// 	loops = 0
+// 	for ((g**q)%p != 1)&&(loops < 100){
+// 		g = rand.int_u64(p)
+// 		loops++
+// 	}
+
+// }
