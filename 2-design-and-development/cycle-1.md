@@ -75,7 +75,7 @@ In the pages directory I have created four primary web pages:
 
 The main challenge I faced in this cycle of development was deciding how to make the node software available for download, originally I attempted to setup a file server and upload files to that in order to download the software easily, however I soon realised that this would be a lot of setup to just host one file.
 
-Luckily I soon realised that you can download files very easily from websites using the "download" flag in chakra-ui (the component package I'm using - it's very similar for html) and because I had setup the repositories in a monorepo it was possible to build and zip the node software from the node's package, then copy it into the public folder in the website's package and have the download link from the website just point to the zipped software within it's own public folder.
+Luckily I soon realised that you can download files very easily from websites using the "download" flag in chakra-ui (the component package I'm using - it's very similar for html/css) and because I had setup the repositories in a monorepo it was possible to build and zip the node software from the node's package, then copy it into the public folder within the website's package and have the download link from the website just point to the zipped software within it's own public folder.
 
 This then means that upon building the node software, the typescript in which it is written is compiled to javascript within the "dist" folder (dist meaning distribution), this dist folder is then zipped and finally the zipped folder is copied to the web portal's public folder.
 
@@ -107,9 +107,20 @@ By following this code we can see that once "yarn build" is run it runs:&#x20;
 1. "yarn clean" - which removes the last code distribution and typescript build info from the file system, then recreate the distribution code file structure before echoing that it has finished cleaning the distribution files.
 2. "yarn clean-zip" - which removes the previous zip file and then echoes that the command has successfully run
 3. "yarn compile" - which compiles the typescript to javascript, copies the current package.json to the distribution folder and echoes to let us know it's successfully completed.
-4. "yarn zip" - which zips the newly compiled distribution folder to the webportal's public folder and echoes to
+4. "yarn zip" - which zips the newly compiled distribution folder to the webportal's public folder and echoes to confirm it's finished.
 
 ## Testing
+
+### Tests
+
+| Test | Instructions                                                                           | What I expect                                                                                                  | What actually happens | Pass/Fail |
+| ---- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | --------------------- | --------- |
+| 1    | Run the webportal on localhost.                                                        | Webportal launches and text is displayed on the screen                                                         | As expected           | Pass      |
+| 2    | Deploy the web-portal by git pushing to Github and Vercel should automatically deploy. | Website launches successfully on frontend server and when navigated to displays the same text as on localhost. | As expected           | Pass      |
+| 3    | Run node program.                                                                      | An output of "hello world"                                                                                     | As expected           | Pass      |
+| 4    | Download the node program by clicking on the download button on the web-portal         | The Node program should be downloaded to the test computer                                                     | As expected           | Pass      |
+
+### Evidence
 
 **Test 1 - Web portal running on localhost:**
 
@@ -120,14 +131,3 @@ By following this code we can see that once "yarn build" is run it runs:&#x20;
 **Test 2 - Deploy and Run the webportal on an external server:**
 
 ![Vercel successfully running the webportal on https://monochain.network](<../.gitbook/assets/image (2) (1) (1) (1).png>)
-
-### Tests
-
-| Test | Instructions                                                                           | What I expect                                                                                                  | What actually happens | Pass/Fail |
-| ---- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | --------------------- | --------- |
-| 1    | Run the webportal on localhost.                                                        | Webportal launches and text is displayed on the screen                                                         | As expected           | Pass      |
-| 2    | Deploy the web-portal by git pushing to Github and Vercel should automatically deploy. | Website launches successfully on frontend server and when navigated to displays the same text as on localhost. | As expected           | Pass      |
-| 3    | Run node program.                                                                      | An output of "hello world"                                                                                     |                       |           |
-| 4    | Download the node program by clicking on the download button on the web-portal         | The Node program should be downloaded to the test computer                                                     |                       |           |
-
-### Evidence
