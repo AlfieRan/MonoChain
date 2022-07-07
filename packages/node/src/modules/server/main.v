@@ -12,7 +12,7 @@ struct App {
 pub fn start(config configuration.UserConfig) {
 	api := go vweb.run(&App{}, config.port)
 	time.sleep(2 * time.second)
-	server.ping("http://localhost:$config.port", config)
+	server.ping("https://nano.monochain.network", config)
 	api.wait()
 }
 

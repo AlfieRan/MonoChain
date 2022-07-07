@@ -1,8 +1,14 @@
 module server
+
+// Internal Imports
 import configuration
 import cryptography
+
+// External Imports
 import json
+import time
 import net.http
+
 
 // This is to establish a handshake between two nodes and should be done everytime two nodes connect
 pub struct PongResponse {
@@ -19,7 +25,7 @@ pub struct PingRequest {
 
 pub fn ping(ref string, this configuration.UserConfig) bool {
 	// ref should be an ip or a domain
-	msg := "gfhajbsfhka" // should be random or datetime or something
+	msg := time.now().str() // should be random or datetime or something
 	req := PingRequest{ping_key: this.self.key, message: msg}
 
 	println("Sending ping request to $ref")
