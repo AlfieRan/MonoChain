@@ -126,8 +126,22 @@ By following this code we can see that once "yarn build" is run it runs:&#x20;
 
 ![Web portal running as expected on localhost:3000 when "yarn next" is ran in /packages/webportal](<../.gitbook/assets/image (3) (1) (1) (1) (1).png>)
 
-![Console output for the webportal.](<../.gitbook/assets/image (4) (1) (1) (1).png>)
+![Console output for the webportal.](<../.gitbook/assets/image (4) (1) (1) (1) (1).png>)
 
 **Test 2 - Deploy and Run the webportal on an external server:**
 
 ![Vercel successfully running the webportal on https://monochain.network](<../.gitbook/assets/image (2) (1) (1) (1).png>)
+
+#### Test 3 - Running the node program:
+
+![This shows the node software running within my terminal.](<../.gitbook/assets/image (6).png>)
+
+#### Test 4 - Downloading the node program
+
+
+
+
+
+![](<../.gitbook/assets/image (7).png>)
+
+The top image shows the page that the node software can be downloaded from, with the lower image showing the zip file being downloaded.
