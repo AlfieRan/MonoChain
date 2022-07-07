@@ -9,11 +9,22 @@ import {
   Center,
   Slide,
   Box,
+  Drawer,
+  useDisclosure,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+  DrawerHeader,
+  DrawerBody,
+  DrawerFooter,
 } from "@chakra-ui/react";
 import { Links } from "../utils/types";
 import DevNavigation from "./Dev-navigation";
 import React, { useState, useEffect } from "react";
 import useWindowSize from "../utils/window";
+import { scaling_button } from "../styles/buttons";
+import { NavBarCss } from "../styles/navBar";
+import MobileNav from "./MobileNav";
 
 const LinkHover: Interpolation<{}> = {
   background: "",
@@ -27,7 +38,6 @@ const NavBar = () => {
   const breakpoint = 700;
 
   const [mobile, setMobile] = useState<boolean>(true);
-  const [showingMenu, setShowingMenu] = useState<boolean>(!mobile);
 
   const [shownInfo, setShownInfo] = useState<boolean>(true);
   const [showingInfo, setShowingInfo] = useState<boolean>(false);
@@ -68,7 +78,7 @@ const NavBar = () => {
   return (
     <Box w={"100%"}>
       <div hidden={mobile}>
-        <Flex css={NavBarCss}>
+        <Flex css={NavBarCss} justifyContent={"center"}>
           {Links.map((data) => {
             if (data.type === "component") {
               return (
@@ -123,11 +133,7 @@ const NavBar = () => {
           }
         })}
       </div>
-      <div hidden={!mobile}>
-        <Flex css={NavBarCss}>
-          <Text>Home</Text>
-        </Flex>
-      </div>
+      <MobileNav hidden={!mobile} />
       <Slide direction="bottom" in={showingInfo} style={{ zIndex: 10 }}>
         <Center
           bg={"#5b5be1"}
@@ -158,13 +164,3 @@ const NavBar = () => {
 };
 
 export default NavBar;
-
-const NavBarCss = css({
-  w: "full",
-  bg: "rgba(17,17,17,0.1)",
-  justifyContent: "center",
-  fontSize: "xl",
-  px: 5,
-  pb: 2,
-  pt: 4,
-});
