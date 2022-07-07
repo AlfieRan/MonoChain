@@ -1,6 +1,7 @@
 module server
 import vweb
 import json
+import time
 import configuration
 import cryptography
 
@@ -10,8 +11,8 @@ struct App {
 
 pub fn start(config configuration.UserConfig) {
 	api := go vweb.run(&App{}, config.port)
-	// time.sleep(2 * time.second)
-	// server.ping("http://localhost:$config.port", config)
+	time.sleep(2 * time.second)
+	server.ping("http://localhost:$config.port", config)
 	api.wait()
 }
 

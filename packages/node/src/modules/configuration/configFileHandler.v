@@ -1,5 +1,6 @@
 module configuration
 import json
+import utils
 import os
 
 pub fn load_config() UserConfig {
@@ -16,6 +17,13 @@ pub fn load_config() UserConfig {
 			// something went wrong decoding the file, return without loading the config
 			eprintln('Failed to decode json, error: $err')
 			return UserConfig{ loaded: false }
+		}
+
+		if user_config.config_version != config_version {
+			println("Your Configuration file is outdated, would you like to regenerate it?\nWARNING - If you don't some features may not work properly and may even crash the program.") 
+			if utils.ask_for_bool(0){
+				return create_configuration()
+			}
 		}
 
 		return user_config // config loaded and no issues with it

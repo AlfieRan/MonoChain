@@ -9,6 +9,8 @@ pub fn create_configuration() UserConfig {
 
 	config := UserConfig{
 		loaded: true
+		config_version: config_version
+		last_connect: 0
 		port: ask_for_port(0)
 		priv_key: priv_key
 		self: Node{

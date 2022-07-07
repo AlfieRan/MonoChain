@@ -1,10 +1,13 @@
 module configuration
 import utils
 
+const config_version = 0 
+
 // Structures and Types
 
 pub struct UserConfig {
 	last_connect int	// the last time this node connected to the network
+	config_version int
 	pub: 
 		priv_key []u8
 		loaded bool	// has the config loaded up

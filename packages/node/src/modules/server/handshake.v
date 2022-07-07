@@ -1,5 +1,6 @@
 module server
 import configuration
+import cryptography
 import json
 import net.http
 
@@ -38,7 +39,11 @@ pub fn ping(ref string, this configuration.UserConfig) bool {
 
 	// signed hash can then be verified using the wallet pub key supplied
 	if data.message == msg && data.ping_key == this.self.key {
-		println("Should also verify signature but I haven't implemented DSA yet")
+		if cryptography.verify(data.pong_key, data.message.bytes(), data.signature) {
+			println("Verified signature to match pong key")
+			return true
+		}
+		println("Signature did not match pong key")
 		return true
 	}
 

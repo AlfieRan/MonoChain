@@ -30,6 +30,6 @@ pub interface Wallet_Tree {
 }
 
 pub interface Wallet {
-	wallet string // this wallet's pub key/id
+	key []u8 // this wallet's pub key/id
 	// a bunch of other stuff I haven't figured out how to structure this yet
 }

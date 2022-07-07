@@ -1,22 +1,19 @@
 {
-  "name": "@namespace/node",
-  "author": "Alfie Ranstead",
-  "url": "alfieranstead.com",
-  "version": "1.0.0",
-  "license": "MIT",
-  "scripts": {
-    "clean": "rm -rf dist/code && mkdir dist/code && echo \"cleaned dist/code\"",
-    "clean-zip": "rm -f node.zip && rm -f ../webportal/public/node.zip && echo \"cleaned node.zip\"",
-    "prepack": "yarn build",
-    "build": "yarn tmp-compile-linux-pre && yarn clean && yarn clean-zip && yarn compile && yarn zip && echo \"zipped node\"",
-    "compile-mac": "v ./src/ && mv ./src/src ./dist/code/node-mac && echo \"compiled for mac\"",
-    "compile-windows": "v ./src/ -embed_vlib -os windows && mv ./src/src.exe ./dist/code/node-windows.exe && echo \"compiled for windows\"",
-    "compile-linux": "v -os linux ./src/ && mv ./src/src ./dist/code/node-linux && echo \"compiled for linux\"",
-    "tmp-compile-linux-pre": "mkdir ./tmp && mv ./dist/code/node-linux ./tmp/node-linux && echo \"Moved Linux exec to a temp folder\" ",
-    "tmp-compile-linux-post": "mv ./tmp/node-linux ./dist/code/node-linux && rm -rf ./tmp && echo \"Moved linux exec back\"",
-    "compile": "yarn compile-mac && yarn compile-windows && yarn tmp-compile-linux-post",
-    "zip": "zip ../webportal/public/node.zip -9r ./dist/ && echo \"zipped\"",
-    "dev": "v watch ./src/",
-    "start": "v run ./src/"
-  }
+    "name": "@namespace/node",
+    "author": "Alfie Ranstead",
+    "url": "alfieranstead.com",
+    "version": "1.0.0",
+    "license": "MIT",
+    "scripts": {
+        "clean": "rm -rf dist/code && mkdir dist/code && echo \"cleaned dist/code\"",
+        "clean-zip": "rm -f node.zip && rm -f ../webportal/public/node.zip && echo \"cleaned node.zip\"",
+        "prepack": "yarn build",
+        "build": "yarn clean && yarn clean-zip && yarn compile && yarn zip && echo \"zipped node\"",
+        "compile-native": "v ./src/ && mv ./src/src ./dist/code/node-native && echo \"compiled for the native OS of this system \"",
+        "compile-windows": "v ./src/ -embed_vlib -os windows && mv ./src/src.exe ./dist/code/node-windows.exe && echo \"compiled for windows\"",
+        "compile": "yarn compile-native && yarn compile-windows",
+        "zip": "zip ../webportal/public/node.zip -9r ./dist/ && echo \"zipped\"",
+        "dev": "v watch ./src/",
+        "start": "v run ./src/"
+    }
 }
