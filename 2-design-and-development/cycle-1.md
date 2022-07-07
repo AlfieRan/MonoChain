@@ -124,7 +124,7 @@ By following this code we can see that once "yarn build" is run it runs:&#x20;
 
 **Test 1 - Web portal running on localhost:**
 
-![Web portal running as expected on localhost:3000 when "yarn next" is ran in /packages/webportal](<../.gitbook/assets/image (3) (1) (1) (1) (1).png>)
+![Web portal running as expected on localhost:3000 when "yarn next" is ran in /packages/webportal](<../.gitbook/assets/image (3) (1) (1) (1) (1) (1).png>)
 
 ![Console output for the webportal.](<../.gitbook/assets/image (4) (1) (1) (1) (1).png>)
 
@@ -134,7 +134,7 @@ By following this code we can see that once "yarn build" is run it runs:&#x20;
 
 #### Test 3 - Running the node program:
 
-![This shows the node software running within my terminal.](<../.gitbook/assets/image (6).png>)
+![This shows the node software running within my terminal.](<../.gitbook/assets/image (7).png>)
 
 #### Test 4 - Downloading the node program
 
@@ -142,6 +142,6 @@ By following this code we can see that once "yarn build" is run it runs:&#x20;
 
 
 
-![](<../.gitbook/assets/image (7).png>)
+![](<../.gitbook/assets/image (9).png>)
 
 The top image shows the page that the node software can be downloaded from, with the lower image showing the zip file being downloaded.
