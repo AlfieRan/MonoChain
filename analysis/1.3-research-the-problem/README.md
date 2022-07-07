@@ -44,7 +44,7 @@ The above chart shows this transaction fee over time, and although right now it 
 
 ## Ethereum
 
-![The https://ethereum.org/en/ homepage](<../../.gitbook/assets/image (5) (1).png>)
+![The https://ethereum.org/en/ homepage](<../../.gitbook/assets/image (5) (1) (1).png>)
 
 ### Overview
 
