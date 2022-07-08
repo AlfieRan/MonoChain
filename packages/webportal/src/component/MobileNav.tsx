@@ -6,6 +6,7 @@ import {
   DrawerHeader,
   DrawerOverlay,
   Flex,
+  Link,
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
@@ -14,6 +15,12 @@ import { scaling_button } from "../styles/buttons";
 import React from "react";
 
 const MobileNav = (props: { hidden?: boolean }) => {
+  const Links: { name: string; href: string }[] = [
+    { name: "Home", href: "/" },
+    { name: "Learn More", href: "/info" },
+    { name: "Wallet", href: "/wallet" },
+  ];
+
   const {
     isOpen: menuOpen,
     onOpen: menuOnOpen,
@@ -28,8 +35,10 @@ const MobileNav = (props: { hidden?: boolean }) => {
         justifyContent={"space-between"}
         alignItems={"center"}
       >
-        <Flex pl={2}>
-          <Text>Home</Text>
+        <Flex css={scaling_button()} pl={2}>
+          <Link _hover={{ textDecoration: "none" }} href={"/"}>
+            <Text m={2}>Home</Text>
+          </Link>
         </Flex>
         <Button css={scaling_button()} onClick={menuOnOpen} px={3}>
           <Text m={2}>Menu</Text>
@@ -39,21 +48,39 @@ const MobileNav = (props: { hidden?: boolean }) => {
       <Drawer placement="right" onClose={menuOnClose} isOpen={menuOpen}>
         <DrawerOverlay />
         <DrawerContent>
-          <DrawerHeader
-            borderBottomWidth="1px"
-            flexDir={"row"}
-            flexWrap={"wrap"}
-            justifyContent={"space-between"}
-          >
-            <Text>Basic Drawer</Text>
-            <Button css={scaling_button()} onClick={menuOnClose}>
-              Close
-            </Button>
+          <DrawerHeader borderBottomWidth="2px">
+            <Flex
+              dir={"row"}
+              w={"100%"}
+              justifyContent={"space-between"}
+              alignItems={"center"}
+            >
+              <Text>MonoChain</Text>
+              <Button css={scaling_button()} onClick={menuOnClose}>
+                X
+              </Button>
+            </Flex>
           </DrawerHeader>
           <DrawerBody>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
+            {Links.map((linkObj) => (
+              <Link
+                href={linkObj.href}
+                _hover={{ textDecoration: "none" }}
+                key={linkObj.name}
+              >
+                <Flex
+                  borderWidth={"2px"}
+                  borderRadius={"lg"}
+                  my={3}
+                  p={2}
+                  fontSize={"lg"}
+                  bg={"rgba(0,0,0,0.1)"}
+                  _active={{ bg: "rgba(0,0,0,0.2)" }}
+                >
+                  <Text>{linkObj.name}</Text>
+                </Flex>
+              </Link>
+            ))}
           </DrawerBody>
         </DrawerContent>
       </Drawer>
