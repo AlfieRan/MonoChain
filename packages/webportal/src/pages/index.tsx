@@ -39,7 +39,14 @@ const index = () => {
   return (
     <Flex flexDir="column" pb={"100px"} zIndex={10} position={"relative"}>
       <AspectRatio maxH="5%" ratio={5 / 1}>
-        <Image src="/index/nodes-banner.png" layout="fill" priority />
+        <Image
+          src="/index/nodes-banner.png"
+          layout="fill"
+          alt={
+            "An image of circles and lines all interconnected to look like a node network."
+          }
+          priority
+        />
       </AspectRatio>
       <Flex
         w={"100vw"}
@@ -89,7 +96,13 @@ const index = () => {
           </Flex>
           <Flex px="1%" maxW="600px" w="100%">
             <AspectRatio w="100%" mt="1%" ratio={3 / 2} zIndex={10}>
-              <Image src={"/index/proof-of-trust.png"} layout="fill" />
+              <Image
+                src={"/index/proof-of-trust.png"}
+                layout="fill"
+                alt={
+                  "Two computers talking to each other to represent the network"
+                }
+              />
             </AspectRatio>
           </Flex>
         </Center>
