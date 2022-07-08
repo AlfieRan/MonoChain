@@ -37,7 +37,7 @@ const index = () => {
   ];
 
   return (
-    <Flex flexDir="column" pb={"100px"}>
+    <Flex flexDir="column" pb={"100px"} zIndex={10} position={"relative"}>
       <AspectRatio maxH="5%" ratio={5 / 1}>
         <Image src="/index/nodes-banner.png" layout="fill" priority />
       </AspectRatio>
@@ -88,7 +88,7 @@ const index = () => {
             </Flex>
           </Flex>
           <Flex px="1%" maxW="600px" w="100%">
-            <AspectRatio w="100%" mt="1%" ratio={3 / 2}>
+            <AspectRatio w="100%" mt="1%" ratio={3 / 2} zIndex={10}>
               <Image src={"/index/proof-of-trust.png"} layout="fill" />
             </AspectRatio>
           </Flex>

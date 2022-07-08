@@ -20,7 +20,7 @@ import {
 } from "@chakra-ui/react";
 import { Links } from "../utils/types";
 import DevNavigation from "./Dev-navigation";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import useWindowSize from "../utils/window";
 import { scaling_button } from "../styles/buttons";
 import { NavBarCss } from "../styles/navBar";
@@ -36,6 +36,9 @@ const NavBar = () => {
 
   const window = useWindowSize();
   const breakpoint = 700;
+
+  const navbarRef = useRef(null);
+  const [navbarHeight, setNavbarHeight] = useState<number | null>(null);
 
   const [mobile, setMobile] = useState<boolean>(true);
 
@@ -62,6 +65,11 @@ const NavBar = () => {
     console.log(window.width, mobile, (window.width || 0) < breakpoint);
   }, [window.width]);
 
+  useEffect(() => {
+    setNavbarHeight((navbarRef.current ?? { clientHeight: null }).clientHeight);
+    console.log("Navbar height:", navbarHeight);
+  });
+
   const LinkMarginAmount = 6;
   const Links: Links[] = [
     { name: "Home", href: "/" },
@@ -76,90 +84,93 @@ const NavBar = () => {
   ];
 
   return (
-    <Box w={"100%"}>
-      <div hidden={mobile}>
-        <Flex css={NavBarCss} justifyContent={"center"}>
-          {Links.map((data) => {
-            if (data.type === "component") {
-              return (
-                <Flex flexDir={"column"} key={data.name}>
-                  <Button
-                    bg={""}
-                    my={0}
-                    mx={LinkMarginAmount}
-                    p={0}
-                    _hover={LinkHover}
-                    _active={LinkHover}
-                    onClick={() => {
-                      data.state.change(!data.state.value);
-                    }}
-                  >
-                    <Text
-                      fontSize={"xl"}
-                      fontWeight={"normal"}
-                      h={"full"}
-                      w={"full"}
-                      lineHeight={"base"}
+    <>
+      <Box w={"100%"} position={"fixed"} zIndex={1000} ref={navbarRef}>
+        <div hidden={mobile}>
+          <Flex css={NavBarCss} justifyContent={"center"}>
+            {Links.map((data) => {
+              if (data.type === "component") {
+                return (
+                  <Flex flexDir={"column"} key={data.name}>
+                    <Button
+                      bg={""}
+                      my={0}
+                      mx={LinkMarginAmount}
+                      p={0}
+                      _hover={LinkHover}
+                      _active={LinkHover}
+                      onClick={() => {
+                        data.state.change(!data.state.value);
+                      }}
                     >
+                      <Text
+                        fontSize={"xl"}
+                        fontWeight={"normal"}
+                        h={"full"}
+                        w={"full"}
+                        lineHeight={"base"}
+                      >
+                        {data.name}
+                      </Text>
+                    </Button>
+                  </Flex>
+                );
+              } else {
+                return (
+                  <Link
+                    key={data.name}
+                    href={data.href}
+                    mx={LinkMarginAmount}
+                    isExternal={!!data.external}
+                    _hover={LinkHover}
+                  >
+                    <Text fontSize={"xl"} h={"full"} w={"full"}>
                       {data.name}
                     </Text>
-                  </Button>
-                </Flex>
-              );
-            } else {
+                  </Link>
+                );
+              }
+            })}
+          </Flex>
+          {Links.filter((item) => item.type === "component").map((data) => {
+            if (data.type === "component") {
               return (
-                <Link
-                  key={data.name}
-                  href={data.href}
-                  mx={LinkMarginAmount}
-                  isExternal={!!data.external}
-                  _hover={LinkHover}
-                >
-                  <Text fontSize={"xl"} h={"full"} w={"full"}>
-                    {data.name}
-                  </Text>
-                </Link>
+                <Collapse key={data.name} in={data.state.value} dir="top">
+                  <data.comp />
+                </Collapse>
               );
             }
           })}
-        </Flex>
-        {Links.filter((item) => item.type === "component").map((data) => {
-          if (data.type === "component") {
-            return (
-              <Collapse key={data.name} in={data.state.value} dir="top">
-                <data.comp />
-              </Collapse>
-            );
-          }
-        })}
-      </div>
-      <MobileNav hidden={!mobile} />
-      <Slide direction="bottom" in={showingInfo} style={{ zIndex: 10 }}>
-        <Center
-          bg={"#5b5be1"}
-          color={"white"}
-          p={3}
-          fontSize={"lg"}
-          flexWrap={"wrap"}
-        >
-          <Text flexDir={"column"} maxW={"700px"} textAlign={"left"}>
-            Please be Aware That This Website is in Early Development and is not
-            a Full Representation of the Final Project.
-          </Text>
-          <Button
-            onClick={() => {
-              hideInfo();
-            }}
-            bg={"rgba(0,0,0,0.2)"}
-            _hover={{ bg: "rgba(0,0,0,0.4)" }}
-            _active={{ bg: "rgba(0,0,0,0.2)" }}
-            mx={2}
+        </div>
+        <MobileNav hidden={!mobile} />
+        <Slide direction="bottom" in={showingInfo} style={{ zIndex: 10 }}>
+          <Center
+            bg={"#5b5be1"}
+            color={"white"}
+            p={3}
+            fontSize={"lg"}
+            flexWrap={"wrap"}
           >
-            <Text>Close</Text>
-          </Button>
-        </Center>
-      </Slide>
-    </Box>
+            <Text flexDir={"column"} maxW={"700px"} textAlign={"left"}>
+              Please be Aware That This Website is in Early Development and is
+              not a Full Representation of the Final Project.
+            </Text>
+            <Button
+              onClick={() => {
+                hideInfo();
+              }}
+              bg={"rgba(0,0,0,0.2)"}
+              _hover={{ bg: "rgba(0,0,0,0.4)" }}
+              _active={{ bg: "rgba(0,0,0,0.2)" }}
+              mx={2}
+            >
+              <Text>Close</Text>
+            </Button>
+          </Center>
+        </Slide>
+      </Box>
+      <Box h={`${navbarHeight ?? 10}px`} />
+    </>
   );
 };
 
