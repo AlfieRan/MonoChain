@@ -31,11 +31,11 @@ const Info = () => {
             network] decide how to trust or not trust other nodes. It uses a
             system of parameters used to store both grudges and appreciations
             for other nodes, alongside a few other values, which help decide
-            whether or not to re-process what another node has sent to it. A key
-            addition here is that nodes will also choose to randomly reprocess
-            data that they have sent to them, in order to make sure that the
-            seemingly "trustworthy" nodes are actually trustworthy and haven't
-            been tampered with.
+            whether or not to re-process whatever information other nodes have
+            sent to it. A key addition here is that nodes will also choose to
+            randomly reprocess data that they have received, in order to make
+            sure that the seemingly "trustworthy" nodes are still actually
+            trustworthy and haven't been tampered with.
           </Text>
           <Text css={subTitle("2")}>
             Why is the Proof of Trust Protocol important?
