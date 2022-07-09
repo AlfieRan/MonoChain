@@ -2,10 +2,14 @@ import { Links } from "../utils/types";
 import { Center, Link } from "@chakra-ui/react";
 
 const DevNavigation = (props: { hidden?: boolean }) => {
-  const LinkMarginAmount = 3;
+  const LinkMarginAmount = 10;
   const values: Links[] = [
     {
-      name: "Download",
+      name: "Get in touch",
+      href: "/contact",
+    },
+    {
+      name: "Downloads",
       href: "/download",
     },
   ];
@@ -17,7 +21,7 @@ const DevNavigation = (props: { hidden?: boolean }) => {
       p={3}
       flexDir={"row"}
       w={"full"}
-      bg={"#c0c0c0"}
+      bg={"rgb(156,156,255)"}
       borderBottomRadius={"md"}
     >
       {values.map((value) => {

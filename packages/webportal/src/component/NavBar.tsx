@@ -62,20 +62,18 @@ const NavBar = () => {
     } else if ((window.width || 0) > breakpoint) {
       setMobile(false);
     }
-    console.log(window.width, mobile, (window.width || 0) < breakpoint);
   }, [window.width]);
 
   useEffect(() => {
     setNavbarHeight((navbarRef.current ?? { clientHeight: null }).clientHeight);
-    console.log("Navbar height:", navbarHeight);
-  });
+  }, [navbarHeight]);
 
   const LinkMarginAmount = 6;
   const Links: Links[] = [
     { name: "Home", href: "/" },
     { name: "Learn More", href: "/info" },
     {
-      name: "Developers",
+      name: "Contribute",
       comp: DevNavigation,
       state: { change: setDevShowing, value: devShowing },
       type: "component",
@@ -85,7 +83,13 @@ const NavBar = () => {
 
   return (
     <>
-      <Box w={"100%"} position={"fixed"} zIndex={1000} ref={navbarRef}>
+      <Box
+        w={"100%"}
+        position={"fixed"}
+        zIndex={1000}
+        ref={navbarRef}
+        color={"white"}
+      >
         <div hidden={mobile}>
           <Flex css={NavBarCss} justifyContent={"center"}>
             {Links.map((data) => {
@@ -109,6 +113,7 @@ const NavBar = () => {
                         h={"full"}
                         w={"full"}
                         lineHeight={"base"}
+                        pt={1.5}
                       >
                         {data.name}
                       </Text>
@@ -124,7 +129,7 @@ const NavBar = () => {
                     isExternal={!!data.external}
                     _hover={LinkHover}
                   >
-                    <Text fontSize={"xl"} h={"full"} w={"full"}>
+                    <Text fontSize={"xl"} h={"full"} w={"full"} pt={1.5}>
                       {data.name}
                     </Text>
                   </Link>
@@ -169,7 +174,7 @@ const NavBar = () => {
           </Center>
         </Slide>
       </Box>
-      <Box h={`${navbarHeight ?? 10}px`} />
+      <Box h={`${(navbarHeight ?? 45) - 10}px`} />
     </>
   );
 };

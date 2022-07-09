@@ -41,7 +41,7 @@ pub fn ping(ref string, this configuration.UserConfig) bool {
 		return false
 	}
 
-	println("$ref responded to ping request with pong $data")
+	println("$ref responded to ping request.")
 
 	// signed hash can then be verified using the wallet pub key supplied
 	if data.message == msg && data.ping_key == this.self.key {
