@@ -7,17 +7,18 @@ import cryptography
 
 struct App {
 	vweb.Context
+	test string
 }
 
 pub fn start(config configuration.UserConfig) {
-	api := go vweb.run(&App{}, config.port)
+	api := go vweb.run(&App{test: "test"}, config.port)
 	time.sleep(2 * time.second)
 	server.ping("https://nano.monochain.network", config)
 	api.wait()
 }
 
 pub fn (mut app App) index() vweb.Result {
-	return app.text('Hello World!')
+	return app.text("Hello, World!")
 }
 
 ['/pong/:req']

@@ -2,19 +2,19 @@ module memory
 import json
 
 
-pub fn get_Grudge(id []u8) i8 {
-	return alt_Grudge(id, 0)
+pub fn get_grudge(id []u8) i8 {
+	return alt_grudge(id, 0)
 }
 
-pub fn inc_Grudge(id []u8) i8 {
-	return alt_Grudge(id, 1)
+pub fn inc_grudge(id []u8) i8 {
+	return alt_grudge(id, 1)
 }
 
-pub fn dec_Grudge(id []u8) i8 {
-	return alt_Grudge(id, -1)
+pub fn dec_grudge(id []u8) i8 {
+	return alt_grudge(id, -1)
 }
 
-pub fn alt_Grudge (id []u8, alt i8) i8 {
+pub fn alt_grudge (id []u8, alt i8) i8 {
 	if Cache.loaded {
 		key := json.encode(id)
 

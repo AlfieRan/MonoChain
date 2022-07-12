@@ -25,10 +25,10 @@ pub struct PingRequest {
 
 pub fn ping(ref string, this configuration.UserConfig) bool {
 	// ref should be an ip or a domain
-	msg := time.now().str() // should be random or datetime or something
+	msg := time.now().format_ss_micro() // set the message to the current time since epoch
 	req := PingRequest{ping_key: this.self.key, message: msg}
 
-	println("Sending ping request to $ref")
+	println("\nSending ping request to ${ref}.\nRequest: $req")
 	// fetch domain, domain should respond with their wallet pub key/address, "pong" and a signed hash of the message
 	req_encoded := json.encode(req)
 	raw := http.get("$ref/pong/$req_encoded") or {
@@ -41,7 +41,7 @@ pub fn ping(ref string, this configuration.UserConfig) bool {
 		return false
 	}
 
-	println("$ref responded to ping request.")
+	println("\n\n$ref responded to ping request.\n Response: ${data} \n")
 
 	// signed hash can then be verified using the wallet pub key supplied
 	if data.message == msg && data.ping_key == this.self.key {

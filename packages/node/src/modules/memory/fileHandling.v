@@ -9,8 +9,6 @@ pub struct Cache_Struct{
 		grudges map[string]i8	// maps a node pub key/id to a local grudge -> negative is good, positive is a bad.
 }
 
-pub mut Cache := Cache_Struct{loaded: false}
-
 pub fn load(file_location string){
 	if os.exists(file_location) {
 		// Trust/Grudge File exists, extract it's contents

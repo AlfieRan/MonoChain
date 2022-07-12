@@ -12,6 +12,7 @@ pub struct UserConfig {
 		priv_key []u8
 		loaded bool	// has the config loaded up
 		port int	// open port for server
+		memory_cache_path string	// file path to memory cache file
 		self Node	// ref to self
 }
 
