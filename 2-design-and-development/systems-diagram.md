@@ -18,6 +18,18 @@ Throughout the development stage I will initially focus mainly on the Node Softw
 
 Usability is an essential aspect to my project as I want it to be usable and understandable to both developers who have a prior understanding of blockchain technology and non-developers who have never used it before.
 
+
+
+
+
+\===== end of me =====
+
+
+
+
+
+
+
 ### Effective
 
 Users can achieve the goal with completeness and accuracy. To do this, I will make it easy for the players to realise that they need to reach a goal in order to complete a level. I will make this goal clear to see so there is no confusion over where the players need to go.
