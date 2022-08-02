@@ -22,6 +22,13 @@
 * [2.2.2 Cycle 2](design-and-development/2.2.2-cycle-2.md)
 * [2.2.3 Cycle 3](design-and-development/2.2.3-cycle-3.md)
 * [2.2.4 Cycle 4](design-and-development/2.2.4-cycle-4.md)
+* [2.2.5 Cycle 5](design-and-development/2.2.5-cycle-5.md)
+
+## 2.5 The Protocol
+
+* [2.5.1 Introduction](2.5-the-protocol/2.5.1-introduction.md)
+* [Proof of Worth - the bullet point summary.](2.5-the-protocol/proof-of-worth-the-bullet-point-summary..md)
+* [Voting](2.5-the-protocol/voting.md)
 
 ## 3 Testing <a href="#testing" id="testing"></a>
 
@@ -42,9 +49,7 @@
 
 ## Notes
 
-* [\[Archive\] 1.4a - OLD VERSION](notes/1.4a-features-of-the-proposed-solution/README.md)
-  * [Voting](notes/1.4a-features-of-the-proposed-solution/voting.md)
-  * [Proof of Worth - the bullet point summary.](notes/1.4a-features-of-the-proposed-solution/proof-of-worth-the-bullet-point-summary..md)
+* [\[Archive\] 1.4a - OLD VERSION](notes/1.4a-features-of-the-proposed-solution.md)
 * [important stuff](notes/my-brain-hurts.md)
 * [Stuff to do](notes/stuff-to-do.md)
 * [Phase 1](notes/phase-1.md)
