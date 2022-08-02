@@ -27,8 +27,12 @@
 ## 2.5 The Protocol
 
 * [2.5.1 Introduction](2.5-the-protocol/2.5.1-introduction.md)
-* [Proof of Worth - the bullet point summary.](2.5-the-protocol/proof-of-worth-the-bullet-point-summary..md)
-* [Voting](2.5-the-protocol/voting.md)
+* [2.5.2 Blocks and Transactions](2.5-the-protocol/2.5.2-blocks-and-transactions/README.md)
+  * [2.5.2.1 Transactions](2.5-the-protocol/2.5.2-blocks-and-transactions/1.4a-features-of-the-proposed-solution.md)
+  * [2.5.2.2 Transaction Speed](2.5-the-protocol/2.5.2-blocks-and-transactions/2.5.2.2-transaction-speed.md)
+* [2.5.3 Consensus Algorithm](2.5-the-protocol/2.5.3-consensus-algorithm/README.md)
+  * [2.5.3.1 Proof of Worth - the bullet point summary.](2.5-the-protocol/2.5.3-consensus-algorithm/2.5.3.1-proof-of-worth-the-bullet-point-summary..md)
+  * [2.5.3.5 Voting](2.5-the-protocol/2.5.3-consensus-algorithm/2.5.3.5-voting.md)
 
 ## 3 Testing <a href="#testing" id="testing"></a>
 
@@ -49,7 +53,6 @@
 
 ## Notes
 
-* [\[Archive\] 1.4a - OLD VERSION](notes/1.4a-features-of-the-proposed-solution.md)
 * [important stuff](notes/my-brain-hurts.md)
 * [Stuff to do](notes/stuff-to-do.md)
 * [Phase 1](notes/phase-1.md)
