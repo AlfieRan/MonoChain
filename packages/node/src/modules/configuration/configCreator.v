@@ -4,20 +4,27 @@ import cryptography
 import crypto.ed25519 as dsa
 import utils
 
-pub fn create_configuration() UserConfig {
-	pub_key, priv_key := get_keys(0)
+const defualt = UserConfig{
+	loaded: true
+	config_version: config_version
+	last_connect: 0
+	port: 8000
 
+}
+
+pub fn create_configuration() UserConfig {
 	config := UserConfig{
-		loaded: true
-		config_version: config_version
 		last_connect: 0
-		port: ask_for_port(0)
-		priv_key: priv_key
+		config_version: config_version
+		key_path: "$base_path/keys.config"
+		loaded: true
 		self: Node{
 			trust: 0,	// this should be collected from blockchain
 			ref: "self"
 			key: pub_key
 		}
+		port: ask_for_port(0)
+		memory_cache_path: "$base_path/cache.db"
 	}
 
 	save_config(config, 0)
@@ -25,7 +32,7 @@ pub fn create_configuration() UserConfig {
 }
 
 fn ask_for_port(recursion_depth int) int {
-	mut port := (read_line("What port would you like to run your node on (default: 8001)?\n$:") or { 
+	mut port := (read_line("What port would you like to run your node on (default: 8000)?\n$:") or { 
 		eprintln("Input failed, please try again")
 		utils.recursion_check(recursion_depth, 2)
 		return ask_for_port(recursion_depth + 1)

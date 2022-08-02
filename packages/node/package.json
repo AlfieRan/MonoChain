@@ -13,7 +13,7 @@
         "compile-windows": "v ./src/ -embed_vlib -os windows && mv ./src/src.exe ./dist/code/node-windows.exe && echo \"compiled for windows\"",
         "compile": "yarn compile-native && yarn compile-windows",
         "zip": "zip ../webportal/public/node.zip -9r ./dist/ && echo \"zipped\"",
-        "dev": "v watch ./src/",
+        "dev": "v watch -c ./src/",
         "start": "v run ./src/"
     }
 }

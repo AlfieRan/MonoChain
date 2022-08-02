@@ -1,20 +1,23 @@
 module configuration
 import utils
 
-const config_version = 0 
+const config_version = 2
+pub const base_path = "./monochain"
+pub const config_path = "$base_path/node.config"
 
 // Structures and Types
-
 pub struct UserConfig {
 	last_connect int	// the last time this node connected to the network
 	config_version int
-	pub: 
-		priv_key []u8
+	key_path string		// the path to the private key file
+	pub:
 		loaded bool	// has the config loaded up
+		self Node	// ref to self
 		port int	// open port for server
 		memory_cache_path string	// file path to memory cache file
-		self Node	// ref to self
 }
+
+type UserConfigType = UserConfig
 
 struct Node {
 	pub:
@@ -22,8 +25,6 @@ struct Node {
 		ref string
 		key []u8
 }
-
-// Fundamental Configuration Handlers
 
 pub fn get_config() UserConfig {
 	// get the user configuration from the defualt file location
