@@ -1,9 +1,9 @@
 module main
-// import server
+import server
 import configuration
 
 fn main() {
 	println('***** MonoChain Mining Software *****')
 	config := configuration.get_config()
-	// server.start(config)
+	server.start(config)
 }
