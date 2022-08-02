@@ -43,6 +43,7 @@
 ## Notes
 
 * [\[Archive\] 1.4a - OLD VERSION](notes/1.4a-features-of-the-proposed-solution/README.md)
+  * [Voting](notes/1.4a-features-of-the-proposed-solution/voting.md)
   * [Proof of Worth - the bullet point summary.](notes/1.4a-features-of-the-proposed-solution/proof-of-worth-the-bullet-point-summary..md)
 * [important stuff](notes/my-brain-hurts.md)
 * [Stuff to do](notes/stuff-to-do.md)

@@ -28,6 +28,18 @@ In order to create the proof of worth census that this blockchain will run on we
 * Now that the leader node has "the block's mining revenue" it needs to distribute it to its worker nodes, which it does so by first taking its own cut (this is up to the leader node's own choice but will be 25% on the initial example node software).
 * Then it takes the remaining pile of crypto and distributes it equally to every node that helped construct the block
 
+In order to ensure blocks can be created whilst there are low transaction rates yet restricting blocks from being created too quickly, each block may not be created more than once per 10 seconds, with each block having a maximum of 5000 transactions, setting the maximum transactions per second to 500, far more than Ethereum 1.0's 30 per second although much lower than Visa's average of 1700 per second and Ethereum 2.0's theoretical 100,000 per second.
+
+This will be achieved by setting the number of seconds after the last block creation at which a block can be registered to be:
+
+```
+time = 5 + 30000(transactions + 50)^-1
+```
+
+Where the transactions variable is the number of transactions in this new block, promoting miners to add as many transactions into a block as possible, such to reach this time constraint quicker by lowering it.
+
+An upgrade to increase this could be introduced in the future through the use of the system's wallet, as this rule will be included into the blockchain as a smart contract owned by the system's wallet. However, this will need to be done through voting.
+
 ### Benefits of this system compared to Bitcoin and Ethereum's consensus systems:
 
 #### Bitcoin
