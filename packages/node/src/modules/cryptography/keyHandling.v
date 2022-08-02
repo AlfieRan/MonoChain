@@ -1,6 +1,8 @@
 module cryptography
 import utils
 
+type KeysType = Keys
+
 pub fn get_keys(key_path string) (Keys) {
 	mut keys := utils.read_file(key_path, Keys, true)
 	

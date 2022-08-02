@@ -2,8 +2,9 @@ module cryptography	// this module
 import crypto.ed25519 as dsa	// an external module used to handle all the dsa stuff - too complicated for the time scope of this project.
 
 pub struct Keys {
-	pub_key dsa.PublicKey
 	priv_key dsa.PrivateKey
+	pub: 
+		pub_key dsa.PublicKey
 }
 
 pub fn (Keys keys) validate_keys() bool {
