@@ -7,11 +7,13 @@ pub struct Keys {
 		pub_key dsa.PublicKey
 }
 
-pub fn (Keys keys) validate_keys() bool {
+type KeysType = Keys
+
+pub fn (this Keys) validate_keys() bool {
 	data := "Hello, world!".bytes()		// defines some random data to check a key pair with
-	signature := sign(keys.priv_key, data)	// signs that data using tthe private key
-	verified := verify(keys.pub_key, data, signature)		// validate that data with that signature and key pair
-	if !verified {	// if verification failed
+	signature := this.sign(data)	// signs that data using tthe private key
+	verified := verify(this.pub_key, data, signature)		// validate that data with that signature and key pair
+	if verified == false {	// if verification failed
 		eprintln("Signature verification failed")
 		exit(130)	// exit with error code 130
 	} else {	// verification succeeded
@@ -20,9 +22,9 @@ pub fn (Keys keys) validate_keys() bool {
 	}
 }
 
-pub fn (Keys keys) sign(data []u8) []u8 {
+pub fn (this Keys) sign(data []u8) []u8 {
 	// wrap the sign function to prevent having conditional data throughout program.
-	signature := dsa.sign(keys.priv_key, data) or {
+	signature := dsa.sign(this.priv_key, data) or {
 		eprintln("Error signing data")
 		exit(140)
 	}

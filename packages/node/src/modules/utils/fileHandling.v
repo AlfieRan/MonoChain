@@ -1,27 +1,42 @@
 module utils
 import os
+import json
 
-pub fn read_file<T>(path string, encoding T, bypass_crash ?bool) (T | false) {
+struct FileReading<T> {
+	pub:
+		loaded bool
+		data T
+}
+
+pub fn read_file<T>(path string, encoding T, bypass_crash bool) (FileReading<T>) {
 	if os.exists(path) {
 		raw := os.read_file(path) or {
 			// something went wrong opening the file, return without loading the config
 			eprintln('Failed to open the file at path $path, error $err')
-			if bypass_crash {return false}
-			else {exit(200, 'Failed to open the file at path $path, error $err')}
+
+			if bypass_crash {
+				return FileReading<T>{loaded: false}
+			}
+
+			exit(200)
 		}
 
 		output := json.decode(T, raw) or {
 			// something went wrong decoding the file, return without loading the config
 			eprintln('Failed to decode json of file $path, error: $err')
-			if bypass_crash {return false}
-			else {exit(210, 'Failed to open the file at path $path, error $err')}
+			
+			if bypass_crash {
+				return FileReading<T>{loaded: false}
+			}
+
+			exit(210)
 		}
 
-		return output
+		return FileReading<T>{loaded: true, data: output}
 	} else {
 		eprintln("File $path does not exist")
-		if bypass_crash {return false}
-		else {exit(205, 'File $path does not exist')}
+		if bypass_crash {return FileReading<T>{loaded: false}}
+		else {exit(205)}
 	}
 }
 

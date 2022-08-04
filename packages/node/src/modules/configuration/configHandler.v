@@ -9,8 +9,8 @@ pub const config_path = "$base_path/node.config"
 pub struct UserConfig {
 	last_connect int	// the last time this node connected to the network
 	config_version int
-	key_path string		// the path to the private key file
 	pub:
+		key_path string		// the path to the private key file
 		loaded bool	// has the config loaded up
 		self Node	// ref to self
 		port int	// open port for server
@@ -63,16 +63,4 @@ fn new_config(recursion_depth int) UserConfig {
 		println("Cancelling...\nCannot launch without configuration file, exiting program.")
 		exit(0) // exit with code 0, because program cannot run without a config
 	}
-}
-
-pub fn get_private_key() []u8 {
-	user_config := load_config()
-
-	if !user_config.loaded {
-		// if config doesn't exist, ask user to create a new one
-		println("No config detected, or error occoured.")
-		exit(75) // start creating a new config with a recursion depth of 0
-	}
-
-	return user_config.priv_key
 }

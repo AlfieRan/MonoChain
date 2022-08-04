@@ -35,7 +35,7 @@ pub fn (mut app App) pong(req string) vweb.Result {
 	}
 
 	config := configuration.get_config()
-	keys := cryptography.get_keys(config.keys_path)
+	keys := cryptography.get_keys(config.key_path)
 
 	println("Received pong request.\n data supplied: $req_parsed \n Raw data supplied $req")
 

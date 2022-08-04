@@ -1,25 +1,25 @@
 module cryptography
 import utils
-
-type KeysType = Keys
+import crypto.ed25519 as dsa
+import json
 
 pub fn get_keys(key_path string) (Keys) {
-	mut keys := utils.read_file(key_path, Keys, true)
+	keys := utils.read_file(key_path, Keys{}, true)
 	
-	if keys == false {
+	if !keys.loaded {
 		println("Could not load keys from file, would you like to generate a new pair?")
-		if utils.get_yes_no() {
-			keys = gen_keys()
-			utils.save_file(key_path, keys)
-			return keys
+		if utils.ask_for_bool(0) {
+			new_keys := gen_keys()
+			utils.save_file(key_path, json.encode(new_keys), 0)
+			return new_keys
 		} else {
 			eprintln("Cannot operate without a keypair, Exiting...")
 			exit(1)
 		}
-	} else if keys != false {
-		println("Keys loaded from file.")
-		return keys
 	}
+
+	println("Keys loaded from file.")
+	return keys.data
 }
 
 pub fn gen_keys() (Keys) {

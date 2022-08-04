@@ -3,21 +3,20 @@ import json
 import utils
 
 pub fn load_config() UserConfig {
-	user_config := utils.read_file(config_path, UserConfigType, true)
+	user_config := utils.read_file(config_path, UserConfig{}, true)
 
-	if user_config == false {
+	if !user_config.loaded{
 		return UserConfig{loaded: false}
-	} else if result != false {
+	} 
 
-		if user_config.config_version != config_version {
-			println("Your Configuration file is outdated, would you like to regenerate it?\nWARNING - If you don't some features may not work properly and may even crash the program.") 
-			if utils.ask_for_bool(0){
-				return create_configuration()
-			}
+	if user_config.data.config_version != config_version {
+		println("Your Configuration file is outdated, would you like to regenerate it?\nWARNING - If you don't some features may not work properly and may even crash the program.") 
+		if utils.ask_for_bool(0){
+			return create_configuration()
 		}
-
-		return user_config // config loaded and no issues with it
 	}
+
+	return user_config.data // config loaded and no issues with it
 } 
 
 pub fn save_config(config UserConfig, recursion_depth int) bool {
