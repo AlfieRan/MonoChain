@@ -3,20 +3,24 @@ import json
 import utils
 
 pub fn load_config() UserConfig {
-	user_config := utils.read_file(config_path, UserConfig{}, true)
+	raw := utils.read_file(config_path, true)
 
-	if !user_config.loaded{
+	if !raw.loaded{
 		return UserConfig{loaded: false}
 	} 
 
-	if user_config.data.config_version != config_version {
+	user_config := json.decode(UserConfig, raw.data) or {
+		return UserConfig{loaded: false}
+	}
+
+	if user_config.config_version != config_version {
 		println("Your Configuration file is outdated, would you like to regenerate it?\nWARNING - If you don't some features may not work properly and may even crash the program.") 
 		if utils.ask_for_bool(0){
 			return create_configuration()
 		}
 	}
 
-	return user_config.data // config loaded and no issues with it
+	return user_config // config loaded and no issues with it
 } 
 
 pub fn save_config(config UserConfig, recursion_depth int) bool {
@@ -25,6 +29,9 @@ pub fn save_config(config UserConfig, recursion_depth int) bool {
 
 	if !failed {
 		println("Sucessfully saved configuration file.") 
+	} else {
+		println("Failed to save configuration file.\nCannot run without a configuration file.") 
+		exit(215)
 	}
 	return !failed
 }

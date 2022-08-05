@@ -2,9 +2,9 @@ module cryptography	// this module
 import crypto.ed25519 as dsa	// an external module used to handle all the dsa stuff - too complicated for the time scope of this project.
 
 pub struct Keys {
-	priv_key dsa.PrivateKey
+	priv_key []u8	//dsa.PrivateKey
 	pub: 
-		pub_key dsa.PublicKey
+		pub_key []u8	//dsa.PublicKey
 }
 
 type KeysType = Keys

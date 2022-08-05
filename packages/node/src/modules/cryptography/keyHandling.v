@@ -3,23 +3,35 @@ import utils
 import crypto.ed25519 as dsa
 import json
 
-pub fn get_keys(key_path string) (Keys) {
-	keys := utils.read_file(key_path, Keys{}, true)
-	
-	if !keys.loaded {
-		println("Could not load keys from file, would you like to generate a new pair?")
-		if utils.ask_for_bool(0) {
-			new_keys := gen_keys()
-			utils.save_file(key_path, json.encode(new_keys), 0)
-			return new_keys
-		} else {
-			eprintln("Cannot operate without a keypair, Exiting...")
-			exit(1)
+fn failed_to_get_keys(key_path string) (Keys){
+	println("Could not load keys from file, would you like to generate a new pair?")
+	if utils.ask_for_bool(0) {
+		new_keys := gen_keys()
+		failed := utils.save_file(key_path, json.encode(new_keys), 0)
+		if failed {
+			println("Cannot continue, exiting...")
+			exit(215)
 		}
+		return new_keys
+	} else {
+		eprintln("Cannot operate without a keypair, Exiting...")
+		exit(1)
+	}
+}
+
+pub fn get_keys(key_path string) (Keys) {
+	raw := utils.read_file(key_path, true)
+
+	if !raw.loaded {
+		return failed_to_get_keys(key_path)
+	}
+
+	keys := json.decode(Keys, raw.data) or {
+		return failed_to_get_keys(key_path)
 	}
 
 	println("Keys loaded from file.")
-	return keys.data
+	return keys
 }
 
 pub fn gen_keys() (Keys) {

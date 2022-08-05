@@ -30,3 +30,4 @@
 200 - Tried to open a file and was unable to, likely due to an os error or file not existing.
 205 - File does not exist, could also be an os error in rare cases.
 210 - Tried to decode json from raw file and was unable to, likely due to incorrect formatting.
+215 - Tried to save a fundamental file and failed, hence quit.
