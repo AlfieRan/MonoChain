@@ -1,12 +1,16 @@
-### Alfie Ranstead's A Level Project - A JSON Oriented Blockchain
+### Alfie Ranstead's A Level Project - A Proof of Trust Blockchain
 
-#
+---
 
-## **The MonoChain**
+# **The MonoChain**
 
 This is a completely custom built blockchain centered around the proof of trust consensus protocol, a protocol that aims to keep low entry requirements for new nodes whilst retaining a better evironmental footprint than proof of work.
 
-#
+[Read more about the project here](https://monochain.network/info)
+
+&nbsp;
+
+# Repository Info
 
 This git repo uses a monorepo in order to keep the various sections of the project in one repository, to view individual parts of the project, visit the "/packages" folder.
 
@@ -16,7 +20,9 @@ The main parts of the project are as follows:
 -   Node - The code that runs on a computer intending to use it's storage or cpu power alongside it's network connection in order to support the blockchain and recieve a percentage of transactions that flow through it in return for payment. Can be seen in `/packages/node/`
 -   Webportal - An example website that allows Users of the blockchain to see the data they own on the blockchain and send transactions to other Users on the blockchain. Stored in `/packages/webportal`
 
----
+&nbsp;
+
+# Other Info
 
 It's also important to note that this repository exists in two places:
 
