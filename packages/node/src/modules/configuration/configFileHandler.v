@@ -33,5 +33,5 @@ pub fn save_config(config UserConfig, recursion_depth int) bool {
 		println("Failed to save configuration file.\nCannot run without a configuration file.") 
 		exit(215)
 	}
-	return !failed
+	return failed
 }

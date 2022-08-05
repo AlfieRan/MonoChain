@@ -18,7 +18,7 @@ pub fn start(config configuration.UserConfig) {
 	api := go vweb.run(&App{config: config}, config.port) // start server
 	
 	time.sleep(2 * time.second) // wait to make sure server is up
-	// server.ping("https://nano.monochain.network", config) // ping running node using handshake to verify cryptography is working
+	server.ping("https://nano.monochain.network", config) // ping running node using handshake to verify cryptography is working
 	api.wait()	// bring server process back to main thread
 }
 
