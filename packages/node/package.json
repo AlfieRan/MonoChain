@@ -15,5 +15,6 @@
         "zip": "zip ../webportal/public/node.zip -9r ./dist/ && echo \"zipped\"",
         "dev": "v watch -c ./src/",
         "start": "v run ./src/"
-    }
+    },
+    "engines": { "bun": "0.1.x" }
 }
