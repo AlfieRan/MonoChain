@@ -30,3 +30,9 @@ Lots of the drawbacks were sourced from [(Wackerow, 2022)](../../../reference-li
 ### Proof of Stake
 
 Proof of stake is a consensus protocol that relies upon nodes/miners \*staking\* capital which usually comes in the form of the native currency for a specified blockchain, such that the staked capital can act as a form of deposit. This stake/deposit can then be destroyed if the node/miner becomes dishonest or lazy, where being lazy tends to mean only validating their own blocks and no-one else's.
+
+| Benefits                                           | Drawbacks                                                                                                  |
+| -------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| better energy efficiency compared to proof of work | usually very high stake requirements, requiring a much larger initial investment compared to proof of work |
+| lower hardware entry requirements                  | more complex than proof of work                                                                            |
+| should increase security                           |                                                                                                            |
