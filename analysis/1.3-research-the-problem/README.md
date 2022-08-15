@@ -12,9 +12,9 @@ Bitcoin was created in 2008 and was the first cryptocurrency to be created digit
 
 
 
-### [Consensus Protocol](consensus-protocols/#what-is-a-consensus-protocol)
+### [Consensus Protocol](consensus-protocols.md#what-is-a-consensus-protocol)
 
-Bitcoin uses [proof of power](consensus-protocols/#proof-of-power) as it's [Consensus Protocol](consensus-protocols/#what-is-a-consensus-protocol), the benefit of this is that in order to deceive the blockchain protocol and successfully defraud the system, an individual would need 51% of the computing power connected to the network, which is feasible initially but as the network grows becomes extremely difficult to do so, especially at it's current state. The downside to using proof of power is that it it is extremely inefficient and wastes a lot of energy [(for an explanation why click here)](consensus-protocols/#proof-of-power). This is not only bad for the environment but also raises transaction fees as nodes have to do a lot more work to complete each transaction and have to be compensated fairly.
+Bitcoin uses [proof of power](consensus-protocols.md#proof-of-power) as it's [Consensus Protocol](consensus-protocols.md#what-is-a-consensus-protocol), the benefit of this is that in order to deceive the blockchain protocol and successfully defraud the system, an individual would need 51% of the computing power connected to the network, which is feasible initially but as the network grows becomes extremely difficult to do so, especially at it's current state. The downside to using proof of power is that it it is extremely inefficient and wastes a lot of energy [(for an explanation why click here)](consensus-protocols.md#proof-of-power). This is not only bad for the environment but also raises transaction fees as nodes have to do a lot more work to complete each transaction and have to be compensated fairly.
 
 ![Bitcoin's USD transaction cost over time](<../../.gitbook/assets/image (3) (1) (1) (1) (1).png>)
 
@@ -50,9 +50,9 @@ The above chart shows this transaction fee over time, and although right now it 
 
 Ethereum is the second largest cryptocurrency as of time of writing (Friday 20th May 2022), costing approximately £1,650 GBP per coin. It was launched on the 30th of July 2015 and has grown to a current market cap of £195,873,606,031.48 (\~£200 Bn) in the just under 7 years it has been in use.
 
-### [Consensus Protocol](consensus-protocols/#what-is-a-consensus-protocol)
+### [Consensus Protocol](consensus-protocols.md#what-is-a-consensus-protocol)
 
-Ethereum began as a [proof of power](consensus-protocols/#proof-of-power) blockchain but due to the environmental issues it has begun switching to a [proof of stake](consensus-protocols/#proof-of-stake) blockchain and intends to merge the current developer network that runs the proof of stake version of ethereum with the main network that uses proof of power sometime in August this year (2022) although that date has already been postponed over a year so it may be completed at a later date. Because Ethereum is currently undergoing a transition to proof of stake and by the time you are reading this is should have been completed I will be referring to Ethereum's consensus protocol as proof of stake for the remainder of this project.
+Ethereum began as a [proof of power](consensus-protocols.md#proof-of-power) blockchain but due to the environmental issues it has begun switching to a [proof of stake](consensus-protocols.md#proof-of-stake) blockchain and intends to merge the current developer network that runs the proof of stake version of ethereum with the main network that uses proof of power sometime in August this year (2022) although that date has already been postponed over a year so it may be completed at a later date. Because Ethereum is currently undergoing a transition to proof of stake and by the time you are reading this is should have been completed I will be referring to Ethereum's consensus protocol as proof of stake for the remainder of this project.
 
 ### Features
 
@@ -62,7 +62,7 @@ Ethereum began as a [proof of power](consensus-protocols/#proof-of-power) blockc
 | ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | A consensus protocol that rewards long term users                  | This is very useful to keep users on the blockchain and is what helps to encourage long term usage and financial gain for those who do use the blockchain long term. This is obviously not guaranteed but it should still be a benefit for the network. |
 | Digital ownership certificates [(Nfts)](../../terminology.md#nfts) | This is what allows most of the more useful technology in the Ethereum blockchain and will unlock a lot of the potential in this blockchain. This is how ownership is proven on the blockchain and is what differentiates web2 from web3.               |
-| ≈15 second block times                                             | This is long enough so that nodes should have enough time to reach an agreement on which blocks are valid, but keeps transaction times low and allows lots of data to flow through the network.                                                         |
+| ≈10-15 second block times                                          | This is long enough so that nodes should have enough time to reach an agreement on which blocks are valid, but keeps transaction times low and allows lots of data to flow through the network.                                                         |
 {% endtab %}
 
 {% tab title="Features I won't be including" %}

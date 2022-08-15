@@ -16,7 +16,7 @@ Proof of work is the most common consensus protocol and was originally introduce
 
 It works by requiring the hash of a block that is added to the blockchain to be below a target value based upon how long it took the past&#x20;
 
-explanation for proof of power goes here [(How Bitcoin makes it harder to mine dynamically)](how-bitcoin-makes-mining-harder..md)
+explanation for proof of power goes here [(How Bitcoin makes it harder to mine dynamically)](how-proof-of-work-mining-works.md)
 
 | Benefits                                                              | Drawbacks                                                                                                                                                                                                                                                                                                                          |
 | --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -25,7 +25,7 @@ explanation for proof of power goes here [(How Bitcoin makes it harder to mine d
 | Scales with increases in computing power extremely well               | If a large entity with lots of computing power wanted to they could theoretically create a node network at least 51% of the size of the whole network, centralising it and having complete control of all the data flowing through the network.                                                                                    |
 |                                                                       | Nodes with extremely large computing power do not have to group up and can therefore reap all the rewards of their work alone, growing faster and resulting in a big divide between the ultra wealthy and powerful single nodes and the less wealthy, not very powerful grouped nodes that can't accomplish anything on their own. |
 
-Lots of the drawbacks were sourced from [(Wackerow, 2022)](../../../reference-list.md).
+Lots of the drawbacks were sourced from [(Wackerow, 2022)](../../reference-list.md).
 
 ### Proof of Stake
 
