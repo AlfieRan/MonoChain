@@ -2,7 +2,7 @@
 
 ## Bitcoin
 
-![](<../../.gitbook/assets/image (7).png>)
+![](../../.gitbook/assets/image.png)
 
 ![The https://bitcoin.org/en/ homepage](<../../.gitbook/assets/image (1) (1).png>)
 

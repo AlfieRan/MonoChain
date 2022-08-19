@@ -134,7 +134,7 @@ By following this code we can see that once "yarn build" is run it runs:&#x20;
 
 #### Test 3 - Running the node program:
 
-![This shows the node software running within my terminal.](<../.gitbook/assets/image (7) (1).png>)
+![This shows the node software running within my terminal.](<../.gitbook/assets/image (7).png>)
 
 #### Test 4 - Downloading the node program
 
@@ -142,6 +142,6 @@ By following this code we can see that once "yarn build" is run it runs:&#x20;
 
 
 
-![](<../.gitbook/assets/image (9).png>)
+![](<../.gitbook/assets/image (9) (1).png>)
 
 The top image shows the page that the node software can be downloaded from, with the lower image showing the zip file being downloaded.

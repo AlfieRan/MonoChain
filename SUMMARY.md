@@ -23,6 +23,7 @@
 * [2.2.3 Cycle 3](design-and-development/2.2.3-cycle-3.md)
 * [2.2.4 Cycle 4](design-and-development/2.2.4-cycle-4.md)
 * [2.2.5 Cycle 5](design-and-development/2.2.5-cycle-5.md)
+* [2.2.6 Cycle 6](design-and-development/2.2.6-cycle-6.md)
 
 ## 2.5 The Protocol
 
