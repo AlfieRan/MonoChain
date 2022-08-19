@@ -1,4 +1,4 @@
-# 2.2.1 Cycle 1
+# 2.2.1 Cycle 1 - The Framework
 
 ## Design
 
@@ -134,7 +134,7 @@ By following this code we can see that once "yarn build" is run it runs:&#x20;
 
 #### Test 3 - Running the node program:
 
-![This shows the node software running within my terminal.](<../.gitbook/assets/image (7).png>)
+![This shows the node software running within my terminal.](<../.gitbook/assets/image (7) (1).png>)
 
 #### Test 4 - Downloading the node program
 

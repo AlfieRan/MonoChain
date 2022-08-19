@@ -18,12 +18,14 @@
 
 * [2.1 Design Frame](2-design-and-development/systems-diagram.md)
 * [2.2.x Cycle Template](design-and-development/2.2.x-cycle-template.md)
-* [2.2.1 Cycle 1](2-design-and-development/cycle-1.md)
-* [2.2.2 Cycle 2](design-and-development/2.2.2-cycle-2.md)
-* [2.2.3 Cycle 3](design-and-development/2.2.3-cycle-3.md)
-* [2.2.4 Cycle 4](design-and-development/2.2.4-cycle-4.md)
-* [2.2.5 Cycle 5](design-and-development/2.2.5-cycle-5.md)
-* [2.2.6 Cycle 6](design-and-development/2.2.6-cycle-6.md)
+* [2.2.1 Cycle 1 - The Framework](2-design-and-development/cycle-1.md)
+* [2.2.2 Cycle 2 - Changing Node Language to V Lang](design-and-development/2.2.2-cycle-2-changing-node-language-to-v-lang.md)
+* [2.2.3 Cycle 3 - Configuration Handler](design-and-development/2.2.3-cycle-3-configuration-handler.md)
+* [2.2.4 Cycle 4 - Compiling for Windows](design-and-development/2.2.4-cycle-4-compiling-for-windows.md)
+* [2.2.5 Cycle 5 - Basic Inter-Nodal Communication](design-and-development/2.2.5-cycle-5-basic-inter-nodal-communication.md)
+* [2.2.6 Cycle 6 - Improved Webportal (Mobile Support)](design-and-development/2.2.6-cycle-6-improved-webportal-mobile-support.md)
+* [2.2.7 Cycle 7 - Node Refactor and Protocol Updates](design-and-development/2.2.7-cycle-7-node-refactor-and-protocol-updates.md)
+* [2.2.7 Cycle 8 - Advanced Inter-Nodal Communication](design-and-development/2.2.7-cycle-8-advanced-inter-nodal-communication.md)
 
 ## 2.5 The Protocol
 
@@ -54,6 +56,6 @@
 
 ## Notes
 
+* [To Do](notes/to-do.md)
 * [important stuff](notes/my-brain-hurts.md)
-* [Stuff to do](notes/stuff-to-do.md)
 * [Phase 1](notes/phase-1.md)
