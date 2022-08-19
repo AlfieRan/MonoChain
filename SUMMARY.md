@@ -25,7 +25,7 @@
 * [2.2.5 Cycle 5 - Basic Inter-Nodal Communication](design-and-development/2.2.5-cycle-5-basic-inter-nodal-communication.md)
 * [2.2.6 Cycle 6 - Improved Webportal (Mobile Support)](design-and-development/2.2.6-cycle-6-improved-webportal-mobile-support.md)
 * [2.2.7 Cycle 7 - Node Refactor and Protocol Updates](design-and-development/2.2.7-cycle-7-node-refactor-and-protocol-updates.md)
-* [2.2.7 Cycle 8 - Advanced Inter-Nodal Communication](design-and-development/2.2.7-cycle-8-advanced-inter-nodal-communication.md)
+* [2.2.8 Cycle 8 - Advanced Inter-Nodal Communication](design-and-development/2.2.8-cycle-8-advanced-inter-nodal-communication.md)
 
 ## 2.5 The Protocol
 
