@@ -2,9 +2,9 @@
 
 ## Bitcoin
 
-![](../../.gitbook/assets/image.png)
+![](<../../.gitbook/assets/image (1).png>)
 
-![The https://bitcoin.org/en/ homepage](<../../.gitbook/assets/image (1) (1) (2).png>)
+![The https://bitcoin.org/en/ homepage](<../../.gitbook/assets/image (1) (1).png>)
 
 ### Overview
 
