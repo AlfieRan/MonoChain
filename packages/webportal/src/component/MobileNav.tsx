@@ -3,6 +3,7 @@ import {
   Drawer,
   DrawerBody,
   DrawerContent,
+  DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
   Flex,
@@ -17,8 +18,9 @@ import React from "react";
 const MobileNav = (props: { hidden?: boolean }) => {
   const Links: { name: string; href: string }[] = [
     { name: "Home", href: "/" },
-    { name: "Learn More", href: "/info" },
     { name: "Wallet", href: "/wallet" },
+    { name: "Setup a Node", href: "/download" },
+    { name: "Learn More", href: "/info" },
   ];
 
   const {
@@ -82,6 +84,11 @@ const MobileNav = (props: { hidden?: boolean }) => {
               </Link>
             ))}
           </DrawerBody>
+          <DrawerFooter>
+            <Link href={"https://alfieranstead.com"} _hover={{}} isExternal>
+              <Text>By Alfie Ranstead</Text>
+            </Link>
+          </DrawerFooter>
         </DrawerContent>
       </Drawer>
     </>
