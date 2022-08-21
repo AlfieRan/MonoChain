@@ -26,9 +26,10 @@
 * [2.2.6 Cycle 6 - Setting up Inter-Nodal Communication](design-and-development/2.2.6-cycle-6-setting-up-inter-nodal-communication.md)
 * [2.2.7 Cycle 7 - Improved Webportal (Mobile Support)](design-and-development/2.2.6-cycle-6-improved-webportal-mobile-support.md)
 * [2.2.8 Cycle 8 - Node Refactor and Protocol Updates](design-and-development/2.2.7-cycle-7-node-refactor-and-protocol-updates.md)
-* [\[needs code\] 2.2.9 Cycle 9 - Basic Inter-Nodal Communication](design-and-development/needs-code-2.2.9-cycle-9-basic-inter-nodal-communication.md)
-* [\[needs code\] 2.2.10 Cycle 10 - Remembering Nodes](design-and-development/needs-code-2.2.10-cycle-10-remembering-nodes.md)
-* [\[needs code\] 2.2.11 Cycle 11 - Expanding Node Networks Through Neighbours](design-and-development/needs-code-2.2.11-cycle-11-expanding-node-networks-through-neighbours.md)
+* [2.2.9 Cycle 9 - Protocol Updates](design-and-development/2.2.9-cycle-9-protocol-updates.md)
+* [\[needs code\] 2.2.10 Cycle 10 - Basic Inter-Nodal Communication](design-and-development/needs-code-2.2.10-cycle-10-basic-inter-nodal-communication.md)
+* [\[needs code\] 2.2.11 Cycle 11 - Remembering Nodes](design-and-development/needs-code-2.2.11-cycle-11-remembering-nodes.md)
+* [\[needs code\] 2.2.12 Cycle 12 - Expanding Node Networks Through Neighbours](design-and-development/needs-code-2.2.12-cycle-12-expanding-node-networks-through-neighbours.md)
 
 ## 2.5 The Protocol
 
