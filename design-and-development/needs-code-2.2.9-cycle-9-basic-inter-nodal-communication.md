@@ -1,17 +1,19 @@
-# \[needs code] 2.2.11 Cycle 11 - Expanding Node Networks Through Neighbours
+# \[needs code] 2.2.10 Cycle 10 - Basic Inter-Nodal Communication
 
-* Allow nodes to request lists of online nodes from each other so as to grow their networks.
-* This is fundamental to allowing nodes to grow their networks and hence keep the network alive
+* STOP NODES FROM JUST SIGNING ALL DATA SENT THEIR WAY -> MASSIVE SECURITY FLAW
+* Convert pong route from a get request to a post request
+* move pong request data from query to body
+* create an info getter that just asks a node for all it's info in more detail.
 
 ## Design
 
 ### Objectives
 
-(general objectives)
+The objective for this cycle is to turn the [basic inter-nodal communication from Cycle 6](2.2.6-cycle-6-setting-up-inter-nodal-communication.md) into something more advanced, allowing Nodes to start remembering their neighbours, track their neighbouring node's wallet references and let other nodes know they exist using the ping/pong functionality setup in Cycle 6.
 
-* [ ] Objective 1
-* [ ] Objective 2
-* [ ] Objective 3
+* [ ] Nodes store references to other Nodes.
+* [ ] Nodes remember which wallet was running on each Node it has a reference to.
+* [ ] Nodes can let other Nodes know that they exist using the ping/pong functionality setup in Cycle 5.
 
 ### Usability Features
 

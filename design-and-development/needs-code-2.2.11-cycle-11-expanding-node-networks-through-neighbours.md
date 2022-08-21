@@ -1,9 +1,7 @@
-# \[needs code] 2.2.10 Cycle 10 - Remembering Nodes
+# \[needs code] 2.2.12 Cycle 12 - Expanding Node Networks Through Neighbours
 
-* Start storing node data after they've been collected from nodes
-* Create an "online" file which stores nodes that have been online in the past 30 minutes
-* create a function to go through the stored nodes and ping them to check who's online, if they respond add them to the online file and if not don't.
-* Run this function on startup
+* Allow nodes to request lists of online nodes from each other so as to grow their networks.
+* This is fundamental to allowing nodes to grow their networks and hence keep the network alive
 
 ## Design
 
