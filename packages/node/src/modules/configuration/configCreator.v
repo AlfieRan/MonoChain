@@ -8,7 +8,6 @@ const defualt = UserConfig{
 	config_version: config_version
 	last_connect: 0
 	port: 8000
-
 }
 
 pub fn create_configuration() UserConfig {
