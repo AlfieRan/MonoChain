@@ -1,10 +1,9 @@
-# 2.2.6 Cycle 6 - Improved Webportal (Mobile Support)
+# \[needs code] 2.2.10 Cycle 10 - Remembering Nodes
 
-
-
-* Improved webportal home page, added new buttons.
-* Navigation bar didn't work for mobile.
-* Fixed navigation bar for mobile
+* Start storing node data after they've been collected from nodes
+* Create an "online" file which stores nodes that have been online in the past 30 minutes
+* create a function to go through the stored nodes and ping them to check who's online, if they respond add them to the online file and if not don't.
+* Run this function on startup
 
 ## Design
 
