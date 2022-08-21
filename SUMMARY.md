@@ -16,7 +16,7 @@
 
 ## 2 Design and Development <a href="#design-and-development" id="design-and-development"></a>
 
-* [2.1 Design Frame](2-design-and-development/systems-diagram.md)
+* [\[NOT DONE\] 2.1 Design Frame](2-design-and-development/systems-diagram.md)
 * [2.2.x Cycle Template](design-and-development/2.2.x-cycle-template.md)
 * [2.2.1 Cycle 1 - The Framework](2-design-and-development/cycle-1.md)
 * [2.2.2 Cycle 2 - Changing Node Language to V Lang](design-and-development/2.2.2-cycle-2-changing-node-language-to-v-lang.md)
