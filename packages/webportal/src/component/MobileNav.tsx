@@ -21,6 +21,7 @@ const MobileNav = (props: { hidden?: boolean }) => {
     { name: "Wallet", href: "/wallet" },
     { name: "Setup a Node", href: "/download" },
     { name: "Learn More", href: "/info" },
+    { name: "Contact", href: "/contact" },
   ];
 
   const {
