@@ -10,6 +10,14 @@ This is a completely custom built blockchain centered around the proof of trust 
 
 &nbsp;
 
+# This Project is Still in Early Development
+
+After checking the analytics for this git repository and the website that it's attached to, I've realised that this project is getting a lot more traffic than I thought it was, therefore it's important to know that this project is not currently at a point at which it can be used properly.
+
+If you would like to keep up to date with the project please "star" this repo on [github here](https://github.com/AlfieRan/MonoChain).
+
+&nbsp;
+
 # Repository Info
 
 This git repo uses a monorepo in order to keep the various sections of the project in one repository, to view individual parts of the project, visit the "/packages" folder.
