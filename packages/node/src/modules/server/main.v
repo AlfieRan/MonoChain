@@ -37,15 +37,20 @@ pub fn (mut app App) pong(req string) vweb.Result {
 	config := configuration.get_config()
 	keys := cryptography.get_keys(config.key_path)
 
-	println("Received pong request.\n data supplied: $req_parsed \n Raw data supplied $req")
+	println("Received pong request from node with public key: $req_parsed.ping_key")
 
 	// with this version of the node software all messages should be time objects
 	time := time.parse(req_parsed.message) or {
-		eprintln("Incorrect time format supplied to /pong/:req")
+		eprintln("Incorrect time format supplied to /pong/:req by node claiming to be $req_parsed.ping_key")
+		// this is where we would then store a record of the node's claimed public key
+		// after doing so, send back another handshake and if the node really is that node,
+		// then store a slight negative grudge
+		// otherwise, store the ip address of the node and blacklist it for a while
 		return app.server_error(403)
 	}
 
-	println("Time parsed: $time")
+	// time was okay, so store a slight positive grudge
+	println("Time parsed correctly as: $time")
 
 	res := PongResponse{
 		pong_key: keys.pub_key
