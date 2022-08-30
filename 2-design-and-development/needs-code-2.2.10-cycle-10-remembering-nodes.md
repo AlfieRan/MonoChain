@@ -11,9 +11,9 @@
 
 (general objectives)
 
-* [ ] Objective 1
-* [ ] Objective 2
-* [ ] Objective 3
+* [ ] Nodes store references to other Nodes.
+* [ ] Nodes remember which wallet was running on each Node it has a reference to.
+* [ ] Nodes can let other Nodes know that they exist using the ping/pong functionality.
 
 ### Usability Features
 
