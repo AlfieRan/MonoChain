@@ -39,6 +39,14 @@ pub fn (mut app App) pong(req string) vweb.Result {
 
 	println("Received pong request.\n data supplied: $req_parsed \n Raw data supplied $req")
 
+	// with this version of the node software all messages should be time objects
+	time := time.parse(req_parsed.message) or {
+		eprintln("Incorrect time format supplied to /pong/:req")
+		return app.server_error(403)
+	}
+
+	println("Time parsed: $time")
+
 	res := PongResponse{
 		pong_key: keys.pub_key
 		ping_key: req_parsed.ping_key
