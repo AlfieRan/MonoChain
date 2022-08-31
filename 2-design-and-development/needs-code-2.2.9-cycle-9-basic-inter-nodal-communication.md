@@ -61,15 +61,28 @@ Objective 2 solution:
 
 ## Development
 
-Most of the development for this cycle was just setup, to get everything I need for this project up and running and building out the structure of the codebase in order to make the actual programming as smooth as possible.
+\---
 
 ### Outcome
 
-Objective 1
+#### Signing Date-Time Objects
 
+Converting the pseudocode to actual code for this was pretty simple, although I ended up keeping the parsing within the main handshake route function rather than splitting it out into a separate function, so that's why the code isn't in a function below.
+
+```v
+// V code - within the "pong" route in /src/modules/server/main.v 
+
+// with this version of the node software all messages should be time objects
+time := time.parse(req_parsed.message) or {
+    eprintln("Incorrect time format supplied to /pong/:req by node claiming to be $req_parsed.ping_key")
+    return app.server_error(403)
+}
+
+// time was okay, so store a slight positive grudge
+println("Time parsed correctly as: $time")
 ```
-code
-```
+
+This code can be found in [this commit here](https://github.com/AlfieRan/MonoChain/blob/master/packages/node/src/modules/server/main.v), although bear in mind that the code above removed some in-code comments meant for future use in a different cycle that is not in development and is just being planned at the moment.
 
 Objective 2
 
@@ -85,12 +98,18 @@ Challenges faced in either/both objectives
 
 ### Tests
 
-| Test | Instructions | What I expect | What actually happens | Pass/Fail |
-| ---- | ------------ | ------------- | --------------------- | --------- |
-| 1    |              |               |                       |           |
-| 2    |              |               |                       |           |
-| 3    |              |               |                       |           |
+| Test | Instructions                                                                 | What I expect                                                                        | What actually happens | Pass/Fail |
+| ---- | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | --------------------- | --------- |
+| 1    | Completing a correct and valid handshake using a time object as the message. | A series of console logs on both nodes confirming that the handshake was successful. | As expected           | Pass      |
+| 2    |                                                                              |                                                                                      |                       |           |
+| 3    |                                                                              |                                                                                      |                       |           |
 
 ### Evidence
 
-(Images of tests running/results)
+#### Test 1 Evidence - Valid data in a valid handshake
+
+<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption><p>The handshake initiator</p></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption><p>The handshake Recipient</p></figcaption></figure>
+
+As shown, both the initiator and recipient successfully agreed on the handshake, with both showing the same time message to prove this was the same handshake as the test.
