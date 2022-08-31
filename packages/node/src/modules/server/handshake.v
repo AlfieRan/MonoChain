@@ -26,12 +26,13 @@ pub struct PingRequest {
 pub fn ping(ref string, this configuration.UserConfig) bool {
 	// ref should be an ip or a domain
 	msg := time.now().format_ss_micro() // set the message to the current time since epoch
+	// msg := "invalid data" // Invalid data used for testing
 	req := PingRequest{ping_key: this.self.key, message: msg}
 
 	println("\nSending ping request to ${ref}.\nMessage: $msg")
 	// fetch domain, domain should respond with their wallet pub key/address, "pong" and a signed hash of the message
 	req_encoded := json.encode(req)
-	raw := http.get("$ref/pong/$req_encoded") or {
+	raw := http.post("$ref/pong/$req_encoded", "") or {
 		eprintln("Failed to ping $ref, Node is probably offline. Error: $err")
 		return false
 	}

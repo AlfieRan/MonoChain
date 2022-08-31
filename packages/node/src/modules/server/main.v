@@ -9,13 +9,9 @@ struct App {
 	vweb.Context
 	config configuration.UserConfig
 }
-
-struct Testing {
-	data string = "hello"
-}
  
 pub fn start(config configuration.UserConfig) {
-	api := go vweb.run(&App{config: config}, config.port) // start server
+	api := go vweb.run(&App{config: config}, config.port) // start server on a new thread
 	
 	time.sleep(2 * time.second) // wait to make sure server is up
 	server.ping("https://nano.monochain.network", config) // ping running node using handshake to verify cryptography is working
@@ -27,7 +23,7 @@ pub fn (mut app App) index() vweb.Result {
 }
 
 
-['/pong/:req']
+['/pong/:req'; post]
 pub fn (mut app App) pong(req string) vweb.Result {
 	req_parsed := json.decode(PingRequest, req) or {
 		eprintln("Incorrect data supplied to /pong/:req")
