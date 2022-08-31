@@ -15,7 +15,7 @@ Alongside this there is also a very bad security flaw with the way in which Node
 
 * [x] Make nodes check the data sent to their pong route and only sign it if it is a dateTime string.
 * [x] Convert pong request from a get request to a post request.
-* [ ] Move pong request data from the query of the request to the body.
+* [x] Move pong request data from the query of the request to the body.
 * [ ] Create an info getter route that asks a node for all of its information - will be useful in the future.
 
 ### Usability Features
