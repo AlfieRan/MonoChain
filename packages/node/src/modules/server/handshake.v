@@ -30,11 +30,8 @@ pub fn (mut app App) handshake_route() vweb.Result {
 
 	req_parsed := json.decode(HandshakeRequest, body) or {
 		eprintln("Incorrect data supplied to /handshake/")
-		return app.server_error(403)
+		return app.server_error(403)	
 	}
-
-	config := configuration.get_config()
-	keys := cryptography.get_keys(config.key_path)
 
 	println("Received handshake request from node claiming to have the public key: $req_parsed.initiator_key")
 
@@ -50,6 +47,9 @@ pub fn (mut app App) handshake_route() vweb.Result {
 
 	// time was okay, so store a slight positive grudge
 	println("Time parsed correctly as: $time")
+
+	config := configuration.get_config()
+	keys := cryptography.get_keys(config.key_path)
 
 	res := HandshakeResponse{
 		responder_key: keys.pub_key
