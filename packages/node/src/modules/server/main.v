@@ -23,10 +23,14 @@ pub fn (mut app App) index() vweb.Result {
 }
 
 
-['/pong/:req'; post]
-pub fn (mut app App) pong(req string) vweb.Result {
-	req_parsed := json.decode(PingRequest, req) or {
-		eprintln("Incorrect data supplied to /pong/:req")
+['/pong'; post]
+pub fn (mut app App) pong() vweb.Result {
+	body := app.req.data
+	ip := app.req
+	println(ip)
+
+	req_parsed := json.decode(PingRequest, body) or {
+		eprintln("Incorrect data supplied to /pong/")
 		return app.server_error(403)
 	}
 

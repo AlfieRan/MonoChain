@@ -32,7 +32,8 @@ pub fn ping(ref string, this configuration.UserConfig) bool {
 	println("\nSending ping request to ${ref}.\nMessage: $msg")
 	// fetch domain, domain should respond with their wallet pub key/address, "pong" and a signed hash of the message
 	req_encoded := json.encode(req)
-	raw := http.post("$ref/pong/$req_encoded", "") or {
+	
+	raw := http.post("$ref/pong", req_encoded) or {
 		eprintln("Failed to ping $ref, Node is probably offline. Error: $err")
 		return false
 	}
