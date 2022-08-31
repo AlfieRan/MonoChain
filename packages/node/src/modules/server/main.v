@@ -26,7 +26,7 @@ pub fn (mut app App) index() vweb.Result {
 ['/pong'; post]
 pub fn (mut app App) pong() vweb.Result {
 	body := app.req.data
-	ip := app.req
+	ip := app.req.header
 	println(ip)
 
 	req_parsed := json.decode(PingRequest, body) or {
