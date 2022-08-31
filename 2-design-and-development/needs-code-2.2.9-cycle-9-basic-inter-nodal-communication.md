@@ -99,21 +99,26 @@ HTTP_POST_ROUTE handshake (request):
 		RETURN HTTP.code(403) 
 	ENDIF
 	
+	// time was okay, so store a slight positive grudge
+	OUTPUT "Time parsed correctly as:" + time
+	
 	// how the keys are used has also changed due to the node refactor.
 	config = configuration.get_config()
 	keys = cryptography.get_keys(config.key_path)
 
 	// create an object that represents the response
 	response = {
-		pong_key: self.pub_key
-		ping_key: req_parsed.ping_key
+		responder_key: self.pub_key
+		initiator_key: req_parsed.initiator_key
 		message: req_parsed.message
-		signature: cryptography.sign(self.priv_key, message)
+		signature: keys.sign(message)
 	}
 	
 	// encode the response to be http safe
 	data = json.encode(response)
+	
 	// return it to the requester
+	OUTPUT "Handshake Analysis Complete. Sending response..."
 	return HTTP.text(data)
 END HTTP_ROUTE
 
