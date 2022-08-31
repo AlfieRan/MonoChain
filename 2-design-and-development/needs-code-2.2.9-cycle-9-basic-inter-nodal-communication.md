@@ -54,9 +54,75 @@ FUNCTION Valid_Message(message):
 END FUNCTION
 ```
 
-#### Converting the handshake route from a get request to a post request
+### Converting the handshake route from a get request to a post request
+
+As both the conversion from a get request to a post request and converting from using queries to using the body to send data is so similar I'll use the below examples to summarise both changes.
+
+#### **Api Route**
+
+Because this is based upon code from a previous cycle where I introduced the nodal communication, I've copied that pseudocode as the base and then edited it from there. [Visit here to see the original Pseudocode](2.2.6-cycle-6-setting-up-inter-nodal-communication.md#the-api-route)
 
 ```
+// Pseudocode
+
+// import functions from modules made in previous cycles
+IMPORT configuration
+IMPORT cryptography
+
+
+// In this case request has changed to be the body of the http request
+HTTP_POST_ROUTE handshake (request):
+
+	TRY:
+		req_parsed = json.decode(request)
+	CATCH ERROR:
+		OUTPUT "Incorrect data supplied to handshake"
+		RETURN HTTP.code(403) 	
+		// a code 403 means "forbidden" in http terms
+	END TRY
+
+
+
+	OUTPUT "Received handshake request from node claiming to have the public key"
+		 + req_parsed.initiator_key
+
+	// using the function defined earlier in this cycle
+	time = Valid_Message(req_parsed.message)
+	
+	IF time == False:
+		OUTPUT "Incorrect time format supplied to handshake by node claiming to be"
+			+ req_parsed.initiator_key
+			
+		// this is where a negative grudge would then be stored but that's for a
+		// future cycle.
+		
+		RETURN HTTP.code(403) 
+	ENDIF
+	
+	// how the keys are used has also changed due to the node refactor.
+	config = configuration.get_config()
+	keys = cryptography.get_keys(config.key_path)
+
+	// create an object that represents the response
+	response = {
+		pong_key: self.pub_key
+		ping_key: req_parsed.ping_key
+		message: req_parsed.message
+		signature: cryptography.sign(self.priv_key, message)
+	}
+	
+	// encode the response to be http safe
+	data = json.encode(response)
+	// return it to the requester
+	return HTTP.text(data)
+END HTTP_ROUTE
+
+```
+
+#### Requester Function
+
+```
+// Some code
 ```
 
 ## Development
