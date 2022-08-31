@@ -1,4 +1,4 @@
-# \[needs code] 2.2.10 Cycle 10 - Basic Inter-Nodal Communication
+# 2.2.10 Cycle 10 - Basic Inter-Nodal Communication
 
 * STOP NODES FROM JUST SIGNING ALL DATA SENT THEIR WAY -> MASSIVE SECURITY FLAW
 * Convert pong route from a get request to a post request
@@ -16,12 +16,12 @@ Alongside this there is also a very bad security flaw with the way in which Node
 * [x] Make nodes check the data sent to their pong route and only sign it if it is a dateTime string.
 * [x] Convert pong request from a get request to a post request.
 * [x] Move pong request data from the query of the request to the body.
+* [x] Convert ping/pong terminology into a "handshake" with sufficient renaming
 * [ ] Create an info getter route that asks a node for all of its information - will be useful in the future.
 
 ### Usability Features
 
-* Feature 1
-* Feature 2
+The main usability feature introduced within this cycle is the renaming and structuring of the "ping/pong" functions and routes within the node software to a "handshake" route which more accurately describes what is actually going on.
 
 ### Key Variables
 
