@@ -98,18 +98,26 @@ Challenges faced in either/both objectives
 
 ### Tests
 
-| Test | Instructions                                                                 | What I expect                                                                        | What actually happens | Pass/Fail |
-| ---- | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | --------------------- | --------- |
-| 1    | Completing a correct and valid handshake using a time object as the message. | A series of console logs on both nodes confirming that the handshake was successful. | As expected           | Pass      |
-| 2    |                                                                              |                                                                                      |                       |           |
-| 3    |                                                                              |                                                                                      |                       |           |
+| Test | Instructions                                                                    | What I expect                                                                        | What actually happens | Pass/Fail |
+| ---- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | --------------------- | --------- |
+| 1    | Completing a correct and valid handshake using a time object as the message.    | A series of console logs on both nodes confirming that the handshake was successful. | As expected           | Pass      |
+| 2    | Completing an invalid handshake using the string "invalid data" as the message. | For both nodes to record the handshake as unsuccessful and log such to the console.  |                       |           |
+| 3    |                                                                                 |                                                                                      |                       |           |
 
 ### Evidence
 
 #### Test 1 Evidence - Valid data in a valid handshake
 
-<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption><p>The handshake initiator</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (2).png" alt=""><figcaption><p>The handshake initiator</p></figcaption></figure>
 
 <figure><img src="../.gitbook/assets/image.png" alt=""><figcaption><p>The handshake Recipient</p></figcaption></figure>
 
 As shown, both the initiator and recipient successfully agreed on the handshake, with both showing the same time message to prove this was the same handshake as the test.
+
+#### Test 2 Evidence - Invalid data in the handshake
+
+<figure><img src="../.gitbook/assets/image (11).png" alt=""><figcaption><p>The handshake initiator</p></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption><p>The handshake Recipient</p></figcaption></figure>
+
+As shown both nodes classified the handshake as failed, with the initiator predicting that incorrect data may have been sent (although that is not guaranteed as another error may have occurred but in this case we know it was the case of invalid data); and the Recipient logging an incorrect time format supplied and who it was claimed to be supplied by.
