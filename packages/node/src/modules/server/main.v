@@ -60,16 +60,3 @@ pub fn (mut app App) pong() vweb.Result {
 	data := json.encode(res)
 	return app.text(data)
 }
-
-
-// $for field in T.fields {
-//     if 'vweb_global' in field.attrs || field.is_shared {
-//         equest_app.$(field.name) = global_app.$(field.name)
-//     } 
-// }
-
-fn testing<T>(input &T) {
-	$for field in T.fields {
-		println("Name: ${field.name}\tAttributes: ${field.attrs}\tShared: ${field.is_shared}")
-	}
-}
