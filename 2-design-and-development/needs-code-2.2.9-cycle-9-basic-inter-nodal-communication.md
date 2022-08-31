@@ -136,7 +136,7 @@ END HTTP_ROUTE
 
 ### Outcome
 
-#### Signing Date-Time Objects
+### Signing Date-Time Objects
 
 Converting the pseudocode to actual code for this was pretty simple, although I ended up keeping the parsing within the main handshake route function rather than splitting it out into a separate function, so that's why the code isn't in a function below.
 
@@ -153,13 +153,56 @@ time := time.parse(req_parsed.message) or {
 println("Time parsed correctly as: $time")
 ```
 
-This code can be found in [this commit here](https://github.com/AlfieRan/MonoChain/blob/master/packages/node/src/modules/server/main.v), although bear in mind that the code above removed some in-code comments meant for future use in a different cycle that is not in development and is just being planned at the moment.
+This code can be found in [this commit here](https://github.com/AlfieRan/MonoChain/blob/49d9f53c2253b742795afc40651ba4da988819cb/packages/node/src/modules/server/handshake.v), although bear in mind that the code above removed some in-code comments meant for future use in a different cycle that is not in development and is just being planned at the moment.
 
-Objective 2
+### Converting the handshake route from a get request to a post request
 
+#### The Api route
+
+```v
+// V code - within the "handshake" route in /src/modules/server/handshake.v 
+
+['/handshake'; post]
+pub fn (mut app App) handshake_route() vweb.Result {
+	body := app.req.data
+
+	req_parsed := json.decode(HandshakeRequest, body) or {
+		eprintln("Incorrect data supplied to /handshake/")
+		return app.server_error(403)
+	}
+
+	println("Received handshake request from node claiming to have the public key: $req_parsed.initiator_key")
+
+
+	// THIS IS THE SECTION WRITTEN UNDER THE TITLE "Signing Date-Time Objects"
+	// with this version of the node software all messages should be time objects
+	time := time.parse(req_parsed.message) or {
+		eprintln("Incorrect time format supplied to handshake by node claiming to be $req_parsed.initiator_key")
+		return app.server_error(403)
+	}
+
+	// time was okay, so store a slight positive grudge
+	println("Time parsed correctly as: $time")
+	// THIS IS THE SECTION WRITTEN UNDER THE TITLE "Signing Date-Time Objects"
+
+
+	config := configuration.get_config()
+	keys := cryptography.get_keys(config.key_path)
+
+	res := HandshakeResponse{
+		responder_key: keys.pub_key
+		initiator_key: req_parsed.initiator_key
+		message: req_parsed.message
+		signature: keys.sign(req_parsed.message.bytes())
+	}
+
+	data := json.encode(res)
+	println("Handshake Analysis Complete. Sending response...")
+	return app.text(data)
+}
 ```
-code
-```
+
+[This version of the code can be found here.](https://github.com/AlfieRan/MonoChain/blob/49d9f53c2253b742795afc40651ba4da988819cb/packages/node/src/modules/server/handshake.v)
 
 ### Challenges
 
