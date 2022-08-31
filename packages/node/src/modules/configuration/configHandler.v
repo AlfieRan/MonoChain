@@ -1,7 +1,7 @@
 module configuration
 import utils
 
-const config_version = 2
+const config_version = 3
 pub const base_path = "./monochain"
 pub const config_path = "$base_path/node.config"
 

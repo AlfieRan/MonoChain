@@ -11,15 +11,15 @@ import time
 import net.http
 
 // This is to establish a handshake between two nodes and should be done everytime two nodes connect
-pub struct PongResponse {
-	pong_key []u8
-	ping_key []u8
+pub struct HandshakeResponse {
+	responder_key []u8
+	initiator_key []u8
 	message string
 	signature []u8
 }
 
-pub struct PingRequest {
-	ping_key []u8
+pub struct HandshakeRequest {
+	initiator_key []u8
 	message string
 }
 
@@ -28,7 +28,7 @@ pub struct PingRequest {
 pub fn (mut app App) handshake_route() vweb.Result {
 	body := app.req.data
 
-	req_parsed := json.decode(PingRequest, body) or {
+	req_parsed := json.decode(HandshakeRequest, body) or {
 		eprintln("Incorrect data supplied to /handshake/")
 		return app.server_error(403)
 	}
@@ -36,11 +36,11 @@ pub fn (mut app App) handshake_route() vweb.Result {
 	config := configuration.get_config()
 	keys := cryptography.get_keys(config.key_path)
 
-	println("Received pong request from node with public key: $req_parsed.ping_key")
+	println("Received handshake request from node claiming to have the public key: $req_parsed.initiator_key")
 
 	// with this version of the node software all messages should be time objects
 	time := time.parse(req_parsed.message) or {
-		eprintln("Incorrect time format supplied to /pong/:req by node claiming to be $req_parsed.ping_key")
+		eprintln("Incorrect time format supplied to handshake by node claiming to be $req_parsed.initiator_key")
 		// this is where we would then store a record of the node's claimed public key
 		// after doing so, send back another handshake and if the node really is that node,
 		// then store a slight negative grudge
@@ -51,14 +51,15 @@ pub fn (mut app App) handshake_route() vweb.Result {
 	// time was okay, so store a slight positive grudge
 	println("Time parsed correctly as: $time")
 
-	res := PongResponse{
-		pong_key: keys.pub_key
-		ping_key: req_parsed.ping_key
+	res := HandshakeResponse{
+		responder_key: keys.pub_key
+		initiator_key: req_parsed.initiator_key
 		message: req_parsed.message
 		signature: keys.sign(req_parsed.message.bytes())
 	}
 
 	data := json.encode(res)
+	println("Handshake Analysis Complete. Sending response...")
 	return app.text(data)
 }
 
@@ -67,39 +68,42 @@ pub fn start_handshake(ref string, this configuration.UserConfig) bool {
 	// ref should be an ip or a domain
 	msg := time.now().format_ss_micro() // set the message to the current time since epoch
 	// msg := "invalid data" // Invalid data used for testing
-	req := PingRequest{ping_key: this.self.key, message: msg}
+	req := HandshakeRequest{initiator_key: this.self.key, message: msg}
 
-	println("\nSending ping request to ${ref}.\nMessage: $msg")
+	println("\nSending handshake request to ${ref}.\nMessage: $msg")
 	// fetch domain, domain should respond with their wallet pub key/address, "pong" and a signed hash of the message
 	req_encoded := json.encode(req)
 	
 	raw := http.post("$ref/handshake", req_encoded) or {
-		eprintln("Failed to ping $ref, Node is probably offline. Error: $err")
+		eprintln("Failed to shake hands with $ref, Node is probably offline. Error: $err")
 		return false
 	}
 
 	if raw.status_code != 200 {
-		eprintln("Failed to ping $ref, may have sent incorrect data, repsonse body: $raw.body")
+		eprintln("Failed to shake hands with $ref, may have sent incorrect data, repsonse body: $raw.body")
 		return false
 	}
 
-	data := json.decode(PongResponse, raw.body) or {
-		eprintln("Failed to decode response, responder is probably using an old node version.\nTheir Response: $raw")
+	data := json.decode(HandshakeResponse, raw.body) or {
+		eprintln("Failed to decode handshake response, responder is probably using an old node version.\nTheir Response: $raw")
 		return false
 	}
 
-	println("\n$ref responded to ping request.")
+	println("\n$ref responded to handshake.")
 
 	// signed hash can then be verified using the wallet pub key supplied
-	if data.message == msg && data.ping_key == this.self.key {
-		if cryptography.verify(data.pong_key, data.message.bytes(), data.signature) {
-			println("Verified signature to match pong key\nHandshake with $ref successful.")
+	if data.message == msg && data.initiator_key == this.self.key {
+		if cryptography.verify(data.responder_key, data.message.bytes(), data.signature) {
+			println("Verified signature to match handshake key\nHandshake with $ref successful.")
 			return true
 		}
-		println("Signature did not match pong key")
+		println("Signature did not match handshake key, node is not who they claim to be.")
+		// this is where we would then store a record of the node's reference/ip address and temporarily blacklist it
 		return false
 	}
 
+	println("Handshake was not valid, node is not who they claim to be.")
+	println(data)
 	// if valid, return true, if not return false
 	return false
 }
