@@ -16,7 +16,7 @@ Alongside this there is also a very bad security flaw with the way in which Node
 * [ ] Make nodes check the data sent to their pong route and only sign it if it is a dateTime string.
 * [ ] Convert pong request from a get request to a post request.
 * [ ] Move pong request data from the query of the request to the body.
-* [ ] Create an info getter route that asks a node for all of it's information - will be useful in the future.
+* [ ] Create an info getter route that asks a node for all of its information - will be useful in the future.
 
 ### Usability Features
 
@@ -33,7 +33,11 @@ Alongside this there is also a very bad security flaw with the way in which Node
 
 ### Pseudocode
 
-Objective 1 solution:
+#### Only signing date-time objects
+
+Luckily implementing this, and dramatically improving the node software's current security, should actually be pretty easy. All the code will need to do is attempt to parse the message received within the handshake (ping/pong) request as a date-time object and if it succeeds, then the message is okay to be signed and if not then fail the request and do not sign it.
+
+Parsing date-time objects is different for every language and standard library so for this pseudocode the function `Parse_Date` will represent a function which takes a string in the format `YYYY-MM-DD hh:mm:ss` and either returns a date-time object in some format or errors out.
 
 ```
 ```
