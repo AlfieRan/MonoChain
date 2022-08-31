@@ -27,7 +27,7 @@ pub fn (mut app App) index() vweb.Result {
 pub fn (mut app App) pong() vweb.Result {
 	body := app.req.data
 	ip := app.req.header
-	println(ip)
+	println("data: $ip")
 
 	req_parsed := json.decode(PingRequest, body) or {
 		eprintln("Incorrect data supplied to /pong/")
