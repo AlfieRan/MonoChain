@@ -40,6 +40,18 @@ Luckily implementing this, and dramatically improving the node software's curren
 Parsing date-time objects is different for every language and standard library so for this pseudocode the function `Parse_Date` will represent a function which takes a string in the format `YYYY-MM-DD hh:mm:ss` and either returns a date-time object in some format or errors out.
 
 ```
+// Pseudocode
+
+FUNCTION Valid_Message(message):
+    TRY:
+        date = Parse_Date(message)
+        return date
+        
+    CATCH ERROR:
+        return false
+        
+    END TRY  
+END FUNCTION
 ```
 
 Objective 2 solution:
