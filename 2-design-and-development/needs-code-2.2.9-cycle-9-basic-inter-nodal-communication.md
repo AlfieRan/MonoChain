@@ -13,8 +13,8 @@ The objective for this cycle is to turn the [basic inter-nodal communication fro
 
 Alongside this there is also a very bad security flaw with the way in which Nodes sign data sent to their pong routes, and that is that they will just sign anything sent their way. This means that node A could just ask node B to sign a transaction that gives all of B's assets to A and then B would just do it and send the signed transaction back to A. This is obviously bad and needs to be fixed.
 
-* [ ] Make nodes check the data sent to their pong route and only sign it if it is a dateTime string.
-* [ ] Convert pong request from a get request to a post request.
+* [x] Make nodes check the data sent to their pong route and only sign it if it is a dateTime string.
+* [x] Convert pong request from a get request to a post request.
 * [ ] Move pong request data from the query of the request to the body.
 * [ ] Create an info getter route that asks a node for all of its information - will be useful in the future.
 
@@ -54,7 +54,7 @@ FUNCTION Valid_Message(message):
 END FUNCTION
 ```
 
-Objective 2 solution:
+#### Converting the handshake route from a get request to a post request
 
 ```
 ```
