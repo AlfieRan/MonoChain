@@ -22,6 +22,6 @@ pub fn start(config configuration.UserConfig) {
 }
 
 pub fn (mut app App) index() vweb.Result {
-	return app.text("Hello, World!")
+	return app.text("This is the api route for a node running on the Monochain network.")
 }
 

@@ -3,6 +3,7 @@ module server
 // internal imports
 import configuration
 import cryptography
+import memory
 
 // external imports
 import vweb
@@ -90,20 +91,27 @@ pub fn start_handshake(ref string, this configuration.UserConfig) bool {
 	}
 
 	println("\n$ref responded to handshake.")
+	config := configuration.get_config()
+	mut refs := memory.get_refs(config.ref_path)
 
 	// signed hash can then be verified using the wallet pub key supplied
 	if data.message == msg && data.initiator_key == this.self.key {
 		if cryptography.verify(data.responder_key, data.message.bytes(), data.signature) {
 			println("Verified signature to match handshake key\nHandshake with $ref successful.")
+
+			// now add them to reference list
+			refs.add_key(ref, data.responder_key)
 			return true
 		}
 		println("Signature did not match handshake key, node is not who they claim to be.")
 		// this is where we would then store a record of the node's reference/ip address and temporarily blacklist it
+		refs.add_blacklist(ref)
 		return false
 	}
 
 	println("Handshake was not valid, node is not who they claim to be.")
 	println(data)
-	// if valid, return true, if not return false
+	// node is not who they claim to be, so store their reference/ip address and temporarily blacklist it
+	refs.add_blacklist(ref)
 	return false
 }

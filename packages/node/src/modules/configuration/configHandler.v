@@ -1,7 +1,7 @@
 module configuration
 import utils
 
-const config_version = 3
+const config_version = 5
 pub const base_path = "./monochain"
 pub const config_path = "$base_path/node.config"
 
@@ -11,6 +11,7 @@ pub struct UserConfig {
 	config_version int
 	pub:
 		key_path string		// the path to the private key file
+		ref_path string		// the path to the references file
 		loaded bool	// has the config loaded up
 		self Node	// ref to self
 		port int	// open port for server

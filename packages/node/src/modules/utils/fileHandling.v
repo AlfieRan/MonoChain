@@ -50,6 +50,7 @@ pub fn save_file(path string, data string, recursion_depth int) (bool) {
 					failed = true
 					return true
 				}
+				println("Created directory: " + dir)
 			}
 
 			i++
