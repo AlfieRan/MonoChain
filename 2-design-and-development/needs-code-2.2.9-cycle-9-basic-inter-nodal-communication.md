@@ -17,7 +17,6 @@ Alongside this there is also a very bad security flaw with the way in which Node
 * [x] Convert pong request from a get request to a post request.
 * [x] Move pong request data from the query of the request to the body.
 * [x] Convert ping/pong terminology into a "handshake" with sufficient renaming
-* [ ] Create an info getter route that asks a node for all of its information - will be useful in the future.
 
 ### Usability Features
 
