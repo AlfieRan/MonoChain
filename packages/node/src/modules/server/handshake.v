@@ -69,7 +69,13 @@ pub fn (mut app App) handshake_route() vweb.Result {
 	}
 
 	println("ip for requester found to be: $requester_ip")
-	
+	refs := memory.get_refs(config.ref_path)
+	if !refs.aware_of(requester_ip) {
+		println("Node is not aware of requester, sending a handshake request to requester")
+		// send a handshake request to the requester
+		start_handshake(requester_ip, config)
+	}
+
 	return app.text(data)
 }
 

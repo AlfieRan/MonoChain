@@ -49,7 +49,7 @@ pub fn get_refs(file_path string) References {
 	return refs
 }
 
-pub fn (refs References) check_awareness(reference string) bool {
+pub fn (refs References) aware_of(reference string) bool {
 	// check if the reference is in the blacklist.
 	if refs.blacklist[reference] {
 		// we have encountered this reference before and it is blacklisted.
