@@ -47,3 +47,15 @@ fn ask_for_port(recursion_depth int) int {
 	return port
 }
 
+fn ask_for_ref(recursion_depth int) string {
+	ref := read_line("What is the reference of the node you would like to join the network as?\n(This is either a domain or ip address)\n$:") or {
+		eprintln("Input failed, please try again")
+		utils.recursion_check(recursion_depth, 2)
+		return ask_for_ref(recursion_depth + 1)
+	}
+
+	// run some checks to see if ref is valid
+
+	return ref
+}
+

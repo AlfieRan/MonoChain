@@ -63,19 +63,6 @@ pub fn (mut app App) handshake_route() vweb.Result {
 	println("Handshake Analysis Complete. Sending response...")
 	// now need to figure out where message came from and respond back to it
 
-	requester_ip := app.req.header.get(http.CommonHeader.x_forwarded_for) or {
-		println("\n\nNo X-Forwarded-For header found, sending response back to client and skipping reference checks")
-		return app.ok(data)
-	}
-
-	println("ip for requester found to be: $requester_ip")
-	refs := memory.get_refs(config.ref_path)
-	if !refs.aware_of(requester_ip) {
-		println("Node is not aware of requester, sending a handshake request to requester")
-		// send a handshake request to the requester
-		start_handshake(requester_ip, config)
-	}
-
 	return app.text(data)
 }
 
