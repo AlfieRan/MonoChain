@@ -54,13 +54,6 @@ fn ask_for_ref(recursion_depth int) string {
 		return ask_for_ref(recursion_depth + 1)
 	}
 
-
-	// this is a stupid way of checking for http but it should work for now.
-	// TODO: make this better
-	if ref[0] != "h".u8() {
-		ref = "http://" + ref
-	}
-
 	// should check if ref is valid but I have other things to do right now
 
 	return ref
