@@ -16,7 +16,7 @@ pub fn create_configuration() UserConfig {
 		last_connect: 0
 		config_version: config_version
 		key_path: key_path_tmp
-		ref_path: "$base_path/refs.cache"
+		ref_path: "$base_path/refs.json"
 		loaded: true
 		self: Node{
 			trust: 0,	// this should be collected from blockchain

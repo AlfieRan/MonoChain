@@ -1,9 +1,9 @@
 module configuration
 import utils
 
-const config_version = 7
+const config_version = 8
 pub const base_path = "./monochain"
-pub const config_path = "$base_path/node.config"
+pub const config_path = "$base_path/config.json"
 
 // Structures and Types
 pub struct UserConfig {

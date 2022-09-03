@@ -29,9 +29,6 @@ pub struct HandshakeRequest {
 	message string
 }
 
-
-
-
 ['/handshake'; post]
 pub fn (mut app App) handshake_route() vweb.Result {
 	body := app.req.data
