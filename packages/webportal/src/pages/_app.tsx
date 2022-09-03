@@ -4,7 +4,7 @@ import { ChakraProvider } from "@chakra-ui/provider";
 import { extendTheme } from "@chakra-ui/react";
 import { SWRConfig } from "swr";
 import { fetcher } from "../utils/fetcher";
-import NavBar from "../component/NavBar";
+import NavBar from "../components/nav/NavBar";
 
 const theme = extendTheme({
   styles: {

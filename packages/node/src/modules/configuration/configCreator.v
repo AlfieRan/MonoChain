@@ -1,7 +1,6 @@
 module configuration
 import readline { read_line }
 import cryptography
-import utils
 
 const defualt = UserConfig{
 	loaded: true
@@ -20,42 +19,16 @@ pub fn create_configuration() UserConfig {
 		loaded: true
 		self: Node{
 			trust: 0,	// this should be collected from blockchain
-			ref: ask_for_ref(0)
+			ref: "http://example.com"
 			key: cryptography.get_keys(key_path_tmp).pub_key,
 		}
-		port: ask_for_port(0)
-		memory_cache_path: "$base_path/cache.db"
+		port: 8000
+		memory_cache_path: "$base_path/cache.json"
 	}
 
 	save_config(config, 0)
+	println("A default configuration file has been created at $base_path/config.json\nPlease edit it according to https://monochain.network/download/ \nThen relaunch the program.")
+	exit(0)
 	return config
-}
-
-fn ask_for_port(recursion_depth int) int {
-	mut port := (read_line("What port would you like to run your node on (default: 8000)?\n$:") or { 
-		eprintln("Input failed, please try again")
-		utils.recursion_check(recursion_depth, 2)
-		return ask_for_port(recursion_depth + 1)
-	}).int()
-
-	if port > 65535 || port < 1 {
-		eprintln("That port does not exist! You might want to enter a number between 1 and 65535.")
-		utils.recursion_check(recursion_depth, 3)
-		return ask_for_port(recursion_depth + 1)
-	}
-
-	return port
-}
-
-fn ask_for_ref(recursion_depth int) string {
-	mut ref := read_line("What is the reference of the node you would like to join the network as?\n(This is either a domain or ip address)\n$:") or {
-		eprintln("Input failed, please try again")
-		utils.recursion_check(recursion_depth, 2)
-		return ask_for_ref(recursion_depth + 1)
-	}
-
-	// should check if ref is valid but I have other things to do right now
-
-	return ref
 }
 

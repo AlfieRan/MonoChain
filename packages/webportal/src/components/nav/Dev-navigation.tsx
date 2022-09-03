@@ -1,4 +1,4 @@
-import { Links } from "../utils/types";
+import { Links } from "../../utils/types";
 import { Center, Link } from "@chakra-ui/react";
 
 const DevNavigation = (props: { hidden?: boolean }) => {

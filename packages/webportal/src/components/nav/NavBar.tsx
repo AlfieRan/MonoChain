@@ -18,12 +18,12 @@ import {
   DrawerBody,
   DrawerFooter,
 } from "@chakra-ui/react";
-import { Links } from "../utils/types";
+import { Links } from "../../utils/types";
 import DevNavigation from "./Dev-navigation";
 import React, { useState, useEffect, useRef } from "react";
-import useWindowSize from "../utils/window";
-import { scaling_button } from "../styles/buttons";
-import { NavBarCss } from "../styles/navBar";
+import useWindowSize from "../../utils/window";
+import { scaling_button } from "../../styles/buttons";
+import { NavBarCss } from "../../styles/navBar";
 import MobileNav from "./MobileNav";
 
 const LinkHover: Interpolation<{}> = {

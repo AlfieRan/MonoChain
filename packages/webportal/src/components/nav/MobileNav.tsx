@@ -11,8 +11,8 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import { NavBarCss } from "../styles/navBar";
-import { scaling_button } from "../styles/buttons";
+import { NavBarCss } from "../../styles/navBar";
+import { scaling_button } from "../../styles/buttons";
 import React from "react";
 
 const MobileNav = (props: { hidden?: boolean }) => {
