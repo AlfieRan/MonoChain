@@ -12,17 +12,24 @@ import time
 import net.http
 
 // This is to establish a handshake between two nodes and should be done everytime two nodes connect
+pub struct Initiator {
+	key []u8
+	ref string
+}
+
 pub struct HandshakeResponse {
+	initiator Initiator
 	responder_key []u8
-	initiator_key []u8
 	message string
 	signature []u8
 }
 
 pub struct HandshakeRequest {
-	initiator_key []u8
+	initiator Initiator
 	message string
 }
+
+
 
 
 ['/handshake'; post]
@@ -34,11 +41,11 @@ pub fn (mut app App) handshake_route() vweb.Result {
 		return app.server_error(403)	
 	}
 
-	println("Received handshake request from node claiming to have the public key: $req_parsed.initiator_key")
+	println("Received handshake request from node claiming to be: $req_parsed.initiator.ref")
 
 	// with this version of the node software all messages should be time objects
 	time := time.parse(req_parsed.message) or {
-		eprintln("Incorrect time format supplied to handshake by node claiming to be $req_parsed.initiator_key")
+		eprintln("Incorrect time format supplied to handshake by node claiming to be $req_parsed.initiator.ref")
 		// this is where we would then store a record of the node's claimed public key
 		// after doing so, send back another handshake and if the node really is that node,
 		// then store a slight negative grudge
@@ -51,10 +58,11 @@ pub fn (mut app App) handshake_route() vweb.Result {
 
 	config := configuration.get_config()
 	keys := cryptography.get_keys(config.key_path)
+	refs := memory.get_refs(config.ref_path)
 
 	res := HandshakeResponse{
 		responder_key: keys.pub_key
-		initiator_key: req_parsed.initiator_key
+		initiator: req_parsed.initiator
 		message: req_parsed.message
 		signature: keys.sign(req_parsed.message.bytes())
 	}
@@ -62,6 +70,13 @@ pub fn (mut app App) handshake_route() vweb.Result {
 	data := json.encode(res)
 	println("Handshake Analysis Complete. Sending response...")
 	// now need to figure out where message came from and respond back to it
+	if !refs.aware_of(req_parsed.initiator.ref) {
+		println("Node has not come into contact with initiator before, sending them a handshake request")
+		// send a handshake request to the node
+		start_handshake(req_parsed.initiator.ref, config)
+	} else {
+		println("Node has come into contact with initiator before, no need to send a handshake request")
+	}
 
 	return app.text(data)
 }
@@ -71,7 +86,7 @@ pub fn start_handshake(ref string, this configuration.UserConfig) bool {
 	// ref should be an ip or a domain
 	msg := time.now().format_ss_micro() // set the message to the current time since epoch
 	// msg := "invalid data" // Invalid data used for testing
-	req := HandshakeRequest{initiator_key: this.self.key, message: msg}
+	req := HandshakeRequest{initiator: Initiator{key: this.self.key, ref: this.self.ref}, message: msg}
 
 	println("\nSending handshake request to ${ref}.\nMessage: $msg")
 	// fetch domain, domain should respond with their wallet pub key/address, "pong" and a signed hash of the message
@@ -97,7 +112,7 @@ pub fn start_handshake(ref string, this configuration.UserConfig) bool {
 	mut refs := memory.get_refs(config.ref_path)
 
 	// signed hash can then be verified using the wallet pub key supplied
-	if data.message == msg && data.initiator_key == this.self.key {
+	if data.message == msg && data.initiator.key == this.self.key {
 		if cryptography.verify(data.responder_key, data.message.bytes(), data.signature) {
 			println("Verified signature to match handshake key\nHandshake with $ref successful.")
 

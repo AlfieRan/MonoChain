@@ -20,7 +20,7 @@ pub fn create_configuration() UserConfig {
 		loaded: true
 		self: Node{
 			trust: 0,	// this should be collected from blockchain
-			ref: "self"
+			ref: ask_for_ref(0)
 			key: cryptography.get_keys(key_path_tmp).pub_key,
 		}
 		port: ask_for_port(0)
@@ -48,13 +48,20 @@ fn ask_for_port(recursion_depth int) int {
 }
 
 fn ask_for_ref(recursion_depth int) string {
-	ref := read_line("What is the reference of the node you would like to join the network as?\n(This is either a domain or ip address)\n$:") or {
+	mut ref := read_line("What is the reference of the node you would like to join the network as?\n(This is either a domain or ip address)\n$:") or {
 		eprintln("Input failed, please try again")
 		utils.recursion_check(recursion_depth, 2)
 		return ask_for_ref(recursion_depth + 1)
 	}
 
-	// run some checks to see if ref is valid
+
+	// this is a stupid way of checking for http but it should work for now.
+	// TODO: make this better
+	if ref[0] != "h".u8() {
+		ref = "http://" + ref
+	}
+
+	// should check if ref is valid but I have other things to do right now
 
 	return ref
 }
