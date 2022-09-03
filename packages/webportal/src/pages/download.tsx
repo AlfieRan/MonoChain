@@ -12,7 +12,7 @@ const Download = () => (
       maxW={["inherit", "3xl"]}
       p={3}
     >
-      <Text fontSize={"3xl"}>Node (Mining software)</Text>
+      <Text fontSize={"3xl"}>Node (Mining Software)</Text>
       <Text p="lg">
         This is an example node software written in Vlang, it is recommended
         that you clone the git repository and compile it yourself so that you
@@ -21,11 +21,11 @@ const Download = () => (
         different for different systems.
         <br />
         The below zip file contains an arm64 macOS executable called
-        "node-native" (native because that's the native OS for the laptop I do
-        the dev for this project on) and an x86 windows executable called
-        "node-windows". If you don't use either of these systems then you must
-        clone the git repo and use the v compiler to compile to project
-        yourself.
+        'node-native' (native because that's the native OS for the laptop I do
+        the development for this project on) and an x86 windows executable
+        called 'node-windows'. If you don't use either of these systems then you
+        must clone the git repository and use the v compiler to compile the
+        project yourself.
       </Text>
       <Center p={5} justifyContent={"space-evenly"} flexWrap={"wrap"}>
         <Link download href={"node.zip"} css={download_button}>
@@ -36,9 +36,10 @@ const Download = () => (
         <Link
           href="https://github.com/AlfieRan/A-Level-Project/"
           css={download_button}
+          isExternal
         >
           <Text color={"#3535c7"} m={2}>
-            Clone the repo
+            Clone the Repo
           </Text>
         </Link>
       </Center>

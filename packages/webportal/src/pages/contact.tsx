@@ -5,7 +5,7 @@ const Contact = () => {
   const contactInfo: { name: string; link: string }[] = [
     {
       name: "Email",
-      link: "mailto:alfie.ranstead@outlook.com",
+      link: "mailto:hi@alfieranstead.com",
     },
     {
       name: "Website",
@@ -21,9 +21,8 @@ const Contact = () => {
       <Text css={subTitle("3")}>Get in Touch</Text>
       <Center maxW={"700px"} flexDir={"column"}>
         <Text mb={3} textAlign={"center"}>
-          Currently the only developer working on this project is the creator,
-          Alfie Ranstead, who you can get in contact with through the links
-          below:
+          The creator and lead developer of this project is Alfie Ranstead, who
+          can be contacted via the links below:
         </Text>
         <UnorderedList flexDir={"column"}>
           {contactInfo.map((info) => (

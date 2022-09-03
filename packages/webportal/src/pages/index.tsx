@@ -25,20 +25,20 @@ const index = () => {
     },
     {
       link: "/download",
-      title: "Setup a Node",
+      title: "Set up a Node",
       subtitle:
         "Download a node to support the MonoChain in exchange for a fee.",
     },
     {
       link: "https://github.com/AlfieRan/A-Level-Project",
       title: "View the Code",
-      subtitle: "View the open source code for the default Node and webportal.",
+      subtitle: "View the open source code for the default Node and Webportal.",
     },
   ];
 
   return (
     <Flex flexDir="column" pb={"100px"} zIndex={10} position={"relative"}>
-      <AspectRatio maxH="5%" ratio={5 / 1}>
+      <AspectRatio maxH="5%" ratio={5}>
         <Image
           src="/index/nodes-banner.png"
           layout="fill"
@@ -87,10 +87,10 @@ const index = () => {
                 What is Proof of Trust?
               </Text>
               <Text>
-                "Proof of Trust" is a custom built consensus protocol that uses
-                a "trust" parameter in order to be faster and eco-friendlier
-                than "Proof of Work" whilst having much lower entry requirements
-                than "Proof of Stake".
+                'Proof of Trust' is a custom built consensus protocol that uses
+                a 'trust' parameter in order to be faster and eco-friendlier
+                than 'Proof of Work' whilst having much lower entry requirements
+                than 'Proof of Stake'.
               </Text>
             </Flex>
           </Flex>

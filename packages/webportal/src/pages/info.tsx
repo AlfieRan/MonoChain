@@ -21,8 +21,8 @@ const Info = () => {
             trust consensus protocol, designed and built by Alfie Ranstead, a
             computer scientist with a strong interest in complex problems and
             their solutions. Blockchain technology is just a natural part of
-            this group of technology, but it is far from perfect, that's why the
-            proof of trust protocol - and this project - exist.
+            this group of technology, but it is far from perfect, and that is
+            why the proof of trust protocol - and this project - exist.
           </Text>
           <Text css={subTitle("2")}>What is the Proof of Trust Protocol?</Text>
           <Text css={bodyText}>
@@ -34,7 +34,7 @@ const Info = () => {
             whether or not to re-process whatever information other nodes have
             sent to it. A key addition here is that nodes will also choose to
             randomly reprocess data that they have received, in order to make
-            sure that the seemingly "trustworthy" nodes are still actually
+            sure that the seemingly 'trustworthy' nodes are still actually
             trustworthy and haven't been tampered with.
           </Text>
           <Text css={subTitle("2")}>
@@ -52,25 +52,25 @@ const Info = () => {
             energy. <br /> The 'proof of stake' protocol requires the nodes to
             put forward a large amount of money to be able to stake, which is
             more energy efficient, but extremely favouring of nodes that have
-            large backings and kind of defeats the point of a decentralised
-            system, as it just gives power to those who have money - which is
-            against a lot of the ideas of the decentralised system. <br /> This
-            is where proof of trust comes in, as it is a consensus protocol that
-            is more energy efficient than 'proof of work', and although it is
-            not as energy efficient as 'proof of stake', it does allow anyone to
-            use and operate a node, removing the need for a large amount of
-            money to be staked.
+            large backings which defeats part of the reasoning for a
+            decentralised system, as it just gives power to those who have money
+            - which is against a lot of the ideas of the decentralised system.{" "}
+            <br /> This is where proof of trust comes in, as it is a consensus
+            protocol that is more energy efficient than 'proof of work', and
+            although it is not as energy efficient as 'proof of stake', it does
+            allow anyone to use and operate a node, removing the need for a
+            large amount of money to be staked.
           </Text>
           <Text css={subTitle("2")}>So Why the MonoChain?</Text>
           <Text css={bodyText}>
             The MonoChain is being developed as proof that behind all the hype,
             buzzwords and roller-coaster like evaluations of decentralised
-            technologies, that the technology can still be used for some cool
-            stuff. This project is not aiming to be the newest trend in the tech
-            world, but rather to be a proof of concept of how a new technology
-            can still be useful and that it shouldn't be thrown away as just
-            some get quick rich scheme. <br /> Oh also because I needed an
-            A-Level Project and I thought it would be fun to do.
+            technologies, the technology can still be used for some cool stuff.
+            This project is not aiming to be the newest trend in the tech world,
+            but rather to be a proof of concept of how a new technology can
+            still be useful and that it shouldn't be thrown away as just some
+            get rich quick scheme. <br /> Oh also because I needed an A-Level
+            Project and I thought it would be fun to do.
           </Text>
         </Center>
       </Center>

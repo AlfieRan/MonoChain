@@ -157,8 +157,8 @@ const NavBar = () => {
             flexWrap={"wrap"}
           >
             <Text flexDir={"column"} maxW={"700px"} textAlign={"left"}>
-              Please be Aware That This Website is in Early Development and is
-              not a Full Representation of the Final Project.
+              Please be aware that this website is in early development and is
+              not a full representation of the final project.
             </Text>
             <Button
               onClick={() => {
