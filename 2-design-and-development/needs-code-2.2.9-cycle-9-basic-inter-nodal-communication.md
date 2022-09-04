@@ -223,7 +223,7 @@ Challenges faced in either/both objectives
 
 <figure><img src="../.gitbook/assets/image (1) (2).png" alt=""><figcaption><p>The handshake initiator</p></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption><p>The handshake Recipient</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (6).png" alt=""><figcaption><p>The handshake Recipient</p></figcaption></figure>
 
 As shown, both the initiator and recipient successfully agreed on the handshake, with both showing the same time message to prove this was the same handshake as the test.
 
