@@ -12,11 +12,10 @@ const init_ref = "https://nano.monochain.network"
 
 struct App {
 	vweb.Context
-	config configuration.UserConfig
 }
  
 pub fn start(config configuration.UserConfig) {
-	api := go vweb.run(&App{config: config}, config.port) // start server on a new thread
+	api := go vweb.run(&App{}, config.port) // start server on a new thread
 	
 	time.sleep(2 * time.second) // wait to make sure server is up
 	server.start_handshake(init_ref, config) // ping running node using handshake to verify cryptography is working
