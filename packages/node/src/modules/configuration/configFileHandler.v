@@ -14,7 +14,7 @@ pub fn load_config() UserConfig {
 	}
 
 	if user_config.config_version != config_version {
-		println("Your Configuration file is outdated, would you like to regenerate it?\nWARNING - If you don't some features may not work properly and may even crash the program.") 
+		println("[config] Your Configuration file is outdated, would you like to regenerate it?\nWARNING - If you don't some features may not work properly and may even crash the program.") 
 		if utils.ask_for_bool(0){
 			return create_configuration()
 		}
@@ -28,9 +28,9 @@ pub fn save_config(config UserConfig, recursion_depth int) bool {
 	failed := utils.save_file(config_path, data, 0) // save the json to the file
 
 	if !failed {
-		println("Sucessfully saved configuration file.") 
+		println("[config] Sucessfully saved configuration file.") 
 	} else {
-		println("Failed to save configuration file.\nCannot run without a configuration file.") 
+		println("[config] Failed to save configuration file.\nCannot run without a configuration file.") 
 		exit(215)
 	}
 	return failed

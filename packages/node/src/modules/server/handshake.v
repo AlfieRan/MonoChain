@@ -29,29 +29,145 @@ pub struct HandshakeRequest {
 	message string
 }
 
+pub struct HandshakeError {
+	error string
+	code int
+}
+
+type HandshakeResult = HandshakeResponse | HandshakeError
+
+enum HandshakeRequestResultEnum {
+	blacklist
+	accept
+	ignore
+}
+
+struct HandshakeRequestResult {
+	result HandshakeRequestResultEnum
+	keys []u8
+}
+
 ['/handshake'; post]
 pub fn (mut app App) handshake_route() vweb.Result {
 	body := app.req.data
+	data := handshake_receiver(body)
 
-	req_parsed := json.decode(HandshakeRequest, body) or {
-		eprintln("Incorrect data supplied to /handshake/")
-		return app.server_error(403)	
+	if data is HandshakeError {
+		return app.server_error(data.code)
 	}
 
-	println("Received handshake request from node claiming to be: $req_parsed.initiator.ref")
+	return app.json(data)
+}
+
+pub fn start_handshake(ref string, this configuration.UserConfig) HandshakeRequestResult {
+	if ref == this.self.ref {
+		println("[Handshake Requester] Sending a request to self, waiting to prevent feedback loops")
+		time.sleep(1 * time.second) // wait to make sure not to loop self 
+		mut refs := memory.get_refs(this.ref_path)
+
+		if refs.aware_of(ref) {
+			// if another handshake request has occoured during the waiting period and overrights this one
+			return HandshakeRequestResult{result: .ignore}
+		}
+	}
+
+	// ref should be an ip or a domain
+	msg := time.now().format_ss_micro() // set the message to the current time since epoch
+	// msg := "invalid data" // Invalid data used for testing
+	req := HandshakeRequest{initiator: Initiator{key: this.self.key, ref: this.self.ref}, message: msg}
+
+
+	println("\n[Handshake Requester] Sending handshake request to ${ref}.\n[Handshake Requester] Message: $msg")
+	// fetch domain, domain should respond with their wallet pub key/address, "pong" and a signed hash of the message
+	req_encoded := json.encode(req)
+	
+	raw := http.post("$ref/handshake", req_encoded) or {
+		eprintln("[Handshake Requester] Failed to shake hands with $ref, Node is probably offline. Error: $err")
+		return HandshakeRequestResult{result: .ignore}
+	}
+
+	if raw.status_code != 200 {
+		eprintln("[Handshake Requester] Failed to shake hands with $ref, may have sent incorrect data, repsonse body: $raw.body")
+		return HandshakeRequestResult{result: .ignore}
+	}
+
+	data := json.decode(HandshakeResponse, raw.body) or {
+		eprintln("[Handshake Requester] Failed to decode handshake response, responder is probably using an old node version.\nTheir Response: $raw")
+		return HandshakeRequestResult{result: .ignore}
+	}
+
+	println("\n[Handshake Requester] $ref responded to handshake.")
+	
+
+	// signed hash can then be verified using the wallet pub key supplied
+	if data.message == msg && data.initiator.key == this.self.key {
+		if cryptography.verify(data.responder_key, data.message.bytes(), data.signature) {
+			println("[Handshake Requester] Verified signature to match handshake key\nHandshake with $ref successful.")
+			// now add them to reference list
+			return HandshakeRequestResult{
+				result: .accept
+				keys: data.responder_key
+			}
+		}
+		println("[Handshake Requester] Signature did not match handshake key, node is not who they claim to be.")
+		// this is where we would then store a record of the node's reference/ip address and temporarily blacklist it
+		return HandshakeRequestResult{result: .blacklist}
+	}
+
+	println("[Handshake Requester] Handshake was not valid, node is not who they claim to be.")
+	println("[Handshake Requester] $data")
+	// node is not who they claim to be, so store their reference/ip address and temporarily blacklist it
+	return HandshakeRequestResult{result: .blacklist}
+}
+
+pub fn start_handshake_ws(ref string, this configuration.UserConfig) {
+	handshake := start_handshake(ref, this)
+	mut refs := memory.get_refs(this.ref_path)
+
+	if handshake.result == .accept {
+		println("[Handshake Requester] Adding ref to refs")
+		refs.add_key_ws(ref, handshake.keys)
+	}  else if handshake.result == .blacklist {
+		println("[Handshake Requester] Blacklisting Handshake with result $handshake")
+		refs.add_blacklist_ws(ref)
+	} else {
+		println("[Handshake Requester] Not doing anything with result from handshake with $ref")
+	}
+
+	println("[Handshake Requester] Handshake Request Finished")
+}
+
+pub fn start_handshake_http(ref string, this configuration.UserConfig){
+	handshake := start_handshake(ref, this)
+	mut refs := memory.get_refs(this.ref_path)
+	println("[Handshake Requester] Completed handshake")
+
+	if handshake.result == .accept {
+		println("[Handshake Requester] Adding ref to refs")
+		refs.add_key_http(ref, handshake.keys)
+	} else if handshake.result == .blacklist {
+		println("[Handshake Requester] Blacklisting Handshake with result $handshake")
+		refs.add_blacklist_http(ref)
+	}
+
+	println("[Handshake Requester] Handshake Request Finished")
+}
+
+pub fn handshake_receiver(request string) HandshakeResult {
+	req_parsed := json.decode(HandshakeRequest, request) or {
+		eprintln("[Handshake Receiver] Incorrect data supplied to handshake")
+		return HandshakeError{error: "Incorrect data supplied to handshake", code: 403}
+	}	
+	
+	println("[Handshake Receiver] Received handshake request from node claiming to be: $req_parsed.initiator.ref")
 
 	// with this version of the node software all messages should be time objects
 	time := time.parse(req_parsed.message) or {
-		eprintln("Incorrect time format supplied to handshake by node claiming to be $req_parsed.initiator.ref")
-		// this is where we would then store a record of the node's claimed public key
-		// after doing so, send back another handshake and if the node really is that node,
-		// then store a slight negative grudge
-		// otherwise, store the ip address of the node and blacklist it for a while
-		return app.server_error(403)
+		eprintln("[Handshake Receiver] Incorrect time format supplied to handshake by node claiming to be $req_parsed.initiator.ref")
+		return HandshakeError{error: "Incorrect time format supplied to handshake", code: 403}
 	}
 
-	// time was okay, so store a slight positive grudge
-	println("Time parsed correctly as: $time")
+	println("[Handshake Receiver] Time parsed correctly as: $time")
 
 	config := configuration.get_config()
 	keys := cryptography.get_keys(config.key_path)
@@ -64,68 +180,16 @@ pub fn (mut app App) handshake_route() vweb.Result {
 		signature: keys.sign(req_parsed.message.bytes())
 	}
 
-	data := json.encode(res)
-	println("Handshake Analysis Complete. Sending response...")
 	// now need to figure out where message came from and respond back to it
 	if !refs.aware_of(req_parsed.initiator.ref) {
-		println("Node has not come into contact with initiator before, sending them a handshake request")
+		println("[Handshake Receiver] Node has not come into contact with initiator before, sending them a handshake request")
 		// send a handshake request to the node
-		start_handshake(req_parsed.initiator.ref, config)
+		go start_handshake(req_parsed.initiator.ref, config)
 	} else {
-		println("Node has come into contact with initiator before, no need to send a handshake request")
+		println("[Handshake Receiver] Node has come into contact with initiator before, no need to send a handshake request")
 	}
 
-	return app.text(data)
-}
+	println("[Handshake Receiver] Handshake Analysis Complete. Sending response...")
 
-
-pub fn start_handshake(ref string, this configuration.UserConfig) bool {
-	// ref should be an ip or a domain
-	msg := time.now().format_ss_micro() // set the message to the current time since epoch
-	// msg := "invalid data" // Invalid data used for testing
-	req := HandshakeRequest{initiator: Initiator{key: this.self.key, ref: this.self.ref}, message: msg}
-
-	println("\nSending handshake request to ${ref}.\nMessage: $msg")
-	// fetch domain, domain should respond with their wallet pub key/address, "pong" and a signed hash of the message
-	req_encoded := json.encode(req)
-	
-	raw := http.post("$ref/handshake", req_encoded) or {
-		eprintln("Failed to shake hands with $ref, Node is probably offline. Error: $err")
-		return false
-	}
-
-	if raw.status_code != 200 {
-		eprintln("Failed to shake hands with $ref, may have sent incorrect data, repsonse body: $raw.body")
-		return false
-	}
-
-	data := json.decode(HandshakeResponse, raw.body) or {
-		eprintln("Failed to decode handshake response, responder is probably using an old node version.\nTheir Response: $raw")
-		return false
-	}
-
-	println("\n$ref responded to handshake.")
-	config := configuration.get_config()
-	mut refs := memory.get_refs(config.ref_path)
-
-	// signed hash can then be verified using the wallet pub key supplied
-	if data.message == msg && data.initiator.key == this.self.key {
-		if cryptography.verify(data.responder_key, data.message.bytes(), data.signature) {
-			println("Verified signature to match handshake key\nHandshake with $ref successful.")
-
-			// now add them to reference list
-			refs.add_key(ref, data.responder_key)
-			return true
-		}
-		println("Signature did not match handshake key, node is not who they claim to be.")
-		// this is where we would then store a record of the node's reference/ip address and temporarily blacklist it
-		refs.add_blacklist(ref)
-		return false
-	}
-
-	println("Handshake was not valid, node is not who they claim to be.")
-	println(data)
-	// node is not who they claim to be, so store their reference/ip address and temporarily blacklist it
-	refs.add_blacklist(ref)
-	return false
+	return res
 }

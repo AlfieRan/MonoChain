@@ -7,8 +7,8 @@ import configuration
 import vweb
 import time
 
-const init_ref = "https://nano.monochain.network"
-// const init_ref = "http://localhost:8000"
+// const init_ref = "https://nano.monochain.network"
+const init_ref = "http://localhost:8000"
 
 struct App {
 	vweb.Context
@@ -18,7 +18,8 @@ pub fn start(config configuration.UserConfig) {
 	api := go vweb.run(&App{}, config.port) // start server on a new thread
 	
 	time.sleep(2 * time.second) // wait to make sure server is up
-	server.start_handshake(init_ref, config) // ping running node using handshake to verify cryptography is working
+	server.start_handshake_http(init_ref, config) // ping running node using handshake to verify cryptography is working
+	println("[Api Server] Initial handshake finished, returning to main thread")
 	api.wait()	// bring server process back to main thread
 }
 

@@ -18,7 +18,7 @@ pub fn inp_parser(input string) string {
 
 pub fn ask_for_bool(recursion_depth int) bool {
 	mut response := inp_parser(read_line("$:") or { 
-		eprintln("Input failed, please try again")
+		eprintln("[utils] Input failed, please try again")
 		utils.recursion_check(recursion_depth, 3)
 		return ask_for_bool(recursion_depth + 1)
 	})
@@ -28,7 +28,7 @@ pub fn ask_for_bool(recursion_depth int) bool {
 	} else if response in utils.deny {
 		return false
 	} else {
-		eprintln("That is not a valid input, please try again")
+		eprintln("[utils] That is not a valid input, please try again")
 		utils.recursion_check(recursion_depth, 5)
 		return ask_for_bool(recursion_depth + 1)
 	}

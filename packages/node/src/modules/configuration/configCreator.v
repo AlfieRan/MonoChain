@@ -27,7 +27,7 @@ pub fn create_configuration() UserConfig {
 	}
 
 	save_config(config, 0)
-	println("A default configuration file has been created at $base_path/config.json\nPlease edit it according to https://monochain.network/download/ \nThen relaunch the program.")
+	println("[config] A default configuration file has been created at $base_path/config.json\nPlease edit it according to https://monochain.network/download/ \nThen relaunch the program.")
 	exit(0)
 	return config
 }

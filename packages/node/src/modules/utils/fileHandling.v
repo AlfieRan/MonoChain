@@ -8,11 +8,11 @@ struct FileReading {
 }
 
 pub fn read_file(path string, bypass_crash bool) (FileReading) {
-	println("Reading file: " + path)
+	println("[utils] Reading file: " + path)
 	if os.exists(path) {
 		raw := os.read_file(path) or {
 			// something went wrong opening the file, return without loading the config
-			eprintln('Failed to open the file at path $path, error $err')
+			eprintln('[utils] Failed to open the file at path $path, error $err')
 
 			if bypass_crash {
 				return FileReading{loaded: false}
@@ -23,7 +23,7 @@ pub fn read_file(path string, bypass_crash bool) (FileReading) {
 
 		return FileReading{loaded: true, data: raw}
 	} else {
-		eprintln("File $path does not exist")
+		eprintln("[utils] File $path does not exist")
 		if bypass_crash {return FileReading{loaded: false}}
 		else {exit(205)}
 	}
@@ -46,11 +46,11 @@ pub fn save_file(path string, data string, recursion_depth int) (bool) {
 				// the directory doesn't exist, so we need to create it
 				os.mkdir(dir) or {
 					// something went wrong creating the directory, return without saving the config
-					eprintln("Failed to create the directory at path $dir, error $err")
+					eprintln("[utils] Failed to create the directory at path $dir, error $err")
 					failed = true
 					return true
 				}
-				println("Created directory: " + dir)
+				println("[utils] Created directory: " + dir)
 			}
 
 			i++
@@ -59,9 +59,9 @@ pub fn save_file(path string, data string, recursion_depth int) (bool) {
 
 	os.write_file(path, data) or { // try and write data to file
 		// if it failed, run the recursion depth checker to ensure there hasn't been too many failed attempts
-		eprintln('Failed to save file, error ${err}\nTrying again.')
+		eprintln('[utils] Failed to save file, error ${err}\nTrying again.')
 		if recursion_depth >= 5{
-			eprintln("Failed to save file too many times.")
+			eprintln("[utils] Failed to save file too many times.")
 			failed = true
 		} else {
 			failed = save_file(path, path, recursion_depth + 1)
