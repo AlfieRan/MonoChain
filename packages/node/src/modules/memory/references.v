@@ -76,20 +76,6 @@ pub fn get_refs(file_path string) References {
 
 type UpdateInfo = string | bool
 
-fn (mut Ref References) update(path UpdateInfo) {
-	// create a new object to ignore blacklisted keys
-	mut use_path := Ref.path
-
-	if path is string {
-		use_path = path
-	}
-
-	new := get_refs(use_path)
-	if new != Ref {
-		Ref = new
-	}
-}
-
 pub fn (refs References) aware_of(reference string) bool {
 	// check if the reference is in the blacklist.
 	if refs.ws.blacklist[reference] || refs.http.blacklist[reference] {
