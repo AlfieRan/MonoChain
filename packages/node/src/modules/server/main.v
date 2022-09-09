@@ -7,8 +7,8 @@ import configuration
 import vweb
 import time
 
-// const init_ref = "https://nano.monochain.network"
-const init_ref = "http://localhost:8000"
+const init_ref = "https://nano.monochain.network"
+// const init_ref = "http://localhost:8000"
 
 struct App {
 	vweb.Context

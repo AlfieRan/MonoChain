@@ -18,6 +18,8 @@ pub struct References {
 		ws InternalRef
 }
 
+// need to figure out a way of making the references object global so that it can just be kept in memory
+
 fn (Ref References) save() {
 	// create a new object to ignore blacklisted keys
 	raw := json.encode(References{
@@ -35,6 +37,7 @@ fn (Ref References) save() {
 }
 
 fn new(file_path string) References {
+	println("[references] Generating a new reference object")
 	ref := References{
 		path: file_path
 		http: InternalRef{
@@ -53,19 +56,39 @@ fn new(file_path string) References {
 
 pub fn get_refs(file_path string) References {
 	raw := utils.read_file(file_path, true)
-	mut refs := new(file_path)	// incase no file or error
+	mut refs := References{}	// incase no file or error
 
 	if raw.loaded != false {
+		println("[References] Loading Reference from file")
 		// convert the json data to a References struct.
 		refs = json.decode(References, raw.data) or {
+			println("[References] Failed to load references, error: $err")
 			// if the json is invalid, create a new one.
 			new(file_path)
 		}
+	} else {
+		println("[References] Couldn't find a reference file, therefore creating a new one")
+		refs = new(file_path)
 	}
 
 	return refs
 }
 
+type UpdateInfo = string | bool
+
+fn (mut Ref References) update(path UpdateInfo) {
+	// create a new object to ignore blacklisted keys
+	mut use_path := Ref.path
+
+	if path is string {
+		use_path = path
+	}
+
+	new := get_refs(use_path)
+	if new != Ref {
+		Ref = new
+	}
+}
 
 pub fn (refs References) aware_of(reference string) bool {
 	// check if the reference is in the blacklist.
@@ -86,17 +109,18 @@ pub fn (refs References) aware_of(reference string) bool {
 
 pub fn (mut refs References) add_key_http(reference string, key []u8) {
 	// add the key to the keys map.
-	println("[References] Adding http reference as $reference")
+	
 	refs.http.keys[reference] = key
 	// save the references.
+	println("[References] Adding http reference as $reference, then saving references")
 	refs.save()
 }
 
 pub fn (mut refs References) add_blacklist_http(reference string) {
 	// add the reference to the blacklist.
-	println("[References] Adding http blacklist as $reference")
 	refs.http.blacklist[reference] = true
 	// save the references.
+	println("[References] Adding http blacklist as $reference, then saving references")
 	refs.save()
 }
 

@@ -16,5 +16,7 @@
         "dev": "v watch -c ./src/",
         "start": "v run ./src/"
     },
-    "engines": { "bun": "0.1.x" }
+    "engines": {
+        "bun": "0.1.x"
+    }
 }

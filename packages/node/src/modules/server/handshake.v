@@ -49,6 +49,8 @@ struct HandshakeRequestResult {
 
 ['/handshake'; post]
 pub fn (mut app App) handshake_route() vweb.Result {
+	ip := app.ip()
+	println(ip)
 	body := app.req.data
 	data := handshake_receiver(body)
 
