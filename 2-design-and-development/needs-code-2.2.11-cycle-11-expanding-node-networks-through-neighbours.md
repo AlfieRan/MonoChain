@@ -1,17 +1,16 @@
-# \[needs code] 2.2.12 Cycle 12 - Expanding Node Networks Through Neighbours
-
-* Allow nodes to request lists of online nodes from each other so as to grow their networks.
-* This is fundamental to allowing nodes to grow their networks and hence keep the network alive
+# 2.2.12 Cycle 12 - Adding Web sockets for dynamic Nodes.
 
 ## Design
 
 ### Objectives
 
-(general objectives)
+Currently the only way a node can contribute to a network is if it either has a static public DNS/IP address that it can be reached at or if it has a direct local connection to a node with such an address. This is a problem because it means that users have to setup some kind of port forwarding, networking tunnel or some other somewhat complicated method just to connect to the network which increases the barrier to entry and is obviously not good.
 
-* [ ] Objective 1
-* [ ] Objective 2
-* [ ] Objective 3
+The solution to this is to introduce web sockets so that "private" nodes without a public address can open a communication tunnel to a public node that can then communicate with it in either direction and therefore continue to use it for the network without having such a high barrier to entry.
+
+* [ ] Convert the main section of the handshake method into a function so that it can be used with either web sockets or http.
+* [ ] Add a web sockets object to the references created in the last cycle so that nodes don't get http addresses and web socket ids mixed up.
+* [ ] Successfully ensure that the handshake method works for both http and web sockets.
 
 ### Usability Features
 

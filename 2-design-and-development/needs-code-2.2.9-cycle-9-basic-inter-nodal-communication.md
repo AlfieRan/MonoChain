@@ -1,10 +1,5 @@
 # 2.2.10 Cycle 10 - Basic Inter-Nodal Communication
 
-* STOP NODES FROM JUST SIGNING ALL DATA SENT THEIR WAY -> MASSIVE SECURITY FLAW
-* Convert pong route from a get request to a post request
-* move pong request data from query to body
-* create an info getter that just asks a node for all it's info in more detail.
-
 ## Design
 
 ### Objectives
@@ -24,11 +19,10 @@ The main usability feature introduced within this cycle is the renaming and stru
 
 ### Key Variables
 
-| Variable Name | Use |
-| ------------- | --- |
-|               |     |
-|               |     |
-|               |     |
+| Variable Name                  | Use                                                                                                                           |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| <pre><code>config</code></pre> | Stores all the configuration object's data, such as the node's reference to itself, its port and other essential information. |
+| <pre><code>keys</code></pre>   | Contains the keys object, which has the ability to sign, validate and verify data.                                            |
 
 ### Pseudocode
 
@@ -126,12 +120,70 @@ END HTTP_ROUTE
 #### Requester Function
 
 ```
-// Some code
+// Psuedocode
+
+IMPORT time
+IMPORT json
+IMPORT http
+
+IMPORT cryptography
+
+FUNCTION start_handshake(ref, this):
+	// ref should be an ip or a domain
+	
+	message = time.now() // set the message to the current time since epoch
+	// message = "invalid data" // Invalid data used for testing
+	
+	request = {initiator_key: this.self.key, message: msg}
+
+	OUTPUT "Sending handshake request to" + ref + ".\nMessage:" + message
+	// fetch domain, domain should respond with their wallet pub key/address, "pong" and a signed hash of the message
+	request_encoded := json.encode(request)
+	
+	TRY:
+		raw_response = http.post("$ref/handshake", req_encoded)
+	CATCH:
+		OUTPUT "Failed to shake hands with" + ref + ", Node is probably offline."
+		RETURN FALSE
+	END TRY
+
+	if raw_response.status_code != 200 {
+		OUTPUT "Failed to shake hands with" + ref + ", may have sent incorrect data, repsonse body:" + raw_response.body
+		RETURN FALSE
+	}
+
+	TRY:
+		response = json.decode(HandshakeResponse, raw.body)
+	CATCH:
+		OUTPUT "Failed to decode handshake response, responder is probably using an old node version.\nTheir Response:" + raw_response
+		RETURN FALSE
+	END TRY
+
+	OUTPUT "\n" + ref + "responded to handshake."
+
+	// signed hash can then be verified using the wallet pub key supplied
+	IF (response.message == message && response.initiator_key == this.self.key):
+	
+		IF (cryptography.verify(response.responder_key, response.message.bytes(), response.signature):
+			OUTPUT "Verified signature to match handshake key\nHandshake with $ref successful."
+			RETURN TRUE
+		END IF
+		
+		OUTPUT "Signature did not match handshake key, node is not who they claim to be."
+		// this is where we would then store a record of the node's reference/ip address and temporarily blacklist it
+		RETURN FALSE
+	END IF
+
+	OUTPUT "Handshake was not valid, node is not who they claim to be."
+	OUTPUT response
+	// if valid, return true, if not return false
+	RETURN FALSE
+END FUNCTION
 ```
 
 ## Development
 
-\---
+The development for this cycle was primarily based upon changing the code, pushing the changes, downloading the new code and running it on two nodes and seeing if either of them had communication issues. This was fairly repetitive but due to having ssh access to both servers It wasn't too time consuming and allowed me to just keep testing the new code until it stopped having errors, which lowered the error rates a lot due to so many tests as I was programming.
 
 ### Outcome
 
@@ -201,11 +253,63 @@ pub fn (mut app App) handshake_route() vweb.Result {
 }
 ```
 
+#### The Handshake Requester
+
+```v
+// V code - /src/modules/server/handshake.v
+
+pub fn start_handshake(ref string, this configuration.UserConfig) bool {
+	// ref should be an ip or a domain
+	msg := time.now().format_ss_micro() // set the message to the current time since epoch
+	// msg := "invalid data" // Invalid data used for testing
+	req := HandshakeRequest{initiator_key: this.self.key, message: msg}
+
+	println("\nSending handshake request to ${ref}.\nMessage: $msg")
+	// fetch domain, domain should respond with their wallet pub key/address, "pong" and a signed hash of the message
+	req_encoded := json.encode(req)
+	
+	raw := http.post("$ref/handshake", req_encoded) or {
+		eprintln("Failed to shake hands with $ref, Node is probably offline. Error: $err")
+		return false
+	}
+
+	if raw.status_code != 200 {
+		eprintln("Failed to shake hands with $ref, may have sent incorrect data, repsonse body: $raw.body")
+		return false
+	}
+
+	data := json.decode(HandshakeResponse, raw.body) or {
+		eprintln("Failed to decode handshake response, responder is probably using an old node version.\nTheir Response: $raw")
+		return false
+	}
+
+	println("\n$ref responded to handshake.")
+
+	// signed hash can then be verified using the wallet pub key supplied
+	if data.message == msg && data.initiator_key == this.self.key {
+		if cryptography.verify(data.responder_key, data.message.bytes(), data.signature) {
+			println("Verified signature to match handshake key\nHandshake with $ref successful.")
+			return true
+		}
+		println("Signature did not match handshake key, node is not who they claim to be.")
+		// this is where we would then store a record of the node's reference/ip address and temporarily blacklist it
+		return false
+	}
+
+	println("Handshake was not valid, node is not who they claim to be.")
+	println(data)
+	// if valid, return true, if not return false
+	return false
+}
+```
+
 [This version of the code can be found here.](https://github.com/AlfieRan/MonoChain/blob/49d9f53c2253b742795afc40651ba4da988819cb/packages/node/src/modules/server/handshake.v)
 
 ### Challenges
 
-Challenges faced in either/both objectives
+The main challenge faced in this cycle was surrounding responding to the handshake requests, as in a future cycle I plan to complete a check after a node receives a request to check if they have seen the requester before and if not send them their own request to get info on them.
+
+This involved planning for the future and examining how to get the reference of the node that sent a request, however my initial plan, which was just to examine the http headers failed because due to how my primary node (https://nano.monochain.network) uses cloud-flare tunnelling to increase security so all nodes that send requests appear to have the same ip -> one of cloud-flare's servers. Therefore if I was having that problem then other people probably would as well so after some testing and probing I decided not to try and cover that in this cycle and it will instead be covered in a future cycle.
 
 ## Testing
 
@@ -214,8 +318,7 @@ Challenges faced in either/both objectives
 | Test | Instructions                                                                    | What I expect                                                                        | What actually happens | Pass/Fail |
 | ---- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | --------------------- | --------- |
 | 1    | Completing a correct and valid handshake using a time object as the message.    | A series of console logs on both nodes confirming that the handshake was successful. | As expected           | Pass      |
-| 2    | Completing an invalid handshake using the string "invalid data" as the message. | For both nodes to record the handshake as unsuccessful and log such to the console.  |                       |           |
-| 3    |                                                                                 |                                                                                      |                       |           |
+| 2    | Completing an invalid handshake using the string "invalid data" as the message. | For both nodes to record the handshake as unsuccessful and log such to the console.  | As expected           | Pass      |
 
 ### Evidence
 

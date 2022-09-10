@@ -16,7 +16,7 @@
 
 ## 2 Design and Development
 
-* [\[NOT DONE\] 2.1 Design Frame](2-design-and-development/2.1-design-frame.md)
+* [2.1 Design Frame](2-design-and-development/2.1-design-frame.md)
 * [2.2.x Cycle Template](2-design-and-development/2.2.x-cycle-template.md)
 * [2.2.1 Cycle 1 - The Framework](2-design-and-development/2.2.1-cycle-1-the-framework.md)
 * [2.2.2 Cycle 2 - Changing Node Language to V Lang](2-design-and-development/2.2.2-cycle-2-changing-node-language-to-v-lang.md)
@@ -28,8 +28,8 @@
 * [2.2.8 Cycle 8 - Node Refactor](2-design-and-development/2.2.8-cycle-8-node-refactor.md)
 * [2.2.9 Cycle 9 - Protocol Updates](2-design-and-development/2.2.9-cycle-9-protocol-updates.md)
 * [2.2.10 Cycle 10 - Basic Inter-Nodal Communication](2-design-and-development/needs-code-2.2.9-cycle-9-basic-inter-nodal-communication.md)
-* [\[needs code\] 2.2.11 Cycle 11 - Remembering Nodes](2-design-and-development/needs-code-2.2.10-cycle-10-remembering-nodes.md)
-* [\[needs code\] 2.2.12 Cycle 12 - Expanding Node Networks Through Neighbours](2-design-and-development/needs-code-2.2.11-cycle-11-expanding-node-networks-through-neighbours.md)
+* [2.2.11 Cycle 11 - Remembering Nodes](2-design-and-development/needs-code-2.2.10-cycle-10-remembering-nodes.md)
+* [2.2.12 Cycle 12 - Adding Web sockets for dynamic Nodes.](2-design-and-development/needs-code-2.2.11-cycle-11-expanding-node-networks-through-neighbours.md)
 
 ## 2.5 The Protocol
 
