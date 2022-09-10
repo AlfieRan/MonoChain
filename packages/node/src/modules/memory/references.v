@@ -12,17 +12,22 @@ struct InternalRef {
 }
 
 pub struct References {
-	path string
+	version int
 	mut:
 		http InternalRef
 		ws InternalRef
+	pub:
+		path string
 }
+
+const cur_version = 1
 
 // need to figure out a way of making the references object global so that it can just be kept in memory
 
 fn (Ref References) save() {
 	// create a new object to ignore blacklisted keys
 	raw := json.encode(References{
+		version: cur_version
 		path: Ref.path
 		http: InternalRef{
 			keys: Ref.http.keys
@@ -36,10 +41,18 @@ fn (Ref References) save() {
 	utils.save_file(Ref.path, raw, 0)
 }
 
+fn (Ref References) outdated() bool {
+	if Ref.version != cur_version {
+		return true
+	}
+	return false
+}
+
 fn new(file_path string) References {
 	println("[references] Generating a new reference object")
 	ref := References{
 		path: file_path
+		version: cur_version
 		http: InternalRef{
 			keys: map[string][]u8{},
 			blacklist: map[string]bool{},
@@ -61,11 +74,19 @@ pub fn get_refs(file_path string) References {
 	if raw.loaded != false {
 		println("[References] Loading Reference from file")
 		// convert the json data to a References struct.
-		refs = json.decode(References, raw.data) or {
+		decoded := json.decode(References, raw.data) or {
 			println("[References] Failed to load references, error: $err")
 			// if the json is invalid, create a new one.
 			new(file_path)
 		}
+
+		if decoded.outdated() == false {
+			refs = decoded
+		} else {
+			println("[References] Reference file outdated, creating new file...")
+			new(file_path)
+		}
+
 	} else {
 		println("[References] Couldn't find a reference file, therefore creating a new one")
 		refs = new(file_path)
