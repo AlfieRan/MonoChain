@@ -61,12 +61,14 @@ pub fn (mut app App) handshake_route() vweb.Result {
 }
 
 pub fn start_handshake(ref string, this configuration.UserConfig) HandshakeRequestResult {
+	println("[Handshake Requester] Start Handshake initiated")
 	if ref == this.self.ref {
 		println("[Handshake Requester] Sending a request to self, waiting to prevent feedback loops")
 		time.sleep(1 * time.second) // wait to make sure not to loop self 
 		mut refs := memory.get_refs(this.ref_path)
 
 		if refs.aware_of(ref) {
+			println("[Handshake Requester] Handshake no longer needed, aborting")
 			// if another handshake request has occoured during the waiting period and overrights this one
 			return HandshakeRequestResult{result: .ignore}
 		}
@@ -182,7 +184,10 @@ pub fn handshake_receiver(request string, refs memory.References) HandshakeResul
 
 	// now need to figure out where message came from and respond back to it
 	if !refs.aware_of(req_parsed.initiator.ref) {
-		println("[Handshake Receiver] Node has not come into contact with initiator before, sending them a handshake request")
+		println("\n[Handshake Receiver] Node has not come into contact with initiator before, sending them a handshake request")
+
+		println("[Handshake Receiver] dumping ref: $refs, checking for $req_parsed.initiator.ref")
+
 		// send a handshake request to the node
 		go start_handshake(req_parsed.initiator.ref, config)
 	} else {
