@@ -49,10 +49,9 @@ struct HandshakeRequestResult {
 
 ['/handshake'; post]
 pub fn (mut app App) handshake_route() vweb.Result {
-	ip := app.ip()
-	println(ip)
+	refs := app.refs
 	body := app.req.data
-	data := handshake_receiver(body)
+	data := handshake_receiver(body, refs)
 
 	if data is HandshakeError {
 		return app.server_error(data.code)
@@ -155,7 +154,7 @@ pub fn start_handshake_http(ref string, this configuration.UserConfig){
 	println("[Handshake Requester] Handshake Request Finished")
 }
 
-pub fn handshake_receiver(request string) HandshakeResult {
+pub fn handshake_receiver(request string, refs memory.References) HandshakeResult {
 	req_parsed := json.decode(HandshakeRequest, request) or {
 		eprintln("[Handshake Receiver] Incorrect data supplied to handshake")
 		return HandshakeError{error: "Incorrect data supplied to handshake", code: 403}
@@ -173,7 +172,6 @@ pub fn handshake_receiver(request string) HandshakeResult {
 
 	config := configuration.get_config()
 	keys := cryptography.get_keys(config.key_path)
-	refs := memory.get_refs(config.ref_path)
 
 	res := HandshakeResponse{
 		responder_key: keys.pub_key
