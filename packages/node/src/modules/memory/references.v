@@ -32,9 +32,7 @@ fn (Ref References) save() {
 		http: InternalRef{
 			keys: Ref.http.keys
 		}
-		ws: InternalRef{
-			keys: Ref.ws.keys
-		}
+		ws: InternalRef{}
 	})
 
 	println("[References] Saving references as $raw")
@@ -136,7 +134,6 @@ pub fn (mut refs References) add_key_ws(reference string, key []u8) {
 	println("[References] Adding ws reference as $reference")
 	refs.ws.keys[reference] = key
 	// save the references.
-	refs.save()
 }
 
 pub fn (mut refs References) add_blacklist_ws(reference string) {
