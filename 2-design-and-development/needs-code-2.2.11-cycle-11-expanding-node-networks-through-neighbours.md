@@ -39,14 +39,45 @@ Objective 2 solution:
 
 ## Development
 
-Most of the development for this cycle was just setup, to get everything I need for this project up and running and building out the structure of the codebase in order to make the actual programming as smooth as possible.
+Development moment
 
 ### Outcome
 
-Objective 1
+#### The test code
 
-```
-code
+This was the test code for confirming that shared variables do in fact do what I needed them to do.
+
+```v
+struct Info {
+	test int
+}
+
+struct App {
+	vweb.Context
+	info shared Info
+}
+ 
+pub fn start(config configuration.UserConfig) {
+	info := Info{test: 0}
+	app := App{info: info}
+	api := go vweb.run(app, config.port) // start server on a new thread
+	
+	// there's some other code here but it isn't important in this cycle
+	
+	api.wait()	// bring server process back to main thread
+}
+
+["/test"]
+pub fn (mut app App) test() vweb.Result {
+	println(app)
+	mut result := ""
+	lock app.info {
+		cur := app.info.test
+		result = json.encode(cur)
+		app.info = Info{test: cur + 1}
+	}
+	return app.text(result)
+}
 ```
 
 Objective 2
@@ -63,12 +94,15 @@ Challenges faced in either/both objectives
 
 ### Tests
 
-| Test | Instructions | What I expect | What actually happens | Pass/Fail |
-| ---- | ------------ | ------------- | --------------------- | --------- |
-| 1    |              |               |                       |           |
-| 2    |              |               |                       |           |
-| 3    |              |               |                       |           |
+| Test | Instructions                                                | What I expect                                                        | What actually happens | Pass/Fail |
+| ---- | ----------------------------------------------------------- | -------------------------------------------------------------------- | --------------------- | --------- |
+| 1    | Run the test code, navigate to "http://localhost:8000/test" | A number to be displayed which increases by 1 for each page refresh. | as expected           | Pass      |
+| 2    |                                                             |                                                                      |                       |           |
+| 3    |                                                             |                                                                      |                       |           |
 
 ### Evidence
 
-(Images of tests running/results)
+#### Test 1
+
+{% embed url="https://youtu.be/PfIk16whvgA" %}
+
