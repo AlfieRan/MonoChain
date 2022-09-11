@@ -35,3 +35,4 @@
 // Database Errors
 300 - Could not start or initialise the database, docker is probably not running.
 310 - Could not connect to databaser, container is probably not running.
+320 - Could not create a table, could be due to various reasons
