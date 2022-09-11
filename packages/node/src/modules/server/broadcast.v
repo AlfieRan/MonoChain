@@ -1,12 +1,14 @@
 module server
 
 // internal
-import memory
+import database
 import cryptography
+import configuration
 
 // external
 import json
 import vweb
+import time
 
 struct Broadcast_Message_Contents {
 	data	string
@@ -47,6 +49,26 @@ pub fn (mut app App) broadcast_route() vweb.Result {
 	return app.server_error(403)
 }
 
-pub fn forward_to_refs(refs memory.References, msg Broadcast_Message) {
+pub fn forward_to_refs(refs database.References, msg Broadcast_Message) {
 	println("[Broadcaster] Would now forward to references, needs implementing")
+}
+
+pub fn send_message(refs database.References, data string) {
+	println("[Broadcaster] Assembling message with data: $data")
+	contents := Broadcast_Message_Contents{
+		time: time.now().format_ss_micro()
+		data: data
+	}
+
+	config := configuration.get_config()
+	keys := cryptography.get_keys(config.key_path)
+
+	message := Broadcast_Message{
+		sender: config.self.key
+		signature: keys.sign(json.encode(contents).bytes())
+		message: contents
+	}
+
+	println("[Broadcaster] Message assembled, broadcasting to refs...")
+	forward_to_refs(refs, message)
 }

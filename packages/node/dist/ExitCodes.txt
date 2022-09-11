@@ -31,3 +31,7 @@
 205 - File does not exist, could also be an os error in rare cases.
 210 - Tried to decode json from raw file and was unable to, likely due to incorrect formatting.
 215 - Tried to save a fundamental file and failed, hence quit.
+
+// Database Errors
+300 - Could not start or initialise the database, docker is probably not running.
+310 - Could not connect to databaser, container is probably not running.

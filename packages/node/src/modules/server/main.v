@@ -2,7 +2,7 @@ module server
 
 // internal imports
 import configuration
-import memory
+import database
 
 // external imports
 import vweb
@@ -15,11 +15,11 @@ const init_ref = "https://nano.monochain.network"
 
 struct App {
 	vweb.Context
-	refs shared memory.References
+	refs shared database.References
 }
  
 pub fn start(config configuration.UserConfig) {
-	app := App{refs: memory.get_refs(config.ref_path)}
+	app := App{refs: database.get_refs(config.ref_path)}
 	api := go vweb.run(app, config.port) // start server on a new thread
 	
 	

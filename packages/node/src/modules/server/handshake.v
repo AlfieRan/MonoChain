@@ -3,7 +3,7 @@ module server
 // internal imports
 import configuration
 import cryptography
-import memory
+import database
 
 // external imports
 import vweb
@@ -65,7 +65,7 @@ pub fn start_handshake(ref string, this configuration.UserConfig) HandshakeReque
 	if ref == this.self.ref {
 		println("[Handshake Requester] Sending a request to self, waiting to prevent feedback loops")
 		time.sleep(1 * time.second) // wait to make sure not to loop self 
-		mut refs := memory.get_refs(this.ref_path)
+		mut refs := database.get_refs(this.ref_path)
 
 		if refs.aware_of(ref) {
 			println("[Handshake Requester] Handshake no longer needed, aborting")
@@ -125,7 +125,7 @@ pub fn start_handshake(ref string, this configuration.UserConfig) HandshakeReque
 
 pub fn start_handshake_ws(ref string, this configuration.UserConfig) {
 	handshake := start_handshake(ref, this)
-	mut refs := memory.get_refs(this.ref_path)
+	mut refs := database.get_refs(this.ref_path)
 
 	if handshake.result == .accept {
 		println("[Handshake Requester] Adding ref to refs")
@@ -142,7 +142,7 @@ pub fn start_handshake_ws(ref string, this configuration.UserConfig) {
 
 pub fn start_handshake_http(ref string, this configuration.UserConfig){
 	handshake := start_handshake(ref, this)
-	mut refs := memory.get_refs(this.ref_path)
+	mut refs := database.get_refs(this.ref_path)
 	println("[Handshake Requester] Completed handshake")
 
 	if handshake.result == .accept {
@@ -156,7 +156,7 @@ pub fn start_handshake_http(ref string, this configuration.UserConfig){
 	println("[Handshake Requester] Handshake Request Finished")
 }
 
-pub fn handshake_receiver(request string, refs memory.References) HandshakeResult {
+pub fn handshake_receiver(request string, refs database.References) HandshakeResult {
 	req_parsed := json.decode(HandshakeRequest, request) or {
 		eprintln("[Handshake Receiver] Incorrect data supplied to handshake")
 		return HandshakeError{error: "Incorrect data supplied to handshake", code: 403}
