@@ -43,6 +43,7 @@ pub fn (db DatabaseConnection) create_ref(input_domain string, pubkey []u8, webs
 		key: key_str
 		ws: websocket
 	}
+	println("\n[Database] data to be inserted: $ref\n")
 	
 	sql db.connection {
 		insert ref into Reference_Table
