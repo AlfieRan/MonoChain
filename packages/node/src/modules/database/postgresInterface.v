@@ -22,7 +22,7 @@ pub struct Reference_Table {
 		domain     	string 	[default: '']	// domain of node
 		key        	string 	// key that is attached to node
 		ws		 	bool 	// ref is a websocket connection
-		last_connected 		string 	[default: 'CURRENT_TIMESTAMP'; sql_type: 'TIMESTAMP']	// when the reference was last used
+		last_connected 		string	[default: 'CURRENT_TIMESTAMP'; sql_type: 'TIMESTAMP']	// when the reference was last used
 }
 
 pub struct Message_Table {
@@ -65,5 +65,5 @@ pub fn (db DatabaseConnection) init_tables() {
 	sql db.connection {
 		create table Message_Table
 	}
-	println("[Database] Tables created.")
+	println("[Database] Tables created.\n")
 }

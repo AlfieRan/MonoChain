@@ -1,16 +1,8 @@
 module database
 
-pub fn (db DatabaseConnection) table_exists(table string) bool {
-	exists := db.connection.exec("SELECT EXISTS ( SELECT FROM pg_tables WHERE schemaname = 'public' AND tablename = '$table');") or {
-		println('[Database] Error occoured while checking if table $table exists. $err')
-		return false
-	}[0].vals[0] == 't'
-
-	if exists {
-		println('[Database] Table $table exists.')
-	} else {
-		println('[Database] Table $table does not exist.')
+pub fn (db DatabaseConnection) get_message(parsed_signature string, parsed_sender string, parsed_receiver string, time string, data string) []Message_Table {
+	existing_message := sql db.connection {
+		select from Message_Table where signature == parsed_signature && sender == parsed_sender && receiver == parsed_receiver && timestamp == time && contents == data limit 3
 	}
-
-	return exists
+	return existing_message
 }
