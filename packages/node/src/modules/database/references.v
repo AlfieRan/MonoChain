@@ -38,7 +38,6 @@ pub fn (db DatabaseConnection) create_ref(input_domain string, pubkey []u8, webs
 
 	println("[Database] Creating reference for $input_domain")
 	ref := Reference_Table{
-		id: rand.uuid_v4()
 		domain: input_domain
 		key: key_str
 		ws: websocket
