@@ -7,7 +7,6 @@ import database
 // external imports
 import vweb
 import time
-import json
 
 const init_ref = "https://nano.monochain.network"
 // const init_ref = "http://localhost:8000"

@@ -9,6 +9,7 @@ import configuration
 import json
 import vweb
 import time
+import net.http
 
 struct Broadcast_Message_Contents {
 	data	string
@@ -38,8 +39,8 @@ pub fn (mut app App) broadcast_route() vweb.Result {
 
 	if valid_message {
 		println("\n[Broadcaster] Received message:\n[Broadcaster] User: $decoded.sender\n[Broadcaster] Received at: $decoded.message.time\n[Broadcaster] Message: $decoded.message.data")
-		forward_to_refs(db, decoded)
-		return app.json("ok")
+		forward_to_all(db, decoded)
+		return app.ok("ok")
 	} else {
 		eprintln("[Broadcaster] Received an invalid message")
 		return app.server_error(403)
@@ -49,8 +50,37 @@ pub fn (mut app App) broadcast_route() vweb.Result {
 	return app.server_error(403)
 }
 
-pub fn forward_to_refs(db database.DatabaseConnection, msg Broadcast_Message) {
+pub fn forward_to_all(db database.DatabaseConnection, msg Broadcast_Message) {
 	println("[Broadcaster] Would now forward to references, needs implementing")
+
+	refs := sql db.connection {
+		select from database.Reference_Table
+	}
+
+	for ref in refs {
+		go send(ref.domain, ref.ws, msg)
+	}
+}
+
+pub fn send(ref string, ws bool, msg Broadcast_Message) bool {
+	println("[Broadcaster] Attempting to send message to $ref")
+	if ws {
+		eprintln("[Broadcaster] Websockets are not implemented yet, cannot send message.")
+		return false
+	}
+
+	raw_response := http.post("$ref/broadcast", json.encode(msg)) or {
+		eprintln("[Broadcaster] Failed to send a message to $ref, Node is probably offline. Error: $err")
+		return false
+	}
+
+	if raw_response.status_code != 200 {
+		eprintln("[Broadcaster] $ref responded to message with an error. Code: $raw_response.status_code")
+		return false
+	}
+
+	println("[Broadcaster] Successfully Sent message to $ref")
+	return true
 }
 
 pub fn send_message(db database.DatabaseConnection, data string) {
@@ -70,5 +100,5 @@ pub fn send_message(db database.DatabaseConnection, data string) {
 	}
 
 	println("[Broadcaster] Message assembled, broadcasting to refs...")
-	forward_to_refs(db, message)
+	forward_to_all(db, message)
 }
