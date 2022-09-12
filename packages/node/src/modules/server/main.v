@@ -8,8 +8,8 @@ import database
 import vweb
 import time
 
-const init_ref = "https://nano.monochain.network"
-// const init_ref = "http://localhost:8000"
+// const init_ref = "https://nano.monochain.network"
+const init_ref = "http://192.168.1.20:8000"
 
 
 struct App {
@@ -26,7 +26,8 @@ pub fn start(config configuration.UserConfig) {
 	
 	time.sleep(2 * time.second) // wait to make sure server is up
 	server.start_handshake_http(init_ref, config, db) // ping running node using handshake to verify cryptography is working
-	println("[Api Server] Initial handshake finished, returning to main thread")
+	server.broadcast_message(db, "Hello World!") // broadcast a message to all nodes
+	println("[Api Server] Initial setup finished, returning to main thread")
 	api.wait()	// bring server process back to main thread
 }
 

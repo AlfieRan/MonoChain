@@ -63,11 +63,11 @@ pub fn (mut app App) broadcast_route() vweb.Result {
 
 			println("\n[Broadcaster] Received message:\n[Broadcaster] Sender: $decoded.message.sender\n[Broadcaster] Received at: $decoded.message.time\n[Broadcaster] Message: $decoded.message.data\n")
 			forward_to_all(db, decoded)
-			return app.ok("ok")
+			return app.ok("Message received and forwarded.")
 		}
 
 		println("[Broadcaster] Have seen message before.")
-		return app.ok("ok")
+		return app.ok("Message received but not forwarded.")
 
 	} else {
 		eprintln("[Broadcaster] Received an invalid message")
@@ -79,15 +79,18 @@ pub fn (mut app App) broadcast_route() vweb.Result {
 }
 
 pub fn forward_to_all(db database.DatabaseConnection, msg Broadcast_Message) {
-	println("[Broadcaster] Would now forward to references, needs implementing")
+	println("[Broadcaster] Sending message to all known nodes.")
 
-	// refs := sql db.connection {
-	// 	select from database.Reference_Table
-	// }
+	// get all known nodes
+	refs := sql db.connection {
+		select from database.Reference_Table
+	}
 
-	// for ref in refs {
-	// 	go send(ref.domain, ref.ws, msg)
-	// }
+	for ref in refs {
+		go send(ref.domain, ref.ws, msg)
+	}
+
+	println("[Broadcaster] Sent message to all known nodes.")
 }
 
 pub fn send(ref string, ws bool, msg Broadcast_Message) bool {
