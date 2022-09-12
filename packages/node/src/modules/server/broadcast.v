@@ -10,6 +10,7 @@ import json
 import vweb
 import time
 import net.http
+import rand
 
 struct Broadcast_Message_Contents {
 	sender	[]u8
@@ -49,6 +50,7 @@ pub fn (mut app App) broadcast_route() vweb.Result {
 			println("[Broadcaster] Have not seen message before.\n[Broadcaster] Saving message to database.")
 			
 			message_db := database.Message_Table{
+				id: rand.uuid_v4().int()
 				timestamp: decoded.message.time
 				contents: decoded.message.data
 				sender: parsed_sender
@@ -137,6 +139,7 @@ pub fn send_message(db database.DatabaseConnection, data string, receiver []u8) 
 
 	println("[Database] Saving message to database.")
 	db_msg := database.Message_Table{
+		id: rand.uuid_v4().int()
 		timestamp: contents.time
 		sender: contents.sender.str()
 		receiver: contents.receiver.str()

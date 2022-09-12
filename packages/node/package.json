@@ -11,7 +11,7 @@
         "build": "yarn clean && yarn clean-zip && yarn compile && yarn zip && echo \"zipped node\"",
         "compile-native": "v ./src/ && mv ./src/src ./dist/code/node-native && echo \"compiled for the native OS of this system \"",
         "compile-windows": "v ./src/ -embed_vlib -os windows && mv ./src/src.exe ./dist/code/node-windows.exe && echo \"compiled for windows\"",
-        "compile": "yarn compile-native && yarn compile-windows",
+        "compile": "yarn compile-native",
         "zip": "zip ../webportal/public/node.zip -9r ./dist/ && echo \"zipped\"",
         "dev": "v watch -c ./src/",
         "start": "v run ./src/"
