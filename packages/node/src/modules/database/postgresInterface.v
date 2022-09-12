@@ -18,7 +18,7 @@ const config = pg.Config{
 
 pub struct Reference_Table {
 	pub:
-		id 			int		[default: 'gen_random_uuid()'; primary; sql_type: 'uuid']	// just for the db
+		id 			string	[primary]	// just for the db
 		domain     	string 	[default: '']	// domain of node
 		key        	string 	// key that is attached to node
 		ws		 	bool 	// ref is a websocket connection
@@ -27,7 +27,7 @@ pub struct Reference_Table {
 
 pub struct Message_Table {
 	pub:
-		id 			int		[default: 'gen_random_uuid()'; primary; sql_type: 'uuid']	// just for the db
+		id 			string	[primary]	// just for the db
 		timestamp  	string 	[default: 'CURRENT_TIMESTAMP'; sql_type: 'TIMESTAMP']	// when the message was sent
 		sender     	string	// key of the sender
 		receiver   	string	// key of the receiver
