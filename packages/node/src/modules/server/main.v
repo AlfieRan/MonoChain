@@ -8,8 +8,8 @@ import database
 import vweb
 import time
 
-// const init_ref = "https://nano.monochain.network"
-const init_ref = "http://192.168.1.20:8000"
+const init_ref = "https://nano.monochain.network"
+// const init_ref = "http://192.168.1.20:8000"
 
 
 struct App {

@@ -61,7 +61,7 @@ pub fn (mut app App) broadcast_route() vweb.Result {
 			}
 			println("[Database] Saved message to database.")
 
-			println("\n[Broadcaster] Received message:\n[Broadcaster] Sender: $decoded.message.sender\n[Broadcaster] Received at: $decoded.message.time\n[Broadcaster] Message: $decoded.message.data\n")
+			println("\n[Broadcaster] Received message:\n[Broadcaster] Sender: $decoded.message.sender\n[Broadcaster] Sent at: $decoded.message.time\n[Broadcaster] Message: $decoded.message.data\n")
 			forward_to_all(db, decoded)
 			return app.ok("Message received and forwarded.")
 		}
