@@ -10,7 +10,6 @@ import json
 import vweb
 import time
 import net.http
-import rand
 
 struct Broadcast_Message_Contents {
 	sender	[]u8

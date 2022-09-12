@@ -1,7 +1,6 @@
 module database
 
 import time
-import rand
 
 pub fn (db DatabaseConnection) aware_of(input_domain string) bool {
 	println("[Database] Checking if domain $input_domain is in database")
