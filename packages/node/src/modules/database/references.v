@@ -17,6 +17,7 @@ pub fn (db DatabaseConnection) get_key(input_domain string) []u8 {
 }
 
 pub fn (db DatabaseConnection) create_ref(input_domain string, key []u8, websocket bool) bool {
+	println("[References] Creating reference for $input_domain")
 	ref := Reference_Table{
 		domain: input_domain
 		key: key.str()

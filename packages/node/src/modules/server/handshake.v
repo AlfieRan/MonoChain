@@ -105,7 +105,7 @@ pub fn start_handshake(ref string, this configuration.UserConfig, db database.Da
 	// signed hash can then be verified using the wallet pub key supplied
 	if data.message == msg && data.initiator.key == this.self.key {
 		if cryptography.verify(data.responder_key, data.message.bytes(), data.signature) {
-			println("[Handshake Requester] Verified signature to match handshake key\nHandshake with $ref successful.")
+			println("[Handshake Requester] Verified signature to match handshake key\n[Handshake Requester] Handshake with $ref successful.")
 			// now add them to reference list
 			return HandshakeRequestResult{
 				result: .accept
@@ -123,8 +123,8 @@ pub fn start_handshake(ref string, this configuration.UserConfig, db database.Da
 	return HandshakeRequestResult{result: .blacklist}
 }
 
-pub fn start_handshake_ws(ref string, this configuration.UserConfig) {
-	handshake := start_handshake(ref, this)
+pub fn start_handshake_ws(ref string, this configuration.UserConfig, db database.DatabaseConnection) {
+	handshake := start_handshake(ref, this, db)
 	// mut refs := database.get_refs(this.ref_path)
 
 	if handshake.result == .accept {
@@ -140,13 +140,14 @@ pub fn start_handshake_ws(ref string, this configuration.UserConfig) {
 	println("[Handshake Requester] Handshake Request Finished")
 }
 
-pub fn start_handshake_http(ref string, this configuration.UserConfig){
-	handshake := start_handshake(ref, this)
+pub fn start_handshake_http(ref string, this configuration.UserConfig, db database.DatabaseConnection) {
+	handshake := start_handshake(ref, this, db)
 	// mut refs := database.get_refs(this.ref_path)
 	println("[Handshake Requester] Completed handshake")
 
 	if handshake.result == .accept {
 		println("[Handshake Requester] Adding ref to refs")
+		db.create_ref(ref, handshake.keys, false)
 		// refs.add_key_http(ref, handshake.keys)
 	} else if handshake.result == .blacklist {
 		println("[Handshake Requester] Blacklisting Handshake with result $handshake")
@@ -186,7 +187,7 @@ pub fn handshake_receiver(request string, db database.DatabaseConnection) Handsh
 	if !db.aware_of(req_parsed.initiator.ref) {
 		println("\n[Handshake Receiver] Node has not come into contact with initiator before, sending them a handshake request")
 		// send a handshake request to the node
-		go start_handshake(req_parsed.initiator.ref, config)
+		go start_handshake(req_parsed.initiator.ref, config, db)
 	} else {
 		println("[Handshake Receiver] Node has come into contact with initiator before, no need to send a handshake request")
 	}

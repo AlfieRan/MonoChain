@@ -5,8 +5,8 @@ import database
 
 fn main() {
 	println('[main] ***** MonoChain Mining Software *****')
-	database.connect()
-	// config := configuration.get_config()
-	// server.start(config)
+	database.launch()
+	config := configuration.get_config()
+	server.start(config)
 	// server.start_ws_server()
 }

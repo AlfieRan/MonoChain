@@ -20,7 +20,7 @@ pub struct Reference_Table {
 	id 			int		[default: 'gen_random_uuid()'; primary; sql_type: 'uuid']	// just for the db
 	domain     	string 	[default: '']	// domain of node
 	key        	string 	// key that is attached to node
-	ws		 	bool 	[default: false]	// ref is a websocket connection
+	ws		 	bool 	// ref is a websocket connection
 	last_connected 		string 	[default: 'CURRENT_TIMESTAMP'; sql_type: 'TIMESTAMP']	// when the reference was last used
 }
 
@@ -40,7 +40,6 @@ pub struct DatabaseConnection {
 
 // interfacing with the tables using the pg module
 pub fn connect() DatabaseConnection {
-	launch()
 	connection := pg.connect(config) or {
 		eprintln("[Database] Could not connect to database, docker container probably not running.\n[Database] Raw error: $err\n[Database] There is a chance this was due to trying to connect before the database was ready, if so restart the program should fix it.")
 		exit(310)
@@ -55,9 +54,11 @@ pub fn connect() DatabaseConnection {
 }
 
 pub fn (db DatabaseConnection) init_tables() {
+	println("[Database] Creating reference table...")
 	sql db.connection {
 		create table Reference_Table
 	}
+	println("[Database] Creating message table...")
 	sql db.connection {
 		create table Message_Table
 	}

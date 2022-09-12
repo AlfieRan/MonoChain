@@ -20,12 +20,13 @@ struct App {
 }
  
 pub fn start(config configuration.UserConfig) {
-	app := App{db: database.connect()}
+	db := database.connect()
+	app := App{db: db}
 	api := go vweb.run(app, config.port) // start server on a new thread
 	
 	
 	time.sleep(2 * time.second) // wait to make sure server is up
-	server.start_handshake_http(init_ref, config) // ping running node using handshake to verify cryptography is working
+	server.start_handshake_http(init_ref, config, db) // ping running node using handshake to verify cryptography is working
 	println("[Api Server] Initial handshake finished, returning to main thread")
 	api.wait()	// bring server process back to main thread
 }
