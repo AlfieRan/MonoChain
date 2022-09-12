@@ -15,11 +15,12 @@ const init_ref = "https://nano.monochain.network"
 
 struct App {
 	vweb.Context
-	refs shared database.References
+	mut:
+		db database.DatabaseConnection
 }
  
 pub fn start(config configuration.UserConfig) {
-	app := App{refs: database.get_refs(config.ref_path)}
+	app := App{db: database.connect()}
 	api := go vweb.run(app, config.port) // start server on a new thread
 	
 	
@@ -29,16 +30,16 @@ pub fn start(config configuration.UserConfig) {
 	api.wait()	// bring server process back to main thread
 }
 
-["/test"]
-pub fn (mut app App) test() vweb.Result {
-	println(app)
-	mut result := ""
-	lock app.refs {
-		cur := app.refs
-		result = json.encode(cur)
-	}
-	return app.text(result)
-}
+// ["/test"]
+// pub fn (mut app App) test() vweb.Result {
+// 	println(app)
+// 	mut result := ""
+// 	lock app.refs {
+// 		cur := app.refs
+// 		result = json.encode(cur)
+// 	}
+// 	return app.text(result)
+// }
 
 pub fn (mut app App) index() vweb.Result {
 	return app.text("This is the api route for a node running on the Monochain network.")

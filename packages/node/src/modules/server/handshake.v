@@ -49,9 +49,9 @@ struct HandshakeRequestResult {
 
 ['/handshake'; post]
 pub fn (mut app App) handshake_route() vweb.Result {
-	refs := app.refs
+	db := app.db
 	body := app.req.data
-	data := handshake_receiver(body, refs)
+	data := handshake_receiver(body, db)
 
 	if data is HandshakeError {
 		return app.server_error(data.code)
@@ -60,14 +60,14 @@ pub fn (mut app App) handshake_route() vweb.Result {
 	return app.json(data)
 }
 
-pub fn start_handshake(ref string, this configuration.UserConfig) HandshakeRequestResult {
+pub fn start_handshake(ref string, this configuration.UserConfig, db database.DatabaseConnection) HandshakeRequestResult {
 	println("[Handshake Requester] Start Handshake initiated")
 	if ref == this.self.ref {
 		println("[Handshake Requester] Sending a request to self, waiting to prevent feedback loops")
 		time.sleep(1 * time.second) // wait to make sure not to loop self 
-		mut refs := database.get_refs(this.ref_path)
 
-		if refs.aware_of(ref) {
+
+		if db.aware_of(ref) {
 			println("[Handshake Requester] Handshake no longer needed, aborting")
 			// if another handshake request has occoured during the waiting period and overrights this one
 			return HandshakeRequestResult{result: .ignore}
@@ -125,14 +125,14 @@ pub fn start_handshake(ref string, this configuration.UserConfig) HandshakeReque
 
 pub fn start_handshake_ws(ref string, this configuration.UserConfig) {
 	handshake := start_handshake(ref, this)
-	mut refs := database.get_refs(this.ref_path)
+	// mut refs := database.get_refs(this.ref_path)
 
 	if handshake.result == .accept {
 		println("[Handshake Requester] Adding ref to refs")
-		refs.add_key_ws(ref, handshake.keys)
+		// refs.add_key_ws(ref, handshake.keys)
 	}  else if handshake.result == .blacklist {
 		println("[Handshake Requester] Blacklisting Handshake with result $handshake")
-		refs.add_blacklist_ws(ref)
+		// refs.add_blacklist_ws(ref)
 	} else {
 		println("[Handshake Requester] Not doing anything with result from handshake with $ref")
 	}
@@ -142,21 +142,21 @@ pub fn start_handshake_ws(ref string, this configuration.UserConfig) {
 
 pub fn start_handshake_http(ref string, this configuration.UserConfig){
 	handshake := start_handshake(ref, this)
-	mut refs := database.get_refs(this.ref_path)
+	// mut refs := database.get_refs(this.ref_path)
 	println("[Handshake Requester] Completed handshake")
 
 	if handshake.result == .accept {
 		println("[Handshake Requester] Adding ref to refs")
-		refs.add_key_http(ref, handshake.keys)
+		// refs.add_key_http(ref, handshake.keys)
 	} else if handshake.result == .blacklist {
 		println("[Handshake Requester] Blacklisting Handshake with result $handshake")
-		refs.add_blacklist_http(ref)
+		// refs.add_blacklist_http(ref)
 	}
 
 	println("[Handshake Requester] Handshake Request Finished")
 }
 
-pub fn handshake_receiver(request string, refs database.References) HandshakeResult {
+pub fn handshake_receiver(request string, db database.DatabaseConnection) HandshakeResult {
 	req_parsed := json.decode(HandshakeRequest, request) or {
 		eprintln("[Handshake Receiver] Incorrect data supplied to handshake")
 		return HandshakeError{error: "Incorrect data supplied to handshake", code: 403}
@@ -183,11 +183,8 @@ pub fn handshake_receiver(request string, refs database.References) HandshakeRes
 	}
 
 	// now need to figure out where message came from and respond back to it
-	if !refs.aware_of(req_parsed.initiator.ref) {
+	if !db.aware_of(req_parsed.initiator.ref) {
 		println("\n[Handshake Receiver] Node has not come into contact with initiator before, sending them a handshake request")
-
-		println("[Handshake Receiver] dumping ref: $refs, checking for $req_parsed.initiator.ref")
-
 		// send a handshake request to the node
 		go start_handshake(req_parsed.initiator.ref, config)
 	} else {

@@ -23,7 +23,7 @@ struct Broadcast_Message {
 
 ['/broadcast'; post]
 pub fn (mut app App) broadcast_route() vweb.Result {
-	refs := app.refs
+	db := app.db
 	body := app.req.data
 
 	decoded := json.decode(Broadcast_Message, body) or {
@@ -38,7 +38,7 @@ pub fn (mut app App) broadcast_route() vweb.Result {
 
 	if valid_message {
 		println("\n[Broadcaster] Received message:\n[Broadcaster] User: $decoded.sender\n[Broadcaster] Received at: $decoded.message.time\n[Broadcaster] Message: $decoded.message.data")
-		forward_to_refs(refs, decoded)
+		forward_to_refs(db, decoded)
 		return app.json("ok")
 	} else {
 		eprintln("[Broadcaster] Received an invalid message")
@@ -49,11 +49,11 @@ pub fn (mut app App) broadcast_route() vweb.Result {
 	return app.server_error(403)
 }
 
-pub fn forward_to_refs(refs database.References, msg Broadcast_Message) {
+pub fn forward_to_refs(db database.DatabaseConnection, msg Broadcast_Message) {
 	println("[Broadcaster] Would now forward to references, needs implementing")
 }
 
-pub fn send_message(refs database.References, data string) {
+pub fn send_message(db database.DatabaseConnection, data string) {
 	println("[Broadcaster] Assembling message with data: $data")
 	contents := Broadcast_Message_Contents{
 		time: time.now().format_ss_micro()
@@ -70,5 +70,5 @@ pub fn send_message(refs database.References, data string) {
 	}
 
 	println("[Broadcaster] Message assembled, broadcasting to refs...")
-	forward_to_refs(refs, message)
+	forward_to_refs(db, message)
 }

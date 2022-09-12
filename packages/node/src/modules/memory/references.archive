@@ -46,24 +46,6 @@ fn (Ref References) outdated() bool {
 	return false
 }
 
-fn new(file_path string) References {
-	println("[references] Generating a new reference object")
-	ref := References{
-		path: file_path
-		version: cur_version
-		http: InternalRef{
-			keys: map[string][]u8{},
-			blacklist: map[string]bool{},
-		}
-		ws: InternalRef{
-			keys: map[string][]u8{},
-			blacklist: map[string]bool{},
-		}
-		
-	}
-	ref.save()
-	return ref
-}
 
 pub fn get_refs(file_path string) References {
 	raw := utils.read_file(file_path, true)
@@ -74,20 +56,21 @@ pub fn get_refs(file_path string) References {
 		// convert the json data to a References struct.
 		decoded := json.decode(References, raw.data) or {
 			println("[References] Failed to load references, error: $err")
+			exit(1)
 			// if the json is invalid, create a new one.
-			new(file_path)
+			// new(file_path)
 		}
 
 		if decoded.outdated() == false {
 			refs = decoded
 		} else {
 			println("[References] Reference file outdated, creating new file...")
-			new(file_path)
+			// new(file_path)
 		}
 
 	} else {
 		println("[References] Couldn't find a reference file, therefore creating a new one")
-		refs = new(file_path)
+		// refs = new(file_path)
 	}
 
 	return refs
@@ -111,6 +94,7 @@ pub fn (refs References) aware_of(reference string) bool {
 	// we have not encountered this reference before.
 	return false
 }
+
 
 pub fn (mut refs References) add_key_http(reference string, key []u8) {
 	// add the key to the keys map.

@@ -2,8 +2,6 @@ module database
 
 // external imports
 import pg
-import orm
-import v.ast
 
 // config constants
 const host = "localhost"
@@ -18,78 +16,50 @@ const config = pg.Config{
 }
 
 
-// table constants
-struct Table {
-	name string
-	fields []orm.TableField
+pub struct Reference_Table {
+	id 			int		[default: 'gen_random_uuid()'; primary; sql_type: 'uuid']	// just for the db
+	domain     	string 	[default: '']	// domain of node
+	key        	string 	// key that is attached to node
+	ws		 	bool 	[default: false]	// ref is a websocket connection
+	last_connected 		string 	[default: 'CURRENT_TIMESTAMP'; sql_type: 'TIMESTAMP']	// when the reference was last used
 }
 
-// the V pg docs are not very clear on how to use the orm module, so most of this is just from the examples
-// examples - https://github.com/vlang/v/blob/master/vlib/pg/pg_orm_test.v
-const ref_table = Table{
-	name: "references"
-	fields: [
-		orm.TableField{
-			name: 'domain'
-			typ: ast.string_type_idx
-			is_time: false
-			default_val: ''
-			is_arr: false
-			attrs: [
-				StructAttribute{
-					name: 'primary'
-					has_arg: false
-					arg: ''
-					kind: .plain
-				},
-				StructAttribute{
-					name: 'sql'
-					has_arg: true
-					arg: 'serial'
-					kind: .plain
-				},
-			]
-		}
-		orm.TableField{
-			name: 'key'
-			typ: ast.string_type_idx
-			is_time: false
-			default_val: ''
-			is_arr: false
-			attrs: []
-		},
-	]
+pub struct Message_Table {
+	id 			int		[default: 'gen_random_uuid()'; primary; sql_type: 'uuid']	// just for the db
+	timestamp  	string 	[default: 'CURRENT_TIMESTAMP'; sql_type: 'TIMESTAMP']	// when the message was sent
+	sender     	string	// key of the sender
+	receiver   	string	// key of the receiver
+	contents   	string 	// conetnts of the message
+	signature  	string	// the signature of the message 
 }
 
-const msg_table = "messages"
+pub struct DatabaseConnection {
+	mut:
+		connection pg.DB
+}
 
-
-
-
-pub fn connect() {
+// interfacing with the tables using the pg module
+pub fn connect() DatabaseConnection {
 	launch()
-	db := pg.connect(config) or {
+	connection := pg.connect(config) or {
 		eprintln("[Database] Could not connect to database, docker container probably not running.\n[Database] Raw error: $err\n[Database] There is a chance this was due to trying to connect before the database was ready, if so restart the program should fix it.")
 		exit(310)
 	}
+	db := DatabaseConnection{connection: connection}
+
 	println("[Database] Connected to database. ($host:$port)")
 	
 	println("[Database] Creating tables...")
-	init_tables(db)
+	db.init_tables()
+	return db
 }
 
-pub fn init_tables(db pg.DB) {
-	tables := [ref_table]
-
-	for table in tables {
-		// check if table exists
-		if !table_exists(table.name, db) {
-			// create table
-			db.create(table.name, table.fields) or {
-				eprintln("[Database] Could not create table $table.name\n[Database] Raw error: $err")
-				exit(320)
-			}
-			println("[Database] Created table $table.name")
-		}
+pub fn (db DatabaseConnection) init_tables() {
+	sql db.connection {
+		create table Reference_Table
 	}
+	sql db.connection {
+		create table Message_Table
+	}
+	println("[Database] Tables created.")
 }
