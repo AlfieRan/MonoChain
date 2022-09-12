@@ -8,7 +8,7 @@ pub fn (db DatabaseConnection) aware_of(input_domain string) bool {
 	matches := sql db.connection {
 		select from Reference_Table where domain == input_domain order by last_connected limit 2
 	}
-	// matches := []Reference_Table{}
+
 	println("[Database] Found $matches.len references to $input_domain")
 
 	return matches.len > 0
@@ -43,8 +43,7 @@ pub fn (db DatabaseConnection) create_ref(input_domain string, pubkey []u8, webs
 		key: key_str
 		ws: websocket
 	}
-	// /opt/homebrew/Cellar/postgresql@14/14.5_3/include
-
+	
 	sql db.connection {
 		insert ref into Reference_Table
 	}
