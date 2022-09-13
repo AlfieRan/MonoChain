@@ -124,6 +124,7 @@ pub fn start_handshake(ref string, this configuration.UserConfig, db database.Da
 }
 
 pub fn start_handshake_ws(ref string, this configuration.UserConfig, db database.DatabaseConnection) {
+	println("[Handshake Requester] Starting Handshake over WS")
 	handshake := start_handshake(ref, this, db)
 	
 	// mut refs := database.get_refs(this.ref_path)
@@ -142,6 +143,7 @@ pub fn start_handshake_ws(ref string, this configuration.UserConfig, db database
 }
 
 pub fn start_handshake_http(ref string, this configuration.UserConfig, db database.DatabaseConnection) {
+	println("[Handshake Requester] Starting Handshake over HTTP")
 	handshake := start_handshake(ref, this, db)
 	println("[Handshake Requester] Completed handshake")
 
@@ -185,7 +187,7 @@ pub fn handshake_receiver(request string, db database.DatabaseConnection) Handsh
 	if !db.aware_of(req_parsed.initiator.ref) {
 		println("\n[Handshake Receiver] Node has not come into contact with initiator before, sending them a handshake request")
 		// send a handshake request to the node
-		go start_handshake(req_parsed.initiator.ref, config, db)
+		go start_handshake_http(req_parsed.initiator.ref, config, db)
 	} else {
 		println("[Handshake Receiver] Node has come into contact with initiator before, no need to send a handshake request")
 	}
