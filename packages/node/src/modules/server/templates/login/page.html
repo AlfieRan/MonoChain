@@ -1,0 +1,83 @@
+<html>
+  <header>
+    <title>Monochain Dashboard</title>
+  </header>
+  <style>
+    body {
+      padding: 10px;
+    }
+    .center {
+      text-align: center;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .title {
+      font-size: 40px;
+      font-weight: bold;
+      width: 100%;
+      text-align: center;
+    }
+    .button {
+      font-size: large;
+    }
+    .login {
+      margin-top: 40px;
+      justify-content: center;
+      vertical-align: middle;
+    }
+  </style>
+  <script>
+    function getToken() {
+      fetch('/dashboard/gentoken', {
+        method: 'GET',
+      })
+    }
+    function login() {
+      console.log("Starting login process");
+      fetch('/dashboard/login', {
+        method: 'POST',
+        body: document.getElementById('token').value,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then(
+        res => {
+          if (res.status == 200) {
+            console.log("Login successful, redirecting to dashboard");
+            window.location.href = '/dashboard';
+          } else {
+            console.log("Login failed, please try again");
+          }
+        }
+      ).catch(
+        console.error
+      )
+    }
+    function skipLogin() {
+      fetch('/dashboard/info', {
+        method: 'GET',
+      }).then(res => {
+        if (res.status == 200) {
+            console.log("Already logged in, redirecting to dashboard");
+            window.location.href = '/dashboard';
+        } else {
+            console.log("Not logged in, staying on login page");
+        }
+      }).catch(console.error)
+    }
+    skipLogin();
+  </script>
+  <body>
+    <h1 class="title">Monochain Dashboard</h1>
+    <div class="center">
+      <h2 class="subtitle">You are not currently logged in.</h2>
+      <button class="button" onclick="getToken()">Get Token</button>
+      <div class="login">
+        <input style="bottom: 50%" placeholder="Token..." id="token" type="number"></input>
+        <button class="button" onclick="login()">Login</button>
+      </div>
+    </div>
+  </body>
+</html>

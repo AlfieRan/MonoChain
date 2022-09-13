@@ -1,0 +1,114 @@
+<html>
+  <header>
+    <title>Monochain Dashboard</title>
+  </header>
+  <style>
+    body {
+      padding: 10px;
+    }
+    .center {
+      text-align: center;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .flex-v {
+      display: flex;
+      flex-direction: column;
+    }
+    .flex-h {
+      display: flex;
+      flex-direction: row;
+    }
+    .title {
+      font-size: 40px;
+      font-weight: bold;
+      width: 100%;
+      text-align: center;
+    }
+    .button {
+      font-size: large;
+    }
+    .message_box {
+      display: flex;
+      flex-direction: column;
+      vertical-align: middle;
+      max-height: 70vh;
+      text-align: left;
+      overflow: scroll;
+      padding: 10px;
+    }
+    .pd-sm {
+      padding: 1px;
+    }
+    .bld-txt {
+      font-weight: bold;
+    }
+    .pdr-md {
+      padding-right: 10px;
+    }
+    .m-md {
+      margin: 10px;
+    }
+    .w-full {
+      width: 100%;
+    }
+    .w-xl {
+      width: min(60%, 600px);
+    }
+  </style>
+  <script>
+    function sendMessage() {
+      console.log("Sending message");
+      fetch('/dashboard/send_message', {
+        method: 'POST',
+        body: document.getElementById('inp_message').value,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then(
+        res => {
+          console.log("Message response: ", res);
+        }
+      ).catch(
+        console.error
+      )
+    }
+  </script>
+  <body>
+    <h1 class="title">Monochain Dashboard</h1>
+    <div class="center">
+      <div class="message_box">
+        @for message in message_objs
+        <div class="flex-v m-md">
+          <table>
+            <tr>
+              <td class="pdr-md pd-sm bld-txt">Sender:</td>
+              <td class="pd-sm">${message.sender}</td>
+            </tr>
+            <tr>
+              <td class="pd-sm pdr-md bld-txt">Timestamp:</td>
+              <td class="pd-sm">${message.timestamp}</td>
+            </tr>
+            <tr>
+              <td class="pdr-md pd-sm bld-txt">Message:</td>
+              <td class="pd-sm">${message.contents}</td>
+            </tr>
+          </table>
+        </div>
+        @end
+      </div>
+      <div class="flex-h m-md w-xl">
+        <div  class="pdr-md w-full">
+          <input id="inp_message" class="w-full" placeholder="Send a message..."></input>
+        </div>
+        <button onclick="sendMessage()">Send</button>
+      </div>
+      <div class="flex-h m-md">
+        <p class="pdr-md">To get collect new messages -></p>
+        <button onclick="location.reload();">Refresh</button>
+      </div>
+    </div>
+  </body>
+</html>
