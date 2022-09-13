@@ -32,7 +32,8 @@ pub fn (mut app App) dashboard_page() vweb.Result {
 		mut sender := ""
 
 		data := json.decode([]u8, msg.sender) or {
-			sender = "Unknown"
+			eprintln("Error decoding JSON of sender: $err")
+			sender = msg.sender
 			[]u8{}
 		}
 
