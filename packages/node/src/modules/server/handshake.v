@@ -125,6 +125,7 @@ pub fn start_handshake(ref string, this configuration.UserConfig, db database.Da
 
 pub fn start_handshake_ws(ref string, this configuration.UserConfig, db database.DatabaseConnection) {
 	handshake := start_handshake(ref, this, db)
+	
 	// mut refs := database.get_refs(this.ref_path)
 
 	if handshake.result == .accept {
@@ -142,16 +143,13 @@ pub fn start_handshake_ws(ref string, this configuration.UserConfig, db database
 
 pub fn start_handshake_http(ref string, this configuration.UserConfig, db database.DatabaseConnection) {
 	handshake := start_handshake(ref, this, db)
-	// mut refs := database.get_refs(this.ref_path)
 	println("[Handshake Requester] Completed handshake")
 
 	if handshake.result == .accept {
 		println("[Handshake Requester] Adding ref to refs")
 		db.create_ref(ref, handshake.keys, false)
-		// refs.add_key_http(ref, handshake.keys)
-	} else if handshake.result == .blacklist {
-		println("[Handshake Requester] Blacklisting Handshake with result $handshake")
-		// refs.add_blacklist_http(ref)
+	} else {
+		println("[Handshake Requester] Not doing anything with result from handshake with $ref (Returned enum $handshake.result)")
 	}
 
 	println("[Handshake Requester] Handshake Request Finished")
