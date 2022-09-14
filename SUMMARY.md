@@ -29,9 +29,9 @@
 * [2.2.9 Cycle 9 - Protocol Updates](2-design-and-development/2.2.9-cycle-9-protocol-updates.md)
 * [2.2.10 Cycle 10 - Basic Inter-Nodal Communication](2-design-and-development/needs-code-2.2.9-cycle-9-basic-inter-nodal-communication.md)
 * [2.2.11 Cycle 11 - Remembering Nodes](2-design-and-development/needs-code-2.2.10-cycle-10-remembering-nodes.md)
-* [2.2.12 Cycle 12 - Adding Web sockets for dynamic Nodes.](2-design-and-development/needs-code-2.2.11-cycle-11-expanding-node-networks-through-neighbours.md)
-* [2.2.13 Cycle 13 - Sending messages across the network](2-design-and-development/2.2.x-cycle-template-1.md)
-* [2.2.14 Cycle 14 - Introducing a sql database](2-design-and-development/2.2.x-cycle-template-2.md)
+* [2.2.12 Cycle 12 - Sending messages across the network](2-design-and-development/2.2.x-cycle-template-1.md)
+* [2.2.13 Cycle 13 - Introducing a sql database](2-design-and-development/2.2.x-cycle-template-2.md)
+* [2.2.14 Cycle 14 - Adding Web sockets for dynamic Nodes.](2-design-and-development/needs-code-2.2.11-cycle-11-expanding-node-networks-through-neighbours.md)
 
 ## 2.5 The Protocol
 
