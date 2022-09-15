@@ -23,6 +23,11 @@ struct Broadcast_Message {
 	signature []u8
 }
 
+enum Broadcast_receiver_outputs {
+	ok
+	error
+}
+
 ['/broadcast'; post]
 pub fn (mut app App) broadcast_route() vweb.Result {
 	db := app.db
@@ -33,24 +38,36 @@ pub fn (mut app App) broadcast_route() vweb.Result {
 		return app.server_error(403)
 	}
 
-	valid_message := cryptography.verify(decoded.message.sender, json.encode(decoded.message).bytes(), decoded.signature)
+	valid := broadcast_receiver(db, decoded)
+
+	if valid == .ok {
+		println("[Broadcaster] Message received and valid, sending ok")
+		return app.ok("Message received and valid")
+	} 
+
+	println("[Broadcaster] Message received and not valid, sending error")
+	return app.server_error(403)
+}
+
+pub fn broadcast_receiver(db database.DatabaseConnection, msg Broadcast_Message) Broadcast_receiver_outputs {
+	valid_message := cryptography.verify(msg.message.sender, json.encode(msg.message).bytes(), msg.signature)
 
 	if valid_message {
-		println("[Broadcaster] Message received from $decoded.message.sender is valid, checking if seen before...")
+		println("[Broadcaster] Message received from $msg.message.sender is valid, checking if seen before...")
 		// check if message has been recieved before
-		parsed_signature := decoded.signature.str()
-		parsed_sender := decoded.message.sender.str()
-		parsed_receiver := decoded.message.receiver.str()
+		parsed_signature := msg.signature.str()
+		parsed_sender := msg.message.sender.str()
+		parsed_receiver := msg.message.receiver.str()
 
 		// check if message has been recieved before
-		message_seen_before := db.get_message(parsed_signature, parsed_sender, parsed_receiver, decoded.message.time, decoded.message.data).len > 0
+		message_seen_before := db.get_message(parsed_signature, parsed_sender, parsed_receiver, msg.message.time, msg.message.data).len > 0
 
 		if !message_seen_before {
 			println("[Broadcaster] Have not seen message before.\n[Broadcaster] Saving message to database.")
 			
 			message_db := database.Message_Table{
-				timestamp: decoded.message.time
-				contents: decoded.message.data
+				timestamp: msg.message.time
+				contents: msg.message.data
 				sender: parsed_sender
 				receiver: parsed_receiver
 				signature: parsed_signature
@@ -59,22 +76,23 @@ pub fn (mut app App) broadcast_route() vweb.Result {
 			db.save_message(message_db)
 			println("[Database] Saved message to database.")
 
-			println("\n[Broadcaster] Received message:\n[Broadcaster] Sender: $decoded.message.sender\n[Broadcaster] Sent at: $decoded.message.time\n[Broadcaster] Message: $decoded.message.data\n")
-			forward_to_all(db, decoded)
-			return app.ok("Message received and forwarded.")
+			println("\n[Broadcaster] Received message:\n[Broadcaster] Sender: $msg.message.sender\n[Broadcaster] Sent at: $msg.message.time\n[Broadcaster] Message: $msg.message.data\n")
+			forward_to_all(db, msg)
+			return .ok
 		}
 
 		println("[Broadcaster] Have seen message before.")
-		return app.ok("Message received but not forwarded.")
+		return .ok
 
 	} else {
 		eprintln("[Broadcaster] Received an invalid message")
-		return app.server_error(403)
+		return .error
 	}
 
-	println("[Broadcaster] Shouldn't have reached this part of the code - please report as a bug.")
-	return app.server_error(403)
+	println("[Broadcaster] Message signature not valid.")
+	return .error
 }
+
 
 pub fn forward_to_all(db database.DatabaseConnection, msg Broadcast_Message) {
 	println("[Broadcaster] Sending message to all known nodes.")

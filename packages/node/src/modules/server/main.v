@@ -29,9 +29,9 @@ pub fn start(config configuration.UserConfig) {
 	api := go vweb.run(app, config.port) // start server on a new thread
 
 	// start websocket server
-	println("[Server] Starting Websocket server")
-	start_ws_server()
-	start_client()
+	// println("[Server] Starting Websocket server")
+	// start_ws_server()
+	// start_client()
 
 	
 	// initiate entry point to network

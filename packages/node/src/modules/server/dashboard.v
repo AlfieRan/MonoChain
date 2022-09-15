@@ -28,6 +28,7 @@ pub fn (mut app App) dashboard_page() vweb.Result {
 	raw_message_objs := app.db.get_latest_messages(0, 25)
 	mut message_objs := []MessageInfo{}
 
+	println("[Dashboard] Got ${raw_message_objs.len} messages from database")
 	for msg in raw_message_objs {
 		mut sender := ""
 
