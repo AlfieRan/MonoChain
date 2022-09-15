@@ -13,3 +13,9 @@ pub fn (db DatabaseConnection) get_latest_messages(offset_quantity int, num int)
 	}
 	return existing_message
 }
+
+pub fn (db DatabaseConnection) save_message(message Message_Table) {
+	sql db.connection {
+		insert message into Message_Table
+	}
+}

@@ -56,9 +56,7 @@ pub fn (mut app App) broadcast_route() vweb.Result {
 				signature: parsed_signature
 			}
 
-			sql db.connection {
-				insert message_db into database.Message_Table
-			}
+			db.save_message(message_db)
 			println("[Database] Saved message to database.")
 
 			println("\n[Broadcaster] Received message:\n[Broadcaster] Sender: $decoded.message.sender\n[Broadcaster] Sent at: $decoded.message.time\n[Broadcaster] Message: $decoded.message.data\n")
@@ -82,9 +80,7 @@ pub fn forward_to_all(db database.DatabaseConnection, msg Broadcast_Message) {
 	println("[Broadcaster] Sending message to all known nodes.")
 
 	// get all known nodes
-	refs := sql db.connection {
-		select from database.Reference_Table
-	}
+	refs := db.get_refs()
 
 	for ref in refs {
 		go send(ref.domain, ref.ws, msg)
@@ -144,9 +140,7 @@ pub fn send_message(db database.DatabaseConnection, data string, receiver []u8) 
 		signature: message.signature.str()
 	}
 
-	sql db.connection {
-		insert db_msg into database.Message_Table
-	}
+	db.save_message(db_msg)
 	println("[Database] Message saved.")
 
 
