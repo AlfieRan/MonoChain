@@ -36,6 +36,8 @@ pub struct HandshakeError {
 
 type HandshakeResult = HandshakeResponse | HandshakeError
 
+type HandshakeAssembleResult = string | bool
+
 enum HandshakeRequestResultEnum {
 	blacklist
 	accept
@@ -60,9 +62,9 @@ pub fn (mut app App) handshake_route() vweb.Result {
 	return app.json(data)
 }
 
-pub fn start_handshake(ref string, this configuration.UserConfig, db database.DatabaseConnection) HandshakeRequestResult {
+pub fn assemble_handshake(ref string, this configuration.UserConfig, db database.DatabaseConnection, msg string) HandshakeAssembleResult {
 	println("[Handshake Requester] Start Handshake initiated")
-	if ref == this.self.ref {
+	if ref == this.self.http_ref || ref == this.self.ws_ref {
 		println("[Handshake Requester] Sending a request to self, waiting to prevent feedback loops")
 		time.sleep(1 * time.second) // wait to make sure not to loop self 
 
@@ -70,92 +72,88 @@ pub fn start_handshake(ref string, this configuration.UserConfig, db database.Da
 		if db.aware_of(ref) {
 			println("[Handshake Requester] Handshake no longer needed, aborting")
 			// if another handshake request has occoured during the waiting period and overrights this one
-			return HandshakeRequestResult{result: .ignore}
+			return false
 		}
 	}
 
 	// ref should be an ip or a domain
-	msg := time.now().format_ss_micro() // set the message to the current time since epoch
+	
 	// msg := "invalid data" // Invalid data used for testing
-	req := HandshakeRequest{initiator: Initiator{key: this.self.key, ref: this.self.ref}, message: msg}
+	req := HandshakeRequest{initiator: Initiator{key: this.self.key, ref: this.self.http_ref}, message: msg}
 
 
-	println("\n[Handshake Requester] Sending handshake request to ${ref}.\n[Handshake Requester] Message: $msg")
+	println("[Handshake Requester] Sending handshake request to ${ref}.\n[Handshake Requester] Message: $msg")
 	// fetch domain, domain should respond with their wallet pub key/address, "pong" and a signed hash of the message
 	req_encoded := json.encode(req)
-	
-	raw := http.post("$ref/handshake", req_encoded) or {
-		eprintln("[Handshake Requester] Failed to shake hands with $ref, Node is probably offline. Error: $err")
-		return HandshakeRequestResult{result: .ignore}
-	}
+	return req_encoded
+}
 
-	if raw.status_code != 200 {
-		eprintln("[Handshake Requester] Failed to shake hands with $ref, may have sent incorrect data, repsonse body: $raw.body")
-		return HandshakeRequestResult{result: .ignore}
-	}
-
-	data := json.decode(HandshakeResponse, raw.body) or {
-		eprintln("[Handshake Requester] Failed to decode handshake response, responder is probably using an old node version.\nTheir Response: $raw")
-		return HandshakeRequestResult{result: .ignore}
-	}
-
-	println("\n[Handshake Requester] $ref responded to handshake.")
-	
-
+pub fn verify_handshake_response(data HandshakeResponse, msg string, this configuration.UserConfig) bool {
 	// signed hash can then be verified using the wallet pub key supplied
 	if data.message == msg && data.initiator.key == this.self.key {
 		if cryptography.verify(data.responder_key, data.message.bytes(), data.signature) {
-			println("[Handshake Requester] Verified signature to match handshake key\n[Handshake Requester] Handshake with $ref successful.")
+			println("[Handshake Requester] Verified signature to match handshake key\n[Handshake Requester] Handshake successful.")
 			// now add them to reference list
-			return HandshakeRequestResult{
-				result: .accept
-				keys: data.responder_key
-			}
+			return true
 		}
 		println("[Handshake Requester] Signature did not match handshake key, node is not who they claim to be.")
 		// this is where we would then store a record of the node's reference/ip address and temporarily blacklist it
-		return HandshakeRequestResult{result: .blacklist}
+		return false
 	}
 
 	println("[Handshake Requester] Handshake was not valid, node is not who they claim to be.")
 	println("[Handshake Requester] $data")
 	// node is not who they claim to be, so store their reference/ip address and temporarily blacklist it
-	return HandshakeRequestResult{result: .blacklist}
+	return false
 }
 
-pub fn start_handshake_ws(ref string, this configuration.UserConfig, db database.DatabaseConnection) {
-	println("[Handshake Requester] Starting Handshake over WS")
-	handshake := start_handshake(ref, this, db)
-	
-	// mut refs := database.get_refs(this.ref_path)
+type HandshakeTransmitterResult = HandshakeResponse | bool
 
-	if handshake.result == .accept {
-		println("[Handshake Requester] Adding ref to refs")
-		// refs.add_key_ws(ref, handshake.keys)
-	}  else if handshake.result == .blacklist {
-		println("[Handshake Requester] Blacklisting Handshake with result $handshake")
-		// refs.add_blacklist_ws(ref)
-	} else {
-		println("[Handshake Requester] Not doing anything with result from handshake with $ref")
+pub fn send_handshake_packet_http(req_encoded string, ref string) HandshakeTransmitterResult {
+	raw := http.post("$ref/handshake", req_encoded) or {
+		eprintln("[Handshake Requester] Failed to shake hands with $ref, Node is probably offline. Error: $err")
+		return false
 	}
 
-	println("[Handshake Requester] Handshake Request Finished")
+	if raw.status_code != 200 {
+		eprintln("[Handshake Requester] Failed to shake hands with $ref, may have sent incorrect data, repsonse body: $raw.body")
+		return false
+	}
+
+	data := json.decode(HandshakeResponse, raw.body) or {
+		eprintln("[Handshake Requester] Failed to decode handshake response, responder is probably using an old node version.\nTheir Response: $raw")
+		return false
+	}
+
+	return data
 }
 
-pub fn start_handshake_http(ref string, this configuration.UserConfig, db database.DatabaseConnection) {
+pub fn start_handshake_http(ref string, this configuration.UserConfig, db database.DatabaseConnection) bool {
 	println("[Handshake Requester] Starting Handshake over HTTP")
-	handshake := start_handshake(ref, this, db)
-	println("[Handshake Requester] Completed handshake")
+	msg := time.now().format_ss_micro() // set the message to the current time since epoch
+	req_encoded := assemble_handshake(ref, this, db, msg)
 
-	if handshake.result == .accept {
-		println("[Handshake Requester] Adding ref to refs")
-		db.create_ref(ref, handshake.keys, false)
-	} else {
-		println("[Handshake Requester] Not doing anything with result from handshake with $ref (Returned enum $handshake.result)")
+	if req_encoded is string {
+		data := send_handshake_packet_http(req_encoded, ref)
+
+		if data is HandshakeResponse {
+			
+			println("[Handshake Requester] $ref responded to handshake.")
+			verified := verify_handshake_response(data, msg, this)
+
+			if verified {
+				println("[Handshake Requester] Completed handshake")
+				println("[Handshake Requester] Adding ref to refs")
+				db.create_ref(ref, data.responder_key)
+				println("[Handshake Requester] Handshake Request Finished")
+
+				return true
+			}
+		}
 	}
-
-	println("[Handshake Requester] Handshake Request Finished")
+	return false
 }
+
 
 pub fn handshake_receiver(request string, db database.DatabaseConnection) HandshakeResult {
 	req_parsed := json.decode(HandshakeRequest, request) or {

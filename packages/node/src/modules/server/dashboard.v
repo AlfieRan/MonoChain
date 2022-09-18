@@ -132,7 +132,7 @@ pub fn (mut app App) send_message_route() vweb.Result {
 	}
 
 	data := app.Context.req.data
-	send_message(app.db, data, []u8{})
+	send_message(app.db, mut app.ws, data, []u8{})
 	return app.ok("ok")
 }
 

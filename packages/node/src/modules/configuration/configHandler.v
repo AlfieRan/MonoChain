@@ -1,7 +1,7 @@
 module configuration
 import utils
 
-const config_version = 8
+const config_version = 10
 pub const base_path = "./monochain"
 pub const config_path = "$base_path/config.json"
 
@@ -10,20 +10,20 @@ pub struct UserConfig {
 	last_connect int	// the last time this node connected to the network
 	config_version int
 	pub:
-		key_path string		// the path to the private key file
-		ref_path string		// the path to the references file
 		loaded bool	// has the config loaded up
+		key_path string		// the path to the private key file
 		self Node	// ref to self
-		port int	// open port for server
-		memory_cache_path string	// file path to memory cache file
+		port int	// open port for server - only required if node is public
+		ws_port int	// open port for websocket server - only required if node is public
 }
 
 type UserConfigType = UserConfig
 
 struct Node {
 	pub:
-		trust int
-		ref string
+		public bool	// should be true if node has a public ip/dns and false if not
+		http_ref string	// only required if node is public
+		ws_ref string
 		key []u8
 }
 

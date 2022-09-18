@@ -10,7 +10,7 @@ pub fn (db DatabaseConnection) get_message(parsed_signature string, parsed_sende
 pub fn (db DatabaseConnection) get_latest_messages(offset_quantity int, num int) []Message_Table {
 	println("[Database] Getting latest messages")
 	existing_message := sql db.connection {
-		select from Message_Table where id > 1 order by timestamp desc limit num offset offset_quantity 
+		select from Message_Table where id > 0 order by timestamp desc limit num offset offset_quantity 
 	}
 	return existing_message
 }

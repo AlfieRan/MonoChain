@@ -24,14 +24,6 @@ pub struct Http_Reference {
 		last_connected 		string	[default: 'CURRENT_TIMESTAMP'; sql_type: 'TIMESTAMP']	// when the reference was last used
 }
 
-pub struct Ws_Reference {
-	pub:
-		id        	int    	[primary; sql: serial; sql_type: 'SERIAL']	// just for the db
-		domain     	string 	[default: '']	// domain of node
-		key        	string 	// key that is attached to node
-		last_connected 		string	[default: 'CURRENT_TIMESTAMP'; sql_type: 'TIMESTAMP']	// when the reference was last used
-}
-
 pub struct Message_Table {
 	pub:
 		id        	int    	[primary; sql: serial; sql_type: 'SERIAL']	// just for the db
@@ -67,10 +59,6 @@ pub fn (db DatabaseConnection) init_tables() {
 	println("[Database] Creating http reference table...")
 	sql db.connection {
 		create table Http_Reference
-	}
-	println("[Database] Creating ws reference table...")
-	sql db.connection {
-		create table Ws_Reference
 	}
 	println("[Database] Creating message table...")
 	sql db.connection {

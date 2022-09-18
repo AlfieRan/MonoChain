@@ -12,20 +12,21 @@ const init_ref = "https://nano.monochain.network"
 // const init_ref = "http://192.168.1.20:8000"
 // const init_ref = "http://192.168.170.24:8000"
 
-
 struct App {
 	vweb.Context
 	mut:
 		db database.DatabaseConnection
+		ws Websocket_Server
 }
  
 pub fn start(config configuration.UserConfig) {
 	// create database connection
 	db := database.connect()
+	ws := gen_ws_server(db, config)
 
 	// start http server
 	println("[Server] Starting Http server")
-	app := App{db: db}
+	app := App{db: db, ws: ws}
 	api := go vweb.run(app, config.port) // start server on a new thread
 
 	// start websocket server
