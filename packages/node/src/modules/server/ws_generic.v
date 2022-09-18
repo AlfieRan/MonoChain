@@ -19,6 +19,8 @@ struct WS_Success {
 
 type WS_Object = Broadcast_Message | WS_Error | WS_Success
 
+// websocket server
+
 struct Websocket_Server {
 	is_client bool
 	db database.DatabaseConnection
@@ -37,6 +39,20 @@ pub fn (mut ws Websocket_Server) send_to_all(msg string) bool {
 		return ws.s.send_to_all(msg)
 	}
 }
+
+pub fn (mut ws Websocket_Server) connect(ref string) bool {
+	println("[Websockets] Connecting to server $ref")
+	if ws.is_client {
+		println("[Websockets] Connecting as a client...")
+		return ws.c.connect(ref)
+	} else {
+		println("[Websockets] Cannot connect as a server, only clients can connect to servers.")
+		return false
+	}
+}
+
+
+// generic functions
 
 pub fn gen_ws_server(db database.DatabaseConnection, config configuration.UserConfig) Websocket_Server {
 	if config.self.public {

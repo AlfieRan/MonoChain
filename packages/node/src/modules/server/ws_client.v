@@ -26,10 +26,10 @@ pub fn start_client(db database.DatabaseConnection, config configuration.UserCon
 	return c
 }
 
-pub fn (mut c Client) connect(ref string) {
+pub fn (mut c Client) connect(ref string) bool {
 	mut ws := websocket.new_client(ref) or {
 		eprintln("[Websockets] Failed to connect to $ref\n[Websockets] Error: $err")
-		return
+		return false
 	}
 
 	println('[Websockets] Setup Client, initialising handlers... ')
@@ -37,7 +37,7 @@ pub fn (mut c Client) connect(ref string) {
 
 	c.connections[ws.id] = ws
 	println('[Websockets] Connected to $ref')
-	return
+	return true
 }
 
 pub fn (mut c Client) send_to(id string, data string) bool {
