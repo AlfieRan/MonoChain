@@ -13,6 +13,7 @@ pub struct UserConfig {
 		loaded bool	// has the config loaded up
 		key_path string		// the path to the private key file
 		self Node	// ref to self
+		running_db_seperate bool	// is the db running on a seperate server
 		port int	// open port for server - only required if node is public
 		ws_port int	// open port for websocket server - only required if node is public
 }

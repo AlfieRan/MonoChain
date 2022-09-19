@@ -8,10 +8,12 @@ import database
 import vweb
 import time
 
-const init_http_ref = "https://nano.monochain.network"
-const init_ws_ref = "wss://nano.monochain.network"
-// const init_ref = "http://192.168.1.20:8000"
-// const init_ref = "http://192.168.170.24:8000"
+// const init_http_ref = "https://nano.monochain.network"
+// const init_ws_ref = "wss://nano.monochain.network"
+// const init_http_ref = "http://192.168.1.20:8000"
+// const init_http_ref = "http://192.168.170.24:8000"
+const init_http_ref = "http://nano:8000"
+const init_ws_ref = "ws://nano:8001"
 
 struct App {
 	vweb.Context
