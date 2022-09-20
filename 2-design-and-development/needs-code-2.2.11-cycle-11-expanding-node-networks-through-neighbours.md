@@ -1,4 +1,4 @@
-# 2.2.12 Cycle 12 - Adding Web sockets for dynamic Nodes.
+# 2.2.14 Cycle 14 - Adding Web sockets for dynamic Nodes.
 
 ## Design
 
@@ -89,6 +89,19 @@ code
 ### Challenges
 
 Challenges faced in either/both objectives
+
+Code that the compiler was creating with the removed function "I\_voidptr\_to\_Interface\_log\_\_Logger"
+
+```c
+.logger = HEAP(log__Logger, /*&log.Logger*/I_voidptr_to_Interface_log__Logger(HEAP(voidptr, (((void*)0)))))
+```
+
+Code that should've been generated
+
+```c
+.logger = HEAP(log__Logger, /*&log.Logger*/I_log__Log_to_Interface_log__Logger(((log__Log*)memdup(&(log__Log){.level = log__Level__info,.output_label = (string){.str=(byteptr)"", .is_lit=1},.ofile = (os__File){.cfile = 0,.fd = 0,.is_opened = 0,},.output_target = 0,.output_file_name = (string){.str=(byteptr)"", .is_lit=1},}og__Log))))
+	
+```
 
 ## Testing
 
