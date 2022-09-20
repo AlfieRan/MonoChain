@@ -6,6 +6,7 @@ import configuration
 
 // external
 import net.websocket
+import log
 
 struct Server {
 	db database.DatabaseConnection	[required]
@@ -15,19 +16,16 @@ struct Server {
 }
 
 pub fn start_server(db database.DatabaseConnection, config configuration.UserConfig) Server {
-	// make ws port configurable
-	mut s := Server{
-		sv: websocket.new_server(.ip, config.ws_port, "")
-		db: db
-		config: config
-	}
+	mut sv := websocket.new_server(.ip, config.port, "", websocket.ServerOpt{
+		logger: &log.Logger(&log.Log{
+			level: .info
+		})
+	})
+	mut s := Server{db, config, sv}
+
 
 	println("[Websockets] Server started on port $config.ws_port, setting up handlers...")
 	s.sv.on_message_ref(on_message, &s)
-
-	s.sv.on_connect(announce_connection) or {
-		eprintln("[Websockets] Error setting up on_connect handler: $err")
-	}
 
 	println("[Websockets] Server started on port $config.ws_port, waiting for connections...")
 	return s
@@ -60,10 +58,5 @@ pub fn (mut S Server) send_to_all(data string) bool {
 	println("[Websockets] Waiting for all threads to finish")
 	threads.wait()
 	println("[Websockets] Message sent to all clients")
-	return true
-}
-
-fn announce_connection(mut c websocket.ServerClient) ?bool {
-	println("[Websockets] New connection with id $c.client.id")
 	return true
 }

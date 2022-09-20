@@ -16,5 +16,4 @@ fn main() {
 	}
 
 	server.start(config)
-	// server.start_ws_server()
 }

@@ -22,8 +22,8 @@ type WS_Object = Broadcast_Message | WS_Error | WS_Success
 // websocket server
 
 struct Websocket_Server {
-	is_client bool
-	db database.DatabaseConnection
+	is_client bool	[required]
+	db database.DatabaseConnection	[required]
 	mut:
 		c Client
 		s Server
@@ -38,6 +38,7 @@ pub fn (mut ws Websocket_Server) send_to_all(msg string) bool {
 		println("[Websockets] Sending messages as a server...")
 		return ws.s.send_to_all(msg)
 	}
+	return false
 }
 
 pub fn (mut ws Websocket_Server) connect(ref string) bool {
@@ -49,6 +50,8 @@ pub fn (mut ws Websocket_Server) connect(ref string) bool {
 		println("[Websockets] Cannot connect as a server, only clients can connect to servers.")
 		return false
 	}
+
+	return false
 }
 
 
@@ -70,6 +73,10 @@ pub fn gen_ws_server(db database.DatabaseConnection, config configuration.UserCo
 		 	c: start_client(db, config)
 		}
 	}
+
+
+	eprintln("[Websockets] Error starting websocket server.")
+	exit(1)
 }
 
 fn on_message(mut ws websocket.Client, msg &websocket.Message, mut obj &Websocket_Server) ? {
@@ -106,28 +113,11 @@ fn on_message(mut ws websocket.Client, msg &websocket.Message, mut obj &Websocke
 	}
 }
 
-fn send_ws(mut ws websocket.Client, msg string) {
+fn send_ws(mut ws websocket.Client, msg string) bool {
 	ws.write_string(msg) or {
 		eprintln('[Websockets] Could not send message: $err')
+		return false
 	}
+	return true
 }
 
-
-// fn start_ws_server(db database.DatabaseConnection, config configuration.UserConfig) {
-// 	println('[websockets] starting client')
-// 	uri := 'ws://localhost:8001/'
-// 	entrypoint := 'ws://localhost:8001/ws'
-// 	// change port to be stored in config
-// 	mut ws := websocket.new_server(.ip, 8001, '')
-// 	mut ws_client := websocket.new_client(entrypoint) or {
-// 		println('failed to connect to websocket server')
-// 		return
-// 	}
-// 	ws.clients[ws_client.id] = &websocket.ServerClient{resource_name: ws_client.resource_name, client_key: ws_client.id, server: ws, client: ws_client}
-// 	ws.on_message_ref(on_message, &InputObj{db, config})
-// 	// ws.connect() or {
-// 	// 	eprintln('[websockets] Failed to connect to $uri due to $err')
-// 	// }
-// 	go ws.listen()
-// 	return
-// }

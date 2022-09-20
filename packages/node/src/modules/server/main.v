@@ -8,18 +8,11 @@ import database
 import vweb
 import time
 
-// const init_http_ref = "https://nano.monochain.network"
-// const init_ws_ref = "wss://nano.monochain.network"
-// const init_http_ref = "http://192.168.1.20:8000"
-// const init_http_ref = "http://192.168.170.24:8000"
-const init_http_ref = "http://nano:8000"
-const init_ws_ref = "ws://nano:8001"
-
 struct App {
 	vweb.Context
 	mut:
-		db database.DatabaseConnection
-		ws Websocket_Server
+		db database.DatabaseConnection [required]
+		ws Websocket_Server [required]
 }
  
 pub fn start(config configuration.UserConfig) {
@@ -32,21 +25,15 @@ pub fn start(config configuration.UserConfig) {
 	app := App{db: db, ws: ws}
 	api := go vweb.run(app, config.port) // start server on a new thread
 
-	// start websocket server
-	// println("[Server] Starting Websocket server")
-	// start_ws_server()
-	// start_client()
-
-	
 	// initiate entry point to network
 	println("[Server] Initiating entry point to network")
 	if config.self.public {
-		println("[Server] Public node, connecting to $init_http_ref using http")
+		println("[Server] Public node, connecting to $config.entrypoint.http_ref using http")
 		time.sleep(2 * time.second) // wait to make sure api server is up properly
-		server.start_handshake_http(init_http_ref, config, db) // ping running node using handshake to verify cryptography is working
+		start_handshake_http(config.entrypoint.http_ref, config, db) // ping running node using handshake to verify cryptography is working
 	} else {
-		println("[Server] Private node, connecting to $init_ws_ref using ws")
-		ws.connect(init_ws_ref)
+		println("[Server] Private node, connecting to $config.entrypoint.ws_ref  using ws")
+		ws.connect(config.entrypoint.ws_ref)
 	}
 
 	println("[Api Server] Initial setup finished, returning to main thread")
