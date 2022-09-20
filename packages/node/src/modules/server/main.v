@@ -17,6 +17,9 @@ struct App {
  
 pub fn start(config configuration.UserConfig) {
 	// create database connection
+	println("[Server] Connecting to database...")
+	println("[Server] Database is external: $config.db_config.run_seperate")
+	println("[Server] Database host: $config.db_config.config.host")
 	db := database.connect(config.db_config.run_seperate, config.db_config.config)
 	mut ws := gen_ws_server(db, config)
 
