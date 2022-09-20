@@ -17,7 +17,7 @@ struct App {
  
 pub fn start(config configuration.UserConfig) {
 	// create database connection
-	db := database.connect()
+	db := database.connect(config.db_config.run_seperate, config.db_config.config)
 	mut ws := gen_ws_server(db, config)
 
 	// start http server

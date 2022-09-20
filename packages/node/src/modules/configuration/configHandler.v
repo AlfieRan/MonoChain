@@ -1,7 +1,10 @@
 module configuration
 import utils
 
-const config_version = 10
+// external imports
+import pg
+
+const config_version = 11
 pub const base_path = "./monochain"
 pub const config_path = "$base_path/config.json"
 
@@ -13,8 +16,8 @@ pub struct UserConfig {
 		loaded bool	// has the config loaded up
 		key_path string		// the path to the private key file
 		self Node	// ref to self
-		entrypoint Node = Node{http_ref: "https://nano.monochain.network", ws_ref: "wss://live.monochain.network"}	// the entrypoint node 
-		running_db_seperate bool	// is the db running on a seperate server
+		entrypoint Node = Node{http_ref: "https://nano.monochain.network", ws_ref: "wss://live.monochain.network"}	// the entrypoint node
+		db_config DbConfig	// is the db running on a seperate server
 		port int	// open port for server - only required if node is public
 		ws_port int	// open port for websocket server - only required if node is public
 }
@@ -27,6 +30,12 @@ struct Node {
 		http_ref string	// only required if node is public
 		ws_ref string
 		key []u8
+}
+
+struct DbConfig {
+	pub:
+		run_seperate bool // if this is true, the db will run on a seperate server and require below info, if not it will setup using docker
+		config pg.Config
 }
 
 pub fn get_config() UserConfig {

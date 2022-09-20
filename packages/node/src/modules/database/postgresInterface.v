@@ -40,8 +40,14 @@ pub struct DatabaseConnection {
 }
 
 // interfacing with the tables using the pg module
-pub fn connect() DatabaseConnection {
-	connection := pg.connect(config) or {
+pub fn connect(over_ride_config bool, supplied_config pg.Config) DatabaseConnection {
+	mut config_to_use := config
+
+	if over_ride_config {
+		config_to_use = supplied_config
+	}
+
+	connection := pg.connect(config_to_use) or {
 		eprintln("[Database] Could not connect to database, docker container probably not running.\n[Database] Raw error: $err\n[Database] There is a chance this was due to trying to connect before the database was ready, if so restarting the program should fix it.")
 		exit(310)
 	}
