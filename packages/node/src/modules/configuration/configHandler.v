@@ -14,6 +14,7 @@ pub struct UserConfig {
 	config_version int
 	pub:
 		loaded bool	// has the config loaded up
+		headless bool	// run in headless mode - no inputs
 		key_path string		// the path to the private key file
 		self Node	// ref to self
 		entrypoint Node = Node{http_ref: "https://nano.monochain.network", ws_ref: "wss://live.monochain.network"}	// the entrypoint node

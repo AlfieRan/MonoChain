@@ -1,0 +1,35 @@
+{
+	"last_connect": 0,
+	"config_version": 11,
+	"loaded": true,
+	"key_path": "./monochain/keys.config",
+	"headless": true,
+	"self": {
+		"public": true,
+		"http_ref": "https://dash.monochain.network",
+		"ws_ref": "wss://live.monochain.network",
+		"key": [
+			44, 26, 69, 99, 22, 13, 108, 35, 46, 148, 249, 139, 213, 219, 85,
+			67, 96, 172, 8, 193, 174, 83, 118, 226, 185, 218, 115, 111, 178,
+			110, 233, 92
+		]
+	},
+	"entrypoint": {
+		"public": true,
+		"http_ref": "https://dash.monochain.network",
+		"ws_ref": "wss://live.monochain.network",
+		"key": []
+	},
+	"db_config": {
+		"run_seperate": false,
+		"config": {
+			"host": "monochain.caul6mrwg1l4.us-east-1.rds.amazonaws.com",
+			"port": 5432,
+			"user": "postgres",
+			"password": "alistairsmith",
+			"dbname": "postgres"
+		}
+	},
+	"port": 8000,
+	"ws_port": 8001
+}

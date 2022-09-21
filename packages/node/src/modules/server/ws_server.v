@@ -15,6 +15,18 @@ struct Server {
 		sv websocket.Server	[required]
 }
 
+pub fn test_server () bool {
+	println("[WEBSOCKET TEST] Getting constants")
+	config := configuration.get_config()
+	db := database.connect(config.db_config.run_seperate, config.db_config.config)
+	println("[WEBSOCKET TEST] Generating server")
+	mut ws := gen_ws_server(db, config)
+	println("[WEBSOCKET TEST] Starting server")
+	ws.listen()
+	return true
+}
+
+
 pub fn start_server(db database.DatabaseConnection, config configuration.UserConfig) Server {
 	mut sv := websocket.new_server(.ip, config.ws_port, "", websocket.ServerOpt{
 		logger: &log.Logger(&log.Log{

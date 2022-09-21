@@ -1,4 +1,8 @@
 node_modules
-node.config
-monochain
-/monochain/
+*.config
+keys.config
+tokens.json
+config.json
+/monochain/config.json
+/monochain/keys.config
+/monochain/tokens.json
