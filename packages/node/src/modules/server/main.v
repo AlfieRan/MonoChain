@@ -30,16 +30,18 @@ pub fn start(config configuration.UserConfig) {
 
 	// initiate entry point to network
 	println("[Server] Initiating entry point to network")
-	if config.self.public {
-		println("[Server] Public node, connecting to $config.entrypoint.http_ref using http")
-		time.sleep(2 * time.second) // wait to make sure api server is up properly
-	} else {
-		println("[Server] Private node, connecting to $config.entrypoint.ws_ref  using ws")
+	if !config.self.public {
+		println("[Server] Private node, connecting to $config.entrypoint.ws_ref using ws")
 		ws.connect(config.entrypoint.ws_ref)
+	} else {
+		println("[Server] Public node, do not need to connect using ws.")
 	}
 
+	time.sleep(2 * time.second) // wait to make sure api server is up properly
+	println("[Server] Starting http handshake with entrypoint")
 	start_handshake_http(config.entrypoint.http_ref, config, db) // ping running node using handshake to verify cryptography is working
 	println("[Api Server] Initial setup finished.")
+	
 	println("[Server] Switching to ws server and listening for incoming connections")
 	ws.listen() // start listening for incoming connections
 	api.wait()	// bring server process back to main thread
