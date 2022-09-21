@@ -7,6 +7,7 @@ import configuration
 // external
 import net.websocket
 import log
+import time
 
 struct Server {
 	db database.DatabaseConnection	[required]
@@ -16,28 +17,36 @@ struct Server {
 }
 
 pub fn start_server(db database.DatabaseConnection, config configuration.UserConfig) Server {
-	mut sv := websocket.new_server(.ip, config.port, "", websocket.ServerOpt{
+	mut sv := websocket.new_server(.ip, config.ws_port, "", websocket.ServerOpt{
 		logger: &log.Logger(&log.Log{
 			level: .info
 		})
 	})
 	mut s := Server{db, config, sv}
 
-
-	println("[Websockets] Server started on port $config.ws_port, setting up handlers...")
-	s.sv.on_message_ref(on_message, &s)
-	s.sv.listen() or {
-		eprintln("[Websockets] Error listening for new connections: $err")
-		exit(1)
-	}
-
-	if !s.status_check() {
-		eprintln("[Websockets] WARNING - Error checking server status, may due to server starting slowly but if this persists, there may be an issue with the server.")
-	}
+	println("[Websockets] Server initialised on port $config.ws_port, setting up handlers...")
+	sv.on_message_ref(on_message, &s)
+	
 	
 
-	println("[Websockets] Server started on port $config.ws_port, waiting for connections...")
+	println("[Websockets] Server setup on port $config.ws_port, ready to launch.")
+	s.run_server()
 	return s
+}
+
+pub fn (mut S Server) run_server() {
+	println("[Websockets] Launching server...")
+	go S.listen()
+	println("[Websockets] Server started listening on a new thread, waiting 2 seconds to ensure it's ready to proceed...")
+	time.sleep(2 * time.second)
+	return
+}
+
+pub fn (mut S Server) listen() {
+	S.sv.listen() or {
+		eprintln("[Websockets] ERROR - Error listening on server: $err")
+		exit(1)
+	}
 }
 
 pub fn (mut S Server) send_to(id string, data string) bool {
@@ -70,21 +79,3 @@ pub fn (mut S Server) send_to_all(data string) bool {
 	return true
 }
 
-pub fn (mut S Server) status_check() bool {
-	println("[Websockets] Checking server is running")
-	mut cl := websocket.new_client("ws://localhost:$S.config.ws_port", websocket.ClientOpt{
-		logger: &log.Logger(&log.Log{
-			level: .info
-		})
-	}) or {
-		eprintln("[Websockets] Failed to connect to server")
-		return false
-	}
-
-	cl.ping() or {
-		eprintln("[Websockets] Failed to ping server")
-		return false
-	}
-
-	return true
-}
