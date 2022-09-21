@@ -100,6 +100,7 @@ pub fn forward_to_all(db database.DatabaseConnection, mut ws Websocket_Server, m
 	mut threads := []thread bool{}
 
 	// get all known public nodes
+	println("[Broadcaster] Sending message to public nodes.")
 	http_refs := db.get_refs()
 
 	for http_ref in http_refs {
@@ -107,10 +108,11 @@ pub fn forward_to_all(db database.DatabaseConnection, mut ws Websocket_Server, m
 	}
 
 	// now send to all websocket nodes
+	println("[Broadcaster] Sending message to websocket nodes.")
 	encoded := json.encode(msg)
 	threads << go ws.send_to_all(encoded)
-	
 
+	println("[Broadcaster] Created threads to send message to all known nodes.")
 	println("[Broadcaster] Waiting for threads to return.")
 	threads.wait()
 	println("[Broadcaster] Sent message to all known nodes.")

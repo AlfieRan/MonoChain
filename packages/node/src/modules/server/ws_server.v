@@ -56,10 +56,12 @@ pub fn (mut S Server) send_to(id string, data string) bool {
 }
 
 pub fn (mut S Server) send_to_all(data string) bool {
-	println("[Websockets] Sending a message to all clients")
+	len := S.sv.clients.keys().len
+	println("[Websockets] Sending a message to all $len clients")
 
 	mut threads := []thread bool{}
 	for id in S.sv.clients.keys() {
+		println("[Websockets] Sending message to socket with $id")
 		threads << go S.send_to(id, data)
 	}
 	
