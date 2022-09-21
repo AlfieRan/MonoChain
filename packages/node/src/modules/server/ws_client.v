@@ -40,6 +40,10 @@ pub fn (mut c Client) connect(ref string) bool {
 	ws.on_error(socket_error)
 	println('[Websockets] Setup Client, initialising handlers... ')
 	ws.on_message_ref(on_message, &c)
+	ws.connect() or {
+		eprintln("[Websockets] Failed to connect to $ref\n[Websockets] Error: $err")
+	}
+	go ws.listen()
 
 	c.connections << ws
 	println('[Websockets] Connected to $ref')

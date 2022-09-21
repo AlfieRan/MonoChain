@@ -39,7 +39,9 @@ pub fn start(config configuration.UserConfig) {
 	}
 
 	start_handshake_http(config.entrypoint.http_ref, config, db) // ping running node using handshake to verify cryptography is working
-	println("[Api Server] Initial setup finished, returning to main thread")
+	println("[Api Server] Initial setup finished.")
+	println("[Server] Switching to ws server and listening for incoming connections")
+	ws.listen() // start listening for incoming connections
 	api.wait()	// bring server process back to main thread
 }
 

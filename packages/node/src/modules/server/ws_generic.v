@@ -54,6 +54,15 @@ pub fn (mut ws Websocket_Server) connect(ref string) bool {
 	return false
 }
 
+pub fn (mut ws Websocket_Server) listen() {
+	if !ws.is_client {
+		println("[Websockets] Listening for connections...")
+		ws.s.listen()
+	} else {
+		println("[Websockets] Cannot listen as a client, only servers can listen for connections.")
+		return
+	}
+}
 
 // generic functions
 

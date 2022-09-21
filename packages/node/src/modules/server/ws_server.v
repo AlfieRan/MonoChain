@@ -7,7 +7,6 @@ import configuration
 // external
 import net.websocket
 import log
-import time
 
 struct Server {
 	db database.DatabaseConnection	[required]
@@ -30,16 +29,7 @@ pub fn start_server(db database.DatabaseConnection, config configuration.UserCon
 	
 
 	println("[Websockets] Server setup on port $config.ws_port, ready to launch.")
-	s.run_server()
 	return s
-}
-
-pub fn (mut S Server) run_server() {
-	println("[Websockets] Launching server...")
-	go S.listen()
-	println("[Websockets] Server started listening on a new thread, waiting 2 seconds to ensure it's ready to proceed...")
-	time.sleep(2 * time.second)
-	return
 }
 
 pub fn (mut S Server) listen() {
