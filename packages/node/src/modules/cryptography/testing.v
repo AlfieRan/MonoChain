@@ -15,7 +15,7 @@ pub fn sign_test() (bool) {
 	keys := gen_keys()
 
 	println("[testing] Generated a new key pair successfully")
-	message := time.now().str().bytes()
+	message := time.utc().str().bytes()
 
 	keys.sign(message)
 	println("[testing] Signed a message successfully")
@@ -30,7 +30,7 @@ pub fn verify_test() (bool) {
 	keys := gen_keys()
 
 	println("[testing] Generated a new key pair successfully")
-	message := time.now().str().bytes()
+	message := time.utc().str().bytes()
 
 	signature := keys.sign(message)
 	println("[testing] Signed a message successfully")

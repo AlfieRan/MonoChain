@@ -55,7 +55,7 @@ fn (db DatabaseConnection) submit_create(input_domain string, pubkey []u8)  {
 }
 
 fn (db DatabaseConnection) submit_update(input_domain string, pubkey []u8)  {
-	cur_time := time.now()
+	cur_time := time.utc()
 	key_str := pubkey.str()
 
 	println("[Database] Updating http reference for $input_domain")

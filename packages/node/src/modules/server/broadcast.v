@@ -145,7 +145,7 @@ pub fn send_message(db database.DatabaseConnection, mut ws Websocket_Server, dat
 	contents := Broadcast_Message_Contents{
 		sender: config.self.key
 		receiver: receiver
-		time: time.now().str()
+		time: time.utc().str()
 		data: data
 	}
 

@@ -130,7 +130,7 @@ pub fn send_handshake_packet_http(req_encoded string, ref string) HandshakeTrans
 
 pub fn start_handshake_http(ref string, this configuration.UserConfig, db database.DatabaseConnection) bool {
 	println("[Handshake Requester] Starting Handshake over HTTP")
-	msg := time.now().format_ss_micro() // set the message to the current time since epoch
+	msg := time.utc().format_ss_micro() // set the message to the current time since epoch
 	req_encoded := assemble_handshake(ref, this, db, msg)
 
 	if req_encoded is string {

@@ -26,6 +26,15 @@ pub fn start_server(db database.DatabaseConnection, config configuration.UserCon
 
 	println("[Websockets] Server started on port $config.ws_port, setting up handlers...")
 	s.sv.on_message_ref(on_message, &s)
+	s.sv.listen() or {
+		eprintln("[Websockets] Error listening for new connections: $err")
+		exit(1)
+	}
+
+	if !s.status_check() {
+		eprintln("[Websockets] WARNING - Error checking server status, may due to server starting slowly but if this persists, there may be an issue with the server.")
+	}
+	
 
 	println("[Websockets] Server started on port $config.ws_port, waiting for connections...")
 	return s
@@ -58,5 +67,24 @@ pub fn (mut S Server) send_to_all(data string) bool {
 	println("[Websockets] Waiting for all threads to finish")
 	threads.wait()
 	println("[Websockets] Message sent to all clients")
+	return true
+}
+
+pub fn (mut S Server) status_check() bool {
+	println("[Websockets] Checking server is running")
+	mut cl := websocket.new_client("ws://localhost:$S.config.ws_port", websocket.ClientOpt{
+		logger: &log.Logger(&log.Log{
+			level: .info
+		})
+	}) or {
+		eprintln("[Websockets] Failed to connect to server")
+		return false
+	}
+
+	cl.ping() or {
+		eprintln("[Websockets] Failed to ping server")
+		return false
+	}
+
 	return true
 }

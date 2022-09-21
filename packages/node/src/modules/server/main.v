@@ -33,12 +33,12 @@ pub fn start(config configuration.UserConfig) {
 	if config.self.public {
 		println("[Server] Public node, connecting to $config.entrypoint.http_ref using http")
 		time.sleep(2 * time.second) // wait to make sure api server is up properly
-		start_handshake_http(config.entrypoint.http_ref, config, db) // ping running node using handshake to verify cryptography is working
 	} else {
 		println("[Server] Private node, connecting to $config.entrypoint.ws_ref  using ws")
 		ws.connect(config.entrypoint.ws_ref)
 	}
 
+	start_handshake_http(config.entrypoint.http_ref, config, db) // ping running node using handshake to verify cryptography is working
 	println("[Api Server] Initial setup finished, returning to main thread")
 	api.wait()	// bring server process back to main thread
 }

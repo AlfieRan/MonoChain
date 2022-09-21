@@ -35,6 +35,9 @@ pub fn (mut c Client) connect(ref string) bool {
 		return false
 	}
 
+	ws.on_open(socket_opened)
+	ws.on_close(socket_closed)
+	ws.on_error(socket_error)
 	println('[Websockets] Setup Client, initialising handlers... ')
 	ws.on_message_ref(on_message, &c)
 
@@ -44,9 +47,8 @@ pub fn (mut c Client) connect(ref string) bool {
 }
 
 pub fn (mut c Client) send_to_all(data string) bool {
-	println("[Websockets] Sending a message to all clients")
+	println("[Websockets] Sending a message to all ${c.connections.len} clients")
 	mut threads := []thread bool{}
-
 	for mut connection in c.connections {
 		println("[Websockets] Starting a new thread to send a message to $connection.id")
 		threads << go send_ws(mut connection, data)
@@ -56,4 +58,16 @@ pub fn (mut c Client) send_to_all(data string) bool {
 	threads.wait()
 	println("[Websockets] All threads finished, message sent.")
 	return true
+}
+
+fn socket_opened(mut c websocket.Client) ? {
+	println("[Websocket] Socket opened")
+}
+
+fn socket_closed(mut c websocket.Client, code int, reason string) ? {
+	println("[Websocket] Socket closed, code: $code, reason: $reason")
+}
+
+fn socket_error(mut c websocket.Client, err string) ? {
+	println("[Websocket] Socket error: $err")
 }
