@@ -107,11 +107,11 @@ Code that should've been generated
 
 ### Tests
 
-| Test | Instructions                                                | What I expect                                                        | What actually happens | Pass/Fail |
-| ---- | ----------------------------------------------------------- | -------------------------------------------------------------------- | --------------------- | --------- |
-| 1    | Run the test code, navigate to "http://localhost:8000/test" | A number to be displayed which increases by 1 for each page refresh. | as expected           | Pass      |
-| 2    |                                                             |                                                                      |                       |           |
-| 3    |                                                             |                                                                      |                       |           |
+| Test | Instructions                                                                                   | What I expect                                                                                 | What actually happens                                           | Pass/Fail |
+| ---- | ---------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------- | --------- |
+| 1    | Run the test code, navigate to "http://localhost:8000/test"                                    | A number to be displayed which increases by 1 for each page refresh.                          | as expected                                                     | Pass      |
+| 2    | Send a message using web sockets                                                               | The message sent to be transmitted and received successfully.                                 |                                                                 |           |
+| 3    | Send multiple messages for a prolonged period of time (once every 0.5 seconds for 30 seconds). | The messages to continue to be transmitted and validated consistently during the entire time. | Ran successfully for approximately 10 seconds and then crashed. | Fail      |
 
 ### Evidence
 
