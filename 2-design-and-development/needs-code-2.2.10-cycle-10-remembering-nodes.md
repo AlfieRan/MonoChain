@@ -1,4 +1,4 @@
-# \[needs code] 2.2.11 Cycle 11 - Remembering Nodes
+# 2.2.11 Cycle 11 - Remembering Nodes
 
 * Start storing node data after they've been collected from nodes
 * Create an "online" file which stores nodes that have been online in the past 30 minutes
@@ -9,7 +9,9 @@
 
 ### Objectives
 
-(general objectives)
+The next step to building a network in which nodes can successfully communicate across is for the node software to remember which nodes it has come into contact with previously so that it can send messages it receives from other nodes onto it's remembered nodes in the future.
+
+This is what will create the networking effect that allows for messages to flow throughout the entire network without having to have any form of central server.
 
 * [ ] Nodes store references to other Nodes.
 * [ ] Nodes remember which wallet was running on each Node it has a reference to.
