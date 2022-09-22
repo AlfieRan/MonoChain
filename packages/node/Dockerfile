@@ -13,7 +13,6 @@ RUN apk --no-cache add \
     make musl-dev valgrind clang gcc
 
 RUN apk update
-RUN apk add git
 RUN apk add make
 RUN apk add libpq
 RUN apk add --no-cache openssl-dev sqlite-dev 
@@ -22,10 +21,8 @@ RUN mkdir -p /opt/vlang && ln -s /opt/vlang/v /usr/bin/v
 
 # Install custom V version from source
 WORKDIR /opt/vlang
-RUN git clone https://github.com/AlfieRan/v /opt/vlang
-RUN git pull
+RUN git clone https://github.com/vlang/v.git /opt/vlang
 RUN make VFLAGS='-cc gcc'
-RUN v self
 RUN v -version
 
 # Install Source Code

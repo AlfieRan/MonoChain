@@ -35,12 +35,12 @@ pub fn start(config configuration.UserConfig) {
 			println("[Server] Private node, connecting to $config.entrypoint.ws_ref using ws")
 			ws.connect(config.entrypoint.ws_ref)
 		} else {
-			println("[Server] Public node, do not need to connect using ws.")
+			println("[Server] Public node, connecting using http.")
+			time.sleep(2 * time.second) // wait to make sure api server is up properly
+			println("[Server] Starting http handshake with entrypoint")
+			start_handshake_http(config.entrypoint.http_ref, config, db) // ping running node using handshake to verify cryptography is working
 		}
 
-		time.sleep(2 * time.second) // wait to make sure api server is up properly
-		println("[Server] Starting http handshake with entrypoint")
-		start_handshake_http(config.entrypoint.http_ref, config, db) // ping running node using handshake to verify cryptography is working
 		println("[Api Server] Initial setup finished.")
 	} else {
 		println("[Server] WARNING - Ignoring entrypoint, this is highly recommended against as it will not connect your node to the network and can be changed in your config file.")
