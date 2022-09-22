@@ -119,3 +119,8 @@ Code that should've been generated
 
 {% embed url="https://youtu.be/PfIk16whvgA" %}
 
+**Test 3**
+
+Sending messages once every 0.5 seconds for a prolonged period of time.
+
+<figure><img src="../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
