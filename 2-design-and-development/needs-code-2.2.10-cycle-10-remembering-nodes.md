@@ -13,6 +13,8 @@ The next step to building a network in which nodes can successfully communicate 
 
 This is what will create the networking effect that allows for messages to flow throughout the entire network without having to have any form of central server.
 
+<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption><p>This diagram represents the flow of information, with each number being a new generation of messages.</p></figcaption></figure>
+
 * [ ] Nodes store references to other Nodes.
 * [ ] Nodes remember which wallet was running on each Node it has a reference to.
 * [ ] Nodes can let other Nodes know that they exist using the ping/pong functionality.
