@@ -39,7 +39,7 @@ Objective 2 solution:
 
 ## Development
 
-Development moment
+Since the web sockets have two types of connections, servers and clients, some kind of wrapper function will be required to prevent all parts of the code from having to have two methods for both objects&#x20;
 
 ### Outcome
 
@@ -80,11 +80,334 @@ pub fn (mut app App) test() vweb.Result {
 }
 ```
 
-Objective 2
+#### The web socket client
+
+```v
+// Found at /packages/node/src/modules/server/ws_client.v
+module server
+
+// internal modules
+import database
+import configuration
+
+// external
+import net.websocket
+import log
+
+
+struct Client {
+	db database.DatabaseConnection	[required]
+	config configuration.UserConfig [required]
+	mut:
+		connections []websocket.Client
+}
+
+pub fn start_client(db database.DatabaseConnection, config configuration.UserConfig) Client {
+	c := Client{
+		db: db
+		config: config
+		connections: []websocket.Client{}
+	}
+
+	println("[Websockets] Created client.")
+	return c
+}
+
+pub fn (mut c Client) connect(ref string) bool {
+	mut ws := websocket.new_client(ref, websocket.ClientOpt{logger: &log.Logger(&log.Log{
+		level: .info
+	})}) or {
+		eprintln("[Websockets] Failed to connect to $ref\n[Websockets] Error: $err")
+		return false
+	}
+
+	ws.on_open(socket_opened)
+	ws.on_close(socket_closed)
+	ws.on_error(socket_error)
+	println('[Websockets] Setup Client, initialising handlers... ')
+	ws.on_message_ref(on_message, &c)
+	ws.connect() or {
+		eprintln("[Websockets] Failed to connect to $ref\n[Websockets] Error: $err")
+	}
+	go ws.listen()
+
+	c.connections << ws
+	println('[Websockets] Connected to $ref')
+	return true
+}
+
+pub fn (mut c Client) send_to_all(data string) bool {
+	println("[Websockets] Sending a message to all ${c.connections.len} clients")
+	mut threads := []thread bool{}
+	for mut connection in c.connections {
+		println("[Websockets] Starting a new thread to send a message to $connection.id")
+		threads << go send_ws(mut connection, data)
+	}
+
+	println("[Websockets] Waiting for all threads to finish")
+	threads.wait()
+	println("[Websockets] All threads finished, message sent.")
+	return true
+}
+
+fn socket_opened(mut c websocket.Client) ? {
+	println("[Websockets] Socket opened")
+}
+
+fn socket_closed(mut c websocket.Client, code int, reason string) ? {
+	println("[Websockets] Socket closed, code: $code, reason: $reason")
+}
+
+fn socket_error(mut c websocket.Client, err string) ? {
+	println("[Websockets] Socket error: $err")
+}
+```
+
+#### The web socket server
+
+```v
+// Found at /packages/node/src/modules/server/ws_server.v
+module server
+
+// internal
+import database
+import configuration
+
+// external
+import net.websocket
+import log
+
+struct Server {
+	db database.DatabaseConnection	[required]
+	config configuration.UserConfig [required]
+	mut: 	
+		sv websocket.Server	[required]
+}
+
+pub fn start_server(db database.DatabaseConnection, config configuration.UserConfig) Server {
+	mut sv := websocket.new_server(.ip, config.ports.ws, "", websocket.ServerOpt{
+		logger: &log.Logger(&log.Log{
+			level: .info
+		})
+	})
+	mut s := Server{db, config, sv}
+
+	println("[Websockets] Server initialised on port $config.ports.ws, setting up handlers...")
+	sv.on_message_ref(on_message, &s)
+	
+	println("[Websockets] Server setup on port $config.ports.ws, ready to launch.")
+	// this does not start listening to the server, need to do that later
+	return s
+}
+
+pub fn (mut S Server) listen() {
+	S.sv.listen() or {
+		eprintln("[Websockets] ERROR - Error listening on server: $err")
+		exit(1)
+	}
+}
+
+pub fn (mut S Server) send_to(id string, data string) bool {
+	println("[Websockets] Sending a message to $id")
+
+	mut cl := S.sv.clients[id] or {
+		eprintln("[Websockets] Client $id not found")
+		return false
+	}
+
+	cl.client.write_string(data) or {
+		eprintln("[Websockets] Failed to send data to client $id")
+	}
+
+	println("[Websockets] Message sent to $id")
+	return true
+}
+
+pub fn (mut S Server) send_to_all(data string) bool {
+	len := S.sv.clients.keys().len
+	println("[Websockets] Sending a message to all $len clients")
+
+	mut threads := []thread bool{}
+	for id in S.sv.clients.keys() {
+		println("[Websockets] Sending message to socket with $id")
+		threads << go S.send_to(id, data)
+	}
+	
+	println("[Websockets] Waiting for all threads to finish")
+	threads.wait()
+	println("[Websockets] Message sent to all clients")
+	return true
+}
+
 
 ```
-code
+
+#### The generic web socket object that wraps the client and server.
+
+```v
+// Found at /packages/node/src/modules/server/ws_generic.v
+
+module server
+
+// internal
+import database
+import configuration
+
+// external
+import net.websocket
+import json
+
+struct WS_Error {
+	code int
+	info string
+}
+
+struct WS_Success {
+	info string
+}
+
+type WS_Object = Broadcast_Message | WS_Error | WS_Success
+
+// websocket server
+
+struct Websocket_Server {
+	is_disabled bool
+	is_client bool	[required]
+	db database.DatabaseConnection	[required]
+	mut:
+		c Client
+		s Server
+}
+
+pub fn (mut ws Websocket_Server) send_to_all(msg string) bool {
+	if ws.is_disabled {
+		eprintln("[Websockets] Message requested to send but websockets are disabled.")
+		return false
+	}
+
+
+	println("[Websockets] Sending message to all clients...")
+	if ws.is_client {
+		println("[Websockets] Sending messages as a client...")
+		return ws.c.send_to_all(msg)
+	} else {
+		println("[Websockets] Sending messages as a server...")
+		return ws.s.send_to_all(msg)
+	}
+	return false
+}
+
+pub fn (mut ws Websocket_Server) connect(ref string) bool {
+	if ws.is_disabled {
+		eprintln("[Websockets] Connection requested to send but websockets are disabled.")
+		return false
+	}
+
+	println("[Websockets] Connecting to server $ref")
+	if ws.is_client {
+		println("[Websockets] Connecting as a client...")
+		return ws.c.connect(ref)
+	} else {
+		println("[Websockets] Cannot connect as a server, only clients can connect to servers.")
+		return false
+	}
+
+	return false
+}
+
+pub fn (mut ws Websocket_Server) listen() {
+	if ws.is_disabled {
+		eprintln("[Websockets] request to listen but websockets are disabled.")
+		return
+	}
+
+	if !ws.is_client {
+		println("[Websockets] Listening for connections...")
+		ws.s.listen()
+	} else {
+		println("[Websockets] Cannot listen as a client, only servers can listen for connections.")
+		return
+	}
+}
+
+// generic functions
+
+pub fn gen_ws_server(db database.DatabaseConnection, config configuration.UserConfig) Websocket_Server {
+	if !config.advanced.ws_enabled {
+		eprintln("[Websockets] Requested to generate a server but websockets are disabled.")
+		return Websocket_Server{
+			is_disabled: !config.advanced.ws_enabled,
+			is_client: true,
+			db: db,
+		}
+	}
+
+	if config.self.public {
+		println("[Websockets] Node is public, starting server...")
+		return Websocket_Server{
+			is_client: false,
+			db: db,
+		 	s: start_server(db, config)
+		}
+	} else {
+		println("[Websockets] Node is private, starting client...")
+		return Websocket_Server{
+			is_client: true,
+			db: db,
+		 	c: start_client(db, config)
+		}
+	}
+
+	eprintln("[Websockets] Error starting websocket server.")
+	exit(1)
+}
+
+fn on_message(mut ws websocket.Client, msg &websocket.Message, mut obj &Websocket_Server) ? {
+	println('[Websockets] Received message: $msg')
+	match msg.opcode {
+		.text_frame {
+			parsed_msg := json.decode(WS_Object, msg.payload.str()) or {
+				eprintln('[Websockets] Could not parse message: $err')
+				return
+			}
+
+			if parsed_msg is Broadcast_Message {
+				println('[Websockets] received broadcast message: $parsed_msg')
+				valid := broadcast_receiver(obj.db, mut obj, parsed_msg)
+
+				if valid == .ok {
+					println('[Websockets] Broadcast message was valid')
+					send_ws(mut ws, json.encode(WS_Success{"Broadcast message was valid"}))				
+				} else {
+					println('[Websockets] Broadcast message was invalid')
+					send_ws(mut ws, json.encode(WS_Error{1, "Broadcast message was invalid"}))
+				}
+			} else if parsed_msg is WS_Success {
+				println("[Websockets] Received success message: $parsed_msg.info")
+			} else if parsed_msg is WS_Error { 
+				eprintln('[Websockets] Received error message: $parsed_msg.info')
+			} else {
+				eprintln('[Websockets] Received unknown message: $parsed_msg')
+			}
+		}
+		else {
+			println('[Websockets] received unknown message: $msg')
+		}
+	}
+}
+
+fn send_ws(mut ws websocket.Client, msg string) bool {
+	ws.write_string(msg) or {
+		eprintln('[Websockets] Could not send message: $err')
+		return false
+	}
+	return true
+}
+
+
 ```
+
+The commit for this code is available [here](https://github.com/AlfieRan/MonoChain/blob/3388fb2b4889f92b5f6cff9d4746c641885188d1/packages/node/src/modules/server/).
 
 ### Challenges
 
@@ -123,7 +446,7 @@ One of the members of the Vlang team then confirmed that the bug I had discovere
 
 Here are the two fixes I made, the top image looks like I changed a lot more than I actually did but that's just to me changing the code comments slightly.
 
-<figure><img src="../.gitbook/assets/image (14) (1).png" alt=""><figcaption><p>The code I changed (green is my code and red is what it replaced)</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (14).png" alt=""><figcaption><p>The code I changed (green is my code and red is what it replaced)</p></figcaption></figure>
 
 <figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption><p>The code I changed (green is my code and red is what it replaced)</p></figcaption></figure>
 
