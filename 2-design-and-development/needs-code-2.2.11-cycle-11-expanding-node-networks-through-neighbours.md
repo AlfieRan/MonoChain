@@ -39,7 +39,9 @@ Objective 2 solution:
 
 ## Development
 
-Since the web sockets have two types of connections, servers and clients, some kind of wrapper function will be required to prevent all parts of the code from having to have two methods for both objects&#x20;
+Since the web sockets have two types of connections, servers and clients, some kind of wrapper function will be required to prevent all parts of the code from having to have two methods for both objects and instead simplifying it to being called on the wrapper object and then that object handling how to deal with the client and server respectively.
+
+The other key section of code that needs to be developed is how the web-socket object is then passed around the code to various api endpoint functions, as these api endpoints will need to be able to send their own web-socket messages for functionality such as message forwarding. To do this, I plan to simply pass the object as a "shared" parameter into the api generator so that the endpoints can use it as required, however since I am completely sure on how V will handle this I will  first write a test program which will be shown below in the outcome section.
 
 ### Outcome
 
@@ -409,7 +411,7 @@ fn send_ws(mut ws websocket.Client, msg string) bool {
 
 The commit for this code is available [here](https://github.com/AlfieRan/MonoChain/blob/3388fb2b4889f92b5f6cff9d4746c641885188d1/packages/node/src/modules/server/).
 
-### Challenges
+## Challenges
 
 The main challenge faced through the development of this cycle was not one of my own code, but instead of the language that I am using's standard library. In particular, the `log` module that is included within it.
 
