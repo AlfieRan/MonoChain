@@ -210,6 +210,8 @@ This code can be found in [this commit here](https://github.com/AlfieRan/MonoCha
 
 #### The Api route
 
+This is the endpoint at which a node will send a http POST request to in order to request a handshake response in accordance to the details sent in the request.
+
 ```v
 // V code - within the "handshake" route in /src/modules/server/handshake.v 
 
@@ -254,6 +256,8 @@ pub fn (mut app App) handshake_route() vweb.Result {
 ```
 
 #### The Handshake Requester
+
+This code handles the assembly of a handshake request, then the http request and finally the handling of the returned data then returns a boolean value that represents whether the handshake was successful or not.
 
 ```v
 // V code - /src/modules/server/handshake.v
