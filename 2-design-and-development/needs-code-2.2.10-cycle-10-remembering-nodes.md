@@ -57,7 +57,7 @@ Although the changes introduced in this cycle were fairly simple to do and didn'
 
 #### Handling References
 
-
+This piece of code handles the initial definition of the 'References' object and the loading, saving generation of that object. Like most of the rest of the key objects in the codebase the object is saved and loaded in json.
 
 ```v
 module memory
@@ -112,7 +112,9 @@ pub fn get_refs(file_path string) References {
 }
 ```
 
-#### ref
+#### Using the Reference object
+
+The functions in this block of code allow for other parts of the codebase to add keys to both the standard reference and the blacklist reference simply by supplying the reference (and key for the main reference type). Then also to check if the references object is already aware of a specified reference for use in areas such as the handshake code expanded in [Cycle 10](needs-code-2.2.9-cycle-9-basic-inter-nodal-communication.md).
 
 ```v
 pub fn (refs References) aware_of(reference string) bool {
