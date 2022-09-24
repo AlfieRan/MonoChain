@@ -41,7 +41,8 @@
   * [2.5.2.2 Transaction Speed](2.5-the-protocol/2.5.2-blocks-and-transactions/2.5.2.2-transaction-speed.md)
 * [2.5.3 Consensus Algorithm](2.5-the-protocol/2.5.3-consensus-algorithm/README.md)
   * [2.5.3.1 Proof of Worth - the bullet point summary.](2.5-the-protocol/2.5.3-consensus-algorithm/2.5.3.1-proof-of-worth-the-bullet-point-summary..md)
-  * [2.5.3.5 Voting](2.5-the-protocol/2.5.3-consensus-algorithm/2.5.3.5-voting.md)
+  * [2.5.3.2 Leader vs Worker nodes](2.5-the-protocol/2.5.3-consensus-algorithm/2.5.3.2-leader-vs-worker-nodes.md)
+  * [2.5.3.3 Voting](2.5-the-protocol/2.5.3-consensus-algorithm/2.5.3.5-voting.md)
 
 ## 3 Testing <a href="#testing" id="testing"></a>
 
