@@ -51,11 +51,13 @@ Objective 2 solution:
 
 ## Development
 
-Most of the development for this cycle was just setup, to get everything I need for this project up and running and building out the structure of the codebase in order to make the actual programming as smooth as possible.
+Although the changes introduced in this cycle were fairly simple to do and didn't take many changes to the rest of the program to start being used properly, they are still very substantial, as the addition of referencing at memorising which nodes a node has come into contact with before is what will allow the network to truly grow and become as interconnected as it will need to be to work properly.
 
 ### Outcome
 
 #### Handling References
+
+
 
 ```v
 module memory
@@ -108,7 +110,11 @@ pub fn get_refs(file_path string) References {
 
 	return refs
 }
+```
 
+#### ref
+
+```v
 pub fn (refs References) aware_of(reference string) bool {
 	// check if the reference is in the blacklist.
 	if refs.blacklist[reference] {
