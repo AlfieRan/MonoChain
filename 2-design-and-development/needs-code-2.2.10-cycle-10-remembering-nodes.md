@@ -151,6 +151,8 @@ pub fn (mut refs References) add_blacklist(reference string) {
 
 #### Using references when receiving a handshake.
 
+This is a piece of code taken from the handshake responder api route that checks if the node has come into contact with the node sending a handshake request before and if not, starts a new handshake to 'get to know' the new node.
+
 ```v
 println("Handshake Analysis Complete. Sending response...")
 // now need to figure out where message came from and respond back to it
@@ -165,6 +167,8 @@ if !refs.aware_of(req_parsed.initiator.ref) {
 ```
 
 #### Using references when sending a handshake.
+
+This allows the node to remember if a node successfully completed a handshake request - in which case it is added to the main reference map - or unsuccessfully didn't complete the request - in which case the reference is temporarily blacklisted until the node restarts.&#x20;
 
 ```v
 mut refs := memory.get_refs(config.ref_path)
