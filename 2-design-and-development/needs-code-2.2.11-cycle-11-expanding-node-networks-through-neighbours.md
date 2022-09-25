@@ -301,7 +301,6 @@ import json
 // websocket server
 
 struct Websocket_Server {
-	is_disabled bool
 	is_client bool	[required]
 	db database.DatabaseConnection	[required]
 	mut:
@@ -310,12 +309,6 @@ struct Websocket_Server {
 }
 
 pub fn (mut ws Websocket_Server) send_to_all(msg string) bool {
-	if ws.is_disabled {
-		eprintln("[Websockets] Message requested to send but websockets are disabled.")
-		return false
-	}
-
-
 	println("[Websockets] Sending message to all clients...")
 	if ws.is_client {
 		println("[Websockets] Sending messages as a client...")
@@ -328,11 +321,6 @@ pub fn (mut ws Websocket_Server) send_to_all(msg string) bool {
 }
 
 pub fn (mut ws Websocket_Server) connect(ref string) bool {
-	if ws.is_disabled {
-		eprintln("[Websockets] Connection requested to send but websockets are disabled.")
-		return false
-	}
-
 	println("[Websockets] Connecting to server $ref")
 	if ws.is_client {
 		println("[Websockets] Connecting as a client...")
@@ -346,11 +334,6 @@ pub fn (mut ws Websocket_Server) connect(ref string) bool {
 }
 
 pub fn (mut ws Websocket_Server) listen() {
-	if ws.is_disabled {
-		eprintln("[Websockets] request to listen but websockets are disabled.")
-		return
-	}
-
 	if !ws.is_client {
 		println("[Websockets] Listening for connections...")
 		ws.s.listen()
@@ -361,17 +344,15 @@ pub fn (mut ws Websocket_Server) listen() {
 }
 ```
 
+#### The generic functions
+
+These functions are for use by both the client and server web-socket objects and are also useful in other parts of the program hence are stored as "generic functions" as they can be used generically.
+
 ```v
 pub fn gen_ws_server(db database.DatabaseConnection, config configuration.UserConfig) Websocket_Server {
-	if !config.advanced.ws_enabled {
-		eprintln("[Websockets] Requested to generate a server but websockets are disabled.")
-		return Websocket_Server{
-			is_disabled: !config.advanced.ws_enabled,
-			is_client: true,
-			db: db,
-		}
-	}
-
+	// this simply attempts to create a websocket server
+	// based upon the node's config settings.
+	
 	if config.self.public {
 		println("[Websockets] Node is public, starting server...")
 		return Websocket_Server{
