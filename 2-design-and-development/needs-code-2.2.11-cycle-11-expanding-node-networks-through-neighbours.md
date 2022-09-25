@@ -309,6 +309,9 @@ struct Websocket_Server {
 }
 
 pub fn (mut ws Websocket_Server) send_to_all(msg string) bool {
+	// this selects between the client and server object and sends a request
+	// to the relevant object to send a message to all of it's connections.
+
 	println("[Websockets] Sending message to all clients...")
 	if ws.is_client {
 		println("[Websockets] Sending messages as a client...")
@@ -321,6 +324,10 @@ pub fn (mut ws Websocket_Server) send_to_all(msg string) bool {
 }
 
 pub fn (mut ws Websocket_Server) connect(ref string) bool {
+	// if this is called by a client object then a connection will be established
+	// with the reference supplied, but if it was a server then an error message
+	// will be returned as that is not possible.
+	
 	println("[Websockets] Connecting to server $ref")
 	if ws.is_client {
 		println("[Websockets] Connecting as a client...")
@@ -334,6 +341,10 @@ pub fn (mut ws Websocket_Server) connect(ref string) bool {
 }
 
 pub fn (mut ws Websocket_Server) listen() {
+	// servers are required to listen for incoming connections hence
+	// this starts that process when called and does nothing for a client as they
+	// don't need to.
+
 	if !ws.is_client {
 		println("[Websockets] Listening for connections...")
 		ws.s.listen()
@@ -388,38 +399,51 @@ type WS_Object = Broadcast_Message | WS_Error | WS_Success
 // the function that is run anytime a connection receives a message 
 fn on_message(mut ws websocket.Client, msg &websocket.Message, mut obj &Websocket_Server) ? {
 	println('[Websockets] Received message: $msg')
+	
+	// first check the message's encoding method, this software only uses
+	// text so .text_frame is the only option here.
 	match msg.opcode {
 		.text_frame {
+			// now the message is decoded into a json object.
 			parsed_msg := json.decode(WS_Object, msg.payload.str()) or {
 				eprintln('[Websockets] Could not parse message: $err')
 				return
 			}
 
+			// if this object is a Broadcast request then handle it.
 			if parsed_msg is Broadcast_Message {
 				println('[Websockets] received broadcast message: $parsed_msg')
+				// check if the request is valid
 				valid := broadcast_receiver(obj.db, mut obj, parsed_msg)
 
 				if valid == .ok {
+					// request is valid, so send a success response
 					println('[Websockets] Broadcast message was valid')
 					send_ws(mut ws, json.encode(WS_Success{"Broadcast message was valid"}))				
 				} else {
+					// request was invalid, send an error response
 					println('[Websockets] Broadcast message was invalid')
 					send_ws(mut ws, json.encode(WS_Error{1, "Broadcast message was invalid"}))
 				}
 			} else if parsed_msg is WS_Success {
+				// received a success response to a message.
 				println("[Websockets] Received success message: $parsed_msg.info")
 			} else if parsed_msg is WS_Error { 
+				// received an error response to a message.
 				eprintln('[Websockets] Received error message: $parsed_msg.info')
 			} else {
+				// object is of an unknown type
 				eprintln('[Websockets] Received unknown message: $parsed_msg')
 			}
 		}
 		else {
+		// if this is called then the message was encoded incorrectly.
 			println('[Websockets] received unknown message: $msg')
 		}
 	}
 }
 
+// this wraps the "write_string" method for more graceful error handling.
 fn send_ws(mut ws websocket.Client, msg string) bool {
 	ws.write_string(msg) or {
 		eprintln('[Websockets] Could not send message: $err')
