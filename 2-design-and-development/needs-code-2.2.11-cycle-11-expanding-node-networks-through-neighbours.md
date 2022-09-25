@@ -298,17 +298,6 @@ import configuration
 import net.websocket
 import json
 
-struct WS_Error {
-	code int
-	info string
-}
-
-struct WS_Success {
-	info string
-}
-
-type WS_Object = Broadcast_Message | WS_Error | WS_Success
-
 // websocket server
 
 struct Websocket_Server {
@@ -370,9 +359,9 @@ pub fn (mut ws Websocket_Server) listen() {
 		return
 	}
 }
+```
 
-// generic functions
-
+```v
 pub fn gen_ws_server(db database.DatabaseConnection, config configuration.UserConfig) Websocket_Server {
 	if !config.advanced.ws_enabled {
 		eprintln("[Websockets] Requested to generate a server but websockets are disabled.")
@@ -403,6 +392,19 @@ pub fn gen_ws_server(db database.DatabaseConnection, config configuration.UserCo
 	exit(1)
 }
 
+// structs and types used for decoding and encoding messages.
+struct WS_Error {
+	code int
+	info string
+}
+
+struct WS_Success {
+	info string
+}
+
+type WS_Object = Broadcast_Message | WS_Error | WS_Success
+
+// the function that is run anytime a connection receives a message 
 fn on_message(mut ws websocket.Client, msg &websocket.Message, mut obj &Websocket_Server) ? {
 	println('[Websockets] Received message: $msg')
 	match msg.opcode {
@@ -444,8 +446,6 @@ fn send_ws(mut ws websocket.Client, msg string) bool {
 	}
 	return true
 }
-
-
 ```
 
 The commit for this code is available [here](https://github.com/AlfieRan/MonoChain/blob/3388fb2b4889f92b5f6cff9d4746c641885188d1/packages/node/src/modules/server/).
