@@ -45,9 +45,9 @@ The other key section of code that needs to be developed is how the web-socket o
 
 The reason that I didn't use the shared parameter when dealing with the configuration object earlier on is because when I last looked into this type of parameter the Vweb module didn't fully support it, thus it caused some weird side effects, but Vweb should now support shared parameters to their full extent so it should all work as expected.
 
-### Outcome
+## Outcome
 
-#### The test code
+### The test code
 
 This was the basic test code I wrote in order to confirm that shared parameters do in fact work as they are described to and that I can therefore use them to pass the web-socket connections around to the various api endpoints as required.
 
@@ -86,7 +86,7 @@ pub fn (mut app App) test() vweb.Result {
 }
 ```
 
-#### The web socket client
+### The web socket client file
 
 This code handles the ability for multiple client web-socket connections and will be used by private nodes that do not intend to host servers for other clients to connect to and hence need the ability to create and store multiple client connections whilst still being able to create connections easily.
 
@@ -187,20 +187,25 @@ fn socket_error(mut c websocket.Client, err string) ? {
 }
 ```
 
-#### The web socket server
+### The web socket server file
+
+This file contains all the logic and code required to assemble a web-socket server for use in public nodes, although it may seems as if both the client and server files do very similar things, they are fundamentally different in the fact that the web-socket module built into V does not support creating connections as a server object or receiving them as a client.&#x20;
+
+This means that public nodes that wish to accept incoming connections must use the server object type whilst private nodes that wish to send out outgoing connections must use the client object type, even if the logic in each is almost identical.
 
 ```v
 // Found at /packages/node/src/modules/server/ws_server.v
 module server
 
-// internal
+// internal modules
 import database
 import configuration
 
-// external
+// external modules
 import net.websocket
 import log
 
+// the server object
 struct Server {
 	db database.DatabaseConnection	[required]
 	config configuration.UserConfig [required]
@@ -209,6 +214,7 @@ struct Server {
 }
 
 pub fn start_server(db database.DatabaseConnection, config configuration.UserConfig) Server {
+	// create and setup the server object to accept incoming connections
 	mut sv := websocket.new_server(.ip, config.ports.ws, "", websocket.ServerOpt{
 		logger: &log.Logger(&log.Log{
 			level: .info
@@ -225,6 +231,7 @@ pub fn start_server(db database.DatabaseConnection, config configuration.UserCon
 }
 
 pub fn (mut S Server) listen() {
+	// this allows the server to actually start listening for connections.
 	S.sv.listen() or {
 		eprintln("[Websockets] ERROR - Error listening on server: $err")
 		exit(1)
@@ -232,6 +239,8 @@ pub fn (mut S Server) listen() {
 }
 
 pub fn (mut S Server) send_to(id string, data string) bool {
+	// this sends a message to a specific client connection based upon id.
+	
 	println("[Websockets] Sending a message to $id")
 
 	mut cl := S.sv.clients[id] or {
@@ -248,6 +257,8 @@ pub fn (mut S Server) send_to(id string, data string) bool {
 }
 
 pub fn (mut S Server) send_to_all(data string) bool {
+	// this loops through all connections and sends a message to each one.
+
 	len := S.sv.clients.keys().len
 	println("[Websockets] Sending a message to all $len clients")
 
@@ -266,7 +277,13 @@ pub fn (mut S Server) send_to_all(data string) bool {
 
 ```
 
-#### The generic web socket object that wraps the client and server.
+### The generic web socket file
+
+This file includes two main sections: one for wrapping functionality over both the client and server objects so the rest of the code doesn't have to worry about handling both object types and can just call any methods it needs to call; and the other for receiving messages then decoded and using them as they would be used by the http side of the project.
+
+#### The wrapper object
+
+This is the first half of the code and simply helps make it easier for other parts of the code to deal with the web-socket connections as described in the summary of this file.
 
 ```v
 // Found at /packages/node/src/modules/server/ws_generic.v
