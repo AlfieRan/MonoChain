@@ -49,7 +49,9 @@ The reason that I didn't use the shared parameter when dealing with the configur
 
 #### The test code
 
-This was the test code for confirming that shared variables do in fact do what I needed them to do.
+This was the basic test code I wrote in order to confirm that shared parameters do in fact work as they are described to and that I can therefore use them to pass the web-socket connections around to the various api endpoints as required.
+
+This code will be ran and demonstrated in test 1 of the testing section further along in this cycle.&#x20;
 
 ```v
 struct Info {
