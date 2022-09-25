@@ -19,11 +19,10 @@ The solution to this is to introduce web sockets so that "private" nodes without
 
 ### Key Variables
 
-| Variable Name | Use |
-| ------------- | --- |
-|               |     |
-|               |     |
-|               |     |
+| Variable Name                            | Use                                                                                                                                       |
+| ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| <pre><code>Websocket_Server</code></pre> | This object holds all the methods/functions for the web-socket server and is what allows web-socket connections to be generated and used. |
+| <pre><code>WS_Object</code></pre>        | This is the object which is sent and received through web-socket connections and allows messages to be standardised.                      |
 
 ### Pseudocode
 
