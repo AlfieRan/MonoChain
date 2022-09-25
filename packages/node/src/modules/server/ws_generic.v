@@ -22,6 +22,7 @@ type WS_Object = Broadcast_Message | WS_Error | WS_Success
 // websocket server
 
 struct Websocket_Server {
+	is_disabled bool
 	is_client bool	[required]
 	db database.DatabaseConnection	[required]
 	mut:
@@ -30,6 +31,12 @@ struct Websocket_Server {
 }
 
 pub fn (mut ws Websocket_Server) send_to_all(msg string) bool {
+	if ws.is_disabled {
+		eprintln("[Websockets] Message requested to send but websockets are disabled.")
+		return false
+	}
+
+
 	println("[Websockets] Sending message to all clients...")
 	if ws.is_client {
 		println("[Websockets] Sending messages as a client...")
@@ -42,6 +49,11 @@ pub fn (mut ws Websocket_Server) send_to_all(msg string) bool {
 }
 
 pub fn (mut ws Websocket_Server) connect(ref string) bool {
+	if ws.is_disabled {
+		eprintln("[Websockets] Connection requested to send but websockets are disabled.")
+		return false
+	}
+
 	println("[Websockets] Connecting to server $ref")
 	if ws.is_client {
 		println("[Websockets] Connecting as a client...")
@@ -55,6 +67,11 @@ pub fn (mut ws Websocket_Server) connect(ref string) bool {
 }
 
 pub fn (mut ws Websocket_Server) listen() {
+	if ws.is_disabled {
+		eprintln("[Websockets] request to listen but websockets are disabled.")
+		return
+	}
+
 	if !ws.is_client {
 		println("[Websockets] Listening for connections...")
 		ws.s.listen()
@@ -67,6 +84,15 @@ pub fn (mut ws Websocket_Server) listen() {
 // generic functions
 
 pub fn gen_ws_server(db database.DatabaseConnection, config configuration.UserConfig) Websocket_Server {
+	if !config.advanced.ws_enabled {
+		eprintln("[Websockets] Requested to generate a server but websockets are disabled.")
+		return Websocket_Server{
+			is_disabled: !config.advanced.ws_enabled,
+			is_client: true,
+			db: db,
+		}
+	}
+
 	if config.self.public {
 		println("[Websockets] Node is public, starting server...")
 		return Websocket_Server{
@@ -82,7 +108,6 @@ pub fn gen_ws_server(db database.DatabaseConnection, config configuration.UserCo
 		 	c: start_client(db, config)
 		}
 	}
-
 
 	eprintln("[Websockets] Error starting websocket server.")
 	exit(1)

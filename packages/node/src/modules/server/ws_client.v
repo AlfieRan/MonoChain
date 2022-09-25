@@ -65,13 +65,13 @@ pub fn (mut c Client) send_to_all(data string) bool {
 }
 
 fn socket_opened(mut c websocket.Client) ? {
-	println("[Websocket] Socket opened")
+	println("[Websockets] Socket opened")
 }
 
 fn socket_closed(mut c websocket.Client, code int, reason string) ? {
-	println("[Websocket] Socket closed, code: $code, reason: $reason")
+	println("[Websockets] Socket closed, code: $code, reason: $reason")
 }
 
 fn socket_error(mut c websocket.Client, err string) ? {
-	println("[Websocket] Socket error: $err")
+	println("[Websockets] Socket error: $err")
 }

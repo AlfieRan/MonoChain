@@ -26,9 +26,9 @@ pub fn start(config configuration.UserConfig) {
 	// start http server
 	println("[Server] Starting http server")
 	app := App{db: db, ws: ws}
-	api := go vweb.run(app, config.port) // start server on a new thread
+	api := go vweb.run(app, config.ports.http) // start server on a new thread
 
-	if !config.bypass_entry {
+	if !config.advanced.bypass_entry {
 		// initiate entry point to network
 		println("[Server] Initiating entry point to network")
 		if !config.self.public {

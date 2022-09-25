@@ -85,7 +85,7 @@ pub fn (mut app App) gentoken_route() vweb.Result {
 		}
 	}
 
-	println("\n\n[Server] Generated new token: $token\n[Server] Enter it at http://localhost:$config.port/dashboard to login \n\n")
+	println("\n\n[Server] Generated new token: $token\n[Server] Enter it at http://localhost:$config.ports.http/dashboard to login \n\n")
 	
 	// Confirm the token has been sent
 	return app.ok("ok")

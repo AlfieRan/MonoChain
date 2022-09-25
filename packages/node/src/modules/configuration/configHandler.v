@@ -4,7 +4,7 @@ import utils
 // external imports
 import pg
 
-const config_version = 11
+const config_version = 12
 pub const base_path = "./monochain"
 pub const config_path = "$base_path/config.json"
 
@@ -14,14 +14,12 @@ pub struct UserConfig {
 	config_version int
 	pub:
 		loaded bool	// has the config loaded up
-		headless bool	// run in headless mode - no inputs
 		key_path string		// the path to the private key file
 		self Node	// ref to self
 		entrypoint Node = Node{http_ref: "https://nano.monochain.network", ws_ref: "wss://live.monochain.network"}	// the entrypoint node
-		bypass_entry bool
 		db_config DbConfig	// is the db running on a seperate server
-		port int	// open port for server - only required if node is public
-		ws_port int	// open port for websocket server - only required if node is public
+		ports Ports	// the ports used to run servers
+		advanced AdvancedSettings // advanced settings that most users should not change
 }
 
 type UserConfigType = UserConfig
@@ -37,7 +35,21 @@ struct Node {
 struct DbConfig {
 	pub:
 		run_seperate bool // if this is true, the db will run on a seperate server and require below info, if not it will setup using docker
-		config pg.Config
+		config pg.Config	// stores the configuration of the database
+}
+
+struct AdvancedSettings {
+	// Changing these values is not recommended
+	pub:
+		bypass_entry bool	// bypasses connecting to any entrypoint on the network - useful for testing custom node setups
+		ws_enabled bool = true	// disables websockets and runs purely using http - useful for debugging
+}
+
+struct Ports {
+	pub:
+		// the ports that are used for various parts of the node
+		http int = 8000	// the port to run the http server on
+		ws int = 8001 // the port to run the websocket server on
 }
 
 pub fn get_config() UserConfig {

@@ -15,32 +15,19 @@ struct Server {
 		sv websocket.Server	[required]
 }
 
-pub fn test_server () bool {
-	println("[WEBSOCKET TEST] Getting constants")
-	config := configuration.get_config()
-	db := database.connect(config.db_config.run_seperate, config.db_config.config)
-	println("[WEBSOCKET TEST] Generating server")
-	mut ws := gen_ws_server(db, config)
-	println("[WEBSOCKET TEST] Starting server")
-	ws.listen()
-	return true
-}
-
-
 pub fn start_server(db database.DatabaseConnection, config configuration.UserConfig) Server {
-	mut sv := websocket.new_server(.ip, config.ws_port, "", websocket.ServerOpt{
+	mut sv := websocket.new_server(.ip, config.ports.ws, "", websocket.ServerOpt{
 		logger: &log.Logger(&log.Log{
 			level: .info
 		})
 	})
 	mut s := Server{db, config, sv}
 
-	println("[Websockets] Server initialised on port $config.ws_port, setting up handlers...")
+	println("[Websockets] Server initialised on port $config.ports.ws, setting up handlers...")
 	sv.on_message_ref(on_message, &s)
 	
-	
-
-	println("[Websockets] Server setup on port $config.ws_port, ready to launch.")
+	println("[Websockets] Server setup on port $config.ports.ws, ready to launch.")
+	// this does not start listening to the server, need to do that later
 	return s
 }
 
