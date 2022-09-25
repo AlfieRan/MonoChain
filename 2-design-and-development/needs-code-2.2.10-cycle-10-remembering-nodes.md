@@ -31,10 +31,11 @@ The diagram above shows how such a message flow would work, with node 'a' wantin
 
 ### Key Variables
 
-| Variable Name                      | Use                                                                                                                                                                                                           |
-| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <pre><code>References</code></pre> | This is the references object which holds all the known references that a node has encountered as well as some functionality to check if the node is aware of a specific reference, add a new reference, etc. |
-| <pre><code>ref_path</code></pre>   | This is the file path of the file at which the references object is stored and loaded from. This is stored as a parameter within the configuration object.                                                    |
+| Variable Name | Use |
+| ------------- | --- |
+|               |     |
+|               |     |
+|               |     |
 
 ### Pseudocode
 
@@ -50,13 +51,11 @@ Objective 2 solution:
 
 ## Development
 
-Although the changes introduced in this cycle were fairly simple to do and didn't take many changes to the rest of the program to start being used properly, they are still very substantial, as the addition of referencing at memorising which nodes a node has come into contact with before is what will allow the network to truly grow and become as interconnected as it will need to be to work properly.
+Most of the development for this cycle was just setup, to get everything I need for this project up and running and building out the structure of the codebase in order to make the actual programming as smooth as possible.
 
 ### Outcome
 
 #### Handling References
-
-This piece of code handles the initial definition of the 'References' object and the loading, saving generation of that object. Like most of the rest of the key objects in the codebase the object is saved and loaded in json.
 
 ```v
 module memory
@@ -109,13 +108,7 @@ pub fn get_refs(file_path string) References {
 
 	return refs
 }
-```
 
-#### Using the Reference object
-
-The functions in this block of code allow for other parts of the codebase to add keys to both the standard reference and the blacklist reference simply by supplying the reference (and key for the main reference type). Then also to check if the references object is already aware of a specified reference for use in areas such as the handshake code expanded in [Cycle 10](needs-code-2.2.9-cycle-9-basic-inter-nodal-communication.md).
-
-```v
 pub fn (refs References) aware_of(reference string) bool {
 	// check if the reference is in the blacklist.
 	if refs.blacklist[reference] {
@@ -150,8 +143,6 @@ pub fn (mut refs References) add_blacklist(reference string) {
 
 #### Using references when receiving a handshake.
 
-This is a piece of code taken from the handshake responder api route that checks if the node has come into contact with the node sending a handshake request before and if not, starts a new handshake to 'get to know' the new node.
-
 ```v
 println("Handshake Analysis Complete. Sending response...")
 // now need to figure out where message came from and respond back to it
@@ -166,8 +157,6 @@ if !refs.aware_of(req_parsed.initiator.ref) {
 ```
 
 #### Using references when sending a handshake.
-
-This allows the node to remember if a node successfully completed a handshake request - in which case it is added to the main reference map - or unsuccessfully didn't complete the request - in which case the reference is temporarily blacklisted until the node restarts.&#x20;
 
 ```v
 mut refs := memory.get_refs(config.ref_path)
