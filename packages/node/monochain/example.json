@@ -1,0 +1,30 @@
+{
+	"last_connect": 0,
+	"config_version": 11,
+	"loaded": true,
+	"key_path": "./monochain/keys.config",
+	"self": {
+		"public": true,
+		"http_ref": "https://dash.monochain.network",
+		"ws_ref": "wss://live.monochain.network",
+		"key": []
+	},
+	"entrypoint": {
+		"public": true,
+		"http_ref": "https://dash.monochain.network",
+		"ws_ref": "wss://live.monochain.network",
+		"key": []
+	},
+	"db_config": {
+		"run_seperate": false,
+		"config": {
+			"host": "database.amazonaws.com",
+			"port": 5432,
+			"user": "postgres",
+			"password": "password",
+			"dbname": "postgres"
+		}
+	},
+	"port": 8000,
+	"ws_port": 8001
+}
