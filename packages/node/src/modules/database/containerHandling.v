@@ -15,7 +15,7 @@ const start_psql_docker = "docker start $image_name"
 const stop_psql_docker = "docker stop $image_name"
 
 // returns whether or not the command executed properly
-fn sh(cmd string) bool {
+pub fn sh(cmd string) bool {
   println("[shell] > $cmd")
   executed := os.execute(cmd)
   print("[shell] - $executed.output")

@@ -54,7 +54,7 @@ struct Ports {
 
 pub fn get_config() UserConfig {
 	// get the user configuration from the defualt file location
-	mut user_config := load_config()
+	mut user_config := load_config(false)
 
 	if !user_config.loaded {
 		// if config doesn't exist, ask user to create a new one
@@ -82,7 +82,9 @@ fn new_config(recursion_depth int) UserConfig {
 	if create_new_config_usr { // user confirmed
 		// start creating the new file
 		println("\n[config] Creating new configuration file...")
-		return create_configuration() // create the new configuration and return it
+		 // create the new configuration and return it
+		create_configuration(false)
+		exit(0) // exit the program
 
 	} else { //user denied
 		// user requested to not create a new config file, so exit the program.

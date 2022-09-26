@@ -1,18 +1,17 @@
-module cryptography
-
+import cryptography
 import time
 
-pub fn generate_key_pair_test() (bool) {
+pub fn test_gen_keys() {
 	println("[testing] Testing Key Pair Generation")
-	gen_keys()
+	cryptography.gen_keys()
 	// because the gen_keys function hasn't exited yet, we know that the keys are valid
 	println("[testing] Key Pair Generation Test Passed")
-	return true
+	assert true
 }
 
-pub fn sign_test() (bool) {
+pub fn test_sign() {
 	println("[testing] Testing Signing")
-	keys := gen_keys()
+	keys := cryptography.gen_keys()
 
 	println("[testing] Generated a new key pair successfully")
 	message := time.utc().str().bytes()
@@ -22,12 +21,13 @@ pub fn sign_test() (bool) {
 	println("[testing] Signing Test Passed")
 
 	// because the sign function hasn't exited yet, we know that the signature is valid
-	return true
+	assert true
 }
 
-pub fn verify_test() (bool) {
+pub fn test_verify() {
+	mut failed := false
 	println("[testing] Testing Verification")
-	keys := gen_keys()
+	keys := cryptography.gen_keys()
 
 	println("[testing] Generated a new key pair successfully")
 	message := time.utc().str().bytes()
@@ -35,13 +35,15 @@ pub fn verify_test() (bool) {
 	signature := keys.sign(message)
 	println("[testing] Signed a message successfully")
 
-	if verify(keys.pub_key, message, signature) {
+	if cryptography.verify(keys.pub_key, message, signature) {
 		println("[testing] Verified a signature successfully")
 		println("[testing] Verification Test Passed")
-		return true
+		failed = false
+	} else {
+		println("[testing] Verification failed")
+		println("[testing] Verification Test Failed")
+		failed = true
 	}
-
-	println("[testing] Verification failed")
-	println("[testing] Verification Test Failed")
-	return false
+	
+	assert failed == false
 }

@@ -4,7 +4,7 @@ import cryptography
 
 const key_path_const = "$base_path/keys.config"
 
-pub fn create_configuration() UserConfig {
+pub fn create_configuration(inp_path StrBool) UserConfig {
 	config := UserConfig{
 		config_version: config_version
 		key_path: key_path_const
@@ -20,9 +20,8 @@ pub fn create_configuration() UserConfig {
 		}
 	}
 
-	save_config(config, 0)
+	save_config(config, 0, inp_path)
 	println("[config] A default configuration file has been created at $base_path/config.json\nPlease edit it according to https://monochain.network/download/ \nThen relaunch the program.")
-	exit(0)
 	return config
 }
 
