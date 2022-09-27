@@ -70,3 +70,11 @@ pub fn save_file(path string, data string, recursion_depth int) (bool) {
 
 	return failed
 }
+
+pub fn delete_file(path string) {
+	if os.exists(path) {
+		os.rm(path) or {
+			eprintln("[utils] Failed to delete file at path $path, error $err")
+		}
+	}
+}
