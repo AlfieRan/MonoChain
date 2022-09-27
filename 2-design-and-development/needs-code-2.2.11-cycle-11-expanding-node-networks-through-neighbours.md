@@ -516,4 +516,4 @@ Here are the two fixes I made, the top image looks like I changed a lot more tha
 
 Sending messages once every 0.5 seconds for a prolonged period of time.
 
-<figure><img src="../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (5) (4).png" alt=""><figcaption></figcaption></figure>
