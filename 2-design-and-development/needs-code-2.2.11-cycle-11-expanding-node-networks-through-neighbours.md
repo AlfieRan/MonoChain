@@ -492,7 +492,7 @@ Here are the two fixes I made, the top image looks like I changed a lot more tha
 
 <figure><img src="../.gitbook/assets/image (14).png" alt=""><figcaption><p>The code I changed (green is my code and red is what it replaced)</p></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption><p>The code I changed (green is my code and red is what it replaced)</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (3) (3).png" alt=""><figcaption><p>The code I changed (green is my code and red is what it replaced)</p></figcaption></figure>
 
 <figure><img src="../.gitbook/assets/IMG_7004.png" alt=""><figcaption><p>A screenshot of my commit in the official V git repository.</p></figcaption></figure>
 

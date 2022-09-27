@@ -8,7 +8,7 @@ The next step to building a network in which nodes can successfully communicate 
 
 This is what will create the networking effect that allows for messages to flow throughout the entire network without having to have any form of central server.
 
-<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption><p>A diagram showing how communication across the network works.</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption><p>A diagram showing how communication across the network works.</p></figcaption></figure>
 
 The diagram above shows how such a message flow would work, with node 'a' wanting to send a message across the network which will end up with every node having read it, including node 'g' at the opposite side. The way in which this will work can be explained using a few stages:
 

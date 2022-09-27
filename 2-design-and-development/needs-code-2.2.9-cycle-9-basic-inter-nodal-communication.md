@@ -330,13 +330,13 @@ This involved planning for the future and examining how to get the reference of 
 
 <figure><img src="../.gitbook/assets/image (1) (2) (3).png" alt=""><figcaption><p>The handshake initiator</p></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/image (6) (2) (2).png" alt=""><figcaption><p>The handshake Recipient</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (6) (2).png" alt=""><figcaption><p>The handshake Recipient</p></figcaption></figure>
 
 As shown, both the initiator and recipient successfully agreed on the handshake, with both showing the same time message to prove this was the same handshake as the test.
 
 #### Test 2 Evidence - Invalid data in the handshake
 
-<figure><img src="../.gitbook/assets/image (11).png" alt=""><figcaption><p>The handshake initiator</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (11) (1).png" alt=""><figcaption><p>The handshake initiator</p></figcaption></figure>
 
 <figure><img src="../.gitbook/assets/image (1) (2).png" alt=""><figcaption><p>The handshake Recipient</p></figcaption></figure>
 
