@@ -7,7 +7,7 @@ description: Computer Science H446-03
 |                  |                |
 | ---------------- | -------------- |
 | Candidate Name   | Alfie Ranstead |
-| Candidate Number | xxxx           |
+| Candidate Number | 1317           |
 | Centre Name      | Marling School |
 | Centre Number    | 57037          |
 
