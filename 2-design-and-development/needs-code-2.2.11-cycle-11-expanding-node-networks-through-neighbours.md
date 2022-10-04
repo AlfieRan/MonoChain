@@ -490,9 +490,9 @@ One of the members of the Vlang team then confirmed that the bug I had discovere
 
 Here are the two fixes I made, the top image looks like I changed a lot more than I actually did but that's just due to me changing the code comments slightly.
 
-<figure><img src="../.gitbook/assets/image (14).png" alt=""><figcaption><p>The code I changed (green is my code and red is what it replaced)</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (14) (1).png" alt=""><figcaption><p>The code I changed (green is my code and red is what it replaced)</p></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/image (3) (3).png" alt=""><figcaption><p>The code I changed (green is my code and red is what it replaced)</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (3) (3) (1).png" alt=""><figcaption><p>The code I changed (green is my code and red is what it replaced)</p></figcaption></figure>
 
 <figure><img src="../.gitbook/assets/IMG_7004.png" alt=""><figcaption><p>A screenshot of my commit in the official V git repository.</p></figcaption></figure>
 
