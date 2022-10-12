@@ -17,7 +17,6 @@
 ## 2 Design and Development
 
 * [2.1 Design Frame](2-design-and-development/2.1-design-frame.md)
-* [2.2.x Cycle Template](2-design-and-development/2.2.x-cycle-template.md)
 * [2.2.1 Cycle 1 - The Framework](2-design-and-development/2.2.1-cycle-1-the-framework.md)
 * [2.2.2 Cycle 2 - Changing Node Language to V Lang](2-design-and-development/2.2.2-cycle-2-changing-node-language-to-v-lang.md)
 * [2.2.3 Cycle 3 - Configuration Handler](2-design-and-development/2.2.3-cycle-3-configuration-handler.md)
@@ -29,8 +28,8 @@
 * [2.2.9 Cycle 9 - Protocol Updates](2-design-and-development/2.2.9-cycle-9-protocol-updates.md)
 * [2.2.10 Cycle 10 - Basic Inter-Nodal Communication](2-design-and-development/needs-code-2.2.9-cycle-9-basic-inter-nodal-communication.md)
 * [2.2.11 Cycle 11 - Remembering Nodes](2-design-and-development/needs-code-2.2.10-cycle-10-remembering-nodes.md)
-* [2.2.12 Cycle 12 - Sending messages across the network](2-design-and-development/2.2.x-cycle-template-1.md)
-* [2.2.13 Cycle 13 - Introducing a sql database](2-design-and-development/2.2.x-cycle-template-2.md)
+* [2.2.12 Cycle 12 - Sending messages across the network](2-design-and-development/2.2.x-cycle-template.md)
+* [2.2.13 Cycle 13 - Introducing a sql database](2-design-and-development/2.2.x-cycle-template-1.md)
 * [2.2.14 Cycle 14 - Adding Web sockets for dynamic Nodes.](2-design-and-development/needs-code-2.2.11-cycle-11-expanding-node-networks-through-neighbours.md)
 
 ## 2.5 The Protocol
