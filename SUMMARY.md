@@ -25,7 +25,9 @@
 * [2.2.6 Cycle 6 - Setting up Inter-Nodal Communication](2-design-and-development/2.2.6-cycle-6-setting-up-inter-nodal-communication.md)
 * [2.2.7 Cycle 7 - Improved Webportal (Mobile Support)](2-design-and-development/2.2.6-cycle-6-improved-webportal-mobile-support.md)
 * [2.2.8 Cycle 8 - Node Refactor](2-design-and-development/2.2.8-cycle-8-node-refactor.md)
-* [2.2.9 Cycle 9 - Protocol Updates](2-design-and-development/2.2.9-cycle-9-protocol-updates.md)
+* [2.2.9 Cycle 9 - Protocol Updates](2-design-and-development/2.2.9-cycle-9-protocol-updates/README.md)
+  * [2.5.2.2 Transaction Speed](2-design-and-development/2.2.9-cycle-9-protocol-updates/2.5.2.2-transaction-speed.md)
+  * [2.5.3.3 Voting](2-design-and-development/2.2.9-cycle-9-protocol-updates/2.5.3.5-voting.md)
 * [2.2.10 Cycle 10 - Basic Inter-Nodal Communication](2-design-and-development/needs-code-2.2.9-cycle-9-basic-inter-nodal-communication.md)
 * [2.2.11 Cycle 11 - Remembering Nodes](2-design-and-development/needs-code-2.2.10-cycle-10-remembering-nodes.md)
 * [2.2.12 Cycle 12 - Sending messages across the network](2-design-and-development/2.2.x-cycle-template.md)
@@ -37,11 +39,9 @@
 * [2.5.1 Introduction](2.5-the-protocol/2.5.1-introduction.md)
 * [2.5.2 Blocks and Transactions](2.5-the-protocol/2.5.2-blocks-and-transactions/README.md)
   * [2.5.2.1 Transactions](2.5-the-protocol/2.5.2-blocks-and-transactions/1.4a-features-of-the-proposed-solution.md)
-  * [2.5.2.2 Transaction Speed](2.5-the-protocol/2.5.2-blocks-and-transactions/2.5.2.2-transaction-speed.md)
 * [2.5.3 Consensus Algorithm](2.5-the-protocol/2.5.3-consensus-algorithm/README.md)
   * [2.5.3.1 Proof of Worth - the bullet point summary.](2.5-the-protocol/2.5.3-consensus-algorithm/2.5.3.1-proof-of-worth-the-bullet-point-summary..md)
   * [2.5.3.2 Leader vs Worker nodes](2.5-the-protocol/2.5.3-consensus-algorithm/2.5.3.2-leader-vs-worker-nodes.md)
-  * [2.5.3.3 Voting](2.5-the-protocol/2.5.3-consensus-algorithm/2.5.3.5-voting.md)
 
 ## 3 Testing <a href="#testing" id="testing"></a>
 
