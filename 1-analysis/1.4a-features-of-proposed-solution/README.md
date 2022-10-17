@@ -4,9 +4,9 @@
 
 ### The Protocol
 
-This is what describes how the blockchain will operate, how it is put together and how [nodes](../terminology.md#nodes) will operate. It is what will be described throughout the rest of this section.
+This is what describes how the blockchain will operate, how it is put together and how [nodes](../../terminology.md#nodes) will operate. It is what will be described throughout the rest of this section.
 
-### The [Node](../terminology.md#nodes) Software
+### The [Node](../../terminology.md#nodes) Software
 
 This is the software that runs on a computer contributing to the network and uses the rules created in the protocol to generate, validate and view blocks and transactions within the blockchain. Since this is effectively the software form of the protocol it will not be described in this section.
 
@@ -24,7 +24,7 @@ This means that the parent\_id can be used to find the parent block of which a c
 
 The blocks should also contain the number block that they think they are, as this makes validation and navigation easier for nodes, as if a different node supplies them with block 347 in response to a request when the node thinks that there's only 43 blocks in existence then they need to either confirm the larger quantity of blocks or disregard the other node as untrustworthy.
 
-![A basic diagram explaining the id fields](<../.gitbook/assets/image (3) (1) (2).png>)
+![A basic diagram explaining the id fields](<../../.gitbook/assets/image (3) (1) (2).png>)
 
 ### Referencing Owned Data
 
@@ -71,11 +71,11 @@ Each version has it's own benefits and drawbacks:
 {% endtab %}
 {% endtabs %}
 
-[(crypto.com, 2022)](../reference-list.md)
+[(crypto.com, 2022)](../../reference-list.md)
 
 Due to the above specifications, I will be aiming to add support for algorithms defined in blocks, and initialise the algorithms for base commodities within the origin block, however initially the limits will just be defined as constants as it is much quicker to setup and test with.
 
-This choice also allows for the blockchain to progress into the future without an individual to control it. This is due to the process of voting, which is something the final product would ideally contain, however since that is a feature that requires a lot of pre-requisites I will only be adding it to the project if there is time, although it will be theorised in [chapter 2.5, "The Protocol"](../2-design-and-development/2.2.9-cycle-9-protocol-updates/2.5.3.5-voting.md).
+This choice also allows for the blockchain to progress into the future without an individual to control it. This is due to the process of voting, which is something the final product would ideally contain, however since that is a feature that requires a lot of pre-requisites I will only be adding it to the project if there is time, although it will be theorised in [chapter 2.5, "The Protocol"](../../2.5-the-protocol/2.5.3-consensus-algorithm/2.5.3.5-voting.md).
 
 ### Storing Data
 
@@ -85,7 +85,7 @@ This is a concept that has been inspired by Ethereum's feature of the same name 
 
 This massively lowers the amount of computations a node has to do per transaction validation, because without this nodes would have to travel back throughout the entire blockchain looking for proof of ownership of an item that is to be transacted.
 
-[(Ethereum, 2015)](../reference-list.md)
+[(Ethereum, 2015)](../../reference-list.md)
 
 #### Storing Blocks
 
@@ -100,11 +100,11 @@ This could be looked at as a benefit of the system because it technically increa
 This is vital to the survival and usefulness of a blockchain, and in the case of the MonoChain is done in two ways:
 
 1. Identifying blocks using the hashes of their parents to ensure if a block is tampered, all hashes after that block become invalid and the chain is broken.
-2. [The Consensus protocol "Proof of Worth"](../2.5-the-protocol/2.5.3-consensus-algorithm/2.5.3.1-proof-of-worth-the-bullet-point-summary..md) is used to cut down on the amount of times each node has to validate transactions from each other node.
+2. [The Consensus protocol "Proof of Worth"](2.5.3-consensus-algorithm/2.5.3.1-proof-of-worth-the-bullet-point-summary..md) is used to cut down on the amount of times each node has to validate transactions from each other node.
 
-**The first method**, identifying and chaining the blocks using hashes is detailed in the ["chaining blocks section"](1.4a-features-of-proposed-solution.md#chaining-blocks) further up this page.
+**The first method**, identifying and chaining the blocks using hashes is detailed in the ["chaining blocks section"](./#chaining-blocks) further up this page.
 
-**The second method**, is a custom designed Consensus Protocol called "Proof of Worth". (This protocol can be seen in a technical summary [here](../2.5-the-protocol/2.5.3-consensus-algorithm/2.5.3.1-proof-of-worth-the-bullet-point-summary..md)). The base concept behind this protocol is to use a trust factor based system that stores, monitors and changes the values of each node's "trustworthiness" within an integer value called that node's "trust". This value can be altered up or down by one unit per each block, with the default node mining software being designed to give a node that helps it a trust increase and a trust decrease to nodes that lie to it.
+**The second method**, is a custom designed Consensus Protocol called "Proof of Worth". (This protocol can be seen in a technical summary [here](2.5.3-consensus-algorithm/2.5.3.1-proof-of-worth-the-bullet-point-summary..md)). The base concept behind this protocol is to use a trust factor based system that stores, monitors and changes the values of each node's "trustworthiness" within an integer value called that node's "trust". This value can be altered up or down by one unit per each block, with the default node mining software being designed to give a node that helps it a trust increase and a trust decrease to nodes that lie to it.
 
 This then means that as nodes make positive contributions to the blockchain their trust ratings will increase and as bad actors make negative contributions their trust ratings will decrease. Hence when a user wishes to create a transaction, they will be able to choose to send their transaction to a well rated node, which will likely have an increased fee and waiting time, or a worse rated node, which will likely to have a lower fee and waiting time. However this also increases the risk of their transaction not be validated properly and require re-sending.
 
