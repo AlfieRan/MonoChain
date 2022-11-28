@@ -8,4 +8,4 @@ Some information may seem to be missing due to the nature of it being common pla
 
 ****[**The Transactions Themselves**](1.4a-features-of-the-proposed-solution.md)****
 
-****[**The Speed at Which Transactions are Allowed to be Completed**](../../../2.5-the-protocol/2.5.2-blocks-and-transactions/2.5.2.2-transaction-speed.md)****
+****[**The Speed at Which Transactions are Allowed to be Completed**](broken-reference)****
