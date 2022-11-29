@@ -14,6 +14,8 @@ This is the software that runs on a computer contributing to the network and use
 
 This simply acts as an introduction to the project and will host some key information, a link to the documents of this project of which you are currently reading, a link to view the source code for the entire project and hopefully some other features which I will mention at the end of this section.
 
+
+
 ## The Protocol
 
 ### Chaining Blocks
@@ -30,7 +32,7 @@ The blocks should also contain the number block that they think they are, as thi
 
 whenever something happens to a piece of data that requires proof of ownership by a user, such as sending it to someone else, the node calculating whether or not this is valid must travel down the blockchain until it finds enough of that data being sent to the user as the user is attempting to send to someone else. This is to stop users trying to duplicate data because it shows the user actually has the data/items they want to transfer currently in their wallet, but it could result in a node travelling throughout the entire blockchain if a user tries to send an item that they don't own.
 
-### Creating Data
+## Creating Data
 
 #### Required Fields
 
@@ -77,7 +79,7 @@ Due to the above specifications, I will be aiming to add support for algorithms 
 
 This choice also allows for the blockchain to progress into the future without an individual to control it. This is due to the process of voting, which is something the final product would ideally contain, however since that is a feature that requires a lot of pre-requisites I will only be adding it to the project if there is time, although it will be theorised in [chapter 2.5, "The Protocol"](broken-reference).
 
-### Storing Data
+## Storing Data
 
 #### State Root
 
@@ -112,7 +114,7 @@ To learn more about the custom consensus protocol beign hypothesised, I have cre
 
 ### Transferring Data
 
-// TODO link to 1.4.1
+The transfer of data will&#x20;
 
 ## The Webportal
 
