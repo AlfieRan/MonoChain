@@ -4,11 +4,11 @@
 
 This section of the document refers to the creation and requirements of the data that is stored within the transactions and blocks that make up the blockchain on the whole, the discussion of those transactions and blocks is done in[ part 2 of this document, storing data](./#2.-storing-data).
 
-#### Required Fields&#x20;
+### Required Fields&#x20;
 
 Whenever new data, whether it be coins, a certificate of ownership, or anything else is created, it is essential that it contains a field that states who created it. This allows anything to be added to the blockchain as if it was a giant public database, but prevents someone from being able to claim they own something that they don't. An example of this is the main currency of this system, the mono, a mono will only be valid and acceptable if its creation flag is attributed to the system. This means that the mono must be created by the system itself, and because typically a creation will be attributed using the creator's public key/id this can only happen when a new block is generated, and such monos should only be accepted as true and valid if when they were created by the system the amount of them created in a single block is below the limit set. How this limit is calculated is described in the below section.
 
-#### How many of a piece of data can be generated.
+### How many of a piece of data can be generated.
 
 This limit of how many of a data object can be created both per block and in total can be dictated through either a constant value, a function dictated in the protocol, or algorithmically by an algorithm stored in the origin block.&#x20;
 
@@ -42,7 +42,7 @@ Each version has it's own benefits and drawbacks:
 {% endtab %}
 {% endtabs %}
 
-
+[(crypto.com, 2022)](../../../reference-list.md)
 
 ## 2. Storing Data
 
