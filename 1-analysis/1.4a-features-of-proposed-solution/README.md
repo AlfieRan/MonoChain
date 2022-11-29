@@ -108,6 +108,12 @@ This is vital to the survival and usefulness of a blockchain, and in the case of
 
 This then means that as nodes make positive contributions to the blockchain their trust ratings will increase and as bad actors make negative contributions their trust ratings will decrease. Hence when a user wishes to create a transaction, they will be able to choose to send their transaction to a well rated node, which will likely have an increased fee and waiting time, or a worse rated node, which will likely to have a lower fee and waiting time. However this also increases the risk of their transaction not be validated properly and require re-sending.
 
+To learn more about the custom consensus protocol beign hypothesised, I have created a bullet point summary of the theory of how it would work in the file ["1.4.2.1 Proof of Worth - the bullet point summary".](2.5.3-consensus-algorithm/2.5.3.1-proof-of-worth-the-bullet-point-summary..md)
+
+### Transferring Data
+
+// TODO link to 1.4.1
+
 ## The Webportal
 
 #### Initially the webportal will contain a few primary sections:
