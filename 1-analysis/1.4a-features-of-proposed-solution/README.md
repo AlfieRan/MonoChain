@@ -14,15 +14,11 @@ This is the software that runs on a computer contributing to the network and use
 
 This simply acts as an introduction to the project and will host some key information, a link to the documents of this project of which you are currently reading, a link to view the source code for the entire project and hopefully some other features which I will mention at the end of this section.
 
+
+
 ## The Protocol
 
-### Chaining Blocks
 
-The blocks will need to be chained together in such a way that if a single one of them is edited, all blocks which connect to it prove that it has been mutated and the edited block was not the original block of which they connected to. To do this, the blocks will contain an id field, this id will be the hash of the previous block's and they will also include a parent\_id field, this is the id of that previous block.
-
-This means that the parent\_id can be used to find the parent block of which a child block is chained, then by hashing the parent block and comparing it to the child block's id it can be validated that the pairing has not been tampered with - or if the hash does not equal the child block's id then the pairing has been tampered with and the chain has been invalidated.
-
-The blocks should also contain the number block that they think they are, as this makes validation and navigation easier for nodes, as if a different node supplies them with block 347 in response to a request when the node thinks that there's only 43 blocks in existence then they need to either confirm the larger quantity of blocks or disregard the other node as untrustworthy.
 
 ![A basic diagram explaining the id fields](<../../.gitbook/assets/image (3) (1) (2).png>)
 
@@ -30,7 +26,7 @@ The blocks should also contain the number block that they think they are, as thi
 
 whenever something happens to a piece of data that requires proof of ownership by a user, such as sending it to someone else, the node calculating whether or not this is valid must travel down the blockchain until it finds enough of that data being sent to the user as the user is attempting to send to someone else. This is to stop users trying to duplicate data because it shows the user actually has the data/items they want to transfer currently in their wallet, but it could result in a node travelling throughout the entire blockchain if a user tries to send an item that they don't own.
 
-### Creating Data
+## Creating Data
 
 #### Required Fields
 
@@ -77,7 +73,7 @@ Due to the above specifications, I will be aiming to add support for algorithms 
 
 This choice also allows for the blockchain to progress into the future without an individual to control it. This is due to the process of voting, which is something the final product would ideally contain, however since that is a feature that requires a lot of pre-requisites I will only be adding it to the project if there is time, although it will be theorised in [chapter 2.5, "The Protocol"](broken-reference).
 
-### Storing Data
+## Storing Data
 
 #### State Root
 
@@ -100,34 +96,15 @@ This could be looked at as a benefit of the system because it technically increa
 This is vital to the survival and usefulness of a blockchain, and in the case of the MonoChain is done in two ways:
 
 1. Identifying blocks using the hashes of their parents to ensure if a block is tampered, all hashes after that block become invalid and the chain is broken.
-2. [The Consensus protocol "Proof of Worth"](2.5.3-consensus-algorithm/2.5.3.1-proof-of-worth-the-bullet-point-summary..md) is used to cut down on the amount of times each node has to validate transactions from each other node.
+2. [The Consensus protocol "Proof of Worth"](1.4.1-the-protocol/2.5.3.1-proof-of-worth-the-bullet-point-summary..md) is used to cut down on the amount of times each node has to validate transactions from each other node.
 
 **The first method**, identifying and chaining the blocks using hashes is detailed in the ["chaining blocks section"](./#chaining-blocks) further up this page.
 
-**The second method**, is a custom designed Consensus Protocol called "Proof of Worth". (This protocol can be seen in a technical summary [here](2.5.3-consensus-algorithm/2.5.3.1-proof-of-worth-the-bullet-point-summary..md)). The base concept behind this protocol is to use a trust factor based system that stores, monitors and changes the values of each node's "trustworthiness" within an integer value called that node's "trust". This value can be altered up or down by one unit per each block, with the default node mining software being designed to give a node that helps it a trust increase and a trust decrease to nodes that lie to it.
+**The second method**, is a custom designed Consensus Protocol called "Proof of Worth". (This protocol can be seen in a technical summary [here](1.4.1-the-protocol/2.5.3.1-proof-of-worth-the-bullet-point-summary..md)). The base concept behind this protocol is to use a trust factor based system that stores, monitors and changes the values of each node's "trustworthiness" within an integer value called that node's "trust". This value can be altered up or down by one unit per each block, with the default node mining software being designed to give a node that helps it a trust increase and a trust decrease to nodes that lie to it.
 
 This then means that as nodes make positive contributions to the blockchain their trust ratings will increase and as bad actors make negative contributions their trust ratings will decrease. Hence when a user wishes to create a transaction, they will be able to choose to send their transaction to a well rated node, which will likely have an increased fee and waiting time, or a worse rated node, which will likely to have a lower fee and waiting time. However this also increases the risk of their transaction not be validated properly and require re-sending.
 
-To learn more about the custom consensus protocol beign hypothesised, I have created a bullet point summary of the theory of how it would work in the file ["1.4.2.1 Proof of Worth - the bullet point summary".](2.5.3-consensus-algorithm/2.5.3.1-proof-of-worth-the-bullet-point-summary..md)
-
-### Transferring Data
-
-// TODO link to 1.4.1
-
-## The Webportal
-
-#### Initially the webportal will contain a few primary sections:
-
-* A Homepage to explain the project.
-* A 'Learn More' page to explain some of the more technical side of the project in more detail
-* And some form of link to the source code as well as any other relevant external documents.
-
-#### Then as the project progresses and reaches a point at which transactions can be completed it should gain:
-
-* A Wallet page which allows users to generate or load their wallets to see the contents and what they are storing.
-* A Marketplace which allows the purchase and sale of data, currency and other blockchain items to other users on the network.
-
-In this case the primary sections will be developed early on in the projects development and are essential, with the secondary sections being important but not being truly essential to the project's use.
+To learn more about the custom consensus protocol beign hypothesised, I have created a bullet point summary of the theory of how it would work in the file ["1.4.2.1 Proof of Worth - the bullet point summary".](1.4.1-the-protocol/2.5.3.1-proof-of-worth-the-bullet-point-summary..md)
 
 ## Limitations
 
