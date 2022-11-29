@@ -1,6 +1,6 @@
 # 1.4.1 The Protocol
 
-## 1. Creating Data
+## 1. Creating Data&#x20;
 
 This section of the document refers to the creation and requirements of the data that is stored within the transactions and blocks that make up the blockchain on the whole, the discussion of those transactions and blocks is done in[ part 2 of this document, storing data](./#2.-storing-data).
 
@@ -52,15 +52,17 @@ This choice also allows for the blockchain to progress into the future without a
 
 ## 2. Storing Data
 
-### State Root
+The data being stored, transferred and owned on the monochain mentioned above will be structured using two fundamental concepts, the block and the transactions that make up the block.
 
-This is a concept that has been inspired by Ethereum's feature of the same name and allows the state of all wallets and stores in the blockchain to be tracked simply using a hash of the current state of the entire system in each block. The idea here is that nodes should hold the latest copy of all the contents of every user's wallets, and that a hash of this state root should be stored in every new block such that when a node connects to the network they can get collect the state root from a different node, verify it to the latest block's state root hash and if it is valid, then continue computing from there.
+### 2.2 The Transactions
 
-This massively lowers the amount of computations a node has to do per transaction validation, because without this nodes would have to travel back throughout the entire blockchain looking for proof of ownership of an item that is to be transacted.
 
-[(Ethereum, 2015)](../../../reference-list.md)
 
-### Storing Blocks
+### 2.1 The Blocks
+
+Blocks are what construct a blockchain, they are groupings of transactions stored with a bunch of meta data that allows them to be chained together in such a way that if any block previous to a specific block is edited, it can be noticed with very few computations so as to ensure the security and confirmation of a set of transactions having actually occoured.&#x20;
+
+#### Storing Blocks
 
 The more blocks a node stores, the better. However they do not need to store them all, as long as nodes know multiple other nodes who store a copy of each block there isn't any major downside to a node only storing a portion of the total blocks in the blockchain.
 
@@ -68,7 +70,7 @@ Yet there is a catch to this, if all nodes begin to only store the most recent b
 
 This could be looked at as a benefit of the system because it technically increases anonymity whilst retaining function, but in certain cases it could be an issue. The reason this is an accepted risk is because the storage gains and general computational benefits are great enough as a network like this scales and this risk is low enough that it is a worthy risk to take.&#x20;
 
-### Chaining Blocks
+#### Chaining Blocks
 
 The blocks will need to be chained together in such a way that if a single one of them is edited, all blocks which connect to it prove that it has been mutated and the edited block was not the original block of which they connected to. To do this, the blocks will contain an id field, this id will be the hash of the previous block's and they will also include a parent\_id field, this is the id of that previous block.
 
@@ -78,7 +80,15 @@ The blocks should also contain the number block that they think they are, as thi
 
 <figure><img src="../../../.gitbook/assets/image (3) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
-## 3. Ensuring Data is Secure
+#### State Root
+
+This is a concept that has been inspired by Ethereum's feature of the same name and allows the state of all wallets and stores in the blockchain to be tracked simply using a hash of the current state of the entire system in each block. The idea here is that nodes should hold the latest copy of all the contents of every user's wallets, and that a hash of this state root should be stored in every new block such that when a node connects to the network they can get collect the state root from a different node, verify it to the latest block's state root hash and if it is valid, then continue computing from there.
+
+This massively lowers the amount of computations a node has to do per transaction validation, because without this nodes would have to travel back throughout the entire blockchain looking for proof of ownership of an item that is to be transacted.
+
+[(Ethereum, 2015)](../../../reference-list.md)
+
+#### Ensuring Blocks are secure
 
 This is vital to the survival and usefulness of a blockchain, and in the case of the MonoChain will be done in two ways:
 
