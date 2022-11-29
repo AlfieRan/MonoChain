@@ -1,4 +1,4 @@
-# 1.4a Features of Proposed Solution
+# 1.4 Features of Proposed Solution
 
 ## The solution will contain three main parts.
 
@@ -75,7 +75,7 @@ Each version has it's own benefits and drawbacks:
 
 Due to the above specifications, I will be aiming to add support for algorithms defined in blocks, and initialise the algorithms for base commodities within the origin block, however initially the limits will just be defined as constants as it is much quicker to setup and test with.
 
-This choice also allows for the blockchain to progress into the future without an individual to control it. This is due to the process of voting, which is something the final product would ideally contain, however since that is a feature that requires a lot of pre-requisites I will only be adding it to the project if there is time, although it will be theorised in [chapter 2.5, "The Protocol"](../../2.5-the-protocol/2.5.3-consensus-algorithm/2.5.3.5-voting.md).
+This choice also allows for the blockchain to progress into the future without an individual to control it. This is due to the process of voting, which is something the final product would ideally contain, however since that is a feature that requires a lot of pre-requisites I will only be adding it to the project if there is time, although it will be theorised in [chapter 2.5, "The Protocol"](broken-reference).
 
 ### Storing Data
 
