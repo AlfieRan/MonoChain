@@ -11,7 +11,6 @@
   * [How Proof of Work Mining Works](1-analysis/1.3-research-the-problem/how-proof-of-work-mining-works.md)
 * [1.4 Features of Proposed Solution](1-analysis/1.4a-features-of-proposed-solution/README.md)
   * [1.4.1 The Protocol](1-analysis/1.4a-features-of-proposed-solution/1.4.1-the-protocol/README.md)
-    * [1.4.1.1 Transactions](1-analysis/1.4a-features-of-proposed-solution/1.4a-features-of-the-proposed-solution.md)
     * [1.4.1.2 Proof of Worth - the bullet point summary.](1-analysis/1.4a-features-of-proposed-solution/2.5.3-consensus-algorithm/2.5.3.1-proof-of-worth-the-bullet-point-summary..md)
   * [1.4.2 The Node Software](1-analysis/1.4a-features-of-proposed-solution/1.4.2-the-node-software.md)
   * [1.4.3 The Webportal](1-analysis/1.4a-features-of-proposed-solution/1.4.3-the-webportal.md)

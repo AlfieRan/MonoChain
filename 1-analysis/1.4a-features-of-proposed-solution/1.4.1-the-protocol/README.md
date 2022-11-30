@@ -165,7 +165,18 @@ For the official currency, MonoCoins, during testing the number of coins will in
 {% endtab %}
 
 {% tab title="Custom" %}
+### Custom
 
+This just represents any other form of data and could be used for individual use or organistational data that is wished to be stored and processed through the blockchain. An example structure of the data that this would represent could be as following:
+
+```json
+{
+     type: custom,
+     data: {
+          "Hello world!"
+     }
+}
+```
 {% endtab %}
 {% endtabs %}
 
