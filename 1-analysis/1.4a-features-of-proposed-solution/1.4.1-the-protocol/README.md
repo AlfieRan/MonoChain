@@ -56,7 +56,20 @@ The data being stored, transferred and owned on the monochain mentioned above wi
 
 ### 2.2 The Transactions
 
+Transactions represent groupings of data being sent from one wallet to another, whether that is the "system wallet" which creates currency or a user sending something they own to another user.
 
+#### The Structure of Transactions and Digital Signatures
+
+Transactions on this blockchain will abide by a few rules, rules which form the system that allow for digital signatures to take place and therefore transactions on the whole.
+
+These rules are the following:
+
+* Wallets (and therefore users) are identified by their public keys
+* The transactions themselves are signed using a wallet's private key and then their signature and transaction combo can be verified using that wallet's public key. The point of this is to only allow the sender to create transactions where they send an item, but anyone can check and verify these transactions.
+* Transactions should include a timestamp of when they were created by the sender, as the block also contains a timestamp, if the transaction is included on a block that is timestamped to outside of a set time frame then the transaction should be counted as null and void.
+* Transactions should then also obviously include where the coins/proof of ownership should be sent to, and what is being sent.
+
+Following these rules gives us an idea of what each transaction should look like:
 
 ### 2.1 The Blocks
 
