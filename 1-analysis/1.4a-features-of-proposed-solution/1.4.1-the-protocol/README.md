@@ -54,7 +54,7 @@ This choice also allows for the blockchain to progress into the future without a
 
 The data being stored, transferred and owned on the monochain mentioned above will be structured using two fundamental concepts, the block and the transactions that make up the block.
 
-### 2.2 The Transactions
+### 2.1 The Transactions
 
 Transactions represent groupings of data being sent from one wallet to another, whether that is the "system wallet" which creates currency or a user sending something they own to another user.
 
@@ -119,7 +119,49 @@ The other alternative to this is to construct the transaction object in two part
 }
 ```
 
-### 2.1 The Blocks
+The final construction has not yet been decided, but it should abide by the above rules.
+
+#### Types of Transactions and Valid Data
+
+**There will initially be four main types of data that can be sent over a transaction:**
+
+* Coin - Any type of cryptocurrency.
+* Certificate - A certificate of ownership
+* Creation - How things are created on the blockchain
+* Custom - Any other json data, this is less strict than the other types and therefore less secure.
+
+{% tabs %}
+{% tab title="Coin" %}
+### Coins
+
+This is what is commonly referred to as a cryptocurrency, and is the data that represents money and allows the whole blockchain to run. There will be one key coin that will be the coin the default node software will be paid in, however if a user was to create their own node software that abides by the blockchain's protocols they could accept any kind of coin they wished as payment.
+
+```json
+{
+     type: coin,
+     data: {
+          id: "mono",
+          created-by: "system", 
+          quantity: 50
+     }
+}
+```
+{% endtab %}
+
+{% tab title="Certificate" %}
+
+{% endtab %}
+
+{% tab title="Creation" %}
+
+{% endtab %}
+
+{% tab title="Custom" %}
+
+{% endtab %}
+{% endtabs %}
+
+### 2.2 The Blocks
 
 Blocks are what construct a blockchain, they are groupings of transactions stored with a bunch of meta data that allows them to be chained together in such a way that if any block previous to a specific block is edited, it can be noticed with very few computations so as to ensure the security and confirmation of a set of transactions having actually occoured.&#x20;
 
@@ -166,7 +208,7 @@ To learn more about the custom consensus protocol beign hypothesised, I have cre
 
 ##
 
-## 4. Transferring Data
+## 3. Transferring Data
 
 #### Referencing Owned Data&#x20;
 
