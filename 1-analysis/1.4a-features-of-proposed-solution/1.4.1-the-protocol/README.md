@@ -149,17 +149,27 @@ This is what is commonly referred to as a cryptocurrency, and is the data that r
 {% endtab %}
 
 {% tab title="Certificate" %}
+### Certificate
 
+This represents a certificate of ownership and is what allows [Nfts](../../../terminology.md#nfts) to be supported on this blockchain, the important thing to know about these is that they can hold multiple owners depending on which part of the certificate you are looking at, and they should only be allowed to be edited or "sent" by the wallet that owns that part of the certificate.
 {% endtab %}
 
 {% tab title="Creation" %}
+### Creation
 
+This is what is used to "create" something on the blockchain, if this is custom then it can just receive a check for compulsory properties (type) and then assumed to be valid, it's up to whoever is implementing it to figure out how to go from here.
+
+For the official currency, MonoCoins, during testing the number of coins will initially just be set to 10000 per day, with the exact value to be calculated to reward miners with to be calculated from 10000 divided by the number of blocks produced in the last 24 hours, ignoring decimal places to round down to the nearest integer. This means that the minimum number of coins rewarded per block will be 1 coin per block, assuming that a block is created once per 10 seconds, which is the fastest blocks will be able to be created initially. However during later development the blockchain should adopt the some form of algorithm to control both of these parameters in a better way.
+
+**TrustElo** is what is sent from a leader node to a worker node after a block has been added to the blockchain, it is calculated during the calculation of the block but since it is a part of that block it will not take effect until that block is added to the blockchain. It can be positive or negative, but has a fixed value of +1 for a useful/valid contribution and -1 for an invalid/harmful contribution, it is up to a leader nodes own discresion to add this to transactions and that's why they have fixed values, to prevent a leader node from being able to destroy/boost the TrustElo of each node in it's pool if a bad actor gained control of it. This means that in theory the trust elo system only works whilst there are more "real" values being contributed per time unit than "fake" values by bad actors.&#x20;
 {% endtab %}
 
 {% tab title="Custom" %}
 
 {% endtab %}
 {% endtabs %}
+
+
 
 ### 2.2 The Blocks
 
