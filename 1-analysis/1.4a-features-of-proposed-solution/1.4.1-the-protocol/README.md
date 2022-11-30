@@ -100,7 +100,24 @@ Therefore, in this scenario the sender would be hashing and signing the followin
 }
 ```
 
+This is very important to bear in mind when writing the node mining software as if the whole json transaction is validated it will never validate successfully, and instead the section of the transaction referenced above is the part that should be validated according to the Sender-signed hash.
 
+The other alternative to this is to construct the transaction object in two parts: the signature and the data. This would be structured similarly to how a typical communication request is structured, with a header and a body.
+
+```json
+{
+    header: {
+        sender: "b94d27b9",
+        signature: "821a643d5ebf18ee9",    
+    },
+    body: {
+        recipient: "j45n63m3",
+        Transaction:
+            [{type: coin, quantity: 50}],
+        Timestamp: "Thu Mar 17 2022 19:06:50 GMT",
+    }
+}
+```
 
 ### 2.1 The Blocks
 
