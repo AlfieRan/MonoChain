@@ -48,9 +48,7 @@ Due to the above specifications, I will be aiming to add support for algorithms 
 
 This choice also allows for the blockchain to progress into the future without an individual to control it. This is due to the process of voting, which is something the final product would ideally contain, however since that is a feature that requires a lot of pre-requisites I will only be adding it to the project if there is time, although it will be theorised in cycles as they are reached.
 
-| Sender's Public Key | Transactions                  | Recipient's Public Key | Timestamp                     | Sender's Signature |
-| ------------------- | ----------------------------- | ---------------------- | ----------------------------- | ------------------ |
-| b94d27b9            | \[{type: coin, quantity: 50}] | j45n63m3               | Thu June 17 2022 19:06:50 GMT | 821a643d5ebf18ee9  |
+
 
 ## 2. Storing Data
 
@@ -72,6 +70,37 @@ These rules are the following:
 * Transactions should then also obviously include where the coins/proof of ownership should be sent to, and what is being sent.
 
 Following these rules gives us an idea of what each transaction should look like:
+
+| Sender's Public Key | Transactions                  | Recipient's Public Key | Timestamp                     | Sender's Signature |
+| ------------------- | ----------------------------- | ---------------------- | ----------------------------- | ------------------ |
+| b94d27b9            | \[{type: coin, quantity: 50}] | j45n63m3               | Thu June 17 2022 19:06:50 GMT | 821a643d5ebf18ee9  |
+
+In JSON format that would look something like the following:
+
+```json
+{
+    Sender: "b94d27b9",
+    Transaction: [{type: "coin", quantity: 50}],
+    Recipient: "j45n63m3",
+    Timestamp: "Thu Mar 17 2022 19:06:50 GMT",
+    Sender-Signature: "821a643d5ebf18ee9"
+}    
+```
+
+It's important to mention that the Sender-Signed hash of the data does not include itself, otherwise that would create a recursion error and would be impossible to destruct. Instead the Sender-Signed hash is a hash of everything except itself in a separate JSON object than the one in the blockchain.
+
+Therefore, in this scenario the sender would be hashing and signing the following:
+
+```json
+{
+    Sender-Key: "b94d27b9",
+    Transaction: [{type: coin, quantity: 50}],
+    Recipient-Key: "j45n63m3",
+    Timestamp: "Thu Mar 17 2022 19:06:50 GMT",
+}
+```
+
+
 
 ### 2.1 The Blocks
 
