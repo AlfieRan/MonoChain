@@ -48,7 +48,9 @@ Due to the above specifications, I will be aiming to add support for algorithms 
 
 This choice also allows for the blockchain to progress into the future without an individual to control it. This is due to the process of voting, which is something the final product would ideally contain, however since that is a feature that requires a lot of pre-requisites I will only be adding it to the project if there is time, although it will be theorised in cycles as they are reached.
 
-##
+| Sender's Public Key | Transactions                  | Recipient's Public Key | Timestamp                     | Sender's Signature |
+| ------------------- | ----------------------------- | ---------------------- | ----------------------------- | ------------------ |
+| b94d27b9            | \[{type: coin, quantity: 50}] | j45n63m3               | Thu June 17 2022 19:06:50 GMT | 821a643d5ebf18ee9  |
 
 ## 2. Storing Data
 
