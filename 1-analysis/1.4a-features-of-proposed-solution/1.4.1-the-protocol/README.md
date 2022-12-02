@@ -1,6 +1,6 @@
 # 1.4.1 The Protocol
 
-## 1. Creating Data&#x20;
+1\. Creating Data&#x20;
 
 This section of the document refers to the creation and requirements of the data that is stored within the transactions and blocks that make up the blockchain on the whole, the discussion of those transactions and blocks is done in[ part 2 of this document, storing data](./#2.-storing-data).
 
@@ -204,14 +204,6 @@ The blocks should also contain the number block that they think they are, as thi
 
 <figure><img src="../../../.gitbook/assets/image (3) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
-#### State Root
-
-This is a concept that has been inspired by Ethereum's feature of the same name and allows the state of all wallets and stores in the blockchain to be tracked simply using a hash of the current state of the entire system in each block. The idea here is that nodes should hold the latest copy of all the contents of every user's wallets, and that a hash of this state root should be stored in every new block such that when a node connects to the network they can get collect the state root from a different node, verify it to the latest block's state root hash and if it is valid, then continue computing from there.
-
-This massively lowers the amount of computations a node has to do per transaction validation, because without this nodes would have to travel back throughout the entire blockchain looking for proof of ownership of an item that is to be transacted.
-
-[(Ethereum, 2015)](../../../reference-list.md)
-
 #### Ensuring Blocks are secure
 
 This is vital to the survival and usefulness of a blockchain, and in the case of the MonoChain will be done in two ways:
@@ -227,10 +219,14 @@ This then means that as nodes make positive contributions to the blockchain thei
 
 To learn more about the custom consensus protocol beign hypothesised, I have created a bullet point summary of the theory of how it would work in the file ["Proof of Worth - the bullet point summary."](../2.5.3-consensus-algorithm/2.5.3.1-proof-of-worth-the-bullet-point-summary..md)
 
-##
+### State Root
 
-## 3. Transferring Data
+This is a concept that has been inspired by Ethereum's feature of the same name and allows the state of all wallets and stores in the blockchain to be tracked simply using a hash of the current state of the entire system in each block. The idea here is that nodes should hold the latest copy of all the contents of every user's wallets, and that a hash of this state root should be stored in every new block such that when a node connects to the network they can get collect the state root from a different node, verify it to the latest block's state root hash and if it is valid, then continue computing from there.
 
-#### Referencing Owned Data&#x20;
+This massively lowers the amount of computations a node has to do per transaction validation, because without this nodes would have to travel back throughout the entire blockchain looking for proof of ownership of an item that is to be transacted.
+
+[(Ethereum, 2015)](../../../reference-list.md)
+
+### Referencing Owned Data&#x20;
 
 Whenever something happens to a piece of data that requires proof of ownership by a user, such as sending it to someone else, the node calculating whether or not this is valid must travel down the blockchain until it finds enough of that data being sent to the user as the user is attempting to send to someone else. This is to stop users trying to duplicate data because it shows the user actually has the data/items they want to transfer currently in their wallet, but it could result in a node travelling throughout the entire blockchain if a user tries to send an item that they don't own.
