@@ -19,10 +19,12 @@ The main usability feature introduced within this cycle is the renaming and stru
 
 ### Key Variables
 
-| Variable Name                  | Use                                                                                                                           |
-| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
-| <pre><code>config</code></pre> | Stores all the configuration object's data, such as the node's reference to itself, its port and other essential information. |
-| <pre><code>keys</code></pre>   | Contains the keys object, which has the ability to sign, validate and verify data.                                            |
+| Variable Name                   | Use                                                                                                                           |
+| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| <pre><code>config
+</code></pre> | Stores all the configuration object's data, such as the node's reference to itself, its port and other essential information. |
+| <pre><code>keys
+</code></pre>   | Contains the keys object, which has the ability to sign, validate and verify data.                                            |
 
 ### Pseudocode
 

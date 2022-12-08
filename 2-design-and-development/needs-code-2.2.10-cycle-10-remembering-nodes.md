@@ -31,10 +31,12 @@ The diagram above shows how such a message flow would work, with node 'a' wantin
 
 ### Key Variables
 
-| Variable Name                      | Use                                                                                                                                                                                                           |
-| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <pre><code>References</code></pre> | This is the references object which holds all the known references that a node has encountered as well as some functionality to check if the node is aware of a specific reference, add a new reference, etc. |
-| <pre><code>ref_path</code></pre>   | This is the file path of the file at which the references object is stored and loaded from. This is stored as a parameter within the configuration object.                                                    |
+| Variable Name                       | Use                                                                                                                                                                                                           |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <pre><code>References
+</code></pre> | This is the references object which holds all the known references that a node has encountered as well as some functionality to check if the node is aware of a specific reference, add a new reference, etc. |
+| <pre><code>ref_path
+</code></pre>   | This is the file path of the file at which the references object is stored and loaded from. This is stored as a parameter within the configuration object.                                                    |
 
 ### Pseudocode
 
