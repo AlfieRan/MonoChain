@@ -55,6 +55,4 @@
 
 ## Notes
 
-* [To Do](notes/to-do.md)
-* [important stuff](notes/my-brain-hurts.md)
 * [Phase 1](notes/phase-1.md)
