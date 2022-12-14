@@ -28,14 +28,120 @@ The solution to this is to introduce web sockets so that "private" nodes without
 
 ### Pseudocode
 
-Objective 1 solution:
+The amount of code that this cycle will require is likely to be quite significant so I will be making the pseudocode for this cycle much higher level so it is easier to understand what is going on.
+
+However the below pseudocode still contains all the key functionality of the websockets server.
+
+### The Websocket Server
 
 ```
-```
+OBJECT Websocket_Server:
+	connections
+	
+	FUNCTION send_to_all(this, msg) {
+		OUTPUT "[Websockets] Sending message to all clients..."
+		
+		FOR (client IN this.connections):
+			TRY:
+				client.send(msg)
+			CATCH:
+				OUTPUT "[Websockets] Failed to send a message"
+				RETURN false
+			END TRY
+		END FOR
+		
+		// nothing went wrong so return true
+		RETURN true
+	END FUNCTION
 
-Objective 2 solution:
+	FUNCTION connect(this, ref):
+		OUTPUT "[Websockets] Connecting to server $ref"
+		
+		TRY:
+			new_connection = CONNECT TO ref
+			this.connections.append(new_connection)
+			OUTPUT "[Websockets] Connected to $ref succesfully"
+		CATCH:
+			OUTPUT "[Websockets] Failed to connect to $ref"
+			RETURN false
+		END TRY
+			
+		// nothing went wrong so return true
+		RETURN true
+	END FUNCTION
 
-```
+	FUNCTION listen(this):
+		FOR (client in this.connections):
+			TRY:
+				client.listen()
+				OUTPUT "[Websockets] Now listening to $client"
+			CATCH:
+				OUTPUT "[Websockets] Failed to listen to $client"
+			END TRY
+		END FOR
+	END FUNCTION
+		
+	// the function that is run anytime a connection receives a message 
+	FUNCTION on_message(this, msg, sender):
+		OUTPUT "[Websockets] Received message: $msg"
+		
+		// first check the message's encoding method, this software only uses
+		// text so the opcode must be that of text to say that the message
+		// was encoded in plain text.
+		SWITCH msg.opcode
+			CASE text:
+				// now the message is decoded into a json object.
+				parsed_msg = {}
+				
+				TRY:	
+					parsed_msg = json.decode(WS_Object, msg.payload.str())
+				CATCH:
+					OUTPUT '[Websockets] Could not parse message: $err'
+					RETURN FALSE
+				END TRY
+	
+				// if this object is a Broadcast request then handle it.
+				IF parsed_msg IS A BROADCAST MESSAGE:
+					OUTPUT '[Websockets] received broadcast message: $parsed_msg'
+					// check if the request is valid
+					valid = CHECK IF parsed_msg IS VALID 
+	
+					IF (valid):
+						// request is valid, so send a success response
+						OUTPUT "[Websockets] Broadcast message was valid"
+						sender.send(mut ws, json.encode(SUCCESS{"Broadcast message was valid"}))	
+									
+					ELSE:
+						// request was invalid, send an error response
+						println('[Websockets] Broadcast message was invalid')
+						sender.send(mut ws, json.encode(ERROR{"Broadcast message was invalid"}))
+						
+					END IF
+					
+				ELSE IF parsed_msg IS A SUCCESS MESSAGE:
+					// received a success response to a message.
+					OUTPUT "[Websockets] Received success message: $parsed_msg.info"
+				
+				ELSE IF parsed_msg IS AN ERROR MESSAGE:
+					// received an error response to a message.
+					OUTPUT "[Websockets] Received error message: $parsed_msg.info"
+				
+				ELSE:
+					// object is of an unknown type
+					OUTPUT "[Websockets] Received unknown message: $parsed_msg"
+					
+				END IF
+			END CASE
+			
+			OTHERWISE:
+				// if this is called then the message was encoded incorrectly.
+				OUTPUT "[Websockets] received unknown message: $msg"
+			END OTHERWISE
+		END SWITCH
+	
+	END FUNCTION
+
+END OBJECT
 ```
 
 ## Development
