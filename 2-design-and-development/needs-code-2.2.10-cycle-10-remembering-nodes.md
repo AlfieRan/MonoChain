@@ -435,7 +435,7 @@ pub fn test_aware_of_blacklisted() {
 
 ### Test 2
 
-<figure><img src="../.gitbook/assets/image (19).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (19) (3).png" alt=""><figcaption></figcaption></figure>
 
 ### Test 3
 
