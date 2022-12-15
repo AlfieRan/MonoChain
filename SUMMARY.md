@@ -52,7 +52,3 @@
 
 * [Reference list](reference-list.md)
 * [Terminology](terminology.md)
-
-## Notes
-
-* [Phase 1](notes/phase-1.md)
