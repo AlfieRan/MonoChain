@@ -20,9 +20,9 @@ The diagram above shows how such a message flow would work, with node 'a' wantin
 
 #### Therefore the primary objectives this cycle are:
 
-* [ ] Nodes should store references to other Nodes.
-* [ ] Nodes should send handshakes to nodes upon connecting to the network.
-* [ ] Nodes should send a handshake back to any node that sends them one that they haven't seen before.
+* [x] Nodes should store references to other Nodes.
+* [x] Nodes should send handshakes to nodes upon connecting to the network.
+* [x] Nodes should send a handshake back to any node that sends them one that they haven't seen before.
 
 ### Usability Features
 
