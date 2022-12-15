@@ -15,7 +15,7 @@ The solution to this is to introduce web sockets so that "private" nodes without
 ### Usability Features
 
 * Internal functionality - The actual logic of message parsing, validation and what to do with that data should be seperated out such that it can be reused by any method of communication (http, websocket, etc)
-* Feature 2
+* Bidirectional communication - Allows worker nodes to communicate with and get information from the network in realtime without having to publically share networking data.
 
 ### Key Variables
 
