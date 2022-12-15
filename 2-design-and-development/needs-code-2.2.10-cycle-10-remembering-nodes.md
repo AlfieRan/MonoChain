@@ -38,17 +38,158 @@ The diagram above shows how such a message flow would work, with node 'a' wantin
 | <pre><code>ref_path
 </code></pre>   | This is the file path of the file at which the references object is stored and loaded from. This is stored as a parameter within the configuration object.                                                    |
 
-### Pseudocode
+## Pseudocode
 
-Objective 1 solution:
+### Handling References
 
-```
-```
-
-Objective 2 solution:
+This piece of code handles the initial definition of the 'References' object and the loading, saving generation of that object. Like most of the rest of the key objects in the codebase the object is saved and loaded in json.
 
 ```
+IMPORT utils
+IMPORT json
+
+
+// This is a simple way of storing the node's memory of other nodes that it's encountered.
+
+OBJECT References:
+	path
+	keys 	// this maps a reference the pub key that it runs using.
+	blacklist 	// this is a list of pub keys that we've already seen and do not trust. Erased when the node is restarted.
+
+	FUNCTION save(this):
+		// "this" refers to the object itself.
+		// create a new object to ignore blacklisted keys
+		raw := json.encode({
+			path: this.path
+			keys: this.keys
+		})
+		utils.save_file(this.path, raw, 0)
+	END FUNCTION
+
+END OBJECT
+
+FUNCTION new(file_path):
+	ref = NEW References{
+		path: file_path
+		keys: {},
+		blacklist: {},
+	}
+	
+	ref.save()
+	RETURN ref
+END FUNCTION
+
+FUNCTION get_refs(file_path):
+	raw = utils.read_file(file_path)
+	refs = new(file_path)	// incase no file or error
+
+	IF (raw.loaded != false):
+		TRY:
+			// convert the json data to a References struct.
+			refs = json.decode(References, raw.data)
+		CATCH:
+			// if the json is invalid, create a new one.
+			refs = new(file_path)
+		END TRY
+	END IF
+
+	RETURN refs
+END FUNCTION
 ```
+
+### Using the Reference object
+
+The functions in this block of code allow for other parts of the codebase to add keys to both the standard reference and the blacklist reference simply by supplying the reference (and key for the main reference type). Then also to check if the references object is already aware of a specified reference for use in areas such as the handshake code expanded in [Cycle 10](needs-code-2.2.9-cycle-9-basic-inter-nodal-communication.md).
+
+```
+EXTEND OBJECT References:
+	FUNCTION aware_of(this, reference):
+		// check if the reference is in the blacklist.
+		IF (refs.blacklist[reference]):
+			// we have encountered this reference before and it is blacklisted.
+			RETURN true
+		END IF
+	
+		// if it is not blacklisted, check if the reference is in the keys.
+		IF (reference in refs.keys):
+			// we have encountered this reference before and it is not blacklisted.
+			RETURN true
+		END IF
+	
+		// we have not encountered this reference before.
+		RETURN false
+	END FUNCTION
+	
+	FUNCTION add_key(this, reference, key) {
+		// add the key to the keys map.
+		this.keys[reference] = key
+		// save the references.
+		this.save()
+	END FUNCTION
+	
+	FUNCTION add_blacklist(this, reference) {
+		// add the reference to the blacklist.
+		this.blacklist[reference] = true
+		// save the references.
+		this.save()
+	END FUNCTION
+END OBJECT EXTEND
+```
+
+### Using references when receiving a handshake.
+
+This is a piece of code taken from the handshake responder api route that checks if the node has come into contact with the node sending a handshake request before and if not, starts a new handshake to 'get to know' the new node.
+
+```
+OUTPUT "Handshake Analysis Complete. Sending response..."
+// now need to figure out where message came from and respond back to it
+
+refs = memory.get_refs(config.ref_path)
+IF (NOT refs.aware_of(req_parsed.initiator.ref)):
+	OUTPUT "Node has not come into contact with initiator before, sending them a handshake request"
+	// send a handshake request to the node
+	start_handshake(req_parsed.initiator.ref, config)
+ELSE:
+ 	OUTPUT "Node has come into contact with initiator before, no need to send a handshake request"
+END IF
+```
+
+### Using references when sending a handshake.
+
+This allows the node to remember if a node successfully completed a handshake request - in which case it is added to the main reference map - or unsuccessfully didn't complete the request - in which case the reference is temporarily blacklisted until the node restarts.&#x20;
+
+```
+refs = memory.get_refs(config.ref_path)
+
+// this verifies that the received handshake is valid
+// signed hash can then be verified using the wallet pub key supplied
+IF (data.message == msg AND data.initiator.key == this.self.key):
+	IF (cryptography.verify(data.responder_key, data.message.bytes(), data.signature)):
+		// handshake was valid.
+		OUTPUT "Verified signature to match handshake key\nHandshake with $ref successful."
+
+		// now add them to reference list
+		refs.add_key(ref, data.responder_key)
+		RETURN true
+	END IF
+	
+	// handshake signature was not valid
+	OUTPUT "Signature did not match handshake key, node is not who they claim to be."
+	
+	// store a record of the node's reference and temporarily blacklist it
+	refs.add_blacklist(ref)
+	RETURN false
+END IF
+
+// handshake message was not assembled correctly.
+OUTPUT "Handshake was not valid, node is not who they claim to be."
+OUTPUT data
+
+// node is not who they claim to be, so temporarily blacklist it
+refs.add_blacklist(ref)
+```
+
+
 
 ## Development
 
@@ -57,8 +198,6 @@ Although the changes introduced in this cycle were fairly simple to do and didn'
 ### Outcome
 
 #### Handling References
-
-This piece of code handles the initial definition of the 'References' object and the loading, saving generation of that object. Like most of the rest of the key objects in the codebase the object is saved and loaded in json.
 
 ```v
 module memory
@@ -115,8 +254,6 @@ pub fn get_refs(file_path string) References {
 
 #### Using the Reference object
 
-The functions in this block of code allow for other parts of the codebase to add keys to both the standard reference and the blacklist reference simply by supplying the reference (and key for the main reference type). Then also to check if the references object is already aware of a specified reference for use in areas such as the handshake code expanded in [Cycle 10](needs-code-2.2.9-cycle-9-basic-inter-nodal-communication.md).
-
 ```v
 pub fn (refs References) aware_of(reference string) bool {
 	// check if the reference is in the blacklist.
@@ -152,8 +289,6 @@ pub fn (mut refs References) add_blacklist(reference string) {
 
 #### Using references when receiving a handshake.
 
-This is a piece of code taken from the handshake responder api route that checks if the node has come into contact with the node sending a handshake request before and if not, starts a new handshake to 'get to know' the new node.
-
 ```v
 println("Handshake Analysis Complete. Sending response...")
 // now need to figure out where message came from and respond back to it
@@ -168,8 +303,6 @@ if !refs.aware_of(req_parsed.initiator.ref) {
 ```
 
 #### Using references when sending a handshake.
-
-This allows the node to remember if a node successfully completed a handshake request - in which case it is added to the main reference map - or unsuccessfully didn't complete the request - in which case the reference is temporarily blacklisted until the node restarts.&#x20;
 
 ```v
 mut refs := memory.get_refs(config.ref_path)
