@@ -341,14 +341,27 @@ The solution to this was to realise that as long as any secure requests/response
 
 ## Testing
 
+{% tabs %}
+{% tab title="Test Table" %}
 ### Tests
 
-| Test | Instructions | What I expect | What actually happens | Pass/Fail |
-| ---- | ------------ | ------------- | --------------------- | --------- |
-| 1    |              |               |                       |           |
-| 2    |              |               |                       |           |
-| 3    |              |               |                       |           |
+| Test | Instructions                                                                                                                        | What I expect                                                                                   | What actually happens | Pass/Fail |
+| ---- | ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | --------------------- | --------- |
+| 1    | Create a new references object and log it to the console.                                                                           | An empty references object to be logged in the console.                                         |                       |           |
+| 2    | Create a new references object and log it to the console using the "get\_refs" function.                                            | An empty references object to be logged in the console and a file created with that object.     |                       |           |
+| 3    | Add a test reference to the references object and save it to a test file.                                                           | A references object with the test reference to be saved to the test file.                       |                       |           |
+| 4    | Load the test references object created in test 3 and check if the node is still aware of that node using the "aware\_of" function. | The references object to be aware of the test reference.                                        |                       |           |
+| 5    | Add a test reference to the references object as a blacklisted node and save it to a test file.                                     | A references object with the test reference as a blacklisted node to be saved to the test file. |                       |           |
+| 6    | Load the test references object created in test 3 and check if the node is still aware of that node using the "aware\_of" function. | The references object to be aware of the test reference.                                        |                       |           |
 
-### Evidence
 
-(Images of tests running/results)
+{% endtab %}
+
+{% tab title="Test Code" %}
+
+{% endtab %}
+
+{% tab title="Evidence" %}
+
+{% endtab %}
+{% endtabs %}
