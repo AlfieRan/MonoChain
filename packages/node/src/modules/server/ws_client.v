@@ -13,14 +13,14 @@ struct Client {
 	db database.DatabaseConnection	[required]
 	config configuration.UserConfig [required]
 	mut:
-		connections []websocket.Client
+		connection websocket.Client
 }
 
 pub fn start_client(db database.DatabaseConnection, config configuration.UserConfig) Client {
 	c := Client{
 		db: db
 		config: config
-		connections: []websocket.Client{}
+		connection: websocket.Client{}
 	}
 
 	println("[Websockets] Created client.")
@@ -45,22 +45,15 @@ pub fn (mut c Client) connect(ref string) bool {
 	}
 	go ws.listen()
 
-	c.connections << ws
+	c.connection = ws
 	println('[Websockets] Connected to $ref')
 	return true
 }
 
 pub fn (mut c Client) send_to_all(data string) bool {
-	println("[Websockets] Sending a message to all ${c.connections.len} clients")
-	mut threads := []thread bool{}
-	for mut connection in c.connections {
-		println("[Websockets] Starting a new thread to send a message to $connection.id")
-		threads << go send_ws(mut connection, data)
-	}
-
-	println("[Websockets] Waiting for all threads to finish")
-	threads.wait()
-	println("[Websockets] All threads finished, message sent.")
+	println("[Websockets] Sending a message to websocker server: ${c.connection}")
+	send_ws(mut c.connection, data)
+	println("[Websockets] Message sent.")
 	return true
 }
 

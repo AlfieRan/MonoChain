@@ -109,8 +109,11 @@ pub fn forward_to_all(db database.DatabaseConnection, mut ws Websocket_Server, m
 
 	// now send to all websocket nodes
 	println("[Broadcaster] Sending message to websocket nodes.")
-	encoded := json.encode(msg)
-	threads << go ws.send_to_all(encoded)
+	if !ws.is_disabled {
+		threads << go ws.send_to_all(json.encode(msg))
+	} else {
+		println("[Broadcaster] Websocket server is disabled, not sending to websocket nodes.")
+	}
 
 	println("[Broadcaster] Created threads to send message to all known nodes.")
 	println("[Broadcaster] Waiting for threads to return.")

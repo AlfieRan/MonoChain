@@ -54,6 +54,6 @@ pub fn start(config configuration.UserConfig) {
 
 
 pub fn (mut app App) index() vweb.Result {
-	return app.text("This is the api route for a node running on the Monochain network. To get to the dashaboard, go to /dashboard")
+	return app.text("This is the api route for a node running on the Monochain network. To get to the dashboard, go to /dashboard")
 }
 

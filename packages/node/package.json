@@ -17,6 +17,7 @@
 		"start": "v run ./src/",
 		"prebuilt": "./dist/code/node-native",
 		"test": "v test ./src/",
-		"test-stats": "v -stats test ./src/"
+		"test-stats": "v -stats test ./src/",
+		"docker-run": "docker build . -t monochain:latest && docker run -p 8000:8000 -p 8001:8001 monochain:latest"
 	}
 }

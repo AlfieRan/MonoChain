@@ -38,6 +38,7 @@ RUN v /app/src/ -o /app/bin
 # get config files
 WORKDIR /app/monochain/
 COPY ./monochain/ /app/monochain/
+COPY ./monochain/remote-config.json /app/monochain/config.json
 
 EXPOSE 8000
 EXPOSE 8001

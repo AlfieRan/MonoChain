@@ -16,8 +16,8 @@ pub fn test_sign() {
 	println("[testing] Generated a new key pair successfully")
 	message := time.utc().str().bytes()
 
-	keys.sign(message)
-	println("[testing] Signed a message successfully")
+	signed := keys.sign(message)
+	println("[testing] Signed a message successfully: $signed")
 	println("[testing] Signing Test Passed")
 
 	// because the sign function hasn't exited yet, we know that the signature is valid
