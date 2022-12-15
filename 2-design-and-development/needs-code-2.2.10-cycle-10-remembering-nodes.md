@@ -26,8 +26,8 @@ The diagram above shows how such a message flow would work, with node 'a' wantin
 
 ### Usability Features
 
-* Feature 1
-* Feature 2
+* Storing the node data locally so that nodes will only send messages to a smaller pool of nodes rather than to every node on large, publically accessible lists speeds the network up and limits the number of duplicate messages.
+* Once the network reaches the point at which it is large enough that every node knows atleast two other nodes, we can be sure that if any one node shuts down or goes offline any messages will still be distributed across the network.
 
 ### Key Variables
 
