@@ -443,7 +443,7 @@ pub fn test_aware_of_blacklisted() {
 
 ### Test 4
 
-<figure><img src="../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (13) (5).png" alt=""><figcaption></figcaption></figure>
 
 ### Test 5
 

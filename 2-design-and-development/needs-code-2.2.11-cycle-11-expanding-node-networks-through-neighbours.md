@@ -622,9 +622,9 @@ Here are the two fixes I made, the top image looks like I changed a lot more tha
 
 #### Test 2
 
-Below is what happens when a websocket message is sent from a Linux machine.
-
 <figure><img src="../.gitbook/assets/image (38).png" alt=""><figcaption><p>Websocket message attempted to be sent from a Linux machine</p></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/image (13).png" alt=""><figcaption><p>Websocket message successfully sent between two macOS devices.</p></figcaption></figure>
 
 **Test 3**
 
