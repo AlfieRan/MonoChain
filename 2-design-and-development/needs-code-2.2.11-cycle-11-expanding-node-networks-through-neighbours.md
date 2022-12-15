@@ -8,9 +8,9 @@ Currently the only way a node can contribute to a network is if it either has a 
 
 The solution to this is to introduce web sockets so that "private" nodes without a public address can open a communication tunnel to a public node that can then communicate with it in either direction and therefore continue to use it for the network without having such a high barrier to entry.
 
-* [ ] Convert the main section of the handshake method into a function so that it can be used with either web sockets or http.
-* [ ] Add a web sockets object to the references created in the last cycle so that nodes don't get http addresses and web socket ids mixed up.
-* [ ] Successfully ensure that the handshake method works for both http and web sockets.
+* [x] Convert the main section of the handshake method into a function so that it can be used with either web sockets or http.
+* [x] Add a web sockets object to the references created in the last cycle so that nodes don't get http addresses and web socket ids mixed up.
+* [x] Successfully ensure that the handshake method works for both http and web sockets.
 
 ### Usability Features
 
@@ -608,17 +608,23 @@ Here are the two fixes I made, the top image looks like I changed a lot more tha
 
 ### Tests
 
-| Test | Instructions                                                                                   | What I expect                                                                                 | What actually happens                                           | Pass/Fail |
-| ---- | ---------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------- | --------- |
-| 1    | Run the test code, navigate to "http://localhost:8000/test"                                    | A number to be displayed which increases by 1 for each page refresh.                          | as expected                                                     | Pass      |
-| 2    | Send a message using web sockets                                                               | The message sent to be transmitted and received successfully.                                 |                                                                 |           |
-| 3    | Send multiple messages for a prolonged period of time (once every 0.5 seconds for 30 seconds). | The messages to continue to be transmitted and validated consistently during the entire time. | Ran successfully for approximately 10 seconds and then crashed. | Fail      |
+| Test | Instructions                                                                                   | What I expect                                                                                 | What actually happens                                               | Pass/Fail |
+| ---- | ---------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- | --------- |
+| 1    | Run the test code, navigate to "http://localhost:8000/test"                                    | A number to be displayed which increases by 1 for each page refresh.                          | as expected                                                         | Pass      |
+| 2    | Send a message using web sockets                                                               | The message sent to be transmitted and received successfully.                                 | Only works when sending to/from a macOS device (+ possibly Windows) | Fail      |
+| 3    | Send multiple messages for a prolonged period of time (once every 0.5 seconds for 30 seconds). | The messages to continue to be transmitted and validated consistently during the entire time. | Ran successfully for approximately 10 seconds and then crashed.     | Fail      |
 
 ### Evidence
 
 #### Test 1
 
 {% embed url="https://youtu.be/PfIk16whvgA" %}
+
+#### Test 2
+
+Below is what happens when a websocket message is sent from a Linux machine.
+
+<figure><img src="../.gitbook/assets/image (38).png" alt=""><figcaption><p>Websocket message attempted to be sent from a Linux machine</p></figcaption></figure>
 
 **Test 3**
 
