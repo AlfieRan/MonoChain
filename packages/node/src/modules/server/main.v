@@ -12,7 +12,7 @@ struct App {
 	vweb.Context
 	mut:
 		db database.DatabaseConnection [required]
-		ws Websocket_Server [required]
+		ws shared Websocket_Server [required]
 }
  
 pub fn start(config configuration.UserConfig) {

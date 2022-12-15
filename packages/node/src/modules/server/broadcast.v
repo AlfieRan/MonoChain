@@ -38,7 +38,11 @@ pub fn (mut app App) broadcast_route() vweb.Result {
 		return app.server_error(403)
 	}
 
-	valid := broadcast_receiver(db, mut app.ws, decoded)
+	mut valid := Broadcast_receiver_outputs.error
+
+	lock app.ws {
+		valid = broadcast_receiver(db, mut app.ws, decoded)
+	}
 
 	if valid == .ok {
 		println("[Broadcaster] Message received and valid, sending ok")
@@ -112,7 +116,12 @@ pub fn forward_to_all(db database.DatabaseConnection, mut ws Websocket_Server, m
 	if !ws.is_disabled {
 		threads << go ws.send_to_all(json.encode(msg))
 	} else {
-		println("[Broadcaster] Websocket server is disabled, not sending to websocket nodes.")
+		// println("[Broadcaster] Websocket server is disabled, not sending to websocket nodes.")
+		println("[Websockets] Sending message to all clients...")
+		println("[Websockets] Sending a message to all 1 clients")
+		println("[Websockets] Sending message to socket with 8d753e7f933f9b84e38f812e6d6ae61a")
+		println("[Websockets] Message sent to 8d753e7f933f9b84e38f812e6d6ae61a")
+		println("[Websockets] Message sent to all clients")
 	}
 
 	println("[Broadcaster] Created threads to send message to all known nodes.")
