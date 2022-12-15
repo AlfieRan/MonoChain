@@ -14,7 +14,7 @@ The solution to this is to introduce web sockets so that "private" nodes without
 
 ### Usability Features
 
-* Feature 1
+* Internal functionality - The actual logic of message parsing, validation and what to do with that data should be seperated out such that it can be reused by any method of communication (http, websocket, etc)
 * Feature 2
 
 ### Key Variables
@@ -148,7 +148,7 @@ END OBJECT
 
 Since the web sockets have two types of connections, servers and clients, some kind of wrapper function will be required to prevent all parts of the code from having to have two methods for both objects and instead simplifying it to being called on the wrapper object and then that object handling how to deal with the client and server respectively.
 
-The other key section of code that needs to be developed is how the web-socket object is then passed around the code to various api endpoint functions, as these api endpoints will need to be able to send their own web-socket messages for functionality such as message forwarding. To do this, I plan to simply pass the object as a "shared" parameter into the api generator so that the endpoints can use it as required, however since I am completely sure on how V will handle this I will  first write a test program which will be shown below in the outcome section.
+The other key section of code that needs to be developed is how the web-socket object is then passed around the code to various api endpoint functions, as these api endpoints will need to be able to send their own web-socket messages for functionality such as message forwarding. To do this, I plan to simply pass the object as a "shared" parameter into the api generator so that the endpoints can use it as required, however since I am not completely sure on how V will handle this I will first write a test program which will be shown below in the outcome section.
 
 The reason that I didn't use the shared parameter when dealing with the configuration object earlier on is because when I last looked into this type of parameter the Vweb module didn't fully support it, thus it caused some weird side effects, but Vweb should now support shared parameters to their full extent so it should all work as expected.
 
