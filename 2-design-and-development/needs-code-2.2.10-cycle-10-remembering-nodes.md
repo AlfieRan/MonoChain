@@ -345,23 +345,113 @@ The solution to this was to realise that as long as any secure requests/response
 {% tab title="Test Table" %}
 ### Tests
 
-| Test | Instructions                                                                                                                        | What I expect                                                                                   | What actually happens | Pass/Fail |
-| ---- | ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | --------------------- | --------- |
-| 1    | Create a new references object and log it to the console.                                                                           | An empty references object to be logged in the console.                                         |                       |           |
-| 2    | Create a new references object and log it to the console using the "get\_refs" function.                                            | An empty references object to be logged in the console and a file created with that object.     |                       |           |
-| 3    | Add a test reference to the references object and save it to a test file.                                                           | A references object with the test reference to be saved to the test file.                       |                       |           |
-| 4    | Load the test references object created in test 3 and check if the node is still aware of that node using the "aware\_of" function. | The references object to be aware of the test reference.                                        |                       |           |
-| 5    | Add a test reference to the references object as a blacklisted node and save it to a test file.                                     | A references object with the test reference as a blacklisted node to be saved to the test file. |                       |           |
-| 6    | Load the test references object created in test 3 and check if the node is still aware of that node using the "aware\_of" function. | The references object to be aware of the test reference.                                        |                       |           |
+<table><thead><tr><th>Test</th><th>Instructions</th><th>What I expect</th><th>What actually happens</th><th data-type="checkbox">Passed?</th></tr></thead><tbody><tr><td>1</td><td>Create a new references object and log it to the console.</td><td>An empty references object to be logged in the console.</td><td>As Expected</td><td>true</td></tr><tr><td>2</td><td>Create a new references object and log it to the console using the "get_refs" function.</td><td>An empty references object to be logged in the console and a file created with that object.</td><td>As Expected</td><td>true</td></tr><tr><td>3</td><td>Add a test reference to the references object and save it to a test file.</td><td>A references object with the test reference to be saved to the test file.</td><td>As Expected</td><td>true</td></tr><tr><td>4</td><td>Load the test references object created in test 3 and check if the node is still aware of that node using the "aware_of" function.</td><td>The references object to be aware of the test reference.</td><td>As Expected</td><td>true</td></tr><tr><td>5</td><td>Add a test reference to the references object as a blacklisted node and save it to a test file.</td><td>A references object with the test reference as a blacklisted node to be saved to the test file.</td><td>As Expected</td><td>true</td></tr><tr><td>6</td><td>Load the test references object created in test 3 and check if the node is still aware of that node using the "aware_of" function.</td><td>The references object to not be aware of the test reference.</td><td>As Expected</td><td>true</td></tr></tbody></table>
 
 
 {% endtab %}
 
 {% tab title="Test Code" %}
+### Test 1
 
+```v
+const test_path = "./test.json"
+
+pub fn test_new_ref_obj() {
+	println("\n\n[Memory Test] Testing the creation of a new Reference Object.")
+	obj := new(test_path)
+	println("[Memory Test] Reference Object created: $obj")
+	assert true
+}
+```
+
+### Test 2
+
+```v
+pub fn test_get_refs() {
+	println("\n\n[Memory Test] Testing the retrieval of references.")
+	refs := get_refs(test_path)
+	println("[Memory Test] References retrieved: $refs")
+	assert true
+}
+```
+
+### Test 3
+
+```v
+pub fn test_add_ref() {
+	println("\n\n[Memory Test] Testing the addition of a reference.")
+	mut refs := get_refs(test_path)
+	println("[Memory Test] Reference object loaded.")
+	refs.add_key("test", []u8{})
+	println("[Memory Test] Reference added: $refs")
+	assert true
+}
+```
+
+### Test 4
+
+```v
+pub fn test_aware_of() {
+	println("\n\n[Memory Test] Testing the awareness of a reference.")
+	refs := get_refs(test_path)
+	println("[Memory Test] Reference object loaded.")
+	aware := refs.aware_of("test")
+	println("[Memory Test] Reference awareness: $aware")
+	assert aware
+}
+```
+
+### Test 5
+
+```v
+pub fn test_add_blacklisted_ref() {
+	println("\n\n[Memory Test] Testing the addition of a blacklisted reference.")
+	mut refs := get_refs(test_path)
+	println("[Memory Test] Reference object loaded.")
+	refs.add_blacklist("test")
+	println("[Memory Test] Reference added: $refs")
+	assert true
+}
+```
+
+### Test 6
+
+```v
+pub fn test_aware_of_blacklisted() {
+	println("\n\n[Memory Test] Testing the awareness of a blacklisted reference.")
+	refs := get_refs(test_path)
+	println("[Memory Test] Reference object loaded.")
+	aware := refs.aware_of("test")
+	println("[Memory Test] Reference awareness: $aware")
+	assert aware == false
+}
+```
 {% endtab %}
 
 {% tab title="Evidence" %}
+### Test 1
 
+<figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+### Test 2
+
+<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+### Test 3
+
+<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+### Test 4
+
+<figure><img src="../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+
+### Test 5
+
+<figure><img src="../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+
+### Test 6
+
+<figure><img src="../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
 {% endtab %}
 {% endtabs %}
+
