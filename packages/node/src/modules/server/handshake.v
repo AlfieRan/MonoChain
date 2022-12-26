@@ -132,6 +132,7 @@ pub fn start_handshake_http(ref string, this configuration.UserConfig, db databa
 	println("[Handshake Requester] Starting Handshake over HTTP")
 	msg := time.utc().format_ss_micro() // set the message to the current time since epoch
 	req_encoded := assemble_handshake(ref, this, db, msg)
+	println("[Handshake Requester] Assembled handshake request: $req_encoded")
 
 	if req_encoded is string {
 		data := send_handshake_packet_http(req_encoded, ref)

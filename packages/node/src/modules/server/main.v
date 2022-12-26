@@ -41,14 +41,17 @@ pub fn start(config configuration.UserConfig) {
 			start_handshake_http(config.entrypoint.http_ref, config, db) // ping running node using handshake to verify cryptography is working
 		}
 
-		println("[Api Server] Initial setup finished.")
+		println("[Api Server] Initial setup finished.\n\n")
 	} else {
 		println("[Server] WARNING - Ignoring entrypoint, this is highly recommended against as it will not connect your node to the network and can be changed in your config file.")
 	}
 
-	
-	println("[Server] Switching to ws server and listening for incoming connections")
-	ws.listen() // start listening for incoming connections
+	if !ws.is_disabled {
+		println("[Server] Switching to ws server and listening for incoming connections")
+		ws.listen() // start listening for incoming connections
+	}
+
+	start_handshake_http("http://nano:8000", config, db)
 	api.wait()	// bring server process back to main thread
 }
 
