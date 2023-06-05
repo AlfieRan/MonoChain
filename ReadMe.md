@@ -7,6 +7,7 @@
 This is a completely custom built blockchain centered around the proof of trust consensus protocol, a protocol that aims to keep low entry requirements for new nodes whilst retaining a better evironmental footprint than proof of work.
 
 [More About The Project](https://monochain.network/info)
+
 [The Development Documentation](https://marling-school.gitbook.io/alfie-ranstead-1/)
 
 &nbsp;
