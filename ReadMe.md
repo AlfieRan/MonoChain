@@ -6,19 +6,18 @@
 
 This is a completely custom built blockchain centered around the proof of trust consensus protocol, a protocol that aims to keep low entry requirements for new nodes whilst retaining a better evironmental footprint than proof of work.
 
-[Read more about the project here](https://monochain.network/info)
+[More About The Project](https://monochain.network/info)
+[The Development Documentation](https://marling-school.gitbook.io/alfie-ranstead-1/)
 
 &nbsp;
 
-# This Project is Still in Early Development
-// TODO - change
-It's important to note that this project is still in early development, and as such, is not read for production use.
-This means that it cannot currently be used for storing or transferring value, and is not secure enough to be used for anything other than testing.
+# Prototype
+It's important to note that this project is a prototype, and as such, is not meant for production use.
+This means that it cannot currently be used for storing or transferring value, and is purely meant for testing.
 
+To learn more visit one of the links in the introductionary section, or visit the development documentation [here](https://marling-school.gitbook.io/alfie-ranstead-1/).
 
-However, if you would like to contribute to the project, or just want to see how it works, you can read through the source code or visit the [MonoChain website](https://monochain.network) to see the progress of the project.
-
-One of the best ways to keep up to date with this project is to "star" this repo on [GitHub here](https://github.com/AlfieRan/MonoChain).
+One of the best ways to keep up to date with this project is to "star" this repo on [GitHub](https://github.com/AlfieRan/MonoChain).
 
 &nbsp;
 
