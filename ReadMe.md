@@ -8,15 +8,16 @@ This is a completely custom built blockchain centered around the proof of trust 
 
 [More About The Project](https://monochain.network/info)
 
-[The Development Documentation](https://marling-school.gitbook.io/alfie-ranstead-1/)
+[The Development Documentation](https://marling-school.gitbook.io/alfie-ranstead-1/LGzOha8ERwp6uFCPw9wn/)
 
 &nbsp;
+
 
 # Prototype
 It's important to note that this project is a prototype, and as such, is not meant for production use.
 This means that it cannot currently be used for storing or transferring value, and is purely meant for testing.
 
-To learn more visit one of the links in the introductionary section, or visit the development documentation [here](https://marling-school.gitbook.io/alfie-ranstead-1/).
+To learn more visit one of the links in the introductionary section, or visit the development documentation [here](https://marling-school.gitbook.io/alfie-ranstead-1/LGzOha8ERwp6uFCPw9wn/).
 
 One of the best ways to keep up to date with this project is to "star" this repo on [GitHub](https://github.com/AlfieRan/MonoChain).
 
